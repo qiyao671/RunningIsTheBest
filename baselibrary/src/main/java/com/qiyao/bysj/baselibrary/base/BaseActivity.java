@@ -1,5 +1,7 @@
 package com.qiyao.bysj.baselibrary.base;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -95,5 +97,9 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
+    }
+
+    protected Bundle getData() {
+        return getIntent().getExtras();
     }
 }
