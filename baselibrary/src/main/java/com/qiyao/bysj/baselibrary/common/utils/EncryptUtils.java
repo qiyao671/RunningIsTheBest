@@ -1,5 +1,9 @@
 package com.qiyao.bysj.baselibrary.common.utils;
 
+import com.qiyao.bysj.baselibrary.common.utils.CloseUtils;
+import com.qiyao.bysj.baselibrary.common.utils.EncodeUtils;
+import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,8 +17,9 @@ import javax.crypto.Cipher;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import static com.blankj.utilcode.utils.ConvertUtils.bytes2HexString;
-import static com.blankj.utilcode.utils.ConvertUtils.hexString2Bytes;
+import static com.qiyao.bysj.baselibrary.common.utils.ConvertUtils.bytes2HexString;
+import static com.qiyao.bysj.baselibrary.common.utils.ConvertUtils.hexString2Bytes;
+
 
 /**
  * <pre>

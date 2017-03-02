@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RunningIsTheBest</string>
+    <!--MainActivity底边栏-->
+    <string name="tab_community">社团</string>
+    <string name="tab_contacts">好友</string>
+    <string name="tab_home">我的</string>
+    <string name="tab_moments">动态</string>
+    <string name="tab_run">跑步</string>
 </resources>

@@ -1,11 +1,11 @@
-package com.qiyao.bysj.runningisthebest.ui.main;
+package com.qiyao.bysj.runningisthebest.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.ui.activity.base.AppBaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

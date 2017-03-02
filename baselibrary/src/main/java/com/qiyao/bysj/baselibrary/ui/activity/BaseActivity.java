@@ -1,24 +1,20 @@
-package com.qiyao.bysj.baselibrary.base;
+package com.qiyao.bysj.baselibrary.ui.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.ViewConfiguration;
 
-import java.lang.ref.WeakReference;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 /**
  * Created by qiyao on 2017/1/24.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends RxAppCompatActivity {
     private static BaseActivity currentActivity;
 
     private Toolbar mToolbar;
