@@ -1,9 +1,13 @@
 package com.qiyao.bysj.baselibrary.ui.activity;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 
+import com.qiyao.bysj.baselibrary.R;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.lang.reflect.Field;
@@ -77,10 +81,12 @@ public class BaseActivity extends RxAppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+        }
        // 如果设备有实体MENU按键，overflow菜单不会再显示
         ViewConfiguration viewConfiguration = ViewConfiguration.get(this);
         if (viewConfiguration.hasPermanentMenuKey()) {
@@ -93,6 +99,33 @@ public class BaseActivity extends RxAppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
+        setToolbar();
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        super.setContentView(view, params);
+        setToolbar();
+    }
+
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view,
+                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        setToolbar();
+
+    }
+
+    private void setToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+        }
     }
 
     protected Bundle getData() {
