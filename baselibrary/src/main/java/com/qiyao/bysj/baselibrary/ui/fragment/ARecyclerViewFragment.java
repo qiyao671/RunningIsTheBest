@@ -1,13 +1,6 @@
 package com.qiyao.bysj.baselibrary.ui.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.qiyao.bysj.baselibrary.databinding.FragmentRecyclerViewBinding;
-import com.qiyao.bysj.baselibrary.viewmodel.ACollectionViewModel;
+import com.qiyao.bysj.baselibrary.R;
 
 /**
  * Created by lvqiyao (amorfatilay@163.com).
@@ -15,8 +8,8 @@ import com.qiyao.bysj.baselibrary.viewmodel.ACollectionViewModel;
  * 类描述：
  */
 
-public abstract class ARecyclerViewFragment extends AbsFragment<ACollectionViewModel> {
-    private FragmentRecyclerViewBinding binding;
+public abstract class ARecyclerViewFragment extends AbsFragment {
+    /*private FragmentRecyclerViewBinding binding;
 
     @Nullable
     @Override
@@ -26,6 +19,10 @@ public abstract class ARecyclerViewFragment extends AbsFragment<ACollectionViewM
             binding.setViewModel(getViewModel());
         }
         return binding.getRoot();
-    }
+    }*/
 
+    @Override
+    protected int layoutRes() {
+        return R.layout.fragment_recycler_view;
+    }
 }

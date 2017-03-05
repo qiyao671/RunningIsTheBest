@@ -1,6 +1,7 @@
 package com.qiyao.bysj.baselibrary.support.bindinghelper;
 
-import com.android.annotations.NonNull;
+import android.support.annotation.NonNull;
+
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 
 /**
@@ -8,7 +9,8 @@ import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
  */
 
 public interface IItemViewBindingCreator<T> {
-    @NonNull ViewBindingRes genViewBindingRes();
+    @NonNull
+    ViewBindingRes genViewBindingRes();
 
 
     @NonNull

@@ -1,6 +1,10 @@
 package com.qiyao.bysj.runningisthebest;
 
+import com.google.gson.Gson;
 import com.qiyao.bysj.baselibrary.common.context.GlobalContext;
+import com.qiyao.bysj.baselibrary.common.utils.SPUtils;
+import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
+import com.qiyao.bysj.runningisthebest.support.Constants;
 
 /**
  * Created by Administrator on 2016/10/10.
@@ -9,14 +13,16 @@ import com.qiyao.bysj.baselibrary.common.context.GlobalContext;
 public class AppApplication extends GlobalContext {
     public static String secretKey = "";
     static final String t = "5218-ef562-ae01";
-    // TODO: 2017/1/24 User
-//    private UserBean user;
+    public final static String SP_NAME = "run";
+    private UserBean user;
+    private SPUtils spUtils;
 
     @Override
     public void onCreate() {
         super.onCreate();
         try {
-//            loadUser();
+            initSPUtils();
+            loadUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -27,8 +33,8 @@ public class AppApplication extends GlobalContext {
         return (AppApplication) getInstance();
     }
 
-    /*public void loadUser() {
-        user = UserDB.getUser();
+    public void loadUser() {
+        user = new Gson().fromJson(spUtils.getString(Constants.SP_KEY_USER_BEAN), UserBean.class);
     }
 
     public static boolean hasLogged() {
@@ -39,7 +45,15 @@ public class AppApplication extends GlobalContext {
         return user;
     }
 
-    public String getClientUserSession() {
+    public void initSPUtils() {
+        spUtils = new SPUtils(SP_NAME);
+    }
+
+    public SPUtils getSpUtils() {
+        return spUtils;
+    }
+
+/*    public String getClientUserSession() {
         if (user == null) {
             return "";
         }
@@ -51,6 +65,5 @@ public class AppApplication extends GlobalContext {
             return "";
         }
         return user.getUserToken();
-    }
-*/
+    }*/
 }

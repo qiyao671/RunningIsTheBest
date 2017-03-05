@@ -1,6 +1,7 @@
 package com.qiyao.bysj.baselibrary.support.bindinghelper;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.qiyao.bysj.baselibrary.BR;
 import com.qiyao.bysj.baselibrary.R;
@@ -18,11 +19,13 @@ public class SimpleLoadMoreViewBindingCreator implements IItemViewBindingCreator
         this.context = context;
     }
 
+    @NonNull
     @Override
     public ViewBindingRes genViewBindingRes() {
         return new ViewBindingRes(R.layout.item_simple_load_more, BR.viewModel);
     }
 
+    @NonNull
     @Override
     public SimpleLoadMoreViewModel genItemViewModel(Object item) {
         return new SimpleLoadMoreViewModel(context);

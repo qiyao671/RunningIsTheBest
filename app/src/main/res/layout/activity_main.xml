@@ -1,30 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.activity.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".module.main.MainActivity">
 
-    <data>
-       <variable
-           name="viewModel"
-           type="com.qiyao.bysj.runningisthebest.viewmodel.MainViewModel" />
-    </data>
+    <include layout="@layout/view_simple_toolbar" />
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/view_simple_toolbar" />
+        android:layout_height="0dp" />
 
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center"
-            app:onNavigationItemSelected="@{viewModel.onNavigationItemSelectedListener}"
-            app:menu="@menu/tabs_main_navigation">
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:menu="@menu/tabs_main_navigation" />
 
-        </android.support.design.widget.BottomNavigationView>
-    </RelativeLayout>
-
-</layout>
+</LinearLayout>
