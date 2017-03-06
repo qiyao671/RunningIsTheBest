@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/tab_contacts"
-        android:showAsAction="ifRoom"
         android:title="@string/tab_contacts"
         android:icon="@drawable/ic_contacts" />
     <item android:id="@+id/tab_community"
-        android:showAsAction="ifRoom"
         android:title="@string/tab_community"
         android:icon="@drawable/ic_community" />
     <item android:id="@+id/tab_run"
-        android:showAsAction="ifRoom"
         android:title="@string/tab_run"
         android:icon="@drawable/ic_run" />
     <item android:id="@+id/tab_moments"
-        android:showAsAction="ifRoom"
         android:title="@string/tab_moments"
         android:icon="@drawable/ic_moments" />
     <item android:id="@+id/tab_home"
-        android:showAsAction="ifRoom"
         android:title="@string/tab_home"
         android:icon="@drawable/ic_home" />
 </menu>

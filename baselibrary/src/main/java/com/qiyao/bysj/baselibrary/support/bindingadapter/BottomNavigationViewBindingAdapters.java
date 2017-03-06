@@ -7,7 +7,7 @@ import android.support.design.widget.BottomNavigationView;
  * Created by qiyao on 2017/3/3.
  */
 
-public class BottomNavigationViewAdapters {
+public class BottomNavigationViewBindingAdapters {
     @BindingAdapter(value = "onNavigationItemSelected")
     public static void setListener(BottomNavigationView bottomNavigationView, BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener) {
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);

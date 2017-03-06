@@ -8,8 +8,21 @@
     <string name="tab_run">跑步</string>
     
     <!--登录-->
-    <string name="hint_user_name">请输入用户名</string>
-    <string name="hint_password">请输入密码</string>
+    <string name="user_name">用户名</string>
+    <string name="type_user_name">请输入用户名</string>
+    <string name="password">密码</string>
+    <string name="type_password_register">请输入6~20位的密码</string>
+    <string name="type_repeat_password">请再次输入密码</string>
     <string name="login">登录</string>
     <string name="new_user_register">新用户注册</string>
+    <string name="register">注册</string>
+    <string name="error_pwd_length">密码长度应为6~20位</string>
+    <string name="error_pwd_null">密码不能为空</string>
+    <string name="error_re_pwd">两次输入的密码不同</string>
+    <string name="error_user_name">用户名不能为空</string>
+
+    <!--home-->
+    <string name="best_achievement">最佳成绩</string>
+    <string name="history">历史纪录</string>
+
 </resources>

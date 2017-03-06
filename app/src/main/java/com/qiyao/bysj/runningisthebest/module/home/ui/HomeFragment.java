@@ -1,6 +1,8 @@
 package com.qiyao.bysj.runningisthebest.module.home.ui;
 
-import com.qiyao.bysj.baselibrary.ui.fragment.AbsFragment;
+import android.support.annotation.NonNull;
+
+import com.qiyao.bysj.baselibrary.ui.fragment.AbsDataBindingFragment;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.module.home.viewmodel.HomeViewModel;
 
@@ -10,7 +12,8 @@ import com.qiyao.bysj.runningisthebest.module.home.viewmodel.HomeViewModel;
  * 类描述：
  */
 
-public class HomeFragment extends AbsFragment {
+public class HomeFragment extends AbsDataBindingFragment {
+    @NonNull
     @Override
     protected HomeViewModel createViewModel() {
         return new HomeViewModel();
