@@ -9,6 +9,7 @@
             name="viewModel"
             type="com.qiyao.bysj.baselibrary.viewmodel.ACollectionViewModel" />
     </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -47,4 +47,8 @@ public abstract class AbsDataBindingFragment extends RxFragment {
     }
 
     protected abstract int layoutRes();
+
+    public ViewDataBinding getBinding() {
+        return binding;
+    }
 }

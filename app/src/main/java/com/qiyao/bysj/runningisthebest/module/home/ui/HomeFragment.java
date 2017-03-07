@@ -1,9 +1,14 @@
 package com.qiyao.bysj.runningisthebest.module.home.ui;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.qiyao.bysj.baselibrary.ui.fragment.AbsDataBindingFragment;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.base.AppBaseActivity;
+import com.qiyao.bysj.runningisthebest.databinding.FragmentHomeBinding;
 import com.qiyao.bysj.runningisthebest.module.home.viewmodel.HomeViewModel;
 
 /**
@@ -13,6 +18,17 @@ import com.qiyao.bysj.runningisthebest.module.home.viewmodel.HomeViewModel;
  */
 
 public class HomeFragment extends AbsDataBindingFragment {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initToolBar();
+    }
+
+    private void initToolBar() {
+        ((AppBaseActivity)getActivity()).setSupportActionBar(((FragmentHomeBinding)getBinding()).toolbar);
+        getActivity().setTitle(getString(R.string.tab_home));
+    }
+
     @NonNull
     @Override
     protected HomeViewModel createViewModel() {

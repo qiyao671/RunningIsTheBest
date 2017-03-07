@@ -11,6 +11,7 @@ import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.module.home.ui.HomeFragment;
 import com.qiyao.bysj.runningisthebest.base.AppBaseActivity;
+import com.qiyao.bysj.runningisthebest.module.run.ui.RunFragment;
 
 public class MainActivity extends AppBaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private BottomNavigationView bottomNavigation;
@@ -21,20 +22,9 @@ public class MainActivity extends AppBaseActivity implements BottomNavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initToolbar();
         initBottomNavigation();
         //默认显示跑步界面
         selectTab(R.id.tab_run);
-    }
-
-    /**
-     * 初始化toolbar
-     */
-    private void initToolbar() {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getSupportActionBar().setDisplayShowHomeEnabled(false);
-        }
     }
 
     /**
@@ -52,6 +42,7 @@ public class MainActivity extends AppBaseActivity implements BottomNavigationVie
     private void selectTab(int tabId) {
         MenuItem item = bottomNavigation.getMenu().findItem(tabId);
         item.setChecked(true);
+        this.onNavigationItemSelected(item);
     }
 
     @Override
@@ -67,9 +58,6 @@ public class MainActivity extends AppBaseActivity implements BottomNavigationVie
         } else {
             selectFragment(fragmentName);
             currentTabId = item.getItemId();    //设置当前的tab
-            if (getSupportActionBar() != null) {    //设置title
-                getSupportActionBar().setTitle(item.getTitle());
-            }
             return true;
         }
     }
@@ -127,6 +115,8 @@ public class MainActivity extends AppBaseActivity implements BottomNavigationVie
         switch (tabId) {
             case R.id.tab_home:
                 return HomeFragment.class.getName();
+            case R.id.tab_run:
+                return RunFragment.class.getName();
             default:
                 return null;
         }

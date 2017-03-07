@@ -24,5 +24,6 @@
     <!--home-->
     <string name="best_achievement">最佳成绩</string>
     <string name="history">历史纪录</string>
+    <string name="sexAndAge">%1$s %2$d岁</string>
 
 </resources>

@@ -128,6 +128,10 @@ public class BaseActivity extends RxAppCompatActivity {
         }
     }
 
+    public void hideToolbar() {
+        mToolbar.setVisibility(View.GONE);
+    }
+
     protected Bundle getData() {
         return getIntent().getExtras();
     }
