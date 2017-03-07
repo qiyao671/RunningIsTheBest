@@ -3,6 +3,7 @@ package com.qiyao.bysj.runningisthebest;
 import com.google.gson.Gson;
 import com.qiyao.bysj.baselibrary.common.context.GlobalContext;
 import com.qiyao.bysj.baselibrary.common.utils.SPUtils;
+import com.qiyao.bysj.baselibrary.common.utils.Utils;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.support.Constants;
 
@@ -21,6 +22,7 @@ public class AppApplication extends GlobalContext {
     public void onCreate() {
         super.onCreate();
         try {
+            initUtils();
             initSPUtils();
             loadUser();
         } catch (Exception e) {
@@ -51,6 +53,10 @@ public class AppApplication extends GlobalContext {
 
     public SPUtils getSpUtils() {
         return spUtils;
+    }
+
+    public void initUtils() {
+        Utils.init(getApplicationContext());
     }
 
 /*    public String getClientUserSession() {

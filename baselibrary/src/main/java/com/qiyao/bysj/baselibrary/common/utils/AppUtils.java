@@ -702,4 +702,12 @@ public class AppUtils {
         }
         return isSuccess;
     }
+
+    public static String getAppCacheDir() {
+        if (Utils.getContext().getExternalCacheDir() != null && SDCardUtils.isSDCardEnable()) {
+            return Utils.getContext().getExternalCacheDir().toString();
+        } else {
+            return Utils.getContext().getCacheDir().toString();
+        }
+    }
 }

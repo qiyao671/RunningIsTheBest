@@ -12,8 +12,9 @@
         android:layout_height="match_parent">
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
@@ -25,47 +26,66 @@
 
                 <RelativeLayout
                     android:id="@+id/user_info"
-                    app:layout_collapseMode="parallax"
-                    android:paddingStart="30dp"
-                    android:paddingEnd="30dp"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp"
+                    android:paddingEnd="30dp"
+                    android:paddingStart="30dp"
+                    android:paddingTop="20dp"
+                    app:layout_collapseMode="parallax">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/civ_user_profile"
-                        app:imageUrl="@{viewModel.userProfileUrl}"
                         android:layout_width="@dimen/user_profile_size"
                         android:layout_height="@dimen/user_profile_size"
-                        android:layout_alignParentStart="true" />
+                        android:layout_alignParentStart="true"
+                        app:imageUrl="@{viewModel.userProfileUrl}" />
 
                     <LinearLayout
-                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:layout_toEndOf="@id/civ_user_profile"
-                        android:baselineAligned="@id/civ_user_profile"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="我是昵称"
+                            android:textSize="@dimen/text_size_xlarge" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="ID:123234"
+                            android:textSize="@dimen/text_size_body" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="男 34岁"
+                            android:textSize="@dimen/text_size_body" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/civ_user_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:text="我是昵称"
-                            android:textSize="@dimen/text_size_xlarge"
+                            android:text="个性签名： "
+                            android:textSize="@dimen/text_size_medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
-
                         <TextView
-                            android:text="ID:123234"
-                            android:textSize="@dimen/text_size_small"
-                            android:layout_marginTop="10dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        
-                        <TextView
-                            android:text="男 34岁"
-                            android:textSize="@dimen/text_size_small"
-                            android:layout_marginTop="10dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_medium"
+                            android:text="我是签名哈哈哈哈"/>
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -74,15 +94,15 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:layout_collapseMode="pin" />
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="606dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <LinearLayout
                 android:orientation="vertical"

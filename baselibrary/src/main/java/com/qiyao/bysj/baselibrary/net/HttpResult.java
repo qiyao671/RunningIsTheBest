@@ -7,29 +7,30 @@ package com.qiyao.bysj.baselibrary.net;
  */
 
 public class HttpResult<T> {
-    private int resultCode;
-    private String resultMessage;
+    private int code;
+    private String callbackMsg;
+    private T responseContext;
 
-    private T data;
+    public static final String ERROR = "Error";
+    public static final String SUCCESS = "Success";
 
     public boolean isSuccess() {
-        // TODO: 2017/2/23
-        return true;
+        return callbackMsg.equals(SUCCESS);
     }
 
-    public T getData() {
-        return data;
+    public T getResponseContext() {
+        return responseContext;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setResponseContext(T responseContext) {
+        this.responseContext = responseContext;
     }
 
-    public int getResultCode() {
-        return resultCode;
+    public int getCode() {
+        return code;
     }
 
-    public String getResultMessage() {
-        return resultMessage;
+    public String getCallbackMsg() {
+        return callbackMsg;
     }
 }
