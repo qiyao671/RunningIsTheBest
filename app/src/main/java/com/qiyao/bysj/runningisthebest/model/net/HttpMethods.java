@@ -1,12 +1,14 @@
 package com.qiyao.bysj.runningisthebest.model.net;
 
+import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.net.HttpFactory;
 import com.qiyao.bysj.runningisthebest.AppApplication;
+import com.qiyao.bysj.runningisthebest.component.Constants;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
+import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 
 import okhttp3.HttpUrl;
-import okhttp3.Request;
 import rx.Observable;
 
 /**
@@ -21,8 +23,16 @@ public class HttpMethods extends HttpFactory {
 
     private HttpMethods() {
         super();
-//        addFixedParam();
         runApiService = getApiService(RunApiService.HOST, RunApiService.class);
+    }
+
+    @Override
+    protected HttpUrl.Builder addFixedParam(HttpUrl.Builder builder) {
+        String token = AppApplication.instance().getSpUtils().getString(Constants.SP_KEY_USER_TOKEN);
+        if (AppApplication.hasLogged() && !StringUtils.isEmpty(token)) {
+                    return builder.addQueryParameter("token", token);
+        }
+        return super.addFixedParam(builder);
     }
 
     public static HttpMethods getInstance() {
@@ -33,35 +43,8 @@ public class HttpMethods extends HttpFactory {
         }
     }
 
-    private void addFixedParam() {
-        getOkHttpClient().interceptors().add(chain -> {
-            Request original = chain.request();
-
-            HttpUrl url = original.url();
-
-            // TODO: 2017/3/6 clientSession
-            if (AppApplication.hasLogged()) {
-                url = url.newBuilder()
-//                        .addQueryParameter("token", AppApplication.instance().getUser().)
-                        .build();
-            }
-
-
-            Request request = original
-                    .newBuilder()
-                    .url(url)
-                    .build();
-
-            return chain.proceed(request);
-        });
-    }
-
     public Observable<BestRunBean> getBestRun() {
         return handleResult(runApiService.getBestRun());
-    }
-
-    public Observable<String> login(UserBean user) {
-        return handleResult(runApiService.login(user));
     }
 
     public Observable<String> login(String username, String password) {
@@ -70,5 +53,13 @@ public class HttpMethods extends HttpFactory {
 
     public Observable<UserBean> getUserBean(String token) {
         return handleResult(runApiService.getUser(token));
+    }
+
+    public Observable<UserBean> getUserBean() {
+        return handleResult(runApiService.getUser());
+    }
+
+    public Observable<TotalRunBean> getTotalLogInfo() {
+        return handleResult(runApiService.getTotalLogInfo());
     }
 }

@@ -25,6 +25,12 @@
     <string name="best_achievement">最佳成绩</string>
     <string name="history">历史纪录</string>
     <string name="config">设置</string>
-    <string name="sexAndAge">%1$s %2$d岁</string>
+    <string name="sex_And_Age">%1$s %2$d岁</string>
+    <string name="id">ID:\  </string>
+    <string name="signature">个性签名：\  </string>
+    <string name="km">km</string>
+    <string name="total_distance">累计里程</string>
+    <string name="total_duration">累计小时</string>
+    <string name="total_times">累计次数</string>
 
 </resources>

@@ -1,5 +1,7 @@
 package com.qiyao.bysj.runningisthebest.model.bean;
 
+import java.util.Date;
+
 /**
  * Created by lvqiyao (amorfatilay@163.com).
  * 2017/3/5 16:48.
@@ -25,28 +27,28 @@ public class UserBean {
      * signature : null
      */
 
-//    private int id;
+    private int id;
     private String username;
     private String password;
-//    private int rank;
-//    private String profile;
-//    private String sex;
-//    private double height;
-//    private double weight;
-//    private Date birthday;
-//    private String location;
-//    private int communityId;
-//    private int totalRunId;
-//    private int bestRunId;
-//    private String signature;
-//
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    private int rank;
+    private String profile;
+    private String sex;
+    private double height;
+    private double weight;
+    private Date birthday;
+    private String location;
+    private int communityId;
+    private int totalRunId;
+    private int bestRunId;
+    private String signature;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -64,7 +66,7 @@ public class UserBean {
         this.password = password;
     }
 
-    /*public int getRank() {
+    public int getRank() {
         return rank;
     }
 
@@ -150,5 +152,5 @@ public class UserBean {
 
     public void setSignature(String signature) {
         this.signature = signature;
-    }*/
+    }
 }

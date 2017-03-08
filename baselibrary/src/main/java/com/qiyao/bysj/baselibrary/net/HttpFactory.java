@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.CacheControl;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -68,7 +69,21 @@ public class HttpFactory {
             }
             return newBuilder.build();
         };
-        builder.cache(cache).addInterceptor(cacheInterceptor);
+        Interceptor fixParamInterceptor = chain -> {
+            Request original = chain.request();
+
+            HttpUrl url = original.url();
+            url = addFixedParam(url.newBuilder())
+                    .build();
+
+            Request request = original
+                    .newBuilder()
+                    .url(url)
+                    .build();
+
+            return chain.proceed(request);
+        };
+        builder.cache(cache).addInterceptor(cacheInterceptor).addInterceptor(fixParamInterceptor);
         //设置超时
         builder.connectTimeout(15, TimeUnit.SECONDS);
         builder.readTimeout(20, TimeUnit.SECONDS);
@@ -106,5 +121,9 @@ public class HttpFactory {
 
     public OkHttpClient getOkHttpClient() {
         return okHttpClient;
+    }
+
+    protected HttpUrl.Builder addFixedParam(HttpUrl.Builder builder) {
+        return builder;
     }
 }

@@ -1,5 +1,6 @@
 package com.qiyao.bysj.runningisthebest.module;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -7,10 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 
+import com.qiyao.bysj.baselibrary.common.utils.ActivityUtils;
+import com.qiyao.bysj.baselibrary.common.utils.AppUtils;
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.runningisthebest.R;
-import com.qiyao.bysj.runningisthebest.module.home.ui.HomeFragment;
 import com.qiyao.bysj.runningisthebest.base.AppBaseActivity;
+import com.qiyao.bysj.runningisthebest.module.home.ui.HomeFragment;
 import com.qiyao.bysj.runningisthebest.module.moment.ui.MomentFragment;
 import com.qiyao.bysj.runningisthebest.module.run.ui.RunFragment;
 
@@ -131,8 +134,8 @@ public class MainActivity extends AppBaseActivity implements BottomNavigationVie
      * @return fragment
      */
     private Fragment newOrFindFragment(String fragmentName) {
-        Fragment fragment = Fragment.instantiate(this, fragmentName);
-        return fragment != null ? fragment : findFragment(fragmentName);
+        Fragment fragment = findFragment(fragmentName);
+        return fragment != null ? fragment : Fragment.instantiate(this, fragmentName);
     }
 
     /**
@@ -151,5 +154,10 @@ public class MainActivity extends AppBaseActivity implements BottomNavigationVie
      */
     public String getFragmentTag(String fragmentName) {
         return "MainActivity_" + fragmentName;
+    }
+
+
+    public static void launch(Activity activity) {
+        ActivityUtils.launchActivity(activity, AppUtils.getAppPackageName(activity), MainActivity.class.getName());
     }
 }

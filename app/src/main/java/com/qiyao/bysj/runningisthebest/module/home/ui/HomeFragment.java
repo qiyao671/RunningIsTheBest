@@ -7,8 +7,6 @@ import android.view.View;
 
 import com.qiyao.bysj.baselibrary.ui.fragment.AbsDataBindingFragment;
 import com.qiyao.bysj.runningisthebest.R;
-import com.qiyao.bysj.runningisthebest.base.AppBaseActivity;
-import com.qiyao.bysj.runningisthebest.databinding.FragmentHomeBinding;
 import com.qiyao.bysj.runningisthebest.module.home.viewmodel.HomeViewModel;
 
 /**
@@ -21,19 +19,12 @@ public class HomeFragment extends AbsDataBindingFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initToolBar();
-    }
-
-    private void initToolBar() {
-        FragmentHomeBinding binding = (FragmentHomeBinding) getBinding();
-        ((AppBaseActivity) getActivity()).setSupportActionBar(binding.toolbar);
-        binding.toolbarLayout.setTitle("我的");
     }
 
     @NonNull
     @Override
     protected HomeViewModel createViewModel() {
-        return new HomeViewModel();
+        return new HomeViewModel(this);
     }
 
     @Override

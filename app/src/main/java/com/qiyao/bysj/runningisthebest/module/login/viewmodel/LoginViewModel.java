@@ -7,10 +7,11 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.AppApplication;
+import com.qiyao.bysj.runningisthebest.component.Constants;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.MainActivity;
 import com.qiyao.bysj.runningisthebest.module.login.ui.RegisterFragment;
-import com.qiyao.bysj.runningisthebest.component.Constants;
 
 import rx.schedulers.Schedulers;
 
@@ -31,14 +32,11 @@ public class LoginViewModel implements IViewModel {
 
     public void login() {
         HttpMethods httpMethods = HttpMethods.getInstance();
-        UserBean userBean = new UserBean();
-        userBean.setUsername(userName.get());
-        userBean.setPassword(password.get());
         httpMethods.login(userName.get(), password.get())
                 .subscribeOn(Schedulers.newThread())
                 .doOnNext(this::saveToken)
                 .flatMap(httpMethods::getUserBean)
-                .subscribe(this::saveUser, this::onLoginFailed);
+                .subscribe(this::onLoginSuccess, this::onLoginFailed);
     }
 
     public void launchRegisterActivity() {
@@ -47,6 +45,12 @@ public class LoginViewModel implements IViewModel {
 
     private void saveUser(UserBean user) {
         AppApplication.instance().getSpUtils().putString(Constants.SP_KEY_USER_BEAN, new Gson().toJson(user));
+        Log.d("login", "saveUser: " + user.getUsername());
+    }
+
+    private void onLoginSuccess(UserBean user) {
+        saveUser(user);
+        MainActivity.launch(fragment.getActivity());
     }
 
     private void onLoginFailed(Throwable e) {
