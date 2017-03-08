@@ -182,4 +182,16 @@ public class ScreenUtils {
             return -123;
         }
     }
+
+    public static int dip2px(float f) {
+        return (int) (0.5D + (double) (f * getDensity()));
+    }
+
+    public static int dip2px(int i) {
+        return (int) (0.5D + (double) (getDensity() * (float) i));
+    }
+
+    public static float getDensity() {
+        return Utils.getContext().getResources().getDisplayMetrics().density;
+    }
 }

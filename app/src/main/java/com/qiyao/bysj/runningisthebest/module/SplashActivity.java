@@ -1,11 +1,11 @@
-package com.qiyao.bysj.runningisthebest.module.splash;
+package com.qiyao.bysj.runningisthebest.module;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.qiyao.bysj.runningisthebest.base.AppBaseActivity;
 import com.qiyao.bysj.runningisthebest.module.login.ui.LoginFragment;
-import com.qiyao.bysj.runningisthebest.module.main.MainActivity;
+import com.qiyao.bysj.runningisthebest.module.MainActivity;
 
 /**
  * Created by lvqiyao (amorfatilay@163.com).
@@ -29,8 +29,8 @@ public class SplashActivity extends AppBaseActivity {
         if (hasLogged()) {
             launchMainActivity();
         } else {
-            launchLoginActivity();
-//            launchMainActivity();
+//            launchLoginActivity();
+            launchMainActivity();
         }
         finish();
     }

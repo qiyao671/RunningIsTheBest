@@ -1,4 +1,4 @@
-package com.qiyao.bysj.runningisthebest.module.main;
+package com.qiyao.bysj.runningisthebest.module;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -11,6 +11,7 @@ import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.module.home.ui.HomeFragment;
 import com.qiyao.bysj.runningisthebest.base.AppBaseActivity;
+import com.qiyao.bysj.runningisthebest.module.moment.ui.MomentFragment;
 import com.qiyao.bysj.runningisthebest.module.run.ui.RunFragment;
 
 public class MainActivity extends AppBaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -117,6 +118,8 @@ public class MainActivity extends AppBaseActivity implements BottomNavigationVie
                 return HomeFragment.class.getName();
             case R.id.tab_run:
                 return RunFragment.class.getName();
+            case R.id.tab_moment:
+                return MomentFragment.class.getName();
             default:
                 return null;
         }

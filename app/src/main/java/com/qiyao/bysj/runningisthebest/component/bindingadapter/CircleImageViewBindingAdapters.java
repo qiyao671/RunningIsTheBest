@@ -1,4 +1,4 @@
-package com.qiyao.bysj.runningisthebest.support.bindingadapter;
+package com.qiyao.bysj.runningisthebest.component.bindingadapter;
 
 import android.databinding.BindingAdapter;
 

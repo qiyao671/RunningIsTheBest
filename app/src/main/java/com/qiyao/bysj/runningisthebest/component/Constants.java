@@ -1,4 +1,4 @@
-package com.qiyao.bysj.runningisthebest.support;
+package com.qiyao.bysj.runningisthebest.component;
 
 /**
  * Created by lvqiyao (amorfatilay@163.com).

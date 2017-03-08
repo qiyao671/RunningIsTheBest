@@ -25,8 +25,9 @@ public class HomeFragment extends AbsDataBindingFragment {
     }
 
     private void initToolBar() {
-        ((AppBaseActivity)getActivity()).setSupportActionBar(((FragmentHomeBinding)getBinding()).toolbar);
-        getActivity().setTitle(getString(R.string.tab_home));
+        FragmentHomeBinding binding = (FragmentHomeBinding) getBinding();
+        ((AppBaseActivity) getActivity()).setSupportActionBar(binding.toolbar);
+        binding.toolbarLayout.setTitle("我的");
     }
 
     @NonNull

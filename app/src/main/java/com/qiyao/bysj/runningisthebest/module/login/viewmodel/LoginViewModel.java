@@ -10,7 +10,7 @@ import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.login.ui.RegisterFragment;
-import com.qiyao.bysj.runningisthebest.support.Constants;
+import com.qiyao.bysj.runningisthebest.component.Constants;
 
 import rx.schedulers.Schedulers;
 

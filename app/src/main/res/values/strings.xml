@@ -4,7 +4,7 @@
     <string name="tab_community">社团</string>
     <string name="tab_contacts">好友</string>
     <string name="tab_home">我的</string>
-    <string name="tab_moments">动态</string>
+    <string name="tab_moment">动态</string>
     <string name="tab_run">跑步</string>
     
     <!--登录-->
@@ -24,6 +24,7 @@
     <!--home-->
     <string name="best_achievement">最佳成绩</string>
     <string name="history">历史纪录</string>
+    <string name="config">设置</string>
     <string name="sexAndAge">%1$s %2$d岁</string>
 
 </resources>

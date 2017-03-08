@@ -9,8 +9,8 @@
     <item android:id="@+id/tab_run"
         android:title="@string/tab_run"
         android:icon="@drawable/ic_run" />
-    <item android:id="@+id/tab_moments"
-        android:title="@string/tab_moments"
+    <item android:id="@+id/tab_moment"
+        android:title="@string/tab_moment"
         android:icon="@drawable/ic_moments" />
     <item android:id="@+id/tab_home"
         android:title="@string/tab_home"
