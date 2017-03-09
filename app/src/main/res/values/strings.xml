@@ -22,7 +22,7 @@
     <string name="error_user_name">用户名不能为空</string>
 
     <!--home-->
-    <string name="best_achievement">最佳成绩</string>
+    <string name="best_run">最佳成绩</string>
     <string name="history">历史纪录</string>
     <string name="config">设置</string>
     <string name="sex_And_Age">%1$s %2$d岁</string>
@@ -32,5 +32,15 @@
     <string name="total_distance">累计里程</string>
     <string name="total_duration">累计小时</string>
     <string name="total_times">累计次数</string>
+
+    <!--best run-->
+    <string name="farthest_run">最长距离：公里</string>
+    <string name="longest_run">最长时间：</string>
+    <string name="fastest_avg_pace">最快均速：公里每小时</string>
+    <string name="fastest_pace">最快配速：分钟每公里</string>
+    <string name="five_km_pb">5公里最快时间：</string>
+    <string name="ten_km_pb">10公里最快时间：</string>
+    <string name="half_marathon_pb">半程马拉松最快时间：</string>
+    <string name="full_marathon_pb">全程马拉松最快时间：</string>
 
 </resources>

@@ -19,8 +19,16 @@
     </style>
     
     <style name="MyTotalNumberText">
+        <item name="android:gravity">center_vertical</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+    <style name="TotalNumberTextSmall" parent="MyTotalNumberText">
+        <item name="android:textSize">@dimen/text_size_large</item>
+
+    </style>    <style name="TotalNumberTextLarge" parent="MyTotalNumberText">
+        <item name="android:textSize">26sp</item>
     </style>
 
     <style name="MyModuleCardLayout">
@@ -49,5 +57,22 @@
 
     <style name="TransparentText">
         <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+    <style name="BestRunItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:paddingTop">@dimen/base_list_item_vertical_spacing</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingStart">@dimen/base_list_item_horizontal_spacing</item>
+        <item name="android:paddingEnd">@dimen/base_list_item_horizontal_spacing</item>
+    </style>
+
+    <style name="BestRunTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/md_grey_600</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:layout_marginStart">3dp</item>
     </style>
 </resources>

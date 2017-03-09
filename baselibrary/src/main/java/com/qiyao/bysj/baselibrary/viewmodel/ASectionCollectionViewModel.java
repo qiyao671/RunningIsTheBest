@@ -2,7 +2,7 @@ package com.qiyao.bysj.baselibrary.viewmodel;
 
 import android.app.Fragment;
 
-import com.qiyao.bysj.baselibrary.support.bindinghelper.ViewBindingRes;
+import com.qiyao.bysj.baselibrary.component.bindinghelper.ViewBindingRes;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.trello.rxlifecycle.components.RxFragment;
 

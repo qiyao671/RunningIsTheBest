@@ -1,6 +1,6 @@
 package com.qiyao.bysj.runningisthebest.model.net;
 
-import com.qiyao.bysj.baselibrary.net.HttpResult;
+import com.qiyao.bysj.baselibrary.model.bean.HttpResult;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;

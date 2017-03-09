@@ -1,10 +1,10 @@
-package com.qiyao.bysj.baselibrary.support.bindingadapter;
+package com.qiyao.bysj.baselibrary.component.bindingadapter;
 
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.qiyao.bysj.baselibrary.support.bindinghelper.OnLoadMoreListener;
+import com.qiyao.bysj.baselibrary.component.bindinghelper.OnLoadMoreListener;
 
 
 /**

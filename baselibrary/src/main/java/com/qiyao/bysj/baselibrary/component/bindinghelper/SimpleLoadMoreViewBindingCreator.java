@@ -1,4 +1,4 @@
-package com.qiyao.bysj.baselibrary.support.bindinghelper;
+package com.qiyao.bysj.baselibrary.component.bindinghelper;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.qiyao.bysj.baselibrary.net;
+package com.qiyao.bysj.baselibrary.model.bean;
 
 /**
  * Created by lvqiyao (amorfatilay@163.com).

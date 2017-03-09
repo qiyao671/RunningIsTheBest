@@ -31,8 +31,8 @@
                 android:layout_width="@dimen/user_profile_size"
                 android:layout_height="@dimen/user_profile_size"
                 android:layout_alignParentStart="true"
-                app:civ_border_width="2dp"
-                app:civ_border_color="@color/md_white_1000"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/primary_light"
                 app:imageUrl="@{viewModel.userProfileUrl}" />
 
             <LinearLayout
@@ -115,11 +115,10 @@
 
                     <TextView
                         android:id="@+id/tv_total_distance"
-                        style="@style/MyTotalNumberText"
+                        style="@style/TotalNumberTextLarge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.totalDistance}"
-                        android:textSize="26sp" />
+                        android:text="@{viewModel.totalDistance}" />
 
                     <TextView
                         style="@style/MyTotalNumberText"
@@ -160,11 +159,10 @@
 
                     <TextView
                         android:id="@+id/tv_total_duration"
-                        style="@style/MyTotalNumberText"
+                        style="@style/TotalNumberTextSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.totalDuration}"
-                        android:textSize="@dimen/text_size_large" />
+                        android:text="@{viewModel.totalDuration}" />
 
                     <TextView
                         style="@style/DarkSecondaryText"
@@ -175,12 +173,11 @@
 
                     <TextView
                         android:id="@+id/tv_total_times"
-                        style="@style/MyTotalNumberText"
+                        style="@style/TotalNumberTextSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@{viewModel.totalTimes}"
-                        android:textSize="@dimen/text_size_large" />
+                        android:text="@{viewModel.totalTimes}" />
 
                     <TextView
                         style="@style/DarkSecondaryText"
@@ -192,7 +189,8 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/best_achievement"
+                android:id="@+id/best_run"
+                android:onClick="@{viewModel::onClick}"
                 style="@style/MyModuleCardLayout">
 
                 <ImageView
@@ -202,7 +200,7 @@
 
                 <TextView
                     style="@style/MyModuleCardTitle"
-                    android:text="@string/best_achievement" />
+                    android:text="@string/best_run" />
 
                 <ImageView
                     android:layout_width="@dimen/home_right_arrow_size"

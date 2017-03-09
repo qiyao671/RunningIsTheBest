@@ -19,7 +19,7 @@ import com.trello.rxlifecycle.components.RxFragment;
  * 类描述：
  */
 
-public abstract class AbsDataBindingFragment extends RxFragment {
+public abstract class ADataBindingFragment extends RxFragment {
     private IViewModel viewModel;
     private ViewDataBinding binding;
 

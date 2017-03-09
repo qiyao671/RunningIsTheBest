@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
-import com.qiyao.bysj.baselibrary.ui.fragment.AbsDataBindingFragment;
+import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.module.login.viewmodel.LoginViewModel;
@@ -15,7 +15,7 @@ import com.qiyao.bysj.runningisthebest.module.login.viewmodel.LoginViewModel;
  * 类描述：
  */
 
-public class LoginFragment extends AbsDataBindingFragment {
+public class LoginFragment extends ADataBindingFragment {
     @NonNull
     @Override
     protected IViewModel createViewModel() {

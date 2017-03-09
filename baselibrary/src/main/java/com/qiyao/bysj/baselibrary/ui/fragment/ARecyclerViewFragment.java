@@ -8,7 +8,7 @@ import com.qiyao.bysj.baselibrary.R;
  * 类描述：
  */
 
-public abstract class ARecyclerViewFragment extends AbsDataBindingFragment {
+public abstract class ARecyclerViewFragment extends ADataBindingFragment {
     /*private FragmentRecyclerViewBinding binding;
 
     @Nullable

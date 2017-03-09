@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
 import android.util.Log;
+import android.view.View;
 
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
@@ -11,6 +12,7 @@ import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.home.ui.BestRunFragment;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -21,7 +23,7 @@ import rx.schedulers.Schedulers;
  * 类描述：
  */
 
-public class HomeViewModel extends BaseObservable implements IViewModel {
+public class HomeViewModel implements IViewModel {
     private Fragment fragment;
 
     public ObservableField<String> userProfileUrl = new ObservableField<>();
@@ -30,9 +32,9 @@ public class HomeViewModel extends BaseObservable implements IViewModel {
     public ObservableField<String> sexAndAge = new ObservableField<>();
     public ObservableField<String> signature = new ObservableField<>();
 
-    public ObservableField<String> totalTimes = new ObservableField<>("0");
-    public ObservableField<String> totalDistance = new ObservableField<>("0.0");
-    public ObservableField<String> totalDuration = new ObservableField<>("0.0");
+    public ObservableField<String> totalTimes = new ObservableField<>("--");
+    public ObservableField<String> totalDistance = new ObservableField<>("--");
+    public ObservableField<String> totalDuration = new ObservableField<>("--");
 
     private UserBean userBean;
     private TotalRunBean totalRunBean;
@@ -89,5 +91,13 @@ public class HomeViewModel extends BaseObservable implements IViewModel {
         totalDistance.set(String.valueOf(totalRun.getTotalDistance()));
         totalDuration.set(String.valueOf(totalRun.getTotalSpendTime()));
         totalTimes.set(String.valueOf(totalRun.getTotalTimes()));
+    }
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.best_run:
+                BestRunFragment.launch(fragment.getActivity());
+                break;
+        }
     }
 }

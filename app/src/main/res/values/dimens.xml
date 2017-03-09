@@ -21,4 +21,5 @@
     <dimen name="user_profile_size">80dp</dimen>
     <dimen name="home_ic_size">22dp</dimen>
     <dimen name="home_right_arrow_size">14dp</dimen>
+    <dimen name="best_run_info_icon_size">18dp</dimen>
 </resources>

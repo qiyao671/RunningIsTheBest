@@ -1,8 +1,9 @@
-package com.qiyao.bysj.baselibrary.net;
+package com.qiyao.bysj.baselibrary.model.net;
 
 import com.qiyao.bysj.baselibrary.BuildConfig;
 import com.qiyao.bysj.baselibrary.common.utils.AppUtils;
 import com.qiyao.bysj.baselibrary.common.utils.NetworkUtils;
+import com.qiyao.bysj.baselibrary.model.bean.HttpResult;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;

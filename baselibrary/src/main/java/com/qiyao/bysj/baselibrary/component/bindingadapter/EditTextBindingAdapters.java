@@ -1,4 +1,4 @@
-package com.qiyao.bysj.baselibrary.support.bindingadapter;
+package com.qiyao.bysj.baselibrary.component.bindingadapter;
 
 import android.databinding.BindingAdapter;
 import android.view.View;

@@ -1,7 +1,7 @@
 package com.qiyao.bysj.runningisthebest.model.net;
 
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
-import com.qiyao.bysj.baselibrary.net.HttpFactory;
+import com.qiyao.bysj.baselibrary.model.net.HttpFactory;
 import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.component.Constants;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
