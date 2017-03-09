@@ -2,7 +2,6 @@ package com.qiyao.bysj.runningisthebest.base;
 
 import com.qiyao.bysj.baselibrary.ui.activity.BaseActivity;
 import com.qiyao.bysj.runningisthebest.AppApplication;
-import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 
 /**
  * Created by qiyao on 2017/1/24.
@@ -10,8 +9,8 @@ import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 
 public class AppBaseActivity extends BaseActivity {
 
-    public UserBean getUser() {
-        return AppApplication.instance().getUser();
+    public String getToken() {
+        return AppApplication.instance().getToken();
     }
 
     public boolean hasLogged() {

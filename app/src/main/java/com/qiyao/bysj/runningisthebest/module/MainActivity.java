@@ -3,13 +3,12 @@ package com.qiyao.bysj.runningisthebest.module;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 
-import com.qiyao.bysj.baselibrary.common.utils.ActivityUtils;
-import com.qiyao.bysj.baselibrary.common.utils.AppUtils;
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.base.AppBaseActivity;
@@ -158,6 +157,8 @@ public class MainActivity extends AppBaseActivity implements BottomNavigationVie
 
 
     public static void launch(Activity activity) {
-        ActivityUtils.launchActivity(activity, AppUtils.getAppPackageName(activity), MainActivity.class.getName());
+        Intent intent = new Intent(activity, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(intent);
     }
 }

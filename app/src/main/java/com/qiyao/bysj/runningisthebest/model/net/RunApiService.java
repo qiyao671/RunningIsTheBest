@@ -40,4 +40,8 @@ public interface RunApiService {
 
     @GET("log/getTotalLogInfo")
     Observable<HttpResult<TotalRunBean>> getTotalLogInfo();
+
+    @FormUrlEncoded
+    @POST("user/add")
+    Observable<HttpResult<String>> register(@Field("username") String username, @Field("password") String password);
 }

@@ -1,7 +1,6 @@
 package com.qiyao.bysj.runningisthebest.module.home.viewmodel;
 
 import android.app.Fragment;
-import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +12,7 @@ import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.home.ui.BestRunFragment;
+import com.trello.rxlifecycle.components.RxFragment;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -52,16 +52,18 @@ public class HomeViewModel implements IViewModel {
     private void getUser() {
         httpMethods.getUserBean()
                 .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
                 .filter(user -> user != null)
+                .compose(((RxFragment) fragment).bindToLifecycle())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setUserInfo, this::onError);
     }
 
     private void getTotalRun() {
         httpMethods.getTotalLogInfo()
                 .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
                 .filter(totalRun -> totalRun != null)
+                .compose(((RxFragment) fragment).bindToLifecycle())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setTotalRunInfo, this::onError);
     }
 

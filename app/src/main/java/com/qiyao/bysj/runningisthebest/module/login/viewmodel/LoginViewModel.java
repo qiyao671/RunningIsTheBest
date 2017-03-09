@@ -4,15 +4,15 @@ import android.app.Fragment;
 import android.databinding.ObservableField;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.component.Constants;
-import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.MainActivity;
 import com.qiyao.bysj.runningisthebest.module.login.ui.RegisterFragment;
+import com.trello.rxlifecycle.components.RxFragment;
 
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
@@ -34,8 +34,8 @@ public class LoginViewModel implements IViewModel {
         HttpMethods httpMethods = HttpMethods.getInstance();
         httpMethods.login(userName.get(), password.get())
                 .subscribeOn(Schedulers.newThread())
-                .doOnNext(this::saveToken)
-                .flatMap(httpMethods::getUserBean)
+                .compose(((RxFragment) fragment).bindToLifecycle())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onLoginSuccess, this::onLoginFailed);
     }
 
@@ -43,13 +43,9 @@ public class LoginViewModel implements IViewModel {
         RegisterFragment.launch(fragment.getActivity());
     }
 
-    private void saveUser(UserBean user) {
-        AppApplication.instance().getSpUtils().putString(Constants.SP_KEY_USER_BEAN, new Gson().toJson(user));
-        Log.d("login", "saveUser: " + user.getUsername());
-    }
 
-    private void onLoginSuccess(UserBean user) {
-        saveUser(user);
+    private void onLoginSuccess(String token) {
+        saveToken(token);
         MainActivity.launch(fragment.getActivity());
     }
 

@@ -6,8 +6,15 @@ import android.databinding.ObservableField;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
+import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.trello.rxlifecycle.components.RxFragment;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by qiyao on 2017/3/6.
@@ -29,7 +36,38 @@ public class RegisterViewModel implements IViewModel {
     }
 
     public void register() {
+        HttpMethods.getInstance().register(userName.get(), password.get())
+                .subscribeOn(Schedulers.newThread())
+                .filter(str -> str != null)
+                .compose(((RxFragment)fragment).bindToLifecycle())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onRegisterSuccess, this::onError);
+    }
 
+    private void onRegisterSuccess(String s) {
+        ToastUtils.showShortToast(s);
+    }
+
+    private void onError(Throwable e) {
+        ToastUtils.showShortToast(e.getMessage());
+    }
+
+    public void onClick(View v) {
+        String errorMsg = null;
+        if (StringUtils.isEmpty(userName.get())) {
+            errorMsg = fragment.getString(R.string.error_user_name);
+        } else if (StringUtils.isEmpty(password.get())) {
+            errorMsg = fragment.getString(R.string.error_pwd_null);
+        } else if (password.get().length() > 20 || password.get().length() < 6) {
+            errorMsg = fragment.getString(R.string.error_pwd_length);
+        } else if (rePassword.get() == null || !rePassword.get().equals(password.get())) {
+            errorMsg = fragment.getString(R.string.error_re_pwd);
+        }
+        if (errorMsg != null) {
+            ToastUtils.showLongToast(errorMsg);
+        } else {
+            register();
+        }
     }
 
     public void onPasswordFocusChange(View v, boolean hasFocus) {

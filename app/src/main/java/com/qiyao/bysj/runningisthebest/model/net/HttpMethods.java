@@ -1,9 +1,7 @@
 package com.qiyao.bysj.runningisthebest.model.net;
 
-import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.model.net.HttpFactory;
 import com.qiyao.bysj.runningisthebest.AppApplication;
-import com.qiyao.bysj.runningisthebest.component.Constants;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
@@ -28,9 +26,9 @@ public class HttpMethods extends HttpFactory {
 
     @Override
     protected HttpUrl.Builder addFixedParam(HttpUrl.Builder builder) {
-        String token = AppApplication.instance().getSpUtils().getString(Constants.SP_KEY_USER_TOKEN);
-        if (AppApplication.hasLogged() && !StringUtils.isEmpty(token)) {
-                    return builder.addQueryParameter("token", token);
+        String token = AppApplication.instance().getToken();
+        if (AppApplication.hasLogged()) {
+            return builder.addQueryParameter("token", token);
         }
         return super.addFixedParam(builder);
     }
@@ -61,5 +59,9 @@ public class HttpMethods extends HttpFactory {
 
     public Observable<TotalRunBean> getTotalLogInfo() {
         return handleResult(runApiService.getTotalLogInfo());
+    }
+
+    public Observable<String> register(String userName, String password) {
+        return handleResult(runApiService.register(userName, password));
     }
 }

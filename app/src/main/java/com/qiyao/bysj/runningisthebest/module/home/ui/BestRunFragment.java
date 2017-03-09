@@ -38,7 +38,7 @@ public class BestRunFragment extends ADataBindingFragment {
     @NonNull
     @Override
     protected IViewModel createViewModel() {
-        return new BestRunViewModel();
+        return new BestRunViewModel(this);
     }
 
     @Override

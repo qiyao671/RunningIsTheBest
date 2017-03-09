@@ -1,10 +1,9 @@
 package com.qiyao.bysj.runningisthebest;
 
-import com.google.gson.Gson;
 import com.qiyao.bysj.baselibrary.common.context.GlobalContext;
 import com.qiyao.bysj.baselibrary.common.utils.SPUtils;
+import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.common.utils.Utils;
-import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.component.Constants;
 
 /**
@@ -15,7 +14,7 @@ public class AppApplication extends GlobalContext {
     public static String secretKey = "";
     static final String t = "5218-ef562-ae01";
     public final static String SP_NAME = "run";
-    private UserBean user;
+    private String token;
     private SPUtils spUtils;
 
     @Override
@@ -24,7 +23,7 @@ public class AppApplication extends GlobalContext {
         try {
             initUtils();
             initSPUtils();
-            loadUser();
+            loadToken();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,16 +34,16 @@ public class AppApplication extends GlobalContext {
         return (AppApplication) getInstance();
     }
 
-    public void loadUser() {
-        user = new Gson().fromJson(spUtils.getString(Constants.SP_KEY_USER_BEAN), UserBean.class);
+    public void loadToken() {
+        token = spUtils.getString(Constants.SP_KEY_USER_TOKEN);
     }
 
     public static boolean hasLogged() {
-        return instance().getUser() != null;
+        return !StringUtils.isEmpty(instance().token);
     }
 
-    public UserBean getUser() {
-        return user;
+    public String getToken() {
+        return token;
     }
 
     public void initSPUtils() {
