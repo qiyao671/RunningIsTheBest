@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.qiyao.bysj.baselibrary.common.utils.ConvertUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ScreenUtils;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class NineImageGridLayout extends FrameLayout {
 
     public NineImageGridLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        totalWidth= ScreenUtils.getScreenWidth()-ScreenUtils.dip2px(80);
+        totalWidth= ScreenUtils.getScreenWidth()- ConvertUtils.dp2px(80);
     }
 
     @Override

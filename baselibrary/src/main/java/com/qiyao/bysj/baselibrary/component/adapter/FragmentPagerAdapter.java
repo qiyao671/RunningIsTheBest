@@ -57,7 +57,7 @@ abstract class FragmentPagerAdapter extends PagerAdapter {
             fragment = getItem(position);
             if (DEBUG) Log.v(TAG, "Adding item #" + itemId + ": f=" + fragment);
             mCurTransaction.add(container.getId(), fragment,
-                    makeFragmentName(container.getId()));
+                    makeFragmentName(position));
         }
         if (fragment != mCurrentPrimaryItem) {
             fragment.setMenuVisibility(false);

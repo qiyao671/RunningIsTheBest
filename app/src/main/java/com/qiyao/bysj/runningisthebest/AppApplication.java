@@ -4,7 +4,7 @@ import com.qiyao.bysj.baselibrary.common.context.GlobalContext;
 import com.qiyao.bysj.baselibrary.common.utils.SPUtils;
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.common.utils.Utils;
-import com.qiyao.bysj.runningisthebest.component.Constants;
+import com.qiyao.bysj.runningisthebest.common.Constants;
 
 /**
  * Created by Administrator on 2016/10/10.

@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import com.qiyao.bysj.baselibrary.common.CommonConstants;
 import com.qiyao.bysj.baselibrary.model.bean.FragmentTabItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,13 +20,17 @@ import java.util.List;
 public class FragmentTabsPagerAdapter extends FragmentPagerAdapter {
 
     @NonNull
-    private List<FragmentTabItem> tabItems;
+    private List<FragmentTabItem> tabItems = new ArrayList<>();
     @NonNull
     private Context context;
-    public FragmentTabsPagerAdapter(FragmentManager fm, @NonNull List<FragmentTabItem> tabItems, @NonNull Context context) {
+    public FragmentTabsPagerAdapter(FragmentManager fm, @NonNull Context context) {
         super(fm);
-        this.tabItems = tabItems;
         this.context = context;
+    }
+
+    public FragmentTabsPagerAdapter(FragmentManager fm, @NonNull Context context, @NonNull List<FragmentTabItem> tabItems) {
+        this(fm, context);
+        this.tabItems = tabItems;
     }
 
     @Override
@@ -48,5 +53,15 @@ public class FragmentTabsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return tabItems.size();
+    }
+
+    public void setTabItems(@NonNull List<FragmentTabItem> tabItems) {
+        this.tabItems = tabItems;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabItems.get(position).getTitle();
     }
 }

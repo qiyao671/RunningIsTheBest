@@ -8,10 +8,12 @@ import android.view.View;
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.common.SPHelper;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.home.ui.BestRunFragment;
+import com.qiyao.bysj.runningisthebest.module.home.ui.TotalRunPagerFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -44,17 +46,18 @@ public class HomeViewModel implements IViewModel {
     public HomeViewModel(Fragment fragment) {
         this.fragment = fragment;
         httpMethods = HttpMethods.getInstance();
+        //默认显示缓存的数据
+        setUserInfo(SPHelper.loadUser());
         getUser();
         getTotalRun();
-
     }
 
     private void getUser() {
         httpMethods.getUserBean()
                 .subscribeOn(Schedulers.newThread())
                 .filter(user -> user != null)
-                .compose(((RxFragment) fragment).bindToLifecycle())
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(((RxFragment) fragment).bindToLifecycle())
                 .subscribe(this::setUserInfo, this::onError);
     }
 
@@ -62,17 +65,18 @@ public class HomeViewModel implements IViewModel {
         httpMethods.getTotalLogInfo()
                 .subscribeOn(Schedulers.newThread())
                 .filter(totalRun -> totalRun != null)
-                .compose(((RxFragment) fragment).bindToLifecycle())
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(((RxFragment) fragment).bindToLifecycle())
                 .subscribe(this::setTotalRunInfo, this::onError);
     }
 
     private void onError(Throwable e) {
-        Log.e("TAG", "onError: " + e.getMessage(), e);
+        Log.e("home", "onError: " + e.getMessage(), e);
     }
 
     private void setUserInfo(UserBean user) {
         this.userBean = user;
+        // TODO: 2017/3/10 不一样的时候再改
         userProfileUrl.set(user.getProfile());
         userId.set(String.valueOf(user.getId()));
         userName.set(user.getUsername());
@@ -99,6 +103,9 @@ public class HomeViewModel implements IViewModel {
         switch (view.getId()) {
             case R.id.best_run:
                 BestRunFragment.launch(fragment.getActivity());
+                break;
+            case R.id.total_run:
+                TotalRunPagerFragment.launch(fragment.getActivity());
                 break;
         }
     }

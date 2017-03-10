@@ -104,6 +104,7 @@
 
             <RelativeLayout
                 android:id="@+id/total_run"
+                android:onClick="@{viewModel::onClick}"
                 style="@style/MyModuleCardLayout">
 
                 <RelativeLayout

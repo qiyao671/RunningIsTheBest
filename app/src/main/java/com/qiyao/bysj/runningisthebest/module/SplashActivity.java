@@ -28,8 +28,8 @@ public class SplashActivity extends AppBaseActivity {
         if (hasLogged()) {
             launchMainActivity();
         } else {
-            launchLoginActivity();
-//            launchMainActivity();
+//            launchLoginActivity();
+            launchMainActivity();
         }
         finish();
     }
@@ -39,7 +39,6 @@ public class SplashActivity extends AppBaseActivity {
     }
 
     private void launchMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        this.startActivity(intent);
+        MainActivity.launch(this);
     }
 }

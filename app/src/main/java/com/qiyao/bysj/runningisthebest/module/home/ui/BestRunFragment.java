@@ -31,8 +31,7 @@ public class BestRunFragment extends ADataBindingFragment {
         BaseActivity activity = (BaseActivity) getActivity();
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setTitle(R.string.best_run);
-            activity.getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-            activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
     @NonNull

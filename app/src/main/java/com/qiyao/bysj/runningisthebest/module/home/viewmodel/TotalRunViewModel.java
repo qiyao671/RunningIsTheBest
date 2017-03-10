@@ -7,4 +7,5 @@ import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
  */
 
 public class TotalRunViewModel implements IViewModel {
+
 }

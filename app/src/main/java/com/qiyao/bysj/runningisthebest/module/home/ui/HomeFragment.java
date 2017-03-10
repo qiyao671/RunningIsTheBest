@@ -16,11 +16,6 @@ import com.qiyao.bysj.runningisthebest.module.home.viewmodel.HomeViewModel;
  */
 
 public class HomeFragment extends ADataBindingFragment {
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
     @NonNull
     @Override
     protected HomeViewModel createViewModel() {

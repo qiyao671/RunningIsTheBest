@@ -2,7 +2,7 @@
     <string name="app_name">RunningIsTheBest</string>
     <!--MainActivity底边栏-->
     <string name="tab_community">社团</string>
-    <string name="tab_contacts">好友</string>
+    <string name="tab_friends">好友</string>
     <string name="tab_home">我的</string>
     <string name="tab_moment">动态</string>
     <string name="tab_run">跑步</string>
@@ -43,4 +43,9 @@
     <string name="half_marathon_pb">半程马拉松最快时间：</string>
     <string name="full_marathon_pb">全程马拉松最快时间：</string>
 
+    <!--total run-->
+    <string name="week">周</string>
+    <string name="month">月</string>
+    <string name="total">总</string>
+    <string name="sports_statistics">运动统计</string>
 </resources>
