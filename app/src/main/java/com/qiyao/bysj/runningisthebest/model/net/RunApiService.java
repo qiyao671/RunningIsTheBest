@@ -2,6 +2,7 @@ package com.qiyao.bysj.runningisthebest.model.net;
 
 import com.qiyao.bysj.baselibrary.model.bean.HttpResult;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
+import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 
@@ -44,4 +45,7 @@ public interface RunApiService {
     @FormUrlEncoded
     @POST("user/add")
     Observable<HttpResult<String>> register(@Field("username") String username, @Field("password") String password);
+
+    @GET("user/listFriends")
+    Observable<HttpResult<ListResultBean<UserBean>>> getFriends();
 }

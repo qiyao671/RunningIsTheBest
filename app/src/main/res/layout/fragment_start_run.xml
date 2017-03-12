@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.qiyao.bysj.runningisthebest.module.run.viewmodel.StartRunViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="开始"
+            android:textSize="@dimen/text_size_xlarge"
+            android:textColor="@color/md_white_1000"
+            android:background="@drawable/btn_start_run_bg"
+            android:onClick="@{viewModel::onClick}"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+    </LinearLayout>
+</layout>

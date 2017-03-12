@@ -177,11 +177,11 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
         return null;
     }
 
-    protected IItemViewBindingCreator<Object> createHeaderViewBindingHelper() {
+    protected <Header> IItemViewBindingCreator<Header> createHeaderViewBindingHelper() {
         return null;
     }
 
-    protected IItemViewBindingCreator<Object> createFooterViewBindingHelper() {
+    protected <Footer> IItemViewBindingCreator<Footer> createFooterViewBindingHelper() {
         return null;
     }
 
@@ -305,7 +305,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
             this.mode = mode;
         }
 
-        protected abstract Observable<List<T>> getData(RefreshMode mode);
+        protected abstract Observable getData(RefreshMode mode);
 
         public void execute() {
             prepare(mode);
@@ -321,6 +321,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
             result
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.newThread())
+                    .filter(list -> !list.isEmpty())
                     .flatMap(Observable::from)
                     .map(ACollectionViewModel.this::newItemViewModel)
                     .toList()

@@ -7,6 +7,5 @@ package com.qiyao.bysj.runningisthebest.common;
  */
 
 public class Constants {
-    public final static String SP_KEY_USER_BEAN = "user";
-    public final static String SP_KEY_USER_TOKEN = "token";
+
 }

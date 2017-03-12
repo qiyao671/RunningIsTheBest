@@ -1,6 +1,7 @@
 package com.qiyao.bysj.runningisthebest.module.login.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
@@ -27,7 +28,8 @@ public class LoginFragment extends ADataBindingFragment {
         return R.layout.fragment_login;
     }
 
-    public static void launch(Activity from) {
-        FragmentContainerActivity.launch(from, LoginFragment.class, null);
+    public static void launchAndClearTask(Activity from) {
+        int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK;
+        FragmentContainerActivity.launch(from, LoginFragment.class, flags);
     }
 }

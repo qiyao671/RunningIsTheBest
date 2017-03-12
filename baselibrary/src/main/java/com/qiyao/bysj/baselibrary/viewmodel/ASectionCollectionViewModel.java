@@ -122,6 +122,7 @@ public abstract class ASectionCollectionViewModel<H, T> extends ACollectionViewM
             result
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.newThread())
+                    .filter(list -> list!=null && !list.isEmpty())
                     .flatMap(Observable::from)
                     .groupBy(ASectionCollectionViewModel.this::headerForSectionOfItem)
                     .doOnNext(htGroupedObservable -> sectionedItems.put(htGroupedObservable.getKey(), new ArrayList<>()))

@@ -9,8 +9,12 @@ import android.view.View;
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
+import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.common.SPHelper;
+import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.MainActivity;
 import com.trello.rxlifecycle.components.RxFragment;
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -36,16 +40,25 @@ public class RegisterViewModel implements IViewModel {
     }
 
     public void register() {
-        HttpMethods.getInstance().register(userName.get(), password.get())
+        HttpMethods httpMethods = HttpMethods.getInstance();
+        httpMethods.register(userName.get(), password.get())
                 .subscribeOn(Schedulers.newThread())
-                .filter(str -> str != null)
+                .filter(token -> token != null)
                 .compose(((RxFragment)fragment).bindToLifecycle())
+                .doOnNext(this::onRegisterSuccess)
+                .flatMap(token -> httpMethods.getUserBean())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onRegisterSuccess, this::onError);
+                .subscribe(this::onSaveUser, this::onError);
     }
 
-    private void onRegisterSuccess(String s) {
-        ToastUtils.showShortToast(s);
+    private void onRegisterSuccess(String token) {
+        SPHelper.saveToken(token);
+        AppApplication.instance().loadToken();
+    }
+
+    private void onSaveUser(UserBean user) {
+        SPHelper.saveUser(user);
+        MainActivity.launch(fragment.getActivity());
     }
 
     private void onError(Throwable e) {

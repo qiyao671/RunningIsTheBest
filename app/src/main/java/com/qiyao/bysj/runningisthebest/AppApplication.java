@@ -4,7 +4,7 @@ import com.qiyao.bysj.baselibrary.common.context.GlobalContext;
 import com.qiyao.bysj.baselibrary.common.utils.SPUtils;
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.common.utils.Utils;
-import com.qiyao.bysj.runningisthebest.common.Constants;
+import com.qiyao.bysj.runningisthebest.common.SPHelper;
 
 /**
  * Created by Administrator on 2016/10/10.
@@ -35,7 +35,7 @@ public class AppApplication extends GlobalContext {
     }
 
     public void loadToken() {
-        token = spUtils.getString(Constants.SP_KEY_USER_TOKEN);
+        token = SPHelper.loadToken();
     }
 
     public static boolean hasLogged() {

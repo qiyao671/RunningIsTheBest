@@ -3,6 +3,7 @@ package com.qiyao.bysj.runningisthebest.model.net;
 import com.qiyao.bysj.baselibrary.model.net.HttpFactory;
 import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
+import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 
@@ -49,9 +50,9 @@ public class HttpMethods extends HttpFactory {
         return handleResult(runApiService.login(username, password));
     }
 
-    public Observable<UserBean> getUserBean(String token) {
+/*    public Observable<UserBean> getUserBean(String token) {
         return handleResult(runApiService.getUser(token));
-    }
+    }*/
 
     public Observable<UserBean> getUserBean() {
         return handleResult(runApiService.getUser());
@@ -63,5 +64,9 @@ public class HttpMethods extends HttpFactory {
 
     public Observable<String> register(String userName, String password) {
         return handleResult(runApiService.register(userName, password));
+    }
+
+    public Observable<ListResultBean<UserBean>> getFriends() {
+        return handleResult(runApiService.getFriends());
     }
 }

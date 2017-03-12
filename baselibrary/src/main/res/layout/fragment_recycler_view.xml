@@ -16,7 +16,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/view_simple_toolbar" />
+        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            tools:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            tools:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        </android.support.v7.widget.Toolbar>
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:layout_width="match_parent"

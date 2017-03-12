@@ -48,4 +48,11 @@
     <string name="month">月</string>
     <string name="total">总</string>
     <string name="sports_statistics">运动统计</string>
+
+    <!--friends ranking-->
+    <string name="day">日</string>
+
+    <!--friends-->
+    <string name="add_friend">添加好友</string>
+    <string name="new_friend">新的朋友</string>
 </resources>

@@ -4,10 +4,8 @@ import android.app.Fragment;
 import android.databinding.ObservableField;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.AppApplication;
-import com.qiyao.bysj.runningisthebest.common.Constants;
 import com.qiyao.bysj.runningisthebest.common.SPHelper;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
@@ -40,7 +38,9 @@ public class LoginViewModel implements IViewModel {
                 .compose(((RxFragment) fragment).bindToLifecycle())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(this::saveToken)
+                .observeOn(Schedulers.newThread())
                 .flatMap(token -> httpMethods.getUserBean())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onLoginSuccess, this::onLoginFailed);
     }
 
@@ -64,6 +64,7 @@ public class LoginViewModel implements IViewModel {
     }
 
     private void saveToken(String token) {
-        AppApplication.instance().getSpUtils().putString(Constants.SP_KEY_USER_TOKEN, token);
+        SPHelper.saveToken(token);
+        AppApplication.instance().loadToken();
     }
 }

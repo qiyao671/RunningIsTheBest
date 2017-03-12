@@ -1,6 +1,5 @@
 package com.qiyao.bysj.runningisthebest.module;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.qiyao.bysj.runningisthebest.base.AppBaseActivity;
@@ -28,14 +27,14 @@ public class SplashActivity extends AppBaseActivity {
         if (hasLogged()) {
             launchMainActivity();
         } else {
-//            launchLoginActivity();
-            launchMainActivity();
+            launchLoginActivity();
+//            launchMainActivity();
         }
         finish();
     }
 
     private void launchLoginActivity() {
-        LoginFragment.launch(this);
+        LoginFragment.launchAndClearTask(this);
     }
 
     private void launchMainActivity() {

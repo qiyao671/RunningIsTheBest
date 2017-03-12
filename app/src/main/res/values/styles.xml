@@ -27,7 +27,9 @@
     <style name="TotalNumberTextSmall" parent="MyTotalNumberText">
         <item name="android:textSize">@dimen/text_size_large</item>
 
-    </style>    <style name="TotalNumberTextLarge" parent="MyTotalNumberText">
+    </style>
+
+    <style name="TotalNumberTextLarge" parent="MyTotalNumberText">
         <item name="android:textSize">26sp</item>
     </style>
 

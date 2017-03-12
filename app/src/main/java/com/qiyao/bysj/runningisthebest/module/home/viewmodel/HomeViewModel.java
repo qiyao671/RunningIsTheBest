@@ -13,6 +13,7 @@ import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.home.ui.BestRunFragment;
+import com.qiyao.bysj.runningisthebest.module.home.ui.SettingFragment;
 import com.qiyao.bysj.runningisthebest.module.home.ui.TotalRunPagerFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
@@ -47,7 +48,10 @@ public class HomeViewModel implements IViewModel {
         this.fragment = fragment;
         httpMethods = HttpMethods.getInstance();
         //默认显示缓存的数据
-        setUserInfo(SPHelper.loadUser());
+        UserBean oldUser = SPHelper.loadUser();
+        if (oldUser != null) {
+            setUserInfo(oldUser);
+        }
         getUser();
         getTotalRun();
     }
@@ -57,6 +61,7 @@ public class HomeViewModel implements IViewModel {
                 .subscribeOn(Schedulers.newThread())
                 .filter(user -> user != null)
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(SPHelper::saveUser)
                 .compose(((RxFragment) fragment).bindToLifecycle())
                 .subscribe(this::setUserInfo, this::onError);
     }
@@ -107,6 +112,8 @@ public class HomeViewModel implements IViewModel {
             case R.id.total_run:
                 TotalRunPagerFragment.launch(fragment.getActivity());
                 break;
+            case R.id.setting:
+                SettingFragment.launch(fragment.getActivity());
         }
     }
 }

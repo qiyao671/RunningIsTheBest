@@ -229,7 +229,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/config"
+                android:id="@+id/setting"
+                android:onClick="@{viewModel::onClick}"
                 style="@style/MyModuleCardLayout">
 
                 <ImageView

@@ -21,6 +21,16 @@ public class FragmentContainerActivity extends BaseActivity {
 
     public static final String FRAGMENT_TAG = "FRAGMENT_CONTAINER";
 
+    public static void launch(Activity activity, Class<? extends Fragment> clazz, Bundle args, int flags) {
+        Intent intent = new Intent(activity, FragmentContainerActivity.class);
+        if (flags != -1) {
+            intent.addFlags(flags);
+        }
+        intent.putExtra("className", clazz.getName());
+        if (args != null)
+            intent.putExtras(args);
+        activity.startActivity(intent);
+    }
     /**
      * 启动一个界面
      *
@@ -29,11 +39,11 @@ public class FragmentContainerActivity extends BaseActivity {
      * @param args
      */
     public static void launch(Activity activity, Class<? extends Fragment> clazz, Bundle args) {
-        Intent intent = new Intent(activity, FragmentContainerActivity.class);
-        intent.putExtra("className", clazz.getName());
-        if (args != null)
-            intent.putExtras(args);
-        activity.startActivity(intent);
+        launch(activity, clazz, args, -1);
+    }
+
+    public static void launch(Activity activity, Class<? extends Fragment> clazz, int flags) {
+        launch(activity, clazz, null, flags);
     }
 
     public static void launch(Activity activity, Class<? extends Fragment> clazz) {

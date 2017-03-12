@@ -1,5 +1,8 @@
 package com.qiyao.bysj.runningisthebest.module.run.viewmodel;
 
+import android.app.Fragment;
+import android.databinding.ObservableField;
+
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 
 /**
@@ -7,4 +10,10 @@ import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
  */
 
 public class RunViewModel implements IViewModel {
+    private Fragment fragment;
+
+    public ObservableField<String> distance = new ObservableField<>();
+    public ObservableField<String> duration = new ObservableField<>();
+
+
 }

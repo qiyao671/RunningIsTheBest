@@ -15,7 +15,7 @@ import com.qiyao.bysj.runningisthebest.base.AppBaseActivity;
 import com.qiyao.bysj.runningisthebest.module.friends.ui.FriendsFragment;
 import com.qiyao.bysj.runningisthebest.module.home.ui.HomeFragment;
 import com.qiyao.bysj.runningisthebest.module.moment.ui.MomentFragment;
-import com.qiyao.bysj.runningisthebest.module.run.ui.RunFragment;
+import com.qiyao.bysj.runningisthebest.module.run.ui.StartRunFragment;
 
 public class MainActivity extends AppBaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private BottomNavigationView bottomNavigation;
@@ -120,7 +120,7 @@ public class MainActivity extends AppBaseActivity implements BottomNavigationVie
             case R.id.tab_home:
                 return HomeFragment.class.getName();
             case R.id.tab_run:
-                return RunFragment.class.getName();
+                return StartRunFragment.class.getName();
             case R.id.tab_moment:
                 return MomentFragment.class.getName();
             case R.id.tab_friends:
@@ -161,7 +161,8 @@ public class MainActivity extends AppBaseActivity implements BottomNavigationVie
 
     public static void launch(Activity activity) {
         Intent intent = new Intent(activity, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         activity.startActivity(intent);
     }
 }
