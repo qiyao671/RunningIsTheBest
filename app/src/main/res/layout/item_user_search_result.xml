@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.qiyao.bysj.runningisthebest.module.friends.viewmodel.UserSearchResultItemViewModel" />
+    </data>
+    <LinearLayout
+        android:onClick="@{viewModel::onClick}"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:paddingStart="@dimen/base_list_item_horizontal_margin"
+            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+            android:paddingTop="@dimen/base_list_item_vertical_margin"
+            android:paddingBottom="@dimen/base_list_item_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                app:imageUrl="@{viewModel.profileUrl}"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+            <TextView
+                android:layout_marginStart="@dimen/base_list_item_horizontal_margin"
+                android:text="@{viewModel.userName}"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_large"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@drawable/ic_add"
+                android:tint="@color/primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:background="@color/divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp" />
+    </LinearLayout>
+
+</layout>

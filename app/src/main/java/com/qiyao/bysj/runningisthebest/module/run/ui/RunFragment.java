@@ -81,7 +81,7 @@ public class RunFragment extends ADataBindingFragment
 
     @NonNull
     @Override
-    protected IViewModel createViewModel() {
+    protected IViewModel createViewModel(Bundle arguments) {
         return new RunViewModel();
     }
 

@@ -28,7 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="4e2a034ac77d2e394245ca8bb16dc8b3" />
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="4e2a034ac77d2e394245ca8bb16dc8b3" />
 
         <activity android:name=".module.MainActivity" />
         <activity android:name=".module.SplashActivity">
@@ -39,6 +41,21 @@
             </intent-filter>
         </activity>
         <activity android:name="com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity" />
+        <activity android:name=".module.friends.ui.FriendsSearchableActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable_friends" />
+        </activity>
+        <activity android:name=".module.friends.ui.AddFriendActivity"
+            android:launchMode="singleTask">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".module.friends.ui.FriendsSearchableActivity" />
+        </activity>
+
         <service android:name="com.amap.api.location.APSService" />
     </application>
 

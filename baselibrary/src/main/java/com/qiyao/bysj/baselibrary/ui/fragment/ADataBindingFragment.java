@@ -26,7 +26,7 @@ public abstract class ADataBindingFragment extends ABaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = createViewModel();
+        viewModel = createViewModel(getArguments());
     }
 
     public IViewModel getViewModel() {
@@ -34,7 +34,7 @@ public abstract class ADataBindingFragment extends ABaseFragment {
     }
 
     @NonNull
-    protected abstract IViewModel createViewModel();
+    protected abstract IViewModel createViewModel(Bundle arguments);
 
     @Nullable
     @Override

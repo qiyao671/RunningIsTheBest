@@ -211,6 +211,7 @@
 
             <LinearLayout
                 android:id="@+id/history"
+                android:onClick="@{viewModel::onClick}"
                 style="@style/MyModuleCardLayout">
 
                 <ImageView

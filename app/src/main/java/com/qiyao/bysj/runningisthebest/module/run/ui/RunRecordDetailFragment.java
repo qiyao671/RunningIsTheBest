@@ -1,5 +1,6 @@
 package com.qiyao.bysj.runningisthebest.module.run.ui;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.qiyao.bysj.baselibrary.ui.fragment.AFragmentPagerFragment;
@@ -14,7 +15,7 @@ import com.qiyao.bysj.baselibrary.viewmodel.AFragmentTabPagerViewModel;
 public class RunRecordDetailFragment extends AFragmentPagerFragment {
     @NonNull
     @Override
-    protected AFragmentTabPagerViewModel createViewModel() {
+    protected AFragmentTabPagerViewModel createViewModel(Bundle arguments) {
         return null;
     }
 }

@@ -19,8 +19,6 @@ import java.lang.reflect.Method;
 public class FragmentContainerActivity extends BaseActivity {
     private int overrideTheme = -1;
 
-    public static final String FRAGMENT_TAG = "FRAGMENT_CONTAINER";
-
     public static void launch(Activity activity, Class<? extends Fragment> clazz, Bundle args, int flags) {
         Intent intent = new Intent(activity, FragmentContainerActivity.class);
         if (flags != -1) {
@@ -115,9 +113,13 @@ public class FragmentContainerActivity extends BaseActivity {
 //        BizFragment.getBizFragment(this);
 
         if (fragment != null) {
-            getFragmentManager().beginTransaction().add(R.id.fragmentContainer, fragment, FRAGMENT_TAG).commit();
+            getFragmentManager().beginTransaction().add(R.id.fragmentContainer, fragment, makeFragmentName(className)).commit();
         }
         setDisplayHomeAsUpEnabled(false);
+    }
+
+    public static String makeFragmentName(String className) {
+        return "TAG_" + className;
     }
 
 

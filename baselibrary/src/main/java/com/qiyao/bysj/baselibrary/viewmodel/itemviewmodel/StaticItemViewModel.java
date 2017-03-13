@@ -16,6 +16,7 @@ public class StaticItemViewModel implements IItemViewModel {
     public static final String TYPE_FOOTER = "TYPE_FOOTER";
     public static final String TYPE_LOAD_MORE = "TYPE_LOAD_MORE";
     public static final String TYPE_EMPTY = "TYPE_EMPTY";
+    public static final String TYPE_ITEM = "TYPE_ITEM";
 
     @Override
     public String getItemViewType() {

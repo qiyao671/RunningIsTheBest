@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
+import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.common.SPHelper;
@@ -15,6 +16,7 @@ import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.home.ui.BestRunFragment;
 import com.qiyao.bysj.runningisthebest.module.home.ui.SettingFragment;
 import com.qiyao.bysj.runningisthebest.module.home.ui.TotalRunPagerFragment;
+import com.qiyao.bysj.runningisthebest.module.run.ui.RunRecordsFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -114,6 +116,9 @@ public class HomeViewModel implements IViewModel {
                 break;
             case R.id.setting:
                 SettingFragment.launch(fragment.getActivity());
+                break;
+            case R.id.history:
+                FragmentContainerActivity.launch(fragment.getActivity(), RunRecordsFragment.class);
         }
     }
 }

@@ -27,7 +27,6 @@ public class FriendsViewModel extends ASectionCollectionViewModel<String, UserBe
     private boolean hasInit;
     public FriendsViewModel(Fragment fragment) {
         super(fragment, false, false);
-        readCache();
     }
 
     @Override
@@ -138,7 +137,8 @@ public class FriendsViewModel extends ASectionCollectionViewModel<String, UserBe
         return new FriendItemViewModel(getFragment().getActivity(), item);
     }
 
-    private void readCache() {
+    @Override
+    protected void beforeRequest() {
         new ASectionTask(RefreshMode.reset) {
             @Override
             protected Observable<List<UserBean>> getData(RefreshMode mode) {

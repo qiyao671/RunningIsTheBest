@@ -55,4 +55,5 @@
     <!--friends-->
     <string name="add_friend">添加好友</string>
     <string name="new_friend">新的朋友</string>
+    <string name="search_friend">搜索用户名</string>
 </resources>

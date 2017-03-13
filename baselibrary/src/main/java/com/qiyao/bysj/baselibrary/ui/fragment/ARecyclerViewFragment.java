@@ -1,9 +1,14 @@
 package com.qiyao.bysj.baselibrary.ui.fragment;
 
 import android.databinding.ViewDataBinding;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.qiyao.bysj.baselibrary.R;
 import com.qiyao.bysj.baselibrary.databinding.FragmentRecyclerViewBinding;
+import com.qiyao.bysj.baselibrary.viewmodel.ACollectionViewModel;
+import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 
 /**
  * Created by lvqiyao (amorfatilay@163.com).
@@ -25,6 +30,12 @@ public abstract class ARecyclerViewFragment extends ADataBindingFragment {
     }*/
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getViewModel().initItemViewModels();
+    }
+
+    @Override
     protected int layoutRes() {
         return R.layout.fragment_recycler_view;
     }
@@ -32,5 +43,10 @@ public abstract class ARecyclerViewFragment extends ADataBindingFragment {
     @Override
     public FragmentRecyclerViewBinding getBinding() {
         return (FragmentRecyclerViewBinding) super.getBinding();
+    }
+
+    @Override
+    public ACollectionViewModel getViewModel() {
+        return (ACollectionViewModel) super.getViewModel();
     }
 }

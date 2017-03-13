@@ -36,7 +36,7 @@ public class BestRunFragment extends ADataBindingFragment {
     }
     @NonNull
     @Override
-    protected IViewModel createViewModel() {
+    protected IViewModel createViewModel(Bundle arguments) {
         return new BestRunViewModel(this);
     }
 

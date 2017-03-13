@@ -33,7 +33,7 @@ public class TotalRunPagerFragment extends AFragmentPagerFragment {
 
     @NonNull
     @Override
-    protected AFragmentTabPagerViewModel createViewModel() {
+    protected AFragmentTabPagerViewModel createViewModel(Bundle arguments) {
         return new AFragmentTabPagerViewModel(this) {
             @Override
             protected List<FragmentTabItem> generateItems() {

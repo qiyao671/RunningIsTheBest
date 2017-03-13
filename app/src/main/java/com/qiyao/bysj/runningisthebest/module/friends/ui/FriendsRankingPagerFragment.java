@@ -1,5 +1,6 @@
 package com.qiyao.bysj.runningisthebest.module.friends.ui;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.qiyao.bysj.baselibrary.model.bean.FragmentTabItem;
@@ -21,7 +22,7 @@ public class FriendsRankingPagerFragment extends AFragmentPagerFragment {
 
     @NonNull
     @Override
-    protected AFragmentTabPagerViewModel createViewModel() {
+    protected AFragmentTabPagerViewModel createViewModel(Bundle arguments) {
         return new AFragmentTabPagerViewModel(this) {
             @Override
             protected List<FragmentTabItem> generateItems() {

@@ -2,6 +2,7 @@ package com.qiyao.bysj.runningisthebest.module.login.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
@@ -19,7 +20,7 @@ import com.qiyao.bysj.runningisthebest.module.login.viewmodel.LoginViewModel;
 public class LoginFragment extends ADataBindingFragment {
     @NonNull
     @Override
-    protected IViewModel createViewModel() {
+    protected IViewModel createViewModel(Bundle arguments) {
         return new LoginViewModel(this);
     }
 

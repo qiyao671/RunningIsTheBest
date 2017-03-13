@@ -9,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.ui.fragment.ARecyclerViewFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
@@ -40,7 +39,7 @@ public class FriendsFragment extends ARecyclerViewFragment {
 
     @NonNull
     @Override
-    protected IViewModel createViewModel() {
+    protected IViewModel createViewModel(Bundle arguments) {
         return new FriendsViewModel(this);
     }
 
@@ -54,7 +53,7 @@ public class FriendsFragment extends ARecyclerViewFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_friend:
-                FragmentContainerActivity.launch(getActivity(), AddFriendFragment.class);
+                AddFriendActivity.launch(getActivity());
         }
         return super.onOptionsItemSelected(item);
     }

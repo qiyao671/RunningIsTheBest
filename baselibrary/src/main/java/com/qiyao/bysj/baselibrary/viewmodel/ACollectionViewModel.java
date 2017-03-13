@@ -6,6 +6,8 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+
+import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.IItemViewBindingCreator;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.OnLoadMoreListener;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.SimpleLoadMoreViewBindingCreator;
@@ -60,8 +62,6 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
         footerViewBindingCreator = createFooterViewBindingHelper();
         loadMoreViewBindingCreator = createLoadMoreViewBindingHelper();
 
-        initItemViewModelList();
-
         onRefreshListener.set(this);
         onLoadMoreListener.set(this);
     }
@@ -107,6 +107,9 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
     }
 
     private ViewBindingRes getBindingRes(int position, IItemViewModel item) {
+        if (StringUtils.isEmpty(item.getItemViewType())) {
+            return getItemRes(position, item);
+        }
         switch (item.getItemViewType()) {
             case StaticItemViewModel.TYPE_HEADER:
                 return getHeaderRes();
@@ -139,14 +142,18 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
         itemViewModels.addAll(index, itemViewModelArrayList);
     }
 
-    protected void clearItemViewModels() {
+    protected final void clearItemViewModels() {
         itemViewModels.clear();
         addStaticViewModel();
     }
 
-    private void initItemViewModelList() {
+    public final void initItemViewModels() {
+        beforeRequest();
         requestData(RefreshMode.reset);
     }
+
+    protected void beforeRequest() {}
+
 
     private void addStaticViewModel() {
         //添加header view model
@@ -199,15 +206,15 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
 
     protected abstract IItemViewModel newItemViewModel(T item);
 
-    public ViewBindingRes getHeaderRes() {
+    protected ViewBindingRes getHeaderRes() {
         return headerViewBindingCreator == null ? null : headerViewBindingCreator.genViewBindingRes();
     }
 
-    public ViewBindingRes getFooterRes() {
+    protected ViewBindingRes getFooterRes() {
         return footerViewBindingCreator == null ? null :footerViewBindingCreator.genViewBindingRes();
     }
 
-    public ViewBindingRes getLoadMoreViewRes() {
+    protected ViewBindingRes getLoadMoreViewRes() {
         return loadMoreViewBindingCreator == null ? null :loadMoreViewBindingCreator.genViewBindingRes();
     }
 
@@ -236,7 +243,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
             return null;
         }
         IItemViewModel loadMoreViewModel = itemViewModels.get(itemViewModels.size() - 1);
-        if (loadMoreViewModel != null
+        if (isLoadMoreEnable && loadMoreViewModel != null
                 && loadMoreViewModel.getItemViewType().equals(StaticItemViewModel.TYPE_LOAD_MORE) ) {
             return (SimpleLoadMoreViewModel)loadMoreViewModel;
         }
@@ -305,7 +312,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
             this.mode = mode;
         }
 
-        protected abstract Observable getData(RefreshMode mode);
+        protected abstract Observable<List<T>> getData(RefreshMode mode);
 
         public void execute() {
             prepare(mode);

@@ -27,7 +27,7 @@ public abstract class AFragmentPagerFragment extends ADataBindingFragment {
 
     @NonNull
     @Override
-    protected abstract AFragmentTabPagerViewModel createViewModel();
+    protected abstract AFragmentTabPagerViewModel createViewModel(Bundle arguments);
 
     @Override
     protected int layoutRes() {

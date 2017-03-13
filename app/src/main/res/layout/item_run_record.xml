@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.qiyao.bysj.runningisthebest.module.run.viewmodel.RunRecordsItemViewModel" />
+    </data>
+    <RelativeLayout
+        android:paddingStart="@dimen/base_list_item_horizontal_margin"
+        android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+        <TextView
+            style="@style/DarkSecondaryText"
+            android:text="@{viewModel.datetime}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_distance"
+            android:textSize="32sp"
+            android:text="@{viewModel.distance}"
+            android:layout_centerVertical="true"
+            style="@style/TotalNumberTextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_km"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_distance"
+            android:layout_marginStart="3dp"
+            android:layout_toEndOf="@id/tv_distance"
+            android:text="@string/km"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/text_size_xlarge" />
+        <LinearLayout
+            android:layout_toEndOf="@id/tv_km"
+            android:orientation="vertical"
+            android:gravity="end"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="@{viewModel.duration}"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="@{viewModel.pace}"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_body"
+                android:layout_marginTop="@dimen/base_list_item_vertical_spacing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
