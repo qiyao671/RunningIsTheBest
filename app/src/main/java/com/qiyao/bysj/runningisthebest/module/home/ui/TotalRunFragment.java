@@ -3,6 +3,7 @@ package com.qiyao.bysj.runningisthebest.module.home.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.qiyao.bysj.baselibrary.common.CommonConstants;
 import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
@@ -16,7 +17,8 @@ public class TotalRunFragment extends ADataBindingFragment {
     @NonNull
     @Override
     protected IViewModel createViewModel(Bundle arguments) {
-        return new TotalRunViewModel();
+        String type = getArguments().getString(CommonConstants.KEY_FRAGMENT_IN_PAGER_ARGS);
+        return new TotalRunViewModel(this, type);
     }
 
     @Override

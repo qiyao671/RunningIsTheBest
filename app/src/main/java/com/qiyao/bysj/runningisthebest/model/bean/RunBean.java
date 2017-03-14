@@ -1,5 +1,8 @@
 package com.qiyao.bysj.runningisthebest.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
@@ -8,14 +11,14 @@ import java.util.Date;
  * 类描述：
  */
 
-public class RunBean {
+public class RunBean implements Parcelable {
     private Integer id;
 
     private Integer userId;
 
     private Double distance;
 
-    private Double spendTime;
+    private Long spendTime;
 
     private Double energy;
 
@@ -27,7 +30,7 @@ public class RunBean {
 
     private Double totalDistance;
 
-    private Double totalSpendTime;
+    private Long totalSpendTime;
 
     private Double totalCount;
 
@@ -67,11 +70,11 @@ public class RunBean {
         this.distance = distance;
     }
 
-    public Double getSpendTime() {
+    public Long getSpendTime() {
         return spendTime;
     }
 
-    public void setSpendTime(Double spendTime) {
+    public void setSpendTime(Long spendTime) {
         this.spendTime = spendTime;
     }
 
@@ -123,11 +126,11 @@ public class RunBean {
         this.totalDistance = totalDistance;
     }
 
-    public Double getTotalSpendTime() {
+    public Long getTotalSpendTime() {
         return totalSpendTime;
     }
 
-    public void setTotalSpendTime(Double totalSpendTime) {
+    public void setTotalSpendTime(Long totalSpendTime) {
         this.totalSpendTime = totalSpendTime;
     }
 
@@ -178,4 +181,68 @@ public class RunBean {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeValue(this.userId);
+        dest.writeValue(this.distance);
+        dest.writeValue(this.spendTime);
+        dest.writeValue(this.energy);
+        dest.writeLong(this.createTime != null ? this.createTime.getTime() : -1);
+        dest.writeString(this.picture);
+        dest.writeString(this.momentContent);
+        dest.writeValue(this.totalDistance);
+        dest.writeValue(this.totalSpendTime);
+        dest.writeValue(this.totalCount);
+        dest.writeValue(this.totalEnergy);
+        dest.writeValue(this.maxDistance);
+        dest.writeValue(this.minDistance);
+        dest.writeValue(this.fastSpend);
+        dest.writeLong(this.beginTime != null ? this.beginTime.getTime() : -1);
+        dest.writeLong(this.endTime != null ? this.endTime.getTime() : -1);
+    }
+
+    public RunBean() {
+    }
+
+    protected RunBean(Parcel in) {
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.userId = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.distance = (Double) in.readValue(Double.class.getClassLoader());
+        this.spendTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.energy = (Double) in.readValue(Double.class.getClassLoader());
+        long tmpCreateTime = in.readLong();
+        this.createTime = tmpCreateTime == -1 ? null : new Date(tmpCreateTime);
+        this.picture = in.readString();
+        this.momentContent = in.readString();
+        this.totalDistance = (Double) in.readValue(Double.class.getClassLoader());
+        this.totalSpendTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.totalCount = (Double) in.readValue(Double.class.getClassLoader());
+        this.totalEnergy = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.maxDistance = (Double) in.readValue(Double.class.getClassLoader());
+        this.minDistance = (Double) in.readValue(Double.class.getClassLoader());
+        this.fastSpend = (Double) in.readValue(Double.class.getClassLoader());
+        long tmpBeginTime = in.readLong();
+        this.beginTime = tmpBeginTime == -1 ? null : new Date(tmpBeginTime);
+        long tmpEndTime = in.readLong();
+        this.endTime = tmpEndTime == -1 ? null : new Date(tmpEndTime);
+    }
+
+    public static final Parcelable.Creator<RunBean> CREATOR = new Parcelable.Creator<RunBean>() {
+        @Override
+        public RunBean createFromParcel(Parcel source) {
+            return new RunBean(source);
+        }
+
+        @Override
+        public RunBean[] newArray(int size) {
+            return new RunBean[size];
+        }
+    };
 }

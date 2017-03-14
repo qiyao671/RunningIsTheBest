@@ -1,36 +1,50 @@
 package com.qiyao.bysj.runningisthebest.module.run.viewmodel;
 
+import android.app.Fragment;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.view.View;
 
-import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
+import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.StaticItemViewModel;
+import com.qiyao.bysj.runningisthebest.common.AppTimeUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
+import com.qiyao.bysj.runningisthebest.module.run.ui.RunRecordDetailPagerFragment;
+
+import java.util.Locale;
 
 /**
  * Created by qiyao on 2017/3/13.
  */
 
 public class RunRecordsItemViewModel extends BaseObservable implements IItemViewModel {
+    private Fragment fragment;
+
     private String distance;
     private String duration;
     private String datetime;
-    private String pace;
+    private String avgPace;
 
     private RunBean runBean;
-    public RunRecordsItemViewModel(RunBean runBean) {
+
+    public RunRecordsItemViewModel(Fragment fragment, RunBean runBean) {
+        this.fragment = fragment;
         this.runBean = runBean;
-        distance = String.valueOf(runBean.getDistance());
-        duration = String.valueOf(runBean.getSpendTime());
-        datetime = String.valueOf(runBean.getBeginTime());
-//        pace = String.valueOf(runBean.getSpendTime() / )
-        pace = "";
+        setRunInfo(runBean);
+    }
+
+    private void setRunInfo(RunBean runBean) {
+        distance = runBean.getDistance() != null ? String.valueOf(runBean.getDistance()) : "--";
+        duration = runBean.getSpendTime() != null ? AppTimeUtils.getTime(runBean.getSpendTime()): "--";
+        datetime = runBean.getBeginTime() != null ? TimeUtils.getFriendlyTimeSpanByNow(runBean.getBeginTime()) : "--";
+        if (!duration.equals("--") && !distance.equals("--")) {
+            avgPace = AppTimeUtils.getPace(runBean.getSpendTime(), runBean.getDistance());
+        }
     }
 
     public void onClick(View view) {
-
+        RunRecordDetailPagerFragment.launch(fragment.getActivity(), runBean);
     }
 
     @Override
@@ -49,8 +63,8 @@ public class RunRecordsItemViewModel extends BaseObservable implements IItemView
     }
 
     @Bindable
-    public String getPace() {
-        return pace;
+    public String getAvgPace() {
+        return avgPace;
     }
 
     @Bindable

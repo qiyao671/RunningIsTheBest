@@ -19,8 +19,8 @@ import com.trello.rxlifecycle.components.RxFragment;
 
 import java.util.List;
 
-import me.tatarka.bindingcollectionadapter.ItemBinding;
-import me.tatarka.bindingcollectionadapter.OnItemBind;
+import me.tatarka.bindingcollectionadapter2.ItemBinding;
+import me.tatarka.bindingcollectionadapter2.OnItemBind;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;

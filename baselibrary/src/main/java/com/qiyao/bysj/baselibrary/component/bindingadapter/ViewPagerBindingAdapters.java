@@ -14,9 +14,9 @@ import java.util.List;
  */
 
 public class ViewPagerBindingAdapters {
-    @BindingAdapter(value = {"fragmentPagerAdapter", "items"})
+/*    @BindingAdapter(value = {"fragmentPagerAdapter", "items"})
     public static void set(ViewPager viewPager, FragmentTabsPagerAdapter adapter ,List<FragmentTabItem> items) {
         adapter.setTabItems(items);
         viewPager.setAdapter(adapter);
-    }
+    }*/
 }

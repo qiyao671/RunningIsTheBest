@@ -34,6 +34,7 @@ public class BestRunFragment extends ADataBindingFragment {
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
+    
     @NonNull
     @Override
     protected IViewModel createViewModel(Bundle arguments) {

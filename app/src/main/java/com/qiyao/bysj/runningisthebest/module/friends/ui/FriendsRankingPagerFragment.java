@@ -19,19 +19,12 @@ import java.util.List;
  */
 
 public class FriendsRankingPagerFragment extends AFragmentPagerFragment {
-
-    @NonNull
     @Override
-    protected AFragmentTabPagerViewModel createViewModel(Bundle arguments) {
-        return new AFragmentTabPagerViewModel(this) {
-            @Override
-            protected List<FragmentTabItem> generateItems() {
-                List<FragmentTabItem> items = new ArrayList<>();
-                items.add(new FragmentTabItem(getString(R.string.day), TotalRunFragment.class));
-                items.add(new FragmentTabItem(getString(R.string.week), TotalRunFragment.class));
-                items.add(new FragmentTabItem(getString(R.string.month), TotalRunFragment.class));
-                return items;
-            }
-        };
+    protected List<FragmentTabItem> generateItems() {
+        List<FragmentTabItem> items = new ArrayList<>();
+        items.add(new FragmentTabItem(getString(R.string.day), TotalRunFragment.class));
+        items.add(new FragmentTabItem(getString(R.string.week), TotalRunFragment.class));
+        items.add(new FragmentTabItem(getString(R.string.month), TotalRunFragment.class));
+        return items;
     }
 }

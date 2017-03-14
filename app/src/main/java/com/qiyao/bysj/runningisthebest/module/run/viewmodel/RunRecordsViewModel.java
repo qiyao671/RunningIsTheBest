@@ -1,14 +1,12 @@
 package com.qiyao.bysj.runningisthebest.module.run.viewmodel;
 
 import android.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 
 import com.qiyao.bysj.baselibrary.component.bindinghelper.ViewBindingRes;
 import com.qiyao.bysj.baselibrary.viewmodel.ACollectionViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.BR;
 import com.qiyao.bysj.runningisthebest.R;
-import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 
 import java.util.ArrayList;
@@ -34,27 +32,27 @@ public class RunRecordsViewModel extends ACollectionViewModel<RunBean> {
                 List<RunBean> list = new ArrayList<>();
                 RunBean runBean = new RunBean();
                 runBean.setBeginTime(Calendar.getInstance().getTime());
-                runBean.setSpendTime(12.8);
+                runBean.setSpendTime(1010L);
                 runBean.setDistance(10.0);
                 list.add(runBean);
                 runBean = new RunBean();
                 runBean.setBeginTime(Calendar.getInstance().getTime());
-                runBean.setSpendTime(132.8);
+                runBean.setSpendTime(193191L);
                 runBean.setDistance(104.0);
                 list.add(runBean);
                 runBean = new RunBean();
                 runBean.setBeginTime(Calendar.getInstance().getTime());
-                runBean.setSpendTime(122.8);
+                runBean.setSpendTime(122L);
                 runBean.setDistance(140.0);
                 list.add(runBean);
                 runBean = new RunBean();
                 runBean.setBeginTime(Calendar.getInstance().getTime());
-                runBean.setSpendTime(112.8);
+                runBean.setSpendTime(112L);
                 runBean.setDistance(130.0);
                 list.add(runBean);
                 runBean = new RunBean();
                 runBean.setBeginTime(Calendar.getInstance().getTime());
-                runBean.setSpendTime(182.8);
+                runBean.setSpendTime(182L);
                 runBean.setDistance(160.0);
                 list.add(runBean);
 
@@ -70,6 +68,6 @@ public class RunRecordsViewModel extends ACollectionViewModel<RunBean> {
 
     @Override
     protected IItemViewModel newItemViewModel(RunBean item) {
-        return new RunRecordsItemViewModel(item);
+        return new RunRecordsItemViewModel(getFragment(), item);
     }
 }

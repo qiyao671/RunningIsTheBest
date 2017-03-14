@@ -47,7 +47,7 @@ public class FragmentTabsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public String makeFragmentName(int position) {
-        return "Tab_" + tabItems.get(position).getFragmentClass().getName();
+        return "Tab_" + tabItems.get(position).getTitle();
     }
 
     @Override

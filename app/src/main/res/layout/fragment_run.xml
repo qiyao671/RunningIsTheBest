@@ -15,10 +15,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <LinearLayout
+            android:background="@color/md_white_1000"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="80dp">
+            android:layout_height="80dp"
+            android:baselineAligned="false">
             <LinearLayout
                 android:orientation="vertical"
                 android:gravity="center"

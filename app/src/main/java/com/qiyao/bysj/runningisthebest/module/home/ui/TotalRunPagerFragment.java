@@ -12,6 +12,7 @@ import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.ui.fragment.AFragmentPagerFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.AFragmentTabPagerViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.module.home.viewmodel.TotalRunViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,19 +32,13 @@ public class TotalRunPagerFragment extends AFragmentPagerFragment {
         }
     }
 
-    @NonNull
     @Override
-    protected AFragmentTabPagerViewModel createViewModel(Bundle arguments) {
-        return new AFragmentTabPagerViewModel(this) {
-            @Override
-            protected List<FragmentTabItem> generateItems() {
-                List<FragmentTabItem> items = new ArrayList<>();
-                items.add(new FragmentTabItem(getString(R.string.week), TotalRunFragment.class));
-                items.add(new FragmentTabItem(getString(R.string.month), TotalRunFragment.class));
-                items.add(new FragmentTabItem(getString(R.string.total), TotalRunFragment.class));
-                return items;
-            }
-        };
+    protected List<FragmentTabItem> generateItems() {
+        List<FragmentTabItem> items = new ArrayList<>();
+        items.add(new FragmentTabItem(getString(R.string.week), TotalRunViewModel.TYPE_WEEK, TotalRunFragment.class));
+        items.add(new FragmentTabItem(getString(R.string.month), TotalRunViewModel.TYPE_MONTH, TotalRunFragment.class));
+        items.add(new FragmentTabItem(getString(R.string.total), TotalRunViewModel.TYPE_TOTAL, TotalRunFragment.class));
+        return items;
     }
 
     public static void launch(Activity activity) {

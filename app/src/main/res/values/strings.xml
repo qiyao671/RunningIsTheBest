@@ -36,7 +36,7 @@
     <!--best run-->
     <string name="farthest_run">最长距离：公里</string>
     <string name="longest_run">最长时间：</string>
-    <string name="fastest_avg_pace">最快均速：公里每小时</string>
+    <string name="fastest_avg_speed">最快均速：公里每小时</string>
     <string name="fastest_pace">最快配速：分钟每公里</string>
     <string name="five_km_pb">5公里最快时间：</string>
     <string name="ten_km_pb">10公里最快时间：</string>
@@ -48,6 +48,11 @@
     <string name="month">月</string>
     <string name="total">总</string>
     <string name="sports_statistics">运动统计</string>
+    <string name="cal">大卡</string>
+    <string name="per_km">/公里</string>
+    <string name="km_per_hour">公里/时</string>
+    <string name="this_week">本周</string>
+    <string name="my_run_life">我的运动生涯</string>
 
     <!--friends ranking-->
     <string name="day">日</string>
@@ -56,4 +61,12 @@
     <string name="add_friend">添加好友</string>
     <string name="new_friend">新的朋友</string>
     <string name="search_friend">搜索用户名</string>
+
+    <!--run record-->
+    <string name="duration">时长</string>
+    <string name="avg_pace">平均配速</string>
+    <string name="calories">卡路里</string>
+    <string name="avg_speed">平均速度</string>
+    <string name="track">轨迹</string>
+    <string name="detail">详情</string>
 </resources>
