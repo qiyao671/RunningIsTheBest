@@ -12,8 +12,6 @@ import com.qiyao.bysj.runningisthebest.common.AppTimeUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.module.run.ui.RunRecordDetailPagerFragment;
 
-import java.util.Locale;
-
 /**
  * Created by qiyao on 2017/3/13.
  */
@@ -25,7 +23,6 @@ public class RunRecordsItemViewModel extends BaseObservable implements IItemView
     private String duration;
     private String datetime;
     private String avgPace;
-
     private RunBean runBean;
 
     public RunRecordsItemViewModel(Fragment fragment, RunBean runBean) {

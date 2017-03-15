@@ -7,16 +7,22 @@ import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.aigestudio.wheelpicker.IWheelPicker;
 import com.aigestudio.wheelpicker.widgets.WheelDatePicker;
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
+import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.common.Constants;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
+import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 
 import java.util.ArrayList;
+import java.util.Date;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by qiyao on 2017/3/15.
@@ -25,7 +31,6 @@ import java.util.ArrayList;
 public class EditMyInfoViewModel extends BaseObservable
         implements IViewModel, View.OnClickListener {
     public static final String KEY_USER_BEAN = "KEY_USER_BEAN";
-    public ArrayList<String> weights = new ArrayList<>();
     private Fragment fragment;
 
     private UserBean userBean;
@@ -47,23 +52,26 @@ public class EditMyInfoViewModel extends BaseObservable
             return;
         }
 
-        userName = userBean.getUsername();
-        userId = String.valueOf(userBean.getId());
+        if (userBean.getUsername() != null) {
+            userName = userBean.getUsername();
+        }
+        if (userBean.getId() != null) {
+            userId = String.valueOf(userBean.getId());
+        }
 
         profileUrl.set(userBean.getProfile());
-        if (userBean.getSex() != null) {
-            sex.set(userBean.getSex());
-        }
+        sex.set(userBean.getSex());
         height.set(String.valueOf(userBean.getHeight()));
         weight.set(String.valueOf(userBean.getWeight()));
-        birthday.set(TimeUtils.millis2String(userBean.getBirthday(), Constants.PATTER_DATE));
-        location.set(userBean.getLocation());
 
-        initSelectList();
+        location.set(userBean.getLocation());
+        setBirthday(userBean.getBirthday());
     }
 
-    private void initSelectList() {
-
+    private void setBirthday(Long birthday) {
+        if (birthday != null) {
+            this.birthday.set(TimeUtils.millis2String(birthday, Constants.PATTER_DATE));
+        }
     }
 
     @Bindable
@@ -93,6 +101,9 @@ public class EditMyInfoViewModel extends BaseObservable
                 break;
             case R.id.birthday:
                 showDatePicker();
+                break;
+            case R.id.location:
+                showLocationPicker();
                 break;
         }
     }
@@ -139,42 +150,66 @@ public class EditMyInfoViewModel extends BaseObservable
         showListDialog(weights, (dialog, view, which, text) -> updateWeight(Integer.parseInt(String.valueOf(text))));
     }
 
-    private void showDatePicker() {
+    private void showPicker(IWheelPicker picker, MaterialDialog.SingleButtonCallback positiveCallback) {
+
         new MaterialDialog.Builder(fragment.getActivity())
-                .customView(R.layout.view_date_picker, false)
+                .customView((View)picker, false)
                 .positiveText(R.string.ok)
                 .negativeText(R.string.cancel)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        WheelDatePicker datePicker = (WheelDatePicker) dialog.getCustomView();
-                        birthday.set(TimeUtils.date2String(datePicker.getCurrentDate(), Constants.PATTER_DATE));
-                    }
-                })
+                .onPositive(positiveCallback)
                 .show();
+    }
+
+    private void showDatePicker() {
+        WheelDatePicker datePicker = new WheelDatePicker(fragment.getActivity());
+        datePicker.setCyclic(false);
+        datePicker.setAtmospheric(true);
+        datePicker.setCurved(true);
+        datePicker.setSelectedYear(2000);
+        datePicker.setSelectedMonth(1);
+        datePicker.setSelectedDay(1);
+        showPicker(datePicker, (dialog, which) -> updateBirthday(datePicker.getCurrentDate()));
+    }
+
+
+    private void showLocationPicker() {
+/*        WheelAreaPicker areaPicker = new WheelAreaPicker(fragment.getActivity());
+        areaPicker.setCyclic(false);
+        areaPicker.setAtmospheric(true);
+        areaPicker.setCurved(true);
+        showPicker(areaPicker, (dialog, which) -> updateArea(areaPicker.getCity()));*/
     }
 
     private void updateSex(String sex) {
         this.sex.set(sex);
         userBean.setSex(sex);
-        updateUser();
-
     }
 
     private void updateHeight(int height) {
         this.height.set(String.valueOf(height));
-        userBean.setHeight(height);
-        updateUser();
+        userBean.setHeight((double)height);
     }
 
     private void updateWeight(int weight) {
-        this.height.set(String.valueOf(weight));
-        userBean.setWeight(weight);
-        updateUser();
+        this.weight.set(String.valueOf(weight));
+        userBean.setWeight((double)weight);
     }
 
+    private void updateBirthday(Date birthday) {
+        setBirthday(birthday.getTime());
+        userBean.setBirthday(birthday.getTime());
+    }
 
-    private void updateUser() {
-        // TODO: 2017/3/15 更新机制？
+    private void updateArea(String area) {
+        this.location.set(area);
+        userBean.setLocation(area);
+    }
+
+    public void submitUpdate() {
+        HttpMethods.getInstance()
+                .updateUserInfo(userBean)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(ToastUtils::showShortToast, e -> ToastUtils.showShortToast(e.getMessage()));
     }
 }

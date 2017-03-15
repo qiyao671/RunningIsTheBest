@@ -34,6 +34,7 @@ import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.databinding.FragmentRunBinding;
 import com.qiyao.bysj.runningisthebest.module.run.viewmodel.RunViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,10 +48,10 @@ public class RunFragment extends ADataBindingFragment
     private OnLocationChangedListener mListener;
     private AMapLocationClient locationClient;
     private AMapLocationClientOption locationOption;
-    private List<LatLng> trackPoints;
+    private List<LatLng> trackPoints = new ArrayList<>();
     private Polyline trackPolyline;
 
-    private boolean isRunning;
+    private boolean isRunning = true;
 
     @Nullable
     @Override
@@ -108,7 +109,7 @@ public class RunFragment extends ADataBindingFragment
         map.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
         map.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         // 设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转几种
-        map.setMyLocationType(AMap.LOCATION_TYPE_MAP_FOLLOW | AMap.LOCATION_TYPE_MAP_ROTATE);
+        map.setMyLocationType(AMap.LOCATION_TYPE_MAP_FOLLOW);
 //        map.getUiSettings().setCompassEnabled(true);    //指南针用于向 App 端用户展示地图方向，默认不显示
         setupLocationStyle();
         //滑动手势

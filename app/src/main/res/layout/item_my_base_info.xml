@@ -58,12 +58,24 @@
                     android:text="@{viewModel.userId}" />
             </LinearLayout>
 
-            <TextView
-                style="@style/LightSecondaryText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
                 android:layout_marginTop="10dp"
-                android:text="@{viewModel.sexAndAge}" />
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/LightSecondaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.sex}" />
+
+                <TextView
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    style="@style/LightSecondaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.age}" />
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 

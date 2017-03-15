@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
+import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.module.run.viewmodel.RunDetailViewModel;
 
 /**
@@ -22,6 +23,6 @@ public class RunDetailFragment extends ADataBindingFragment {
 
     @Override
     protected int layoutRes() {
-        return 0;
+        return R.layout.fragment_run_detail;
     }
 }

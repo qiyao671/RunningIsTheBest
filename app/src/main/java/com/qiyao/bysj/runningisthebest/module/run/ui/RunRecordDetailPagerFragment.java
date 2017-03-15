@@ -2,15 +2,15 @@ package com.qiyao.bysj.runningisthebest.module.run.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.qiyao.bysj.baselibrary.model.bean.FragmentTabItem;
 import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.ui.fragment.AFragmentPagerFragment;
-import com.qiyao.bysj.baselibrary.viewmodel.AFragmentTabPagerViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
-import com.qiyao.bysj.runningisthebest.module.home.ui.TotalRunFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,17 @@ import java.util.List;
 
 public class RunRecordDetailPagerFragment extends AFragmentPagerFragment {
     private static final String KEY_RUN_BEAN = "runBean";
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity.getSupportActionBar() != null) {
+            setTitle(R.string.run_record);
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
     @Override
     protected List<FragmentTabItem> generateItems() {
         RunBean runBean = getArguments().getParcelable(KEY_RUN_BEAN);

@@ -7,14 +7,12 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.SearchView;
 
-import com.qiyao.bysj.baselibrary.common.utils.ScreenUtils;
+import com.qiyao.bysj.baselibrary.common.utils.KeyboardUtils;
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
-import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.base.AppBaseActivity;
@@ -26,7 +24,7 @@ import com.qiyao.bysj.runningisthebest.module.friends.viewmodel.UserSearchResult
 
 public class AddFriendActivity extends AppBaseActivity {
     public static final String KEY_QUERY = "KEY_QUERY";
-
+    private SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +54,8 @@ public class AddFriendActivity extends AppBaseActivity {
         } else {
             ((UserSearchResultViewModel)((UserSearchResultFragment)fragment).getViewModel()).executeQuery(query);
         }
+//        KeyboardUtils.hideSoftInput(AddFriendActivity.this);
+        searchView.clearFocus();
     }
 
     @Override
@@ -66,10 +66,11 @@ public class AddFriendActivity extends AppBaseActivity {
 
         // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
         // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+        searchView.setOnSearchClickListener(view -> KeyboardUtils.hideSoftInput(AddFriendActivity.this));
 
         return true;
     }

@@ -4,8 +4,13 @@ import com.qiyao.bysj.baselibrary.model.net.HttpFactory;
 import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
+import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
+
+import org.w3c.dom.Comment;
+
+import java.util.List;
 
 import okhttp3.HttpUrl;
 import rx.Observable;
@@ -68,5 +73,37 @@ public class HttpMethods extends HttpFactory {
 
     public Observable<ListResultBean<UserBean>> getFriends() {
         return handleResult(runApiService.getFriends());
+    }
+
+    public Observable<List<UserBean>> getUsersByUserName(String username) {
+        return handleResult(runApiService.getUsersByUserName(username));
+    }
+
+    public Observable<String> postMoment(MomentBean momentBean) {
+        return handleResult(runApiService.postMoment(momentBean));
+    }
+
+    public Observable<List<MomentBean>> getRecentMoments(Integer minId, Integer maxId, Integer pageSize) {
+        return handleResult(runApiService.getRecentMoments(minId, maxId, pageSize));
+    }
+
+    public Observable<String> updateUserInfo(UserBean userBean) {
+        return handleResult(runApiService.updateUserInfo(userBean));
+    }
+
+    public Observable<String> deleteMoment(int momentId) {
+        return handleResult(runApiService.deleteMoment(momentId));
+    }
+
+    public Observable<String> likeMoment(int momentId, boolean isLike) {
+        return handleResult(runApiService.likeMoment(momentId, isLike));
+    }
+
+    public Observable<List<UserBean>> listApproveUsers(int momentId) {
+        return handleResult(runApiService.listApproveUsers(momentId));
+    }
+
+    public Observable<String> deleteMoment(int momentId, Comment comment) {
+        return handleResult(runApiService.commentMoment(momentId, comment));
     }
 }

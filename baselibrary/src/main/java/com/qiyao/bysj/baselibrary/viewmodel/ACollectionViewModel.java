@@ -234,6 +234,10 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
         return getLoadMoreViewRes() == null || loadMoreViewBindingCreator.genItemViewModel(null) == null ? 0 : 1;
     }
 
+    private int getItemViewCount() {
+        return itemViewModels.size() - getHeaderViewCount() - getFooterViewCount() - getLoadMoreViewCount();
+    }
+
     public Fragment getFragment() {
         return fragment;
     }
@@ -328,7 +332,6 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
             result
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.newThread())
-                    .filter(list -> !list.isEmpty())
                     .flatMap(Observable::from)
                     .map(ACollectionViewModel.this::newItemViewModel)
                     .toList()
@@ -348,7 +351,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
         @Override
         public void onCompleted() {
             SimpleLoadMoreViewModel loadMoreViewModel = getLoadMoreViewModel();
-            if (itemViewModels.isEmpty()) {
+            if (getItemViewCount() <= 0) {
                 // TODO: 2017/2/15 设置empty view
             } else{
                 if (loadMoreViewModel == null && getLoadMoreViewCount() > 0) {    //如果数据不为空且loadMoreViewModel为null则添加loadMoreViewModel

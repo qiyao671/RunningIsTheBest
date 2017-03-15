@@ -1,6 +1,5 @@
 package com.qiyao.bysj.runningisthebest.module.run.ui;
 
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,7 +19,6 @@ import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.databinding.FragmentRunTrackBinding;
-import com.qiyao.bysj.runningisthebest.databinding.FragmentTotalRunBinding;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.module.run.viewmodel.RunTrackViewModel;
 

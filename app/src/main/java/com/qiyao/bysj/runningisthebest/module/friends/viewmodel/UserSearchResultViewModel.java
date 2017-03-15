@@ -8,8 +8,8 @@ import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.BR;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
+import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -29,7 +29,7 @@ public class UserSearchResultViewModel extends ACollectionViewModel<UserBean> {
 
     @Override
     protected void requestData(RefreshMode refreshMode) {
-        new APagingTask(refreshMode) {
+        /*new APagingTask(refreshMode) {
             @Override
             protected Observable getData(RefreshMode mode) {
                 List<UserBean> list = new ArrayList<UserBean>();
@@ -58,6 +58,13 @@ public class UserSearchResultViewModel extends ACollectionViewModel<UserBean> {
                 user.setUsername("caes");
                 list.add(user);
                 return Observable.just(list);
+            }
+        }.execute();*/
+
+        new APagingTask(refreshMode) {
+            @Override
+            protected Observable<List<UserBean>> getData(RefreshMode mode) {
+                return HttpMethods.getInstance().getUsersByUserName(query);
             }
         }.execute();
     }

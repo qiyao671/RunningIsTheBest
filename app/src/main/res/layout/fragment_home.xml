@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <import type="com.qiyao.bysj.baselibrary.common.utils.StringUtils" />
+        <import type="android.view.View" />
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.home.viewmodel.HomeViewModel" />
@@ -86,7 +88,8 @@
                     android:layout_height="14dp"
                     android:src="@drawable/ic_arrow_right"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"
+                    tools:ignore="ContentDescription" />
 
                 <LinearLayout
                     android:gravity="end|center_vertical"
@@ -136,7 +139,8 @@
                 <ImageView
                     android:layout_width="@dimen/home_ic_size"
                     android:layout_height="@dimen/home_ic_size"
-                    android:src="@drawable/ic_best" />
+                    android:src="@drawable/ic_best"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     style="@style/MyModuleCardTitle"
@@ -145,7 +149,8 @@
                 <ImageView
                     android:layout_width="@dimen/home_right_arrow_size"
                     android:layout_height="@dimen/home_right_arrow_size"
-                    android:src="@drawable/ic_arrow_right" />
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
             <LinearLayout
@@ -156,7 +161,8 @@
                 <ImageView
                     android:layout_width="@dimen/home_ic_size"
                     android:layout_height="@dimen/home_ic_size"
-                    android:src="@drawable/ic_history" />
+                    android:src="@drawable/ic_history"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     style="@style/MyModuleCardTitle"
@@ -165,7 +171,8 @@
                 <ImageView
                     android:layout_width="@dimen/home_right_arrow_size"
                     android:layout_height="@dimen/home_right_arrow_size"
-                    android:src="@drawable/ic_arrow_right" />
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
             <LinearLayout
@@ -176,7 +183,8 @@
                 <ImageView
                     android:layout_width="@dimen/home_ic_size"
                     android:layout_height="@dimen/home_ic_size"
-                    android:src="@drawable/ic_config" />
+                    android:src="@drawable/ic_config"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     style="@style/MyModuleCardTitle"
@@ -185,7 +193,8 @@
                 <ImageView
                     android:layout_width="@dimen/home_right_arrow_size"
                     android:layout_height="@dimen/home_right_arrow_size"
-                    android:src="@drawable/ic_arrow_right" />
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

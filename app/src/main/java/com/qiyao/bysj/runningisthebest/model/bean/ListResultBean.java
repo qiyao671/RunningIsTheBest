@@ -35,7 +35,7 @@ public class ListResultBean<T> {
     private int pageNum;
     private int pageSize;
     private int size;
-    private Object orderBy;
+    private String orderBy;
     private int startRow;
     private int endRow;
     private int total;
@@ -76,11 +76,11 @@ public class ListResultBean<T> {
         this.size = size;
     }
 
-    public Object getOrderBy() {
+    public String getOrderBy() {
         return orderBy;
     }
 
-    public void setOrderBy(Object orderBy) {
+    public void setOrderBy(String orderBy) {
         this.orderBy = orderBy;
     }
 
@@ -148,20 +148,20 @@ public class ListResultBean<T> {
         this.lastPage = lastPage;
     }
 
-    public boolean isIsFirstPage() {
+    public boolean isFirstPage() {
         return isFirstPage;
     }
 
-    public void setIsFirstPage(boolean isFirstPage) {
+    public void setFirstPage(boolean isFirstPage) {
         this.isFirstPage = isFirstPage;
     }
 
-    public boolean isIsLastPage() {
+    public boolean isLastPage() {
         return isLastPage;
     }
 
-    public void setIsLastPage(boolean isLastPage) {
-        this.isLastPage = isLastPage;
+    public void setLastPage(boolean lastPage) {
+        isLastPage = lastPage;
     }
 
     public boolean isHasPreviousPage() {

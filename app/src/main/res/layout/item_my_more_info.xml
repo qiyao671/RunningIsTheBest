@@ -70,7 +70,7 @@
                     android:layout_marginTop="@dimen/base_list_item_vertical_spacing"
                     android:textColor="@color/md_white_1000"
                     android:textSize="@dimen/text_size_medium"
-                    android:text="167cm"
+                    android:text="@{viewModel.bmi}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -80,7 +80,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.signature}"
+            android:text="@{viewModel.signature ?? @string/no_signature}"
             android:textColor="@color/md_white_1000"
             android:textSize="@dimen/text_size_body" />
 

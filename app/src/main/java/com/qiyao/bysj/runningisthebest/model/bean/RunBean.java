@@ -3,8 +3,6 @@ package com.qiyao.bysj.runningisthebest.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
-
 /**
  * Created by lvqiyao (amorfatilay@163.com).
  * 2017/3/9 21:00.
@@ -22,12 +20,13 @@ public class RunBean implements Parcelable {
 
     private Double energy;
 
-    private Date createTime;
+    private Long createTime;
 
     private String picture;
 
     private String momentContent;
 
+    /*非数据库字段*/
     private Double totalDistance;
 
     private Long totalSpendTime;
@@ -41,10 +40,12 @@ public class RunBean implements Parcelable {
     private Double minDistance;
 
     private Double fastSpend;
+    /*最快配速*/
+    private Double fastPace;
 
-    private Date beginTime;
+    private Long beginTime;
 
-    private Date endTime;
+    private Long endTime;
 
     public Integer getId() {
         return id;
@@ -86,11 +87,11 @@ public class RunBean implements Parcelable {
         this.energy = energy;
     }
 
-    public Date getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
@@ -166,21 +167,30 @@ public class RunBean implements Parcelable {
         this.fastSpend = fastSpend;
     }
 
-    public Date getBeginTime() {
+    public Long getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(Date beginTime) {
+    public void setBeginTime(Long beginTime) {
         this.beginTime = beginTime;
     }
 
-    public Date getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
+
+    public Double getFastPace() {
+        return fastPace;
+    }
+
+    public void setFastPace(Double fastPace) {
+        this.fastPace = fastPace;
+    }
+
 
     @Override
     public int describeContents() {
@@ -194,7 +204,7 @@ public class RunBean implements Parcelable {
         dest.writeValue(this.distance);
         dest.writeValue(this.spendTime);
         dest.writeValue(this.energy);
-        dest.writeLong(this.createTime != null ? this.createTime.getTime() : -1);
+        dest.writeValue(this.createTime);
         dest.writeString(this.picture);
         dest.writeString(this.momentContent);
         dest.writeValue(this.totalDistance);
@@ -204,8 +214,9 @@ public class RunBean implements Parcelable {
         dest.writeValue(this.maxDistance);
         dest.writeValue(this.minDistance);
         dest.writeValue(this.fastSpend);
-        dest.writeLong(this.beginTime != null ? this.beginTime.getTime() : -1);
-        dest.writeLong(this.endTime != null ? this.endTime.getTime() : -1);
+        dest.writeValue(this.fastPace);
+        dest.writeValue(this.beginTime);
+        dest.writeValue(this.endTime);
     }
 
     public RunBean() {
@@ -217,8 +228,7 @@ public class RunBean implements Parcelable {
         this.distance = (Double) in.readValue(Double.class.getClassLoader());
         this.spendTime = (Long) in.readValue(Long.class.getClassLoader());
         this.energy = (Double) in.readValue(Double.class.getClassLoader());
-        long tmpCreateTime = in.readLong();
-        this.createTime = tmpCreateTime == -1 ? null : new Date(tmpCreateTime);
+        this.createTime = (Long) in.readValue(Long.class.getClassLoader());
         this.picture = in.readString();
         this.momentContent = in.readString();
         this.totalDistance = (Double) in.readValue(Double.class.getClassLoader());
@@ -228,13 +238,12 @@ public class RunBean implements Parcelable {
         this.maxDistance = (Double) in.readValue(Double.class.getClassLoader());
         this.minDistance = (Double) in.readValue(Double.class.getClassLoader());
         this.fastSpend = (Double) in.readValue(Double.class.getClassLoader());
-        long tmpBeginTime = in.readLong();
-        this.beginTime = tmpBeginTime == -1 ? null : new Date(tmpBeginTime);
-        long tmpEndTime = in.readLong();
-        this.endTime = tmpEndTime == -1 ? null : new Date(tmpEndTime);
+        this.fastPace = (Double) in.readValue(Double.class.getClassLoader());
+        this.beginTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.endTime = (Long) in.readValue(Long.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<RunBean> CREATOR = new Parcelable.Creator<RunBean>() {
+    public static final Creator<RunBean> CREATOR = new Creator<RunBean>() {
         @Override
         public RunBean createFromParcel(Parcel source) {
             return new RunBean(source);

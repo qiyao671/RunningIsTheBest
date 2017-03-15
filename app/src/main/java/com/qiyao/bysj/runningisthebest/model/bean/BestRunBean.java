@@ -23,6 +23,7 @@ public class BestRunBean {
     private RunBean fivePB;
     private RunBean halfMaPB;
     private RunBean tenPB;
+    private RunBean fastSpeed;
 
     public RunBean getFarthestLogInfo() {
         return farthestLogInfo;
@@ -70,5 +71,13 @@ public class BestRunBean {
 
     public void setTenPB(RunBean tenPB) {
         this.tenPB = tenPB;
+    }
+
+    public RunBean getFastSpeed() {
+        return fastSpeed;
+    }
+
+    public void setFastSpeed(RunBean fastSpeed) {
+        this.fastSpeed = fastSpeed;
     }
 }

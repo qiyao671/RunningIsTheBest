@@ -1,67 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.run.viewmodel.RunRecordsItemViewModel" />
     </data>
-    <RelativeLayout
-        android:onClick="@{viewModel::onClick}"
-        android:paddingStart="@dimen/base_list_item_horizontal_margin"
-        android:paddingEnd="@dimen/base_list_item_horizontal_margin"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp">
-        <TextView
-            style="@style/DarkSecondaryText"
-            android:text="@{viewModel.datetime}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_distance"
-            android:textSize="32sp"
-            android:text="@{viewModel.distance}"
-            android:layout_centerVertical="true"
-            style="@style/TotalNumberTextLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <LinearLayout
-            android:id="@+id/duration_and_pace"
-            android:orientation="vertical"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:drawableStart="@drawable/ic_clock"
-                android:drawablePadding="3dp"
-                android:text="@{viewModel.duration}"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/text_size_body"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:onClick="@{viewModel::onClick}"
+            android:paddingBottom="8dp"
+            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+            android:paddingStart="@dimen/base_list_item_horizontal_margin"
+            android:paddingTop="8dp">
 
             <TextView
-                android:drawableStart="@drawable/ic_stopwatch_fill"
-                android:drawablePadding="3dp"
-                android:text="@{viewModel.avgPace}"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/text_size_body"
-                android:layout_marginTop="@dimen/base_list_item_vertical_spacing"
+                style="@style/DarkSecondaryText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/tv_distance"
-            android:layout_marginStart="3dp"
-            android:layout_toEndOf="@id/tv_distance"
-            android:layout_toStartOf="@id/duration_and_pace"
-            android:text="@string/km"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/text_size_xlarge" />
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.datetime}" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_distance"
+                style="@style/TotalNumberTextLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@{viewModel.distance}"
+                android:textSize="32sp" />
+
+            <LinearLayout
+                android:id="@+id/duration_and_pace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="3dp"
+                    android:drawableStart="@drawable/ic_clock"
+                    android:text="@{viewModel.duration}"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_body" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/base_list_item_vertical_spacing"
+                    android:drawablePadding="3dp"
+                    android:drawableStart="@drawable/ic_stopwatch_fill"
+                    android:text="@{viewModel.avgPace}"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_body" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/tv_distance"
+                android:layout_marginStart="3dp"
+                android:layout_toEndOf="@id/tv_distance"
+                android:layout_toStartOf="@id/duration_and_pace"
+                android:text="@string/km"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_xlarge" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/view_divider_horizontal" />
+    </LinearLayout>
 </layout>

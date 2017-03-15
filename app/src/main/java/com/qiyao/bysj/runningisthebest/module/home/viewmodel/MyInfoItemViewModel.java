@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.databinding.ObservableField;
 import android.view.View;
 
-import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.StaticItemViewModel;
 import com.qiyao.bysj.runningisthebest.R;
@@ -29,11 +28,12 @@ public class MyInfoItemViewModel implements IItemViewModel {
     public ObservableField<String> userProfileUrl = new ObservableField<>();
     public ObservableField<String> userName = new ObservableField<>();
     public ObservableField<String> userId = new ObservableField<>();
-    public ObservableField<String> sexAndAge = new ObservableField<>();
+    public ObservableField<String> sex = new ObservableField<>();
+    public ObservableField<String> age = new ObservableField<>();
     public ObservableField<String> signature = new ObservableField<>();
     public ObservableField<String> weight = new ObservableField<>();
     public ObservableField<String> height = new ObservableField<>();
-    public ObservableField<String> bmi = new ObservableField<>();
+    public ObservableField<String> bmi = new ObservableField<>("--");
 
     @Override
     public String getItemViewType() {
@@ -51,22 +51,19 @@ public class MyInfoItemViewModel implements IItemViewModel {
     }
 
     private void setUserInfo(UserBean user) {
-        // TODO: 2017/3/10 不一样的时候再改
+        this.userBean = user;
         userProfileUrl.set(user.getProfile());
         userId.set(String.valueOf(user.getId()));
         userName.set(user.getUsername());
-        if (!StringUtils.isEmpty(user.getSex())) {
-            String str = (fragment.getString(R.string.sex_And_Age));
-            // TODO: 2017/3/8 age
-            sexAndAge.set(String.format(str, user.getSex(), 13));
-        } else {
-            // TODO: 2017/3/8 age
-            sexAndAge.set("0岁");
-        }
+        sex.set(user.getSex() == null ? fragment.getString(R.string.no_sex) : user.getSex());
+        age.set(user.getAge() == null ? fragment.getString(R.string.no_age) : String.valueOf(user.getAge()));
         signature.set(user.getSignature());
-        weight.set(String.valueOf(user.getWeight()));
-        height.set(String.valueOf(user.getHeight()));
-        // TODO: 2017/3/15 bmi
+        weight.set(user.getWeight() == null ? fragment.getString(R.string.no_weight) : String.valueOf(user.getWeight()) + "kg");
+        height.set(user.getHeight() == null ? fragment.getString(R.string.no_height) : String.valueOf(user.getHeight()) + "cm");
+        if (user.getWeight() != null && user.getHeight() != null
+                && user.getHeight() != 0 && user.getWeight() != 0) {
+            bmi.set(String.valueOf(user.getWeight() / (user.getHeight() * user.getHeight())));
+        }
     }
 
     private void getUser() {
@@ -82,8 +79,9 @@ public class MyInfoItemViewModel implements IItemViewModel {
     }
 
     public void onClick(View view) {
-        // TODO: 2017/3/15 userBean == null
-        EditMyInfoFragment.launch(fragment.getActivity(), userBean);
+        if (userBean != null) {
+            EditMyInfoFragment.launch(fragment.getActivity(), userBean);
+        }
     }
 
     private void onError(Throwable e) {

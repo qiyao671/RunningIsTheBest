@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="com.qiyao.bysj.baselibrary.common.utils.StringUtils" />
+
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.home.viewmodel.EditMyInfoViewModel" />
@@ -27,11 +29,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/base_list_item_vertical_margin"
-                android:paddingTop="@dimen/base_list_item_vertical_margin">
+                android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                android:paddingTop="@dimen/large_list_item_vertical_margin">
 
                 <TextView
-                    style="@style/DarkPrimaryMediumText"
+                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/primary_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -42,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.userName}"
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_body" />
+                    android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
 
             <include layout="@layout/view_divider_horizontal" />
@@ -52,11 +55,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/base_list_item_vertical_margin"
-                android:paddingTop="@dimen/base_list_item_vertical_margin">
+                android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                android:paddingTop="@dimen/large_list_item_vertical_margin">
 
                 <TextView
-                    style="@style/DarkPrimaryMediumText"
+                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/primary_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -67,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.userId}"
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_body" />
+                    android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
         </LinearLayout>
 
@@ -82,16 +86,17 @@
 
             <LinearLayout
                 android:id="@+id/user_profile"
-                android:onClick="@{viewModel::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:onClick="@{viewModel::onClick}"
                 android:orientation="horizontal"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp">
 
                 <TextView
-                    style="@style/DarkPrimaryMediumText"
+                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/primary_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -113,16 +118,17 @@
 
             <LinearLayout
                 android:id="@+id/sex"
-                android:onClick="@{viewModel::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:onClick="@{viewModel::onClick}"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/base_list_item_vertical_margin"
-                android:paddingTop="@dimen/base_list_item_vertical_margin">
+                android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                android:paddingTop="@dimen/large_list_item_vertical_margin">
 
                 <TextView
-                    style="@style/DarkPrimaryMediumText"
+                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/primary_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -131,9 +137,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.sex}"
+                    android:text='@{viewModel.sex ?? ""}'
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_body" />
+                    android:textSize="@dimen/text_size_medium" />
 
                 <ImageView
                     android:layout_width="@dimen/home_right_arrow_size"
@@ -147,27 +153,28 @@
 
             <LinearLayout
                 android:id="@+id/height"
-                android:onClick="@{viewModel::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:onClick="@{viewModel::onClick}"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/base_list_item_vertical_margin"
-                android:paddingTop="@dimen/base_list_item_vertical_margin">
+                android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                android:paddingTop="@dimen/large_list_item_vertical_margin">
 
                 <TextView
-                    style="@style/DarkPrimaryMediumText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/primary_text"
                     android:text="@string/height" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.height}"
+                    android:text='@{StringUtils.equals(viewModel.height, "null") ? "" : viewModel.height + "cm"}'
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_body" />
+                    android:textSize="@dimen/text_size_medium" />
 
                 <ImageView
                     android:layout_width="@dimen/home_right_arrow_size"
@@ -181,16 +188,17 @@
 
             <LinearLayout
                 android:id="@+id/weight"
-                android:onClick="@{viewModel::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:onClick="@{viewModel::onClick}"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/base_list_item_vertical_margin"
-                android:paddingTop="@dimen/base_list_item_vertical_margin">
+                android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                android:paddingTop="@dimen/large_list_item_vertical_margin">
 
                 <TextView
-                    style="@style/DarkPrimaryMediumText"
+                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/primary_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -199,9 +207,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.weight}"
+                    android:text='@{StringUtils.equals(viewModel.weight, "null") ? "" : viewModel.weight + "kg"}'
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_body" />
+                    android:textSize="@dimen/text_size_medium" />
 
                 <ImageView
                     android:layout_width="@dimen/home_right_arrow_size"
@@ -215,16 +223,17 @@
 
             <LinearLayout
                 android:id="@+id/birthday"
-                android:onClick="@{viewModel::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:onClick="@{viewModel::onClick}"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/base_list_item_vertical_margin"
-                android:paddingTop="@dimen/base_list_item_vertical_margin">
+                android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                android:paddingTop="@dimen/large_list_item_vertical_margin">
 
                 <TextView
-                    style="@style/DarkPrimaryMediumText"
+                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/primary_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -235,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.birthday}"
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_body" />
+                    android:textSize="@dimen/text_size_medium" />
 
                 <ImageView
                     android:layout_width="@dimen/home_right_arrow_size"
@@ -249,16 +258,17 @@
 
             <LinearLayout
                 android:id="@+id/location"
-                android:onClick="@{viewModel::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:onClick="@{viewModel::onClick}"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/base_list_item_vertical_margin"
-                android:paddingTop="@dimen/base_list_item_vertical_margin">
+                android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                android:paddingTop="@dimen/large_list_item_vertical_margin">
 
                 <TextView
-                    style="@style/DarkPrimaryMediumText"
+                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/primary_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -267,9 +277,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.location}"
+                    android:text='@{viewModel.location ?? ""}'
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_body" />
+                    android:textSize="@dimen/text_size_medium" />
 
                 <ImageView
                     android:layout_width="@dimen/home_right_arrow_size"
@@ -280,48 +290,44 @@
             </LinearLayout>
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@color/md_white_1000"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+            android:paddingStart="@dimen/base_list_item_horizontal_margin">
 
             <LinearLayout
-                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:id="@+id/modify_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/md_white_1000"
-                android:orientation="vertical"
-                android:paddingEnd="@dimen/base_list_item_horizontal_margin"
-                android:paddingStart="@dimen/base_list_item_horizontal_margin">
+                android:gravity="center_vertical"
+                android:onClick="@{viewModel::onClick}"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                android:paddingTop="@dimen/large_list_item_vertical_margin">
 
-                <LinearLayout
-                    android:id="@+id/modify_pwd"
-                    android:onClick="@{viewModel::onClick}"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/primary_text"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/base_list_item_vertical_margin"
-                    android:paddingTop="@dimen/base_list_item_vertical_margin">
+                    android:layout_weight="1"
+                    android:text="@string/modify_pwd" />
 
-                    <TextView
-                        style="@style/DarkPrimaryMediumText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/modify_pwd" />
-
-                    <ImageView
-                        android:layout_width="@dimen/home_right_arrow_size"
-                        android:layout_height="@dimen/home_right_arrow_size"
-                        android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
-                        android:src="@drawable/ic_arrow_right"
-                        tools:ignore="ContentDescription" />
-                </LinearLayout>
-
+                <ImageView
+                    android:layout_width="@dimen/home_right_arrow_size"
+                    android:layout_height="@dimen/home_right_arrow_size"
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
 </layout>

@@ -3,10 +3,16 @@ package com.qiyao.bysj.runningisthebest.module.home.viewmodel;
 import android.app.Fragment;
 import android.databinding.ObservableField;
 import android.util.Log;
+import android.view.View;
 
+import com.qiyao.bysj.baselibrary.common.utils.ConstUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
+import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.common.AppTimeUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
+import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.run.ui.RunRecordDetailPagerFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -21,7 +27,7 @@ public class BestRunViewModel implements IViewModel {
 
     public ObservableField<String> farthestRun = new ObservableField<>("0.00");
     public ObservableField<String> longestRun = new ObservableField<>("00:00:00");
-    public ObservableField<String> fastestAvgPace = new ObservableField<>("0.00");
+    public ObservableField<String> fastestAvgSpeed = new ObservableField<>("0.00");
     public ObservableField<String> fastestPace = new ObservableField<>("0'0\"");
     public ObservableField<String> fiveKmPb = new ObservableField<>("--:--:--");
     public ObservableField<String> tenKmPb = new ObservableField<>("--:--:--");
@@ -48,15 +54,87 @@ public class BestRunViewModel implements IViewModel {
     private void setBestRunInfo(BestRunBean bestRun) {
         this.bestRunBean = bestRun;
 
-        this.farthestRun.set(String.valueOf(bestRun.getFarthestLogInfo().getDistance()));
-        this.longestRun.set(String.valueOf(bestRun.getLongestRunLogVO().getSpendTime()));
-        this.fullMarathonPb.set(String.valueOf(bestRun.getFullMaPB().getSpendTime()));
-        this.halfMarathonPb.set(String.valueOf(bestRun.getHalfMaPB().getSpendTime()));
-        this.fiveKmPb.set(String.valueOf(bestRun.getFivePB().getSpendTime()));
-        this.tenKmPb.set(String.valueOf(bestRun.getTenPB().getSpendTime()));
+        if (bestRun.getFarthestLogInfo() != null && bestRun.getFarthestLogInfo().getDistance() != null) {
+            this.farthestRun.set(String.valueOf(bestRun.getFarthestLogInfo().getDistance()));
+        }
+        if (bestRun.getLongestRunLogVO() != null && bestRun.getLongestRunLogVO().getSpendTime() != null) {
+            this.longestRun.set(AppTimeUtils.getTime(bestRun.getLongestRunLogVO().getSpendTime()));
+        }
+        if (bestRun.getFullMaPB() != null && bestRun.getFullMaPB().getSpendTime() != null) {
+            this.fullMarathonPb.set(AppTimeUtils.getTime(bestRun.getFullMaPB().getSpendTime()));
+        }
+        if (bestRun.getHalfMaPB() != null && bestRun.getHalfMaPB().getSpendTime() != null) {
+            this.halfMarathonPb.set(AppTimeUtils.getTime(bestRun.getHalfMaPB().getSpendTime()));
+        }
+        if (bestRun.getFivePB() != null && bestRun.getFivePB().getSpendTime() != null) {
+            this.fiveKmPb.set(AppTimeUtils.getTime(bestRun.getFivePB().getSpendTime()));
+        }
+        if (bestRun.getTenPB() != null && bestRun.getTenPB().getSpendTime() != null) {
+            this.tenKmPb.set(AppTimeUtils.getTime(bestRun.getTenPB().getSpendTime()));
+        }
+        if (bestRun.getFastSpeed() != null
+                && bestRun.getFastSpeed().getSpendTime() != null
+                && bestRun.getFastSpeed().getDistance() != null) {
+            double speed = bestRun.getFastSpeed().getDistance()
+                    / bestRun.getFastSpeed().getSpendTime()
+                    * ConstUtils.HOUR;
+            this.fastestAvgSpeed.set(String.valueOf(speed));
+        }
     }
 
     private void onError(Throwable throwable) {
         Log.e("getBestRun", "onError: " + throwable.getMessage(), throwable);
+    }
+
+    public void onClick(View view) {
+        if (bestRunBean == null) {
+            return;
+        }
+        switch (view.getId()) {
+            case R.id.farthest_run:
+                if (bestRunBean.getFarthestLogInfo() != null) {
+                    launchRunRecordDetailPagerFragment(bestRunBean.getFarthestLogInfo());
+                }
+                break;
+            case R.id.longest_run:
+                if (bestRunBean.getLongestRunLogVO() != null) {
+                    launchRunRecordDetailPagerFragment(bestRunBean.getLongestRunLogVO());
+                }
+                break;
+            case R.id.fastest_avg_speed:
+                if (bestRunBean.getFullMaPB() != null) {
+                    launchRunRecordDetailPagerFragment(bestRunBean.getFullMaPB());
+                }
+                break;
+            case R.id.fastest_pace:
+/*                if (bestRunBean.getFarthestLogInfo() != null) {
+                    launchRunRecordDetailPagerFragment(bestRunBean.getFarthestLogInfo());
+                }*/
+                break;
+            case R.id.five_km_pb:
+                if (bestRunBean.getFivePB() != null) {
+                    launchRunRecordDetailPagerFragment(bestRunBean.getFivePB());
+                }
+                break;
+            case R.id.ten_km_pb:
+                if (bestRunBean.getTenPB() != null) {
+                    launchRunRecordDetailPagerFragment(bestRunBean.getTenPB());
+                }
+                break;
+            case R.id.half_marathon_pb:
+                if (bestRunBean.getHalfMaPB() != null) {
+                    launchRunRecordDetailPagerFragment(bestRunBean.getHalfMaPB());
+                }
+                break;
+            case R.id.full_marathon_pb:
+                if (bestRunBean.getFullMaPB() != null) {
+                    launchRunRecordDetailPagerFragment(bestRunBean.getFullMaPB());
+                }
+                break;
+        }
+    }
+
+    private void launchRunRecordDetailPagerFragment(RunBean runBean) {
+        RunRecordDetailPagerFragment.launch(fragment.getActivity(), runBean);
     }
 }

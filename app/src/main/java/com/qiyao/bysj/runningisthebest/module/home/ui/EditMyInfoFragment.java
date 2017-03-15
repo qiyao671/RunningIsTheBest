@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
@@ -27,6 +30,7 @@ public class EditMyInfoFragment extends ADataBindingFragment {
     private void initToolbar() {
         setDisplayHomeAsUpEnabled(true);
         setTitle(R.string.edit_info);
+        setHasOptionsMenu(true);
     }
 
     @NonNull
@@ -45,5 +49,20 @@ public class EditMyInfoFragment extends ADataBindingFragment {
         Bundle bundle = new Bundle();
         bundle.putParcelable(EditMyInfoViewModel.KEY_USER_BEAN, userBean);
         FragmentContainerActivity.launch(activity, EditMyInfoFragment.class, bundle);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.tb_complete, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.complete) {
+            ((EditMyInfoViewModel)getViewModel()).submitUpdate();
+            getActivity().finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

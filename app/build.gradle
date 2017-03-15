@@ -33,18 +33,18 @@ android {
     signingConfigs {
         //调试版的keystore
         debug {
-            storeFile file("C:\\Users\\qiyao\\.android\\debug.keystore")
+            storeFile file("C:\\Users\\qiyao671\\.android\\debug.keystore")
             storePassword "android"
             keyAlias "androiddebugkey"
             keyPassword "android"
         }
-/*        //发布版的keystore
+        //发布版的keystore
         release {
             storeFile file("H:\\Android\\keystore\\runisthebest.jks")
             storePassword "19941013"
             keyAlias "runkey"
             keyPassword "19941013"
-        }*/
+        }
     }
 }
 
@@ -63,4 +63,5 @@ dependencies {
     compile files('libs/AMap_Location_V3.3.0_20170118.jar')
     compile 'com.romandanylyk:pageindicatorview:0.1.1'
     compile 'com.afollestad.material-dialogs:core:0.9.4.1'
-    compile 'cn.aigestudio.wheelpicker:WheelPicker:1.1.2'}
+    compile 'cn.aigestudio.wheelpicker:WheelPicker:1.1.2'
+}

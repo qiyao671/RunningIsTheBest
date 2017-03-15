@@ -27,8 +27,8 @@ public class SplashActivity extends AppBaseActivity {
         if (hasLogged()) {
             launchMainActivity();
         } else {
-//            launchLoginActivity();
-            launchMainActivity();
+            launchLoginActivity();
+//            launchMainActivity();
         }
         finish();
     }
