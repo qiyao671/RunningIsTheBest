@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.qiyao.bysj.runningisthebest.module.home.viewmodel.MyInfoItemViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:onClick="@{viewModel::onClick}"
+        android:id="@+id/user_info"
+        android:background="@color/primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingEnd="30dp"
+        android:paddingStart="30dp"
+        android:paddingTop="20dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_user_profile"
+            android:layout_width="@dimen/user_profile_size"
+            android:layout_height="@dimen/user_profile_size"
+            android:layout_alignParentStart="true"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/primary_light"
+            app:imageUrl="@{viewModel.userProfileUrl}" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/civ_user_profile"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.userName}"
+                android:textColor="@color/md_white_1000"
+                android:textSize="@dimen/text_size_xlarge" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/LightSecondaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/id" />
+                <TextView
+                    style="@style/LightSecondaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.userId}" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/LightSecondaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{viewModel.sexAndAge}" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</layout>

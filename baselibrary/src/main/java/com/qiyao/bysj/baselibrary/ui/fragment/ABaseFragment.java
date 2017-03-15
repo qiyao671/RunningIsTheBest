@@ -21,4 +21,11 @@ public class ABaseFragment extends RxFragment {
             getActivity().setTitle(title);
         }
     }
+
+    protected void setDisplayHomeAsUpEnabled(boolean enabled) {
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(enabled);
+        }
+    }
 }

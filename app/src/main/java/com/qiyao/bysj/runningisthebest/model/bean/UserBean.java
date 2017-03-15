@@ -1,5 +1,8 @@
 package com.qiyao.bysj.runningisthebest.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
@@ -8,7 +11,7 @@ import java.util.Date;
  * 类描述：
  */
 
-public class UserBean {
+public class UserBean implements Parcelable {
 
     /**
      * id : 1
@@ -35,7 +38,7 @@ public class UserBean {
     private String sex;
     private double height;
     private double weight;
-    private Date birthday;
+    private Long birthday;
     private String location;
     private int communityId;
     private int totalRunId;
@@ -106,12 +109,12 @@ public class UserBean {
         this.weight = weight;
     }
 
-    public Date getBirthday() {
+    public Long getBirthday() {
         return birthday;
     }
 
     public void setBirthday(long birthday) {
-        this.birthday = new Date(birthday);
+        this.birthday = new Long(birthday);
     }
 
     public String getLocation() {
@@ -153,4 +156,60 @@ public class UserBean {
     public void setSignature(String signature) {
         this.signature = signature;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.username);
+        dest.writeString(this.password);
+        dest.writeInt(this.rank);
+        dest.writeString(this.profile);
+        dest.writeString(this.sex);
+        dest.writeDouble(this.height);
+        dest.writeDouble(this.weight);
+        dest.writeLong(this.birthday != null ? this.birthday : -1);
+        dest.writeString(this.location);
+        dest.writeInt(this.communityId);
+        dest.writeInt(this.totalRunId);
+        dest.writeInt(this.bestRunId);
+        dest.writeString(this.signature);
+    }
+
+    public UserBean() {
+    }
+
+    protected UserBean(Parcel in) {
+        this.id = in.readInt();
+        this.username = in.readString();
+        this.password = in.readString();
+        this.rank = in.readInt();
+        this.profile = in.readString();
+        this.sex = in.readString();
+        this.height = in.readDouble();
+        this.weight = in.readDouble();
+        long tmpBirthday = in.readLong();
+        this.birthday = tmpBirthday == -1 ? null : tmpBirthday;
+        this.location = in.readString();
+        this.communityId = in.readInt();
+        this.totalRunId = in.readInt();
+        this.bestRunId = in.readInt();
+        this.signature = in.readString();
+    }
+
+    public static final Parcelable.Creator<UserBean> CREATOR = new Parcelable.Creator<UserBean>() {
+        @Override
+        public UserBean createFromParcel(Parcel source) {
+            return new UserBean(source);
+        }
+
+        @Override
+        public UserBean[] newArray(int size) {
+            return new UserBean[size];
+        }
+    };
 }

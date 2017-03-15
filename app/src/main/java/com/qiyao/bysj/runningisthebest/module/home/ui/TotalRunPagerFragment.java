@@ -35,9 +35,9 @@ public class TotalRunPagerFragment extends AFragmentPagerFragment {
     @Override
     protected List<FragmentTabItem> generateItems() {
         List<FragmentTabItem> items = new ArrayList<>();
-        items.add(new FragmentTabItem(getString(R.string.week), TotalRunViewModel.TYPE_WEEK, TotalRunFragment.class));
-        items.add(new FragmentTabItem(getString(R.string.month), TotalRunViewModel.TYPE_MONTH, TotalRunFragment.class));
-        items.add(new FragmentTabItem(getString(R.string.total), TotalRunViewModel.TYPE_TOTAL, TotalRunFragment.class));
+        items.add(new FragmentTabItem(TotalRunViewModel.TYPE_WEEK, getString(R.string.week), TotalRunFragment.class));
+        items.add(new FragmentTabItem(TotalRunViewModel.TYPE_MONTH, getString(R.string.month), TotalRunFragment.class));
+        items.add(new FragmentTabItem(TotalRunViewModel.TYPE_TOTAL, getString(R.string.total), TotalRunFragment.class));
         return items;
     }
 

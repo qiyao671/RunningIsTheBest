@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <data>
 
@@ -13,93 +13,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <RelativeLayout
-            android:id="@+id/user_info"
-            android:background="@color/primary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingEnd="30dp"
-            android:paddingStart="30dp"
-            android:paddingTop="20dp"
-            app:layout_collapseMode="parallax"
-            app:layout_collapseParallaxMultiplier="0.3">
+            android:layout_height="150dp">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
+                app:items="@{viewModel.myInfoItems}"
+                app:itemBinding="@{viewModel.itemView}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civ_user_profile"
-                android:layout_width="@dimen/user_profile_size"
-                android:layout_height="@dimen/user_profile_size"
-                android:layout_alignParentStart="true"
-                app:civ_border_width="1dp"
-                app:civ_border_color="@color/primary_light"
-                app:imageUrl="@{viewModel.userProfileUrl}" />
-
-            <LinearLayout
+            <com.rd.PageIndicatorView
+                android:id="@+id/page_indicator_view"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_toEndOf="@id/civ_user_profile"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.userName}"
-                    android:textColor="@color/md_white_1000"
-                    android:textSize="@dimen/text_size_xlarge" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        style="@style/LightSecondaryText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/id" />
-                    <TextView
-                        style="@style/LightSecondaryText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.userId}" />
-                </LinearLayout>
-
-                <TextView
-                    style="@style/LightSecondaryText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@{viewModel.sexAndAge}" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_below="@id/civ_user_profile"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/signature"
-                    android:textColor="@color/md_white_1000"
-                    android:textSize="@dimen/text_size_medium" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.signature}"
-                    android:textColor="@color/md_white_1000"
-                    android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
-
-
+                app:piv_viewPager="@id/view_pager"
+                app:piv_interactiveAnimation="true"
+                app:piv_animationType="thinWorm"
+                app:piv_dynamicCount="true"/>
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <RelativeLayout

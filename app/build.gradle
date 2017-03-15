@@ -61,4 +61,6 @@ dependencies {
     compile 'com.github.frankiesardo:linearlistview:1.0.1@aar'
     compile files('libs/Android_Map3D_SDK_V4.1.3_20161208.jar')
     compile files('libs/AMap_Location_V3.3.0_20170118.jar')
-}
+    compile 'com.romandanylyk:pageindicatorview:0.1.1'
+    compile 'com.afollestad.material-dialogs:core:0.9.4.1'
+    compile 'cn.aigestudio.wheelpicker:WheelPicker:1.1.2'}

@@ -17,7 +17,7 @@ public class TotalRunFragment extends ADataBindingFragment {
     @NonNull
     @Override
     protected IViewModel createViewModel(Bundle arguments) {
-        String type = getArguments().getString(CommonConstants.KEY_FRAGMENT_IN_PAGER_ARGS);
+        String type = getArguments().getString(CommonConstants.KEY_FRAGMENT_IN_PAGER_TYPE);
         return new TotalRunViewModel(this, type);
     }
 

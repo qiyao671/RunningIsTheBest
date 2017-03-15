@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.qiyao.bysj.runningisthebest.module.home.viewmodel.EditMyInfoViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_white_1000"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+            android:paddingStart="@dimen/base_list_item_horizontal_margin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                <TextView
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/user_name" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.userName}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_body" />
+            </LinearLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                <TextView
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/user_id" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.userId}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_body" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@color/md_white_1000"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+            android:paddingStart="@dimen/base_list_item_horizontal_margin">
+
+            <LinearLayout
+                android:id="@+id/user_profile"
+                android:onClick="@{viewModel::onClick}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/profile" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+                <ImageView
+                    android:layout_width="@dimen/home_right_arrow_size"
+                    android:layout_height="@dimen/home_right_arrow_size"
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <LinearLayout
+                android:id="@+id/sex"
+                android:onClick="@{viewModel::onClick}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                <TextView
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/sex" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.sex}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_body" />
+
+                <ImageView
+                    android:layout_width="@dimen/home_right_arrow_size"
+                    android:layout_height="@dimen/home_right_arrow_size"
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <LinearLayout
+                android:id="@+id/height"
+                android:onClick="@{viewModel::onClick}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                <TextView
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/height" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.height}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_body" />
+
+                <ImageView
+                    android:layout_width="@dimen/home_right_arrow_size"
+                    android:layout_height="@dimen/home_right_arrow_size"
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <LinearLayout
+                android:id="@+id/weight"
+                android:onClick="@{viewModel::onClick}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                <TextView
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/weight" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.weight}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_body" />
+
+                <ImageView
+                    android:layout_width="@dimen/home_right_arrow_size"
+                    android:layout_height="@dimen/home_right_arrow_size"
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <LinearLayout
+                android:id="@+id/birthday"
+                android:onClick="@{viewModel::onClick}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                <TextView
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/birthday" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.birthday}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_body" />
+
+                <ImageView
+                    android:layout_width="@dimen/home_right_arrow_size"
+                    android:layout_height="@dimen/home_right_arrow_size"
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <LinearLayout
+                android:id="@+id/location"
+                android:onClick="@{viewModel::onClick}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                <TextView
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/location" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.location}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_body" />
+
+                <ImageView
+                    android:layout_width="@dimen/home_right_arrow_size"
+                    android:layout_height="@dimen/home_right_arrow_size"
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/md_white_1000"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+                android:paddingStart="@dimen/base_list_item_horizontal_margin">
+
+                <LinearLayout
+                    android:id="@+id/modify_pwd"
+                    android:onClick="@{viewModel::onClick}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                    android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                    <TextView
+                        style="@style/DarkPrimaryMediumText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/modify_pwd" />
+
+                    <ImageView
+                        android:layout_width="@dimen/home_right_arrow_size"
+                        android:layout_height="@dimen/home_right_arrow_size"
+                        android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                        android:src="@drawable/ic_arrow_right"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

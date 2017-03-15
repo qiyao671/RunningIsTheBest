@@ -6,4 +6,5 @@ package com.qiyao.bysj.baselibrary.common;
 
 public class CommonConstants {
     public static final String KEY_FRAGMENT_IN_PAGER_ARGS = "KEY_FRAGMENT_IN_PAGER_ARGS";
+    public static final String KEY_FRAGMENT_IN_PAGER_TYPE = "KEY_FRAGMENT_IN_PAGER_TYPE";
 }

@@ -7,5 +7,5 @@ package com.qiyao.bysj.runningisthebest.common;
  */
 
 public class Constants {
-
+    public static final String PATTER_DATE = "yyyy-MM-dd";
 }
