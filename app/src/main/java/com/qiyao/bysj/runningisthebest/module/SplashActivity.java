@@ -1,7 +1,10 @@
 package com.qiyao.bysj.runningisthebest.module;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.WindowManager;
 
+import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.base.AppBaseActivity;
 import com.qiyao.bysj.runningisthebest.module.login.ui.LoginFragment;
 
@@ -12,23 +15,22 @@ import com.qiyao.bysj.runningisthebest.module.login.ui.LoginFragment;
  */
 
 public class SplashActivity extends AppBaseActivity {
+    private static final int SPLASH_TIME = 1500;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        launchNextActivity();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.acticity_splash);
+        Handler handler = new Handler();
+        handler.postDelayed(this::launchNextActivity, SPLASH_TIME);
     }
 
     private void launchNextActivity() {
         if (hasLogged()) {
             launchMainActivity();
         } else {
-//            launchLoginActivity();
-            launchMainActivity();
+            launchLoginActivity();
+//            launchMainActivity();
         }
         finish();
     }

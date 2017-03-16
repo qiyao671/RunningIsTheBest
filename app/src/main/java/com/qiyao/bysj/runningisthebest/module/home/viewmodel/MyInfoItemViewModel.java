@@ -64,7 +64,7 @@ public class MyInfoItemViewModel implements IItemViewModel {
         height.set(user.getHeight() == null ? fragment.getString(R.string.no_height) : String.valueOf(user.getHeight()) + "cm");
         if (user.getWeight() != null && user.getHeight() != null
                 && user.getHeight() != 0 && user.getWeight() != 0) {
-            bmi.set(String.valueOf(user.getWeight() / (user.getHeight() * user.getHeight())));
+            bmi.set(String.format(Locale.CHINA, "%.2f",user.getWeight() / (user.getHeight() * user.getHeight())));
         }
     }
 
@@ -81,12 +81,16 @@ public class MyInfoItemViewModel implements IItemViewModel {
     }
 
     public void onClick(View view) {
-//        if (userBean != null) {
+        if (userBean != null) {
             EditMyInfoFragment.launch(fragment.getActivity(), userBean);
-//        }
+        }
     }
 
     private void onError(Throwable e) {
 
+    }
+
+    public void refreshData() {
+        getUser();
     }
 }

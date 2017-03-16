@@ -11,323 +11,364 @@
             type="com.qiyao.bysj.runningisthebest.module.home.viewmodel.EditMyInfoViewModel" />
     </data>
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/md_white_1000"
-            android:orientation="vertical"
-            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
-            android:paddingStart="@dimen/base_list_item_horizontal_margin">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/large_list_item_vertical_margin"
-                android:paddingTop="@dimen/large_list_item_vertical_margin">
+                android:background="@color/md_white_1000"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+                android:paddingStart="@dimen/base_list_item_horizontal_margin">
 
-                <TextView
-                    android:textSize="@dimen/text_size_large"
-                    android:textColor="@color/primary_text"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/user_name" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                    android:paddingTop="@dimen/large_list_item_vertical_margin">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/user_name"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.userName}"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_size_medium" />
+                </LinearLayout>
+
+                <include layout="@layout/view_divider_horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.userName}"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                    android:paddingTop="@dimen/large_list_item_vertical_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/user_id"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.userId}"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_size_medium" />
+                </LinearLayout>
             </LinearLayout>
 
-            <include layout="@layout/view_divider_horizontal" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@color/md_white_1000"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+                android:paddingStart="@dimen/base_list_item_horizontal_margin">
+
+                <LinearLayout
+                    android:id="@+id/user_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{viewModel::onClick}"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/profile"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp" />
+
+                    <ImageView
+                        android:layout_width="@dimen/home_right_arrow_size"
+                        android:layout_height="@dimen/home_right_arrow_size"
+                        android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                        android:src="@drawable/ic_arrow_right"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+                <include layout="@layout/view_divider_horizontal" />
+
+                <LinearLayout
+                    android:id="@+id/sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{viewModel::onClick}"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                    android:paddingTop="@dimen/large_list_item_vertical_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/sex"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{viewModel.sex ?? ""}'
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <ImageView
+                        android:layout_width="@dimen/home_right_arrow_size"
+                        android:layout_height="@dimen/home_right_arrow_size"
+                        android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                        android:src="@drawable/ic_arrow_right"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+                <include layout="@layout/view_divider_horizontal" />
+
+                <LinearLayout
+                    android:id="@+id/height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{viewModel::onClick}"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                    android:paddingTop="@dimen/large_list_item_vertical_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/height"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{StringUtils.equals(viewModel.height.get(), "null") ? "" : viewModel.height + "cm"}'
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <ImageView
+                        android:layout_width="@dimen/home_right_arrow_size"
+                        android:layout_height="@dimen/home_right_arrow_size"
+                        android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                        android:src="@drawable/ic_arrow_right"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+                <include layout="@layout/view_divider_horizontal" />
+
+                <LinearLayout
+                    android:id="@+id/weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{viewModel::onClick}"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                    android:paddingTop="@dimen/large_list_item_vertical_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/weight"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{StringUtils.equals(viewModel.weight.get(), "null") ? "" : viewModel.weight + "kg"}'
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <ImageView
+                        android:layout_width="@dimen/home_right_arrow_size"
+                        android:layout_height="@dimen/home_right_arrow_size"
+                        android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                        android:src="@drawable/ic_arrow_right"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+                <include layout="@layout/view_divider_horizontal" />
+
+                <LinearLayout
+                    android:id="@+id/birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{viewModel::onClick}"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                    android:paddingTop="@dimen/large_list_item_vertical_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/birthday"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.birthday}"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <ImageView
+                        android:layout_width="@dimen/home_right_arrow_size"
+                        android:layout_height="@dimen/home_right_arrow_size"
+                        android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                        android:src="@drawable/ic_arrow_right"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+                <include layout="@layout/view_divider_horizontal" />
+
+                <LinearLayout
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{viewModel::onClick}"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                    android:paddingTop="@dimen/large_list_item_vertical_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/location"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{viewModel.location ?? ""}'
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <ImageView
+                        android:layout_width="@dimen/home_right_arrow_size"
+                        android:layout_height="@dimen/home_right_arrow_size"
+                        android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                        android:src="@drawable/ic_arrow_right"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+                <include layout="@layout/view_divider_horizontal" />
+
+                <LinearLayout
+                    android:id="@+id/signature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{viewModel::onClick}"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                    android:paddingTop="@dimen/large_list_item_vertical_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/signature"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{viewModel.signature ?? ""}'
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <ImageView
+                        android:layout_width="@dimen/home_right_arrow_size"
+                        android:layout_height="@dimen/home_right_arrow_size"
+                        android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                        android:src="@drawable/ic_arrow_right"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/large_list_item_vertical_margin"
-                android:paddingTop="@dimen/large_list_item_vertical_margin">
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@color/md_white_1000"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+                android:paddingStart="@dimen/base_list_item_horizontal_margin">
 
-                <TextView
-                    android:textSize="@dimen/text_size_large"
-                    android:textColor="@color/primary_text"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/modify_pwd"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/user_id" />
+                    android:gravity="center_vertical"
+                    android:onClick="@{viewModel::onClick}"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/large_list_item_vertical_margin"
+                    android:paddingTop="@dimen/large_list_item_vertical_margin">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.userId}"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_medium" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/modify_pwd"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <ImageView
+                        android:layout_width="@dimen/home_right_arrow_size"
+                        android:layout_height="@dimen/home_right_arrow_size"
+                        android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                        android:src="@drawable/ic_arrow_right"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="@color/md_white_1000"
-            android:orientation="vertical"
-            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
-            android:paddingStart="@dimen/base_list_item_horizontal_margin">
+    </android.support.v4.widget.NestedScrollView>
 
-            <LinearLayout
-                android:id="@+id/user_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:onClick="@{viewModel::onClick}"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <TextView
-                    android:textSize="@dimen/text_size_large"
-                    android:textColor="@color/primary_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/profile" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp" />
-
-                <ImageView
-                    android:layout_width="@dimen/home_right_arrow_size"
-                    android:layout_height="@dimen/home_right_arrow_size"
-                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
-                    android:src="@drawable/ic_arrow_right"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
-
-            <include layout="@layout/view_divider_horizontal" />
-
-            <LinearLayout
-                android:id="@+id/sex"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:onClick="@{viewModel::onClick}"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/large_list_item_vertical_margin"
-                android:paddingTop="@dimen/large_list_item_vertical_margin">
-
-                <TextView
-                    android:textSize="@dimen/text_size_large"
-                    android:textColor="@color/primary_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/sex" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text='@{viewModel.sex ?? ""}'
-                    android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <ImageView
-                    android:layout_width="@dimen/home_right_arrow_size"
-                    android:layout_height="@dimen/home_right_arrow_size"
-                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
-                    android:src="@drawable/ic_arrow_right"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
-
-            <include layout="@layout/view_divider_horizontal" />
-
-            <LinearLayout
-                android:id="@+id/height"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:onClick="@{viewModel::onClick}"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/large_list_item_vertical_margin"
-                android:paddingTop="@dimen/large_list_item_vertical_margin">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/text_size_large"
-                    android:textColor="@color/primary_text"
-                    android:text="@string/height" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text='@{StringUtils.equals(viewModel.height.get(), "null") ? "" : viewModel.height + "cm"}'
-                    android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <ImageView
-                    android:layout_width="@dimen/home_right_arrow_size"
-                    android:layout_height="@dimen/home_right_arrow_size"
-                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
-                    android:src="@drawable/ic_arrow_right"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
-
-            <include layout="@layout/view_divider_horizontal" />
-
-            <LinearLayout
-                android:id="@+id/weight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:onClick="@{viewModel::onClick}"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/large_list_item_vertical_margin"
-                android:paddingTop="@dimen/large_list_item_vertical_margin">
-
-                <TextView
-                    android:textSize="@dimen/text_size_large"
-                    android:textColor="@color/primary_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/weight" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text='@{StringUtils.equals(viewModel.weight.get(), "null") ? "" : viewModel.weight + "kg"}'
-                    android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <ImageView
-                    android:layout_width="@dimen/home_right_arrow_size"
-                    android:layout_height="@dimen/home_right_arrow_size"
-                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
-                    android:src="@drawable/ic_arrow_right"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
-
-            <include layout="@layout/view_divider_horizontal" />
-
-            <LinearLayout
-                android:id="@+id/birthday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:onClick="@{viewModel::onClick}"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/large_list_item_vertical_margin"
-                android:paddingTop="@dimen/large_list_item_vertical_margin">
-
-                <TextView
-                    android:textSize="@dimen/text_size_large"
-                    android:textColor="@color/primary_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/birthday" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.birthday}"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <ImageView
-                    android:layout_width="@dimen/home_right_arrow_size"
-                    android:layout_height="@dimen/home_right_arrow_size"
-                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
-                    android:src="@drawable/ic_arrow_right"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
-
-            <include layout="@layout/view_divider_horizontal" />
-
-            <LinearLayout
-                android:id="@+id/location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:onClick="@{viewModel::onClick}"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/large_list_item_vertical_margin"
-                android:paddingTop="@dimen/large_list_item_vertical_margin">
-
-                <TextView
-                    android:textSize="@dimen/text_size_large"
-                    android:textColor="@color/primary_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/location" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text='@{viewModel.location ?? ""}'
-                    android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <ImageView
-                    android:layout_width="@dimen/home_right_arrow_size"
-                    android:layout_height="@dimen/home_right_arrow_size"
-                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
-                    android:src="@drawable/ic_arrow_right"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="@color/md_white_1000"
-            android:orientation="vertical"
-            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
-            android:paddingStart="@dimen/base_list_item_horizontal_margin">
-
-            <LinearLayout
-                android:id="@+id/modify_pwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:onClick="@{viewModel::onClick}"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/large_list_item_vertical_margin"
-                android:paddingTop="@dimen/large_list_item_vertical_margin">
-
-                <TextView
-                    android:textSize="@dimen/text_size_large"
-                    android:textColor="@color/primary_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/modify_pwd" />
-
-                <ImageView
-                    android:layout_width="@dimen/home_right_arrow_size"
-                    android:layout_height="@dimen/home_right_arrow_size"
-                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
-                    android:src="@drawable/ic_arrow_right"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 </layout>

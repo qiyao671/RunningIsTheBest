@@ -93,4 +93,13 @@
     <string name="no_weight">未设置体重</string>
     <string name="no_data">--</string>
     <string name="complete">完成</string>
+    <string name="signature">个性签名</string>
+    <string name="fill_signature">编辑个性签名</string>
+    
+    <!--user info-->
+    <string name="rank">等级</string>
+    <string name="hour">小时</string>
+    <string name="view_his_moment">查看他的动态</string>
+    <string name="view_his_crew">查看他的跑团</string>
+    <string name="personal_best_run">个人最佳成绩</string>
 </resources>

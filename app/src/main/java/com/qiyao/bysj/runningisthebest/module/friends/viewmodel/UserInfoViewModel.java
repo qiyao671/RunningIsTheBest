@@ -21,9 +21,12 @@ public class UserInfoViewModel implements IViewModel {
     public ObservableField<String> userName = new ObservableField<>();
     public ObservableField<String> userId = new ObservableField<>();
     public ObservableField<String> location = new ObservableField<>();
+    public ObservableField<String> sex = new ObservableField<>();
     public ObservableField<String> rank = new ObservableField<>();
     public ObservableField<Double> totalDistance = new ObservableField<>();
-    public ObservableField<String> totalTime = new ObservableField<>();
+    public ObservableField<Long> totalDuration = new ObservableField<>();
+    public ObservableField<Boolean> isFriend = new ObservableField<>();
+
 
 
     public UserInfoViewModel(Fragment fragment) {
@@ -43,6 +46,7 @@ public class UserInfoViewModel implements IViewModel {
         userName.set(user.getUsername());
         userId.set(String.format(Locale.CHINA, "%06d", user.getId()));
         location.set(user.getLocation());
+        sex.set(user.getSex());
 //        rank.set();
 //        totalDistance.set();
 

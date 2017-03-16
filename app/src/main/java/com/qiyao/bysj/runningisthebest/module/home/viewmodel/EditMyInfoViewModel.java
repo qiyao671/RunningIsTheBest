@@ -5,6 +5,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 
@@ -14,13 +15,16 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.google.gson.Gson;
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
+import com.qiyao.bysj.baselibrary.model.event.MessageEvent;
+import com.qiyao.bysj.baselibrary.model.event.RxBus;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.common.Constants;
 import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
-import com.qiyao.bysj.runningisthebest.model.LocationJsonBean;
+import com.qiyao.bysj.runningisthebest.model.bean.LocationJsonBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.home.ui.HomeFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
 import java.util.ArrayList;
@@ -51,11 +55,10 @@ public class EditMyInfoViewModel extends BaseObservable
     public ObservableField<String> weight = new ObservableField<>();
     public ObservableField<String> birthday = new ObservableField<>();
     public ObservableField<String> location = new ObservableField<>();
+    public ObservableField<String> signature = new ObservableField<>();
 
     private List<String> provinces = new ArrayList<>();
     private List<List<String>> cities = new ArrayList<>();
-    private List<List<List<String>>> areas = new ArrayList<>();
-
 
     public EditMyInfoViewModel(Fragment fragment, UserBean userBean) {
         this.fragment = fragment;
@@ -80,6 +83,7 @@ public class EditMyInfoViewModel extends BaseObservable
         weight.set(String.valueOf(userBean.getWeight()));
 
         location.set(userBean.getLocation());
+        signature.set(userBean.getSignature());
         setBirthday(userBean.getBirthday());
 
     }
@@ -154,11 +158,14 @@ public class EditMyInfoViewModel extends BaseObservable
             case R.id.location:
                 showLocationPicker();
                 break;
+            case R.id.signature:
+                showSignatureFillDialog();
+                break;
         }
     }
 
     private void pickPicture() {
-
+        // TODO: 2017/3/16 选择图片
     }
 
     private void showSexChooseDialog() {
@@ -220,6 +227,15 @@ public class EditMyInfoViewModel extends BaseObservable
         pvOptions.show();
     }
 
+    private void showSignatureFillDialog() {
+        new MaterialDialog.Builder(fragment.getActivity())
+                .title(R.string.fill_signature)
+                .inputType(InputType.TYPE_CLASS_TEXT)
+                .negativeText(R.string.cancel)
+                .input(null, null, false, (dialog, input) -> updateSignature(String.valueOf(input)))
+                .show();
+    }
+
     private void updateSex(String sex) {
         this.sex.set(sex);
         userBean.setSex(sex);
@@ -243,7 +259,12 @@ public class EditMyInfoViewModel extends BaseObservable
     private void updateLocation(int p, int c) {
         String location = provinces.get(p) + "·" + cities.get(p).get(c);
         this.location.set(location);
-//        userBean.setLocation(location);
+        userBean.setLocation(location);
+    }
+
+    private void updateSignature(String signature) {
+        this.signature.set(signature);
+        userBean.setSignature(signature);
     }
 
     public void submitUpdate() {
@@ -251,6 +272,11 @@ public class EditMyInfoViewModel extends BaseObservable
                 .updateUserInfo(userBean)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(ToastUtils::showShortToast, e -> ToastUtils.showShortToast(e.getMessage()));
+                .subscribe(this::onSubmitSuccess, e -> ToastUtils.showShortToast(e.getMessage()));
+    }
+
+    private void onSubmitSuccess(String msg) {
+        ToastUtils.showShortToast(msg);
+        RxBus.getDefault().post(new MessageEvent(HomeFragment.EVENT_EDIT_INFO, true));
     }
 }

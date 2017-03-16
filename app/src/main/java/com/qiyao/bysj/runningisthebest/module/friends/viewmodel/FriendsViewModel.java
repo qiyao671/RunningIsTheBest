@@ -3,6 +3,7 @@ package com.qiyao.bysj.runningisthebest.module.friends.viewmodel;
 import android.app.Fragment;
 import android.support.annotation.NonNull;
 
+import com.qiyao.bysj.baselibrary.common.utils.EmptyUtils;
 import com.qiyao.bysj.baselibrary.common.utils.PinyinUtils;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.IItemViewBindingCreator;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.ViewBindingRes;
@@ -142,7 +143,8 @@ public class FriendsViewModel extends ASectionCollectionViewModel<String, UserBe
         new ASectionTask(RefreshMode.reset) {
             @Override
             protected Observable<List<UserBean>> getData(RefreshMode mode) {
-                return Observable.just(SPHelper.loadFriends());
+                return Observable.just(SPHelper.loadFriends())
+                        .doOnNext(list -> {if (EmptyUtils.isEmpty(list)) { hasInit = true; }});
             }
         }.execute();
     }

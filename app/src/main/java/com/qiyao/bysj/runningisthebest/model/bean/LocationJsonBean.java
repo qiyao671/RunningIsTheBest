@@ -1,4 +1,4 @@
-package com.qiyao.bysj.runningisthebest.model;
+package com.qiyao.bysj.runningisthebest.model.bean;
 
 import java.util.List;
 

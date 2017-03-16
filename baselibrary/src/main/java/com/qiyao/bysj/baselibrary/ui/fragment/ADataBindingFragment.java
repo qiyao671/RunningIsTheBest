@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.qiyao.bysj.baselibrary.BR;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
-import com.trello.rxlifecycle.components.RxFragment;
 
 /**
  * Created by lvqiyao (amorfatilay@163.com).

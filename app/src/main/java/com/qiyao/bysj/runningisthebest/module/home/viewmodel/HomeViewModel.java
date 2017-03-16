@@ -95,4 +95,8 @@ public class HomeViewModel extends BaseObservable implements IViewModel {
     public OnItemBind getItemView() {
         return itemView;
     }
+
+    public void refreshMyInfo() {
+        myInfoItems.get(0).refreshData();
+    }
 }
