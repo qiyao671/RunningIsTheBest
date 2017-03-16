@@ -8,7 +8,7 @@ import android.view.View;
 import com.qiyao.bysj.baselibrary.common.utils.ConstUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
-import com.qiyao.bysj.runningisthebest.common.AppTimeUtils;
+import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
@@ -58,19 +58,19 @@ public class BestRunViewModel implements IViewModel {
             this.farthestRun.set(String.valueOf(bestRun.getFarthestLogInfo().getDistance()));
         }
         if (bestRun.getLongestRunLogVO() != null && bestRun.getLongestRunLogVO().getSpendTime() != null) {
-            this.longestRun.set(AppTimeUtils.getTime(bestRun.getLongestRunLogVO().getSpendTime()));
+            this.longestRun.set(MyAppUtils.getTime(bestRun.getLongestRunLogVO().getSpendTime()));
         }
         if (bestRun.getFullMaPB() != null && bestRun.getFullMaPB().getSpendTime() != null) {
-            this.fullMarathonPb.set(AppTimeUtils.getTime(bestRun.getFullMaPB().getSpendTime()));
+            this.fullMarathonPb.set(MyAppUtils.getTime(bestRun.getFullMaPB().getSpendTime()));
         }
         if (bestRun.getHalfMaPB() != null && bestRun.getHalfMaPB().getSpendTime() != null) {
-            this.halfMarathonPb.set(AppTimeUtils.getTime(bestRun.getHalfMaPB().getSpendTime()));
+            this.halfMarathonPb.set(MyAppUtils.getTime(bestRun.getHalfMaPB().getSpendTime()));
         }
         if (bestRun.getFivePB() != null && bestRun.getFivePB().getSpendTime() != null) {
-            this.fiveKmPb.set(AppTimeUtils.getTime(bestRun.getFivePB().getSpendTime()));
+            this.fiveKmPb.set(MyAppUtils.getTime(bestRun.getFivePB().getSpendTime()));
         }
         if (bestRun.getTenPB() != null && bestRun.getTenPB().getSpendTime() != null) {
-            this.tenKmPb.set(AppTimeUtils.getTime(bestRun.getTenPB().getSpendTime()));
+            this.tenKmPb.set(MyAppUtils.getTime(bestRun.getTenPB().getSpendTime()));
         }
         if (bestRun.getFastSpeed() != null
                 && bestRun.getFastSpeed().getSpendTime() != null

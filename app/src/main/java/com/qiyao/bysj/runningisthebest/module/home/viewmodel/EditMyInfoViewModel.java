@@ -5,22 +5,30 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.aigestudio.wheelpicker.IWheelPicker;
-import com.aigestudio.wheelpicker.widgets.WheelDatePicker;
+import com.bigkoo.pickerview.OptionsPickerView;
+import com.bigkoo.pickerview.TimePickerView;
+import com.google.gson.Gson;
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.common.Constants;
+import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
+import com.qiyao.bysj.runningisthebest.model.LocationJsonBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.trello.rxlifecycle.components.RxFragment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -44,9 +52,16 @@ public class EditMyInfoViewModel extends BaseObservable
     public ObservableField<String> birthday = new ObservableField<>();
     public ObservableField<String> location = new ObservableField<>();
 
+    private List<String> provinces = new ArrayList<>();
+    private List<List<String>> cities = new ArrayList<>();
+    private List<List<List<String>>> areas = new ArrayList<>();
+
+
     public EditMyInfoViewModel(Fragment fragment, UserBean userBean) {
         this.fragment = fragment;
         this.userBean = userBean;
+
+        initLocationSource();
 
         if (userBean == null) {
             return;
@@ -66,6 +81,40 @@ public class EditMyInfoViewModel extends BaseObservable
 
         location.set(userBean.getLocation());
         setBirthday(userBean.getBirthday());
+
+    }
+
+    private void initLocationSource() {
+        Observable.just("location.json")
+                .observeOn(Schedulers.io())
+                .compose(((RxFragment) fragment).bindToLifecycle())
+                .map(s -> MyAppUtils.readTextFileToStringFromAssets(fragment.getActivity(), s, "UTF-8"))
+                .map(s -> new Gson().fromJson(s, LocationJsonBean[].class))
+                .subscribe(this::setLocationLists, e -> Log.e("init location", "initLocationSource: " + e.getMessage(), e));
+    }
+
+    private void setLocationLists(LocationJsonBean[] provinceArray) {
+        for (int i = 1; i < provinceArray.length - 1; i++) {
+            LocationJsonBean province = provinceArray[i];
+            provinces.add(province.getName());
+            List<String> provinceCities = new ArrayList<>();
+//            List<List<String>> provinceCityAreas = new ArrayList<>();
+            if (province.getSub() != null) {
+                for (int j = 1; j < province.getSub().size() - 1; j++) {
+                    LocationJsonBean city = province.getSub().get(j);
+                    provinceCities.add(city.getName());
+/*                    List<String> cityAreas = new ArrayList<>();
+                    if (city.getSub() != null) {
+                        for (int k = 1; k < city.getSub().size() - 1; k++) {
+                            cityAreas.add(city.getSub().get(k).getName());
+                        }
+                    }
+                    provinceCityAreas.add(cityAreas);*/
+                }
+            }
+            cities.add(provinceCities);
+//            areas.add(provinceCityAreas);
+        }
     }
 
     private void setBirthday(Long birthday) {
@@ -150,34 +199,25 @@ public class EditMyInfoViewModel extends BaseObservable
         showListDialog(weights, (dialog, view, which, text) -> updateWeight(Integer.parseInt(String.valueOf(text))));
     }
 
-    private void showPicker(IWheelPicker picker, MaterialDialog.SingleButtonCallback positiveCallback) {
-
-        new MaterialDialog.Builder(fragment.getActivity())
-                .customView((View)picker, false)
-                .positiveText(R.string.ok)
-                .negativeText(R.string.cancel)
-                .onPositive(positiveCallback)
-                .show();
-    }
-
     private void showDatePicker() {
-        WheelDatePicker datePicker = new WheelDatePicker(fragment.getActivity());
-        datePicker.setCyclic(false);
-        datePicker.setAtmospheric(true);
-        datePicker.setCurved(true);
-        datePicker.setSelectedYear(2000);
-        datePicker.setSelectedMonth(1);
-        datePicker.setSelectedDay(1);
-        showPicker(datePicker, (dialog, which) -> updateBirthday(datePicker.getCurrentDate()));
+        TimePickerView pvTime = new TimePickerView
+                .Builder(fragment.getActivity(), (date, v) -> updateBirthday(date))
+                .setType(TimePickerView.Type.YEAR_MONTH_DAY)
+                .build();
+        Calendar date = Calendar.getInstance();
+        date.set(2000, 1, 1);
+        pvTime.setDate(date);//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
+        pvTime.show();
     }
 
 
     private void showLocationPicker() {
-/*        WheelAreaPicker areaPicker = new WheelAreaPicker(fragment.getActivity());
-        areaPicker.setCyclic(false);
-        areaPicker.setAtmospheric(true);
-        areaPicker.setCurved(true);
-        showPicker(areaPicker, (dialog, which) -> updateArea(areaPicker.getCity()));*/
+        @SuppressWarnings("unchecked")
+        OptionsPickerView<String> pvOptions = new OptionsPickerView
+                .Builder(fragment.getActivity(), (options1, options2, options3, v) -> updateLocation(options1, options2))
+                .build();
+        pvOptions.setPicker(provinces, cities);
+        pvOptions.show();
     }
 
     private void updateSex(String sex) {
@@ -197,12 +237,13 @@ public class EditMyInfoViewModel extends BaseObservable
 
     private void updateBirthday(Date birthday) {
         setBirthday(birthday.getTime());
-        userBean.setBirthday(birthday.getTime());
+         userBean.setBirthday(birthday.getTime());
     }
 
-    private void updateArea(String area) {
-        this.location.set(area);
-        userBean.setLocation(area);
+    private void updateLocation(int p, int c) {
+        String location = provinces.get(p) + "·" + cities.get(p).get(c);
+        this.location.set(location);
+//        userBean.setLocation(location);
     }
 
     public void submitUpdate() {

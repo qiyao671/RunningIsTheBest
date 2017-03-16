@@ -13,6 +13,8 @@ import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.home.ui.EditMyInfoFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
+import java.util.Locale;
+
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -53,7 +55,7 @@ public class MyInfoItemViewModel implements IItemViewModel {
     private void setUserInfo(UserBean user) {
         this.userBean = user;
         userProfileUrl.set(user.getProfile());
-        userId.set(String.valueOf(user.getId()));
+        userId.set(String.format(Locale.CHINA,"%06d", userBean.getId()));
         userName.set(user.getUsername());
         sex.set(user.getSex() == null ? fragment.getString(R.string.no_sex) : user.getSex());
         age.set(user.getAge() == null ? fragment.getString(R.string.no_age) : String.valueOf(user.getAge()));
@@ -79,9 +81,9 @@ public class MyInfoItemViewModel implements IItemViewModel {
     }
 
     public void onClick(View view) {
-        if (userBean != null) {
+//        if (userBean != null) {
             EditMyInfoFragment.launch(fragment.getActivity(), userBean);
-        }
+//        }
     }
 
     private void onError(Throwable e) {

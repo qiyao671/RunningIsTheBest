@@ -7,10 +7,8 @@ import com.qiyao.bysj.baselibrary.common.utils.ConstUtils;
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
-import com.qiyao.bysj.runningisthebest.common.AppTimeUtils;
+import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
-
-import java.util.Locale;
 
 /**
  * Created by qiyao on 2017/3/9.
@@ -46,11 +44,11 @@ public class TotalRunViewModel implements IViewModel {
             calories.set(String.valueOf(run.getTotalEnergy()));
         }
         if (run.getTotalSpendTime() != null) {
-            duration.set(AppTimeUtils.getTime(run.getTotalSpendTime()));
+            duration.set(MyAppUtils.getTime(run.getTotalSpendTime()));
         }
         if (run.getTotalDistance() != null && run.getTotalDistance() > 0
                 && run.getTotalSpendTime() != null && run.getTotalSpendTime() > 0) {
-            pace.set(AppTimeUtils.getPace(run.getTotalSpendTime(), run.getTotalDistance()));
+            pace.set(MyAppUtils.getPace(run.getTotalSpendTime(), run.getTotalDistance()));
             long hours = run.getTotalSpendTime() / ConstUtils.HOUR;
             avg_pace.set(String.valueOf(run.getTotalDistance() / hours));
         }

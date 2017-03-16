@@ -172,7 +172,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{StringUtils.equals(viewModel.height, "null") ? "" : viewModel.height + "cm"}'
+                    android:text='@{StringUtils.equals(viewModel.height.get(), "null") ? "" : viewModel.height + "cm"}'
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/text_size_medium" />
 
@@ -207,7 +207,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{StringUtils.equals(viewModel.weight, "null") ? "" : viewModel.weight + "kg"}'
+                    android:text='@{StringUtils.equals(viewModel.weight.get(), "null") ? "" : viewModel.weight + "kg"}'
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/text_size_medium" />
 

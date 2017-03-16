@@ -8,7 +8,7 @@ import android.view.View;
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.StaticItemViewModel;
-import com.qiyao.bysj.runningisthebest.common.AppTimeUtils;
+import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.module.run.ui.RunRecordDetailPagerFragment;
 
@@ -33,10 +33,10 @@ public class RunRecordsItemViewModel extends BaseObservable implements IItemView
 
     private void setRunInfo(RunBean runBean) {
         distance = runBean.getDistance() != null ? String.valueOf(runBean.getDistance()) : "--";
-        duration = runBean.getSpendTime() != null ? AppTimeUtils.getTime(runBean.getSpendTime()): "--";
+        duration = runBean.getSpendTime() != null ? MyAppUtils.getTime(runBean.getSpendTime()): "--";
         datetime = runBean.getBeginTime() != null ? TimeUtils.getFriendlyTimeSpanByNow(runBean.getBeginTime()) : "--";
         if (!duration.equals("--") && !distance.equals("--")) {
-            avgPace = AppTimeUtils.getPace(runBean.getSpendTime(), runBean.getDistance());
+            avgPace = MyAppUtils.getPace(runBean.getSpendTime(), runBean.getDistance());
         }
     }
 

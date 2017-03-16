@@ -6,7 +6,7 @@ import android.databinding.Bindable;
 
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
-import com.qiyao.bysj.runningisthebest.common.AppTimeUtils;
+import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 
 /**
@@ -31,10 +31,10 @@ public class RunTrackViewModel extends BaseObservable implements IViewModel {
 
     private void setRunInfo(RunBean runBean) {
         distance = runBean.getDistance() != null ? String.valueOf(runBean.getDistance()) : "--";
-        duration = runBean.getSpendTime() != null ? AppTimeUtils.getTime(runBean.getSpendTime()) : "--";
+        duration = runBean.getSpendTime() != null ? MyAppUtils.getTime(runBean.getSpendTime()) : "--";
         datetime = runBean.getBeginTime() != null ? TimeUtils.getFriendlyTimeSpanByNow(runBean.getBeginTime()) : "--";
         if (!duration.equals("--") && !distance.equals("--")) {
-            avgPace = AppTimeUtils.getPace(runBean.getSpendTime(), runBean.getDistance());
+            avgPace = MyAppUtils.getPace(runBean.getSpendTime(), runBean.getDistance());
         }
         calories = runBean.getEnergy() != null ? String.valueOf(runBean.getEnergy()) : "--";
     }
