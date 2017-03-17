@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public class NineImageGridLayoutBindingAdapters {
-    @BindingAdapter(value = {"imageUrls", "onChildClick"})
+    @BindingAdapter(value = {"imageUrls", "onChildClick"}, requireAll = false)
     public static void set(NineImageGridLayout layout, List<String> imageUrls, NineImageGridLayout.OnChildClickListener onChildClickListener) {
         layout.setImages(imageUrls);
         layout.setOnChildClickListener(onChildClickListener);

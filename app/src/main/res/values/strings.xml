@@ -102,4 +102,7 @@
     <string name="view_his_moment">查看他的动态</string>
     <string name="view_his_crew">查看他的跑团</string>
     <string name="personal_best_run">个人最佳成绩</string>
+
+    <!--moment-->
+    <string name="reply">回复</string>
 </resources>

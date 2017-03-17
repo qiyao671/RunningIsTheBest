@@ -1,5 +1,6 @@
 package com.qiyao.bysj.runningisthebest.module.moment.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,17 +8,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.databinding.FragmentMomentBinding;
-import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentViewModel;
+import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
+import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentsViewModel;
 
 /**
  * Created by qiyao on 2017/3/8.
  */
 
-public class MomentFragment extends ADataBindingFragment {
+public class MomentsFragment extends ADataBindingFragment {
+    private static final String KEY_USER = "USER";
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -38,7 +42,12 @@ public class MomentFragment extends ADataBindingFragment {
     @NonNull
     @Override
     protected IViewModel createViewModel(Bundle arguments) {
-        return new MomentViewModel();
+        UserBean user = arguments.getParcelable(KEY_USER);
+        if (user == null) {
+            return new MomentsViewModel(this);
+        } else {
+            return new MomentsViewModel(this, user);
+        }
     }
 
     @Override
@@ -49,5 +58,18 @@ public class MomentFragment extends ADataBindingFragment {
     @Override
     public FragmentMomentBinding getBinding() {
         return (FragmentMomentBinding) super.getBinding();
+    }
+
+    public static void launch(Context context, UserBean userBean) {
+        Bundle bundle = null;
+        if (userBean != null) {
+            bundle = new Bundle();
+            bundle.putParcelable(KEY_USER, userBean);
+        }
+        FragmentContainerActivity.launch(context, MomentsFragment.class, bundle);
+    }
+
+    public static void launch(Context context) {
+        launch(context, null);
     }
 }

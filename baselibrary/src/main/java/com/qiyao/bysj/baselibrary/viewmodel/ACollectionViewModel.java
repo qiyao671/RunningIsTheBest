@@ -335,6 +335,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
                     .flatMap(Observable::from)
                     .map(ACollectionViewModel.this::newItemViewModel)
                     .toList()
+                    .doAfterTerminate(() -> {if (isRefreshEnable.get() && isRefreshing.get()) isRefreshing.set(false);})
                     .compose(((RxFragment) fragment).bindToLifecycle())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this);
@@ -368,10 +369,6 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
                         }
                     }
                 }
-            }
-
-            if (isRefreshEnable.get() && isRefreshing.get()) {
-                isRefreshing.set(false);
             }
 
         }

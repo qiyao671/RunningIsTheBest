@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentContentViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/base_list_item_vertical_margin"
+        android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+        android:paddingStart="@dimen/base_list_item_horizontal_margin"
+        android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                app:imageUrl="@{viewModel.profileUrl}"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="@{viewModel.userName}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="@{viewModel.datetime}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:text="@{viewModel.content}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.qiyao.bysj.runningisthebest.widget.NineImageGridLayout
+            app:imageUrls="@{viewModel.imageUrls}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_like" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                android:src="@drawable/ic_comment" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

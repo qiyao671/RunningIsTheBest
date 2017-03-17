@@ -27,8 +27,6 @@ public class UserInfoViewModel implements IViewModel {
     public ObservableField<Long> totalDuration = new ObservableField<>();
     public ObservableField<Boolean> isFriend = new ObservableField<>();
 
-
-
     public UserInfoViewModel(Fragment fragment) {
         this.fragment = fragment;
         getUser();

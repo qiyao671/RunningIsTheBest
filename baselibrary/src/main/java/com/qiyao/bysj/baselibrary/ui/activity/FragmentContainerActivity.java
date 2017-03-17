@@ -2,6 +2,7 @@ package com.qiyao.bysj.baselibrary.ui.activity;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,33 +20,33 @@ import java.lang.reflect.Method;
 public class FragmentContainerActivity extends BaseActivity {
     private int overrideTheme = -1;
 
-    public static void launch(Activity activity, Class<? extends Fragment> clazz, Bundle args, int flags) {
-        Intent intent = new Intent(activity, FragmentContainerActivity.class);
+    public static void launch(Context context, Class<? extends Fragment> clazz, Bundle args, int flags) {
+        Intent intent = new Intent(context, FragmentContainerActivity.class);
         if (flags != -1) {
             intent.addFlags(flags);
         }
         intent.putExtra("className", clazz.getName());
         if (args != null)
             intent.putExtras(args);
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
     /**
      * 启动一个界面
      *
-     * @param activity
+     * @param context
      * @param clazz
      * @param args
      */
-    public static void launch(Activity activity, Class<? extends Fragment> clazz, Bundle args) {
-        launch(activity, clazz, args, -1);
+    public static void launch(Context context, Class<? extends Fragment> clazz, Bundle args) {
+        launch(context, clazz, args, -1);
     }
 
-    public static void launch(Activity activity, Class<? extends Fragment> clazz, int flags) {
-        launch(activity, clazz, null, flags);
+    public static void launch(Context context, Class<? extends Fragment> clazz, int flags) {
+        launch(context, clazz, null, flags);
     }
 
-    public static void launch(Activity activity, Class<? extends Fragment> clazz) {
-        launch(activity, clazz, null);
+    public static void launch(Context context, Class<? extends Fragment> clazz) {
+        launch(context, clazz, null);
     }
 
     public static void launchForResult(Activity from, Class<? extends Fragment> clazz, Bundle args, int requestCode) {

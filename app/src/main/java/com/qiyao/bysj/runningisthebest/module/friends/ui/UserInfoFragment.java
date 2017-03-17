@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
+import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.module.friends.viewmodel.UserInfoViewModel;
 
 /**
@@ -20,6 +21,6 @@ public class UserInfoFragment extends ADataBindingFragment {
 
     @Override
     protected int layoutRes() {
-        return 0;
+        return R.layout.fragment_user_info;
     }
 }
