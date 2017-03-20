@@ -11,7 +11,9 @@
         android:layout_height="match_parent">
         <include layout="@layout/view_moment_content"
             app:viewModel="@{viewModel.contentViewModel}"/>
-        <include layout="@layout/view_moment_likes_and_comments"
-            app:viewModel="@{viewModel.likesAndCommentsViewModel}"/>
+        <include layout="@layout/view_moment_likes"
+            app:viewModel="@{viewModel.likesViewModel}"/>
+        <include layout="@layout/view_moment_comments"
+            app:viewModel="@{viewModel.commentsViewModel}"/>
     </LinearLayout>
 </layout>

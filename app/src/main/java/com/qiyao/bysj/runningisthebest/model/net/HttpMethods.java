@@ -41,7 +41,7 @@ public class HttpMethods extends HttpFactory {
 
     public static HttpMethods getInstance() {
         if (INSTANCE == null) {
-            return new HttpMethods();
+            return INSTANCE = new HttpMethods();
         } else {
             return INSTANCE;
         }

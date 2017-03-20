@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:andriod="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentDetailViewModel" />
+    </data>
+    <LinearLayout
+        andriod:layout_width="match_parent"
+        andriod:layout_height="match_parent">
+        <include layout="@layout/view_moment_content"
+            app:viewModel="@{viewModel.momentContentViewModel}"/>
+        <include layout="@layout/view_moment_likes"
+            app:viewModel="@{viewModel.momentLikesViewModel}" />
+        <include layout="@layout/view_moment_comments"
+            app:viewModel="@{viewModel.momentCommentsViewModel}" />
+        <include layout="@layout/view_comment_bar"
+            app:viewModel="@{viewModel.commentBarViewModel}" />
+    </LinearLayout>
+</layout>

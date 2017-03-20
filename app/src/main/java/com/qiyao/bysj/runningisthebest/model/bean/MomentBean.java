@@ -1,5 +1,8 @@
 package com.qiyao.bysj.runningisthebest.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
@@ -8,7 +11,7 @@ import java.util.Date;
  * 类描述：
  */
 
-public class MomentBean {
+public class MomentBean implements Parcelable {
     private Integer id;
 
     private Integer userId;
@@ -129,4 +132,55 @@ public class MomentBean {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeValue(this.userId);
+        dest.writeString(this.title);
+        dest.writeString(this.picture);
+        dest.writeValue(this.gmtCreate);
+        dest.writeValue(this.gmtModified);
+        dest.writeValue(this.status);
+        dest.writeString(this.content);
+        dest.writeValue(this.minId);
+        dest.writeValue(this.maxId);
+        dest.writeValue(this.num);
+        dest.writeValue(this.pageSize);
+    }
+
+    public MomentBean() {
+    }
+
+    protected MomentBean(Parcel in) {
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.userId = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.title = in.readString();
+        this.picture = in.readString();
+        this.gmtCreate = (Long) in.readValue(Long.class.getClassLoader());
+        this.gmtModified = (Long) in.readValue(Long.class.getClassLoader());
+        this.status = (Short) in.readValue(Short.class.getClassLoader());
+        this.content = in.readString();
+        this.minId = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.maxId = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.num = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.pageSize = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<MomentBean> CREATOR = new Parcelable.Creator<MomentBean>() {
+        @Override
+        public MomentBean createFromParcel(Parcel source) {
+            return new MomentBean(source);
+        }
+
+        @Override
+        public MomentBean[] newArray(int size) {
+            return new MomentBean[size];
+        }
+    };
 }

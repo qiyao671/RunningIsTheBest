@@ -2,6 +2,8 @@ package com.qiyao.bysj.runningisthebest.module.moment.viewmodel;
 
 import android.content.Context;
 import android.databinding.Bindable;
+import android.databinding.ObservableField;
+import android.view.View;
 
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
@@ -22,6 +24,7 @@ public class MomentContentViewModel implements IViewModel {
     private String datetime;
     private String content;
     private List<String> imageUrls;
+    public ObservableField<View.OnClickListener> onClickListener = new ObservableField<>();
 
     private MomentBean momentBean;
 
@@ -61,5 +64,9 @@ public class MomentContentViewModel implements IViewModel {
     @Bindable
     public List<String> getImageUrls() {
         return imageUrls;
+    }
+
+    public void setOnClickListener(ObservableField<View.OnClickListener> onClickListener) {
+        this.onClickListener = onClickListener;
     }
 }
