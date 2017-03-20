@@ -2,6 +2,7 @@ package com.qiyao.bysj.runningisthebest.module.friends.viewmodel;
 
 import android.app.Fragment;
 import android.databinding.ObservableField;
+import android.view.View;
 
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
@@ -12,7 +13,7 @@ import java.util.Locale;
  * Created by qiyao on 2017/3/16.
  */
 
-public class UserInfoViewModel implements IViewModel {
+public class UserInfoViewModel implements IViewModel, View.OnClickListener {
     private Fragment fragment;
 
     private UserBean userBean;
@@ -47,6 +48,11 @@ public class UserInfoViewModel implements IViewModel {
         sex.set(user.getSex());
 //        rank.set();
 //        totalDistance.set();
+
+    }
+
+    @Override
+    public void onClick(View view) {
 
     }
 }

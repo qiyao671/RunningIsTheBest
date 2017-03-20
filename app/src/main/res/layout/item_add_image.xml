@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.WriteMomentViewModel" />
+
+    </data>
+
+        <ImageView
+            android:id="@+id/iv_add_image"
+            android:tint="@color/accent"
+            android:src="@drawable/ic_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+</layout>

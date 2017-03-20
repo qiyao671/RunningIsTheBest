@@ -1,6 +1,7 @@
 package com.qiyao.bysj.runningisthebest.module.home.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
+import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.home.viewmodel.EditMyInfoViewModel;
 
 /**
@@ -21,6 +23,7 @@ import com.qiyao.bysj.runningisthebest.module.home.viewmodel.EditMyInfoViewModel
  */
 
 public class EditMyInfoFragment extends ADataBindingFragment {
+    public static final int CODE_PICK_IMAGE = 1;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -65,4 +68,14 @@ public class EditMyInfoFragment extends ADataBindingFragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CODE_PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            data.getData();
+            HttpMethods.getInstance().uploadProfile(data.getData());
+        }
+    }
+
 }

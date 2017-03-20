@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:text='@{"：" + viewModel.content ?? ""}'
+            android:text='@{":" + viewModel.content ?? ""}'
             android:textSize="@dimen/text_size_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

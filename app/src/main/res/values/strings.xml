@@ -105,6 +105,7 @@
 
     <!--moment-->
     <string name="reply">回复</string>
+    <string name="add_moment">添加动态</string>
     <string name="send">发送</string>
     <string name="comment">评论</string>
 </resources>

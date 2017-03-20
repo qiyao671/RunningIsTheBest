@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+        <variable
+            name="viewModel"
+            type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.WriteMomentViewModel" />
+    </data>
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:text="@={viewModel.content}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
+        <android.support.v7.widget.RecyclerView
+            app:items="@{viewModel.imagesWithAddBtn}"
+            app:itemBinding="@{viewModel.imageItemView}"
+            app:layoutManager="@{LayoutManagers.grid(5)}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</layout>

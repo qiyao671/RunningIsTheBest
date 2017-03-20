@@ -114,7 +114,7 @@ public class HttpFactory {
             if (!httpResult.isSuccess()) {
 //                throw new ApiException(httpResult.getCode());
                 // TODO: 2017/3/7
-                throw new RuntimeException(httpResult.getResponseContext().toString());
+                throw new RuntimeException(httpResult.getCallbackMsg());
             }
             return httpResult.getResponseContext();
         }

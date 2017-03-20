@@ -1,5 +1,7 @@
 package com.qiyao.bysj.runningisthebest.model.net;
 
+import android.net.Uri;
+
 import com.qiyao.bysj.baselibrary.model.net.HttpFactory;
 import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
@@ -10,9 +12,13 @@ import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 
 import org.w3c.dom.Comment;
 
+import java.io.File;
 import java.util.List;
 
 import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import rx.Observable;
 
 /**
@@ -105,5 +111,21 @@ public class HttpMethods extends HttpFactory {
 
     public Observable<String> deleteMoment(int momentId, Comment comment) {
         return handleResult(runApiService.commentMoment(momentId, comment));
+    }
+
+    public Observable<String> uploadProfile(Uri profileUri) {
+        File file = new File(profileUri.getPath());
+        // create RequestBody instance from file
+        RequestBody requestFile =
+                RequestBody.create(
+                        MediaType.parse(AppApplication.getInstance().getContentResolver().getType(profileUri)),
+                        file
+                );
+
+        // MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("profile", file.getName(), requestFile);
+
+        return handleResult(runApiService.uploadProfile(body));
     }
 }

@@ -7,7 +7,7 @@
             type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentLikeItemViewModel" />
     </data>
 
-    <android.support.v4.widget.CircleImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         app:imageUrl="@{viewModel.userProfile}"
         android:layout_width="30dp"
         android:layout_height="30dp" />

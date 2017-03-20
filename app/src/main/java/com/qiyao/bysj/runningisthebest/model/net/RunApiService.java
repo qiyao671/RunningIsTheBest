@@ -11,11 +11,14 @@ import org.w3c.dom.Comment;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -63,7 +66,7 @@ public interface RunApiService {
     Observable<HttpResult<String>> postMoment(@Body MomentBean momentBean);
 
     @GET("moment/listNewestMoments")
-    Observable<HttpResult<List<MomentBean>>> getRecentMoments(@Query("minId") int minId, @Query("maxId") int maxId, @Query("pageSize") Integer pageSize);
+    Observable<HttpResult<List<MomentBean>>> getRecentMoments(@Query("minId") Integer minId, @Query("maxId") Integer maxId, @Query("pageSize") Integer pageSize);
 
     @POST("user/update")
     Observable<HttpResult<String>> updateUserInfo(@Body UserBean userBean);
@@ -83,4 +86,8 @@ public interface RunApiService {
     @FormUrlEncoded
     @POST("moment/comment")
     Observable<HttpResult<String>> commentMoment(@Field("momentId") int momentId, @Field("comment") Comment comment);
+
+    @Multipart
+    @POST("user/uploadProfile")
+    Observable<HttpResult<String>> uploadProfile(@Part MultipartBody.Part profile);
 }

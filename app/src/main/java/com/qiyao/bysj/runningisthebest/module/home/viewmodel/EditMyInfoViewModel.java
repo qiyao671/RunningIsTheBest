@@ -1,6 +1,7 @@
 package com.qiyao.bysj.runningisthebest.module.home.viewmodel;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableField;
@@ -24,6 +25,7 @@ import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.LocationJsonBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.home.ui.EditMyInfoFragment;
 import com.qiyao.bysj.runningisthebest.module.home.ui.HomeFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
@@ -141,7 +143,7 @@ public class EditMyInfoViewModel extends BaseObservable
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.user_profile:
-                pickPicture();
+                pickImage();
                 break;
             case R.id.sex:
                 showSexChooseDialog();
@@ -164,8 +166,11 @@ public class EditMyInfoViewModel extends BaseObservable
         }
     }
 
-    private void pickPicture() {
-        // TODO: 2017/3/16 选择图片
+    private void pickImage() {
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image/*");
+
+        fragment.startActivityForResult(pickIntent, EditMyInfoFragment.CODE_PICK_IMAGE);
     }
 
     private void showSexChooseDialog() {

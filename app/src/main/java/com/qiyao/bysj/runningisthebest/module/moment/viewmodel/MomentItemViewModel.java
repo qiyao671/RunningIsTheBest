@@ -1,6 +1,8 @@
 package com.qiyao.bysj.runningisthebest.module.moment.viewmodel;
 
 import android.content.Context;
+import android.databinding.BaseObservable;
+import android.databinding.ObservableField;
 import android.databinding.Bindable;
 import android.databinding.ObservableField;
 
@@ -12,7 +14,7 @@ import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
  * Created by qiyao on 2017/3/17.
  */
 
-public class MomentItemViewModel implements IItemViewModel {
+public class MomentItemViewModel extends BaseObservable implements IItemViewModel {
     private Context context;
 
     private MomentBean momentBean;

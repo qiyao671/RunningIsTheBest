@@ -1,12 +1,14 @@
 package com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel;
 
+import android.view.View;
+
 /**
  * Created by lvqiyao (amorfatilay@163.com).
  * 2017/2/10 22:18.
  * 类描述：
  */
 
-public class StaticItemViewModel implements IItemViewModel {
+public class StaticItemViewModel implements IItemViewModel,View.OnClickListener {
     private String type;
     public StaticItemViewModel(String type) {
         this.type = type;
@@ -21,5 +23,10 @@ public class StaticItemViewModel implements IItemViewModel {
     @Override
     public String getItemViewType() {
         return type;
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

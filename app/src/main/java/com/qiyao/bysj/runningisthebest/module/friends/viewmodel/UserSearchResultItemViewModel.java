@@ -1,8 +1,6 @@
 package com.qiyao.bysj.runningisthebest.module.friends.viewmodel;
 
 import android.content.Context;
-import android.databinding.Bindable;
-import android.view.View;
 
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;

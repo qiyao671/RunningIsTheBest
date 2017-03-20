@@ -2,7 +2,7 @@ package com.qiyao.bysj.runningisthebest.module.moment.viewmodel;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
+import android.databinding.ObservableField;
 
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.StaticItemViewModel;
@@ -17,21 +17,16 @@ public class MomentLikeItemViewModel extends BaseObservable implements IItemView
 
     private UserBean userBean;
 
-    private String userProfile;
+    public ObservableField<String> userProfile = new ObservableField<>();
 
     public MomentLikeItemViewModel(Context context, UserBean userBean) {
         this.context = context;
         this.userBean = userBean;
-        userProfile = userBean.getProfile();
+        userProfile.set(userBean.getProfile());
     }
 
     @Override
     public String getItemViewType() {
         return StaticItemViewModel.TYPE_ITEM;
-    }
-
-    @Bindable
-    public String getUserProfile() {
-        return userProfile;
     }
 }

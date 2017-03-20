@@ -3,7 +3,6 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
 
         <variable
@@ -32,7 +31,7 @@
             android:layout_height="match_parent"
             bind:onRefresh="@{viewModel.onRefreshListener}"
             bind:refreshEnable="@{viewModel.isRefreshEnable}"
-            bind:refreshing="@={viewModel.isRefreshing}">
+            bind:refreshing="@{viewModel.isRefreshing}">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"

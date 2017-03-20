@@ -1,7 +1,7 @@
 package com.qiyao.bysj.runningisthebest.module.moment.viewmodel;
 
 import android.content.Context;
-import android.databinding.Bindable;
+import android.databinding.ObservableField;
 
 import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
 
@@ -11,8 +11,8 @@ import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
 
 public class RichMomentCommentItemViewModel extends SuccinctMomentCommentItemViewModel {
     public static final String TYPE_RICH = "TYPE_RICH";
-    private String userProfile;
-    private String datetime;
+    public ObservableField<String> userProfile = new ObservableField<>();
+    public ObservableField<String> datetime = new ObservableField<>();
 
     public RichMomentCommentItemViewModel(Context context, CommentBean commentBean) {
         super(context, commentBean);
@@ -28,13 +28,4 @@ public class RichMomentCommentItemViewModel extends SuccinctMomentCommentItemVie
         return TYPE_RICH;
     }
 
-    @Bindable
-    public String getDatetime() {
-        return datetime;
-    }
-
-    @Bindable
-    public String getUserProfile() {
-        return userProfile;
-    }
 }
