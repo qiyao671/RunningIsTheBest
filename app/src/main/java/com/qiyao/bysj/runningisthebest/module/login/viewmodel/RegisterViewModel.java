@@ -3,6 +3,8 @@ package com.qiyao.bysj.runningisthebest.module.login.viewmodel;
 
 import android.app.Fragment;
 import android.databinding.ObservableField;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -90,7 +92,7 @@ public class RegisterViewModel implements IViewModel {
         if (password.get() != null) {
             int length = password.get().length();
             if (length > 20 || length < 6) {
-//            isPasswordErrorEnabled.set(true);
+                isPasswordErrorEnabled.set(true);
                 passwordError.set(fragment.getString(R.string.error_pwd_length));
             } else {
                 isPasswordErrorEnabled.set(false);
@@ -105,6 +107,7 @@ public class RegisterViewModel implements IViewModel {
             return;
         }
         if (TextUtils.isEmpty(userName.get())) {
+            isUserNameErrorEnabled.set(true);
             userNameError.set(fragment.getString(R.string.error_user_name));
         }
     }
@@ -115,6 +118,7 @@ public class RegisterViewModel implements IViewModel {
         }
         if (password.get() != null && rePassword.get() != null) {
             if (!password.get().equals(rePassword.get())) {
+                isRePwdErrorEnabled.set(true);
                 rePwdError.set(fragment.getString(R.string.error_re_pwd));
             } else {
                 isRePwdErrorEnabled.set(false);
