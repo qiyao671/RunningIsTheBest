@@ -8,8 +8,9 @@ import android.support.design.widget.TextInputLayout;
  */
 
 public class TextInputLayoutBindingAdapters {
-    @BindingAdapter(value = { "error"})
-    public static void setError(TextInputLayout textInputLayout, String error) {
+    @BindingAdapter(value = { "error", "errorEnabled"})
+    public static void setError(TextInputLayout textInputLayout, String error, boolean isErrorEnabled) {
         textInputLayout.setError(error);
+        textInputLayout.setErrorEnabled(isErrorEnabled);
     }
 }

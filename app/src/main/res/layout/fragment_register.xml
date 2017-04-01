@@ -15,16 +15,10 @@
         android:paddingEnd="40dp"
         android:paddingStart="40dp">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@mipmap/ic_launcher"
-            android:layout_marginBottom="30dp"/>
-
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="@{viewModel.isUserNameErrorEnabled}"
+            app:errorEnabled="@={viewModel.isUserNameErrorEnabled}"
             app:error="@{viewModel.userNameError}"
             android:hint="@string/type_user_name">
             <EditText
@@ -34,6 +28,8 @@
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/ic_community"
                 android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:inputType="text"
                 android:text="@={viewModel.userName}"
                 app:onFocusChange="@{(v, hasFocus) -> viewModel.onUserNameFocusChange(v, hasFocus)}"/>
         </android.support.design.widget.TextInputLayout>

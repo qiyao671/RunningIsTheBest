@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewModel"
@@ -31,6 +32,9 @@
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/ic_community"
                 android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:inputType="text"
+                android:textSize="@dimen/text_size_medium"
                 android:text="@={viewModel.userName}" />
         </android.support.design.widget.TextInputLayout>
 
@@ -38,6 +42,7 @@
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
             android:hint="@string/password">
             <EditText
                 android:id="@+id/et_password"
@@ -46,6 +51,7 @@
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/ic_community"
                 android:text="@={viewModel.password}"
+                android:textSize="@dimen/text_size_medium"
                 android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
