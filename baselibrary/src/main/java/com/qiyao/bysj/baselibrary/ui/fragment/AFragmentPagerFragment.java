@@ -1,9 +1,7 @@
 package com.qiyao.bysj.baselibrary.ui.fragment;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -15,7 +13,6 @@ import com.qiyao.bysj.baselibrary.R;
 import com.qiyao.bysj.baselibrary.component.adapter.FragmentTabsPagerAdapter;
 import com.qiyao.bysj.baselibrary.databinding.FragmentTabPagerBinding;
 import com.qiyao.bysj.baselibrary.model.bean.FragmentTabItem;
-import com.qiyao.bysj.baselibrary.viewmodel.AFragmentTabPagerViewModel;
 
 import java.util.List;
 
@@ -44,5 +41,9 @@ public abstract class AFragmentPagerFragment extends ABaseFragment {
     }
 
     protected abstract List<FragmentTabItem> generateItems();
+
+    public TabLayout getTabLayout() {
+        return binding.tabLayout;
+    }
 
 }

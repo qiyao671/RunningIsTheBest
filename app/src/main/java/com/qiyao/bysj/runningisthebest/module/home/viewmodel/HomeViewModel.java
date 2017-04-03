@@ -12,6 +12,8 @@ import com.android.databinding.library.baseAdapters.BR;
 import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.common.Constants;
+import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.home.ui.BestRunFragment;
@@ -55,7 +57,7 @@ public class HomeViewModel extends BaseObservable implements IViewModel {
 
     private void getTotalRun() {
         HttpMethods.getInstance()
-                .getTotalLogInfo()
+                .getTotalLogInfo(Constants.FLAG_TOTAL_RUN)
                 .subscribeOn(Schedulers.newThread())
                 .filter(totalRun -> totalRun != null)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -71,7 +73,7 @@ public class HomeViewModel extends BaseObservable implements IViewModel {
         this.totalRunBean = totalRun;
 
         totalDistance.set(String.valueOf(totalRun.getTotalDistance()));
-        totalDuration.set(String.valueOf(totalRun.getTotalSpendTime()));
+        totalDuration.set(MyAppUtils.getTime(totalRun.getTotalSpendTime()));
         totalTimes.set(String.valueOf(totalRun.getTotalTimes()));
     }
 

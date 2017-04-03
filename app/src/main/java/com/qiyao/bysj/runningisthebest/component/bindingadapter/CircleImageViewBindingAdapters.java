@@ -1,9 +1,9 @@
 package com.qiyao.bysj.runningisthebest.component.bindingadapter;
 
 import android.databinding.BindingAdapter;
+import android.graphics.drawable.Drawable;
 
 import com.bumptech.glide.Glide;
-import com.qiyao.bysj.runningisthebest.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -14,11 +14,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class CircleImageViewBindingAdapters {
-    @BindingAdapter(value = "imageUrl")
-    public static void loadImage(CircleImageView imageView, String url) {
+    @BindingAdapter(value = {"imageUrl", "placeholderRes", "placeholder"}, requireAll = false)
+    public static void loadImage(CircleImageView imageView, String url, int placeholderRes, Drawable placeholder) {
         Glide.with(imageView.getContext())
                 .load(url)
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(placeholder)
+                .placeholder(placeholderRes)
                 .crossFade()
                 .dontAnimate()
                 .into(imageView);

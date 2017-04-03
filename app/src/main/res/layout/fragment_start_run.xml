@@ -7,15 +7,21 @@
     </data>
 
     <LinearLayout
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:background="@drawable/start_run_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <Button
-            android:text="开始"
-            android:textSize="@dimen/text_size_xlarge"
-            android:textColor="@color/md_white_1000"
+            android:id="@+id/button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="40dp"
             android:background="@drawable/btn_start_run_bg"
             android:onClick="@{viewModel::onClick}"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:text="开始"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/text_size_xlarge" />
     </LinearLayout>
 </layout>

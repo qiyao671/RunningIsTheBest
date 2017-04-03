@@ -3,6 +3,8 @@ package com.qiyao.bysj.runningisthebest.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Objects;
+
 /**
  * Created by lvqiyao (amorfatilay@163.com).
  * 2017/3/5 16:48.
@@ -51,13 +53,12 @@ public class UserBean implements Parcelable {
 
     private Integer communityId;
 
-    private Integer totalRunId;
-
-    private Integer bestRunId;
-
     private String signature;
 
     private Integer age;
+
+    /*是否是我的好友 是：1 不是：-1 我自己：2*/
+    private Integer relationStatus;
 
     public Integer getId() {
         return id;
@@ -147,22 +148,6 @@ public class UserBean implements Parcelable {
         this.communityId = communityId;
     }
 
-    public Integer getTotalRunId() {
-        return totalRunId;
-    }
-
-    public void setTotalRunId(Integer totalRunId) {
-        this.totalRunId = totalRunId;
-    }
-
-    public Integer getBestRunId() {
-        return bestRunId;
-    }
-
-    public void setBestRunId(Integer bestRunId) {
-        this.bestRunId = bestRunId;
-    }
-
     public String getSignature() {
         return signature;
     }
@@ -197,8 +182,6 @@ public class UserBean implements Parcelable {
         dest.writeValue(this.birthday);
         dest.writeString(this.location);
         dest.writeValue(this.communityId);
-        dest.writeValue(this.totalRunId);
-        dest.writeValue(this.bestRunId);
         dest.writeString(this.signature);
         dest.writeValue(this.age);
     }
@@ -218,8 +201,6 @@ public class UserBean implements Parcelable {
         this.birthday = (Long) in.readValue(Long.class.getClassLoader());
         this.location = in.readString();
         this.communityId = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.totalRunId = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.bestRunId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.signature = in.readString();
         this.age = (Integer) in.readValue(Integer.class.getClassLoader());
     }
@@ -235,4 +216,36 @@ public class UserBean implements Parcelable {
             return new UserBean[size];
         }
     };
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof UserBean)) {
+            return false;
+        }
+
+        UserBean user = (UserBean) o;
+
+        return Objects.equals(user.id, id) &&
+                Objects.equals(user.username, username) &&
+                Objects.equals(user.password, password) &&
+                Objects.equals(user.rank, rank) &&
+                Objects.equals(user.profile, profile) &&
+                Objects.equals(user.height, height) &&
+                Objects.equals(user.birthday, birthday) &&
+                Objects.equals(user.location, location) &&
+                Objects.equals(user.communityId, communityId) &&
+                Objects.equals(user.signature, signature) &&
+                Objects.equals(user.age, age) &&
+                Objects.equals(user.relationStatus, relationStatus);
+    }
+
+    public Integer getRelationStatus() {
+        return relationStatus;
+    }
+
+    public void setRelationStatus(Integer relationStatus) {
+        this.relationStatus = relationStatus;
+    }
 }

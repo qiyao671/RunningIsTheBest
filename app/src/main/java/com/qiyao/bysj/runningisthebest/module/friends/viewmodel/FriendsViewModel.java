@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.qiyao.bysj.baselibrary.common.utils.EmptyUtils;
 import com.qiyao.bysj.baselibrary.common.utils.PinyinUtils;
+import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.IItemViewBindingCreator;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.ViewBindingRes;
 import com.qiyao.bysj.baselibrary.viewmodel.ASectionCollectionViewModel;
@@ -12,7 +13,6 @@ import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.BR;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.common.SPHelper;
-import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 
@@ -25,7 +25,7 @@ import rx.Observable;
  */
 
 public class FriendsViewModel extends ASectionCollectionViewModel<String, UserBean> {
-    private boolean hasInit;
+    private List<UserBean> friends;
     public FriendsViewModel(Fragment fragment) {
         super(fragment, false, false);
     }
@@ -42,7 +42,7 @@ public class FriendsViewModel extends ASectionCollectionViewModel<String, UserBe
 
     @Override
     protected String headerForSectionOfItem(UserBean item) {
-        return PinyinUtils.getPinyinFirstLetter(item.getUsername());
+        return StringUtils.upperFirstLetter(PinyinUtils.getPinyinFirstLetter(item.getUsername()));
     }
 
     @Override
@@ -99,37 +99,6 @@ public class FriendsViewModel extends ASectionCollectionViewModel<String, UserBe
 
     @Override
     protected void requestData(RefreshMode refreshMode) {
-//        new ASectionTask(refreshMode) {
-//            @Override
-//            protected Observable<List<UserBean>> getData(RefreshMode mode) {
-//                List<UserBean> list = new ArrayList<UserBean>();
-//                UserBean user = new UserBean();
-//                user.setUsername("aweads");
-//                list.add(user);
-//                user = new UserBean();
-//                user.setUsername("awers");
-//                list.add(user);
-//                user = new UserBean();
-//                user.setUsername("casfa");
-//                list.add(user);
-//                user = new UserBean();
-//                user.setUsername("猜猜看");
-//                list.add(user);
-//                user = new UserBean();
-//                user.setUsername("爱啊欸");
-//                list.add(user);
-//                user = new UserBean();
-//                user.setUsername("欸容皮u");
-//                list.add(user);
-//                user = new UserBean();
-//                user.setUsername("iciasm");
-//                list.add(user);
-//                user = new UserBean();
-//                user.setUsername("caes");
-//                list.add(user);
-//                return Observable.just(list);
-//            }
-//        }.execute();
         new GetFriends(refreshMode).execute();
     }
 
@@ -144,7 +113,9 @@ public class FriendsViewModel extends ASectionCollectionViewModel<String, UserBe
             @Override
             protected Observable<List<UserBean>> getData(RefreshMode mode) {
                 return Observable.just(SPHelper.loadFriends())
-                        .doOnNext(list -> {if (EmptyUtils.isEmpty(list)) { hasInit = true; }});
+                        .filter(list -> !EmptyUtils.isEmpty(list))
+                        .filter(userBeen -> EmptyUtils.isEmpty(friends))
+                        .doOnNext(list -> friends = list);
             }
         }.execute();
     }
@@ -156,21 +127,11 @@ public class FriendsViewModel extends ASectionCollectionViewModel<String, UserBe
 
         @Override
         protected Observable<List<UserBean>> getData(RefreshMode mode) {
-            if (!hasInit) {
-                return Observable.just(SPHelper.loadFriends());
-            }
             HttpMethods httpMethods = HttpMethods.getInstance();
             return httpMethods.getFriends()
-                    .map(ListResultBean::getList)
+                    .filter(userBeen -> !userBeen.equals(friends))
+                    .doOnNext(list -> friends = list)
                     .doOnNext(SPHelper::saveFriends);
-        }
-
-        @Override
-        public void onCompleted() {
-            super.onCompleted();
-            if (!hasInit) {
-                hasInit = true;
-            }
         }
     }
 }

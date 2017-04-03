@@ -53,6 +53,7 @@
     <string name="km_per_hour">公里/时</string>
     <string name="this_week">本周</string>
     <string name="my_run_life">我的运动生涯</string>
+    <string name="distance">路程</string>
 
     <!--friends ranking-->
     <string name="day">日</string>
@@ -102,10 +103,17 @@
     <string name="view_his_moment">查看他的动态</string>
     <string name="view_his_crew">查看他的跑团</string>
     <string name="personal_best_run">个人最佳成绩</string>
+    <string name="detail_info">详细资料</string>
 
     <!--moment-->
     <string name="reply">回复</string>
     <string name="add_moment">添加动态</string>
     <string name="send">发送</string>
     <string name="comment">评论</string>
+
+    <!--run-->
+    <string name="start">开始</string>
+    <string name="hint_open_gps">记录跑步数据需要使用GPS定位功能\n请设置【准确度高】的定位模式</string>
+    <string name="goto_set">去设置</string>
+    <string name="pls_open_gps">请开启GPS</string>
 </resources>

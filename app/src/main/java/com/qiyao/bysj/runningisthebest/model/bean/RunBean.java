@@ -26,26 +26,7 @@ public class RunBean implements Parcelable {
 
     private String momentContent;
 
-    /*非数据库字段*/
-    private Double totalDistance;
-
-    private Long totalSpendTime;
-
-    private Double totalCount;
-
-    private Integer totalEnergy;
-
-    private Double maxDistance;
-
-    private Double minDistance;
-
-    private Double fastSpend;
-    /*最快配速*/
-    private Double fastPace;
-
-    private Long beginTime;
-
-    private Long endTime;
+    private Long startRunTime;
 
     public Integer getId() {
         return id;
@@ -100,7 +81,7 @@ public class RunBean implements Parcelable {
     }
 
     public void setPicture(String picture) {
-        this.picture = picture == null ? null : picture.trim();
+        this.picture = picture;
     }
 
     public String getMomentContent() {
@@ -108,89 +89,16 @@ public class RunBean implements Parcelable {
     }
 
     public void setMomentContent(String momentContent) {
-        this.momentContent = momentContent == null ? null : momentContent.trim();
+        this.momentContent = momentContent;
     }
 
-    public Integer getTotalEnergy() {
-        return totalEnergy;
+    public Long getStartRunTime() {
+        return startRunTime;
     }
 
-    public void setTotalEnergy(Integer totalEnergy) {
-        this.totalEnergy = totalEnergy;
+    public void setStartRunTime(Long startRunTime) {
+        this.startRunTime = startRunTime;
     }
-
-    public Double getTotalDistance() {
-        return totalDistance;
-    }
-
-    public void setTotalDistance(Double totalDistance) {
-        this.totalDistance = totalDistance;
-    }
-
-    public Long getTotalSpendTime() {
-        return totalSpendTime;
-    }
-
-    public void setTotalSpendTime(Long totalSpendTime) {
-        this.totalSpendTime = totalSpendTime;
-    }
-
-    public Double getTotalCount() {
-        return totalCount;
-    }
-
-    public void setTotalCount(Double totalCount) {
-        this.totalCount = totalCount;
-    }
-
-    public Double getMaxDistance() {
-        return maxDistance;
-    }
-
-    public void setMaxDistance(Double maxDistance) {
-        this.maxDistance = maxDistance;
-    }
-
-    public Double getMinDistance() {
-        return minDistance;
-    }
-
-    public void setMinDistance(Double minDistance) {
-        this.minDistance = minDistance;
-    }
-
-    public Double getFastSpend() {
-        return fastSpend;
-    }
-
-    public void setFastSpend(Double fastSpend) {
-        this.fastSpend = fastSpend;
-    }
-
-    public Long getBeginTime() {
-        return beginTime;
-    }
-
-    public void setBeginTime(Long beginTime) {
-        this.beginTime = beginTime;
-    }
-
-    public Long getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Long endTime) {
-        this.endTime = endTime;
-    }
-
-    public Double getFastPace() {
-        return fastPace;
-    }
-
-    public void setFastPace(Double fastPace) {
-        this.fastPace = fastPace;
-    }
-
 
     @Override
     public int describeContents() {
@@ -207,16 +115,7 @@ public class RunBean implements Parcelable {
         dest.writeValue(this.createTime);
         dest.writeString(this.picture);
         dest.writeString(this.momentContent);
-        dest.writeValue(this.totalDistance);
-        dest.writeValue(this.totalSpendTime);
-        dest.writeValue(this.totalCount);
-        dest.writeValue(this.totalEnergy);
-        dest.writeValue(this.maxDistance);
-        dest.writeValue(this.minDistance);
-        dest.writeValue(this.fastSpend);
-        dest.writeValue(this.fastPace);
-        dest.writeValue(this.beginTime);
-        dest.writeValue(this.endTime);
+        dest.writeValue(this.startRunTime);
     }
 
     public RunBean() {
@@ -231,19 +130,10 @@ public class RunBean implements Parcelable {
         this.createTime = (Long) in.readValue(Long.class.getClassLoader());
         this.picture = in.readString();
         this.momentContent = in.readString();
-        this.totalDistance = (Double) in.readValue(Double.class.getClassLoader());
-        this.totalSpendTime = (Long) in.readValue(Long.class.getClassLoader());
-        this.totalCount = (Double) in.readValue(Double.class.getClassLoader());
-        this.totalEnergy = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.maxDistance = (Double) in.readValue(Double.class.getClassLoader());
-        this.minDistance = (Double) in.readValue(Double.class.getClassLoader());
-        this.fastSpend = (Double) in.readValue(Double.class.getClassLoader());
-        this.fastPace = (Double) in.readValue(Double.class.getClassLoader());
-        this.beginTime = (Long) in.readValue(Long.class.getClassLoader());
-        this.endTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.startRunTime = (Long) in.readValue(Long.class.getClassLoader());
     }
 
-    public static final Creator<RunBean> CREATOR = new Creator<RunBean>() {
+    public static final Parcelable.Creator<RunBean> CREATOR = new Parcelable.Creator<RunBean>() {
         @Override
         public RunBean createFromParcel(Parcel source) {
             return new RunBean(source);

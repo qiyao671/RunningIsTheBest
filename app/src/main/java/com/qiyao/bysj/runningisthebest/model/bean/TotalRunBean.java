@@ -16,9 +16,9 @@ public class TotalRunBean {
      */
 
     private int totalTimes;
-    private int totalEnergy;
+    private double totalEnergy;
     private double totalDistance;
-    private double totalSpendTime;
+    private long totalSpendTime;
 
     public int getTotalTimes() {
         return totalTimes;
@@ -28,11 +28,11 @@ public class TotalRunBean {
         this.totalTimes = totalTimes;
     }
 
-    public int getTotalEnergy() {
+    public double getTotalEnergy() {
         return totalEnergy;
     }
 
-    public void setTotalEnergy(int totalEnergy) {
+    public void setTotalEnergy(double totalEnergy) {
         this.totalEnergy = totalEnergy;
     }
 
@@ -44,11 +44,11 @@ public class TotalRunBean {
         this.totalDistance = totalDistance;
     }
 
-    public double getTotalSpendTime() {
+    public long getTotalSpendTime() {
         return totalSpendTime;
     }
 
-    public void setTotalSpendTime(double totalSpendTime) {
+    public void setTotalSpendTime(long totalSpendTime) {
         this.totalSpendTime = totalSpendTime;
     }
 }

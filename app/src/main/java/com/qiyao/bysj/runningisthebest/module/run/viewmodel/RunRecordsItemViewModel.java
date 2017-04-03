@@ -33,7 +33,7 @@ public class RunRecordsItemViewModel implements IItemViewModel {
     private void setRunInfo(RunBean runBean) {
         distance.set(runBean.getDistance() != null ? String.valueOf(runBean.getDistance()) : "--");
         duration.set(runBean.getSpendTime() != null ? MyAppUtils.getTime(runBean.getSpendTime()): "--");
-        datetime.set(runBean.getBeginTime() != null ? TimeUtils.getFriendlyTimeSpanByNow(runBean.getBeginTime()) : "--");
+        datetime.set(runBean.getStartRunTime() != null ? TimeUtils.getFriendlyTimeSpanByNow(runBean.getStartRunTime()) : "--");
         if (!duration.get().equals("--") && !distance.get().equals("--")) {
             avgPace.set(MyAppUtils.getPace(runBean.getSpendTime(), runBean.getDistance()));
         }

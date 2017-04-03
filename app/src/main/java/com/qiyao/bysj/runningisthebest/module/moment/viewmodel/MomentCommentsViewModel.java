@@ -1,6 +1,7 @@
 package com.qiyao.bysj.runningisthebest.module.moment.viewmodel;
 
 import android.content.Context;
+import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 
@@ -9,11 +10,9 @@ import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
-import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 
 import java.util.List;
 
-import me.tatarka.bindingcollectionadapter2.ItemBinding;
 import me.tatarka.bindingcollectionadapter2.OnItemBind;
 import rx.Observable;
 
@@ -21,7 +20,7 @@ import rx.Observable;
  * Created by qiyao on 2017/3/20.
  */
 
-public class MomentCommentsViewModel implements IViewModel {
+public class MomentCommentsViewModel extends BaseObservable implements IViewModel {
     private Context context;
     private String commentType;
 

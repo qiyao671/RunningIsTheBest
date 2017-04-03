@@ -7,15 +7,23 @@ package com.qiyao.bysj.baselibrary.model.bean;
  */
 
 public class HttpResult<T> {
-    private int code;
-    private String callbackMsg;
+    /* 请求返回 状态的信息 */
+    private Boolean result;
+    /* 请求返回 具体内容*/
     private T responseContext;
-
-    public static final String ERROR = "Error";
-    public static final String SUCCESS = "Success";
+    /*返回请求的msg*/
+    private String msg;
 
     public boolean isSuccess() {
-        return callbackMsg.equals(SUCCESS);
+        return result;
+    }
+
+    public Boolean getResult() {
+        return result;
+    }
+
+    public void setResult(Boolean result) {
+        this.result = result;
     }
 
     public T getResponseContext() {
@@ -26,11 +34,11 @@ public class HttpResult<T> {
         this.responseContext = responseContext;
     }
 
-    public int getCode() {
-        return code;
+    public String getMsg() {
+        return msg;
     }
 
-    public String getCallbackMsg() {
-        return callbackMsg;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

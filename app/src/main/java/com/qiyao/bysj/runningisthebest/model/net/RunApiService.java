@@ -2,7 +2,6 @@ package com.qiyao.bysj.runningisthebest.model.net;
 
 import com.qiyao.bysj.baselibrary.model.bean.HttpResult;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
-import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
@@ -43,21 +42,21 @@ public interface RunApiService {
     @POST("user/login")
     Observable<HttpResult<String>> login(@Field("username") String username, @Field("password") String password);
 
-    @GET("user/getUserInfo")
-    Observable<HttpResult<UserBean>> getUser(String token);
-
-    @GET("user/getUserInfo")
+    @GET("user/getUserInfoById")
     Observable<HttpResult<UserBean>> getUser();
 
+    @GET("user/getUserInfoById")
+    Observable<HttpResult<UserBean>> getUser(@Query("someOneId") int userId);
+
     @GET("log/getTotalLogInfo")
-    Observable<HttpResult<TotalRunBean>> getTotalLogInfo();
+    Observable<HttpResult<TotalRunBean>> getTotalLogInfo(@Query("flag") int flag);
 
     @FormUrlEncoded
     @POST("user/add")
     Observable<HttpResult<String>> register(@Field("username") String username, @Field("password") String password);
 
     @GET("user/listFriends")
-    Observable<HttpResult<ListResultBean<UserBean>>> getFriends();
+    Observable<HttpResult<List<UserBean>>> getFriends();
 
     @GET("user/listUsersByUsername")
     Observable<HttpResult<List<UserBean>>> getUsersByUserName(@Query("username") String username);
@@ -90,4 +89,7 @@ public interface RunApiService {
     @Multipart
     @POST("user/uploadProfile")
     Observable<HttpResult<String>> uploadProfile(@Part MultipartBody.Part profile);
+
+    @POST("user/saveFriend")
+    Observable<HttpResult<String>> addFriend(@Field("friendUserId") int userId);
 }

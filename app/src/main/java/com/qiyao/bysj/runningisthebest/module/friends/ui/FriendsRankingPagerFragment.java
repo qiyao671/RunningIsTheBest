@@ -1,11 +1,12 @@
 package com.qiyao.bysj.runningisthebest.module.friends.ui;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
 
 import com.qiyao.bysj.baselibrary.model.bean.FragmentTabItem;
 import com.qiyao.bysj.baselibrary.ui.fragment.AFragmentPagerFragment;
-import com.qiyao.bysj.baselibrary.viewmodel.AFragmentTabPagerViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.module.home.ui.TotalRunFragment;
 
@@ -19,6 +20,12 @@ import java.util.List;
  */
 
 public class FriendsRankingPagerFragment extends AFragmentPagerFragment {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getTabLayout().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.primary));
+    }
+
     @Override
     protected List<FragmentTabItem> generateItems() {
         List<FragmentTabItem> items = new ArrayList<>();

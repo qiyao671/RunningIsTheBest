@@ -5,7 +5,6 @@ import android.net.Uri;
 import com.qiyao.bysj.baselibrary.model.net.HttpFactory;
 import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
-import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
@@ -69,15 +68,19 @@ public class HttpMethods extends HttpFactory {
         return handleResult(runApiService.getUser());
     }
 
-    public Observable<TotalRunBean> getTotalLogInfo() {
-        return handleResult(runApiService.getTotalLogInfo());
+    public Observable<UserBean> getUserBean(int userId) {
+        return handleResult(runApiService.getUser(userId));
+    }
+
+    public Observable<TotalRunBean> getTotalLogInfo(int flag) {
+        return handleResult(runApiService.getTotalLogInfo(flag));
     }
 
     public Observable<String> register(String userName, String password) {
         return handleResult(runApiService.register(userName, password));
     }
 
-    public Observable<ListResultBean<UserBean>> getFriends() {
+    public Observable<List<UserBean>> getFriends() {
         return handleResult(runApiService.getFriends());
     }
 
@@ -111,6 +114,10 @@ public class HttpMethods extends HttpFactory {
 
     public Observable<String> deleteMoment(int momentId, Comment comment) {
         return handleResult(runApiService.commentMoment(momentId, comment));
+    }
+
+    public Observable<String> addFriend(int userId) {
+        return handleResult(runApiService.addFriend(userId));
     }
 
     public Observable<String> uploadProfile(Uri profileUri) {

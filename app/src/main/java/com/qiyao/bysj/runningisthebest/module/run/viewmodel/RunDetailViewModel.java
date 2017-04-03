@@ -1,6 +1,8 @@
 package com.qiyao.bysj.runningisthebest.module.run.viewmodel;
 
 import android.app.Fragment;
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
@@ -11,7 +13,7 @@ import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
  * 类描述：
  */
 
-public class RunDetailViewModel implements IViewModel {
+public class RunDetailViewModel extends BaseObservable implements IViewModel {
     private Fragment fragment;
 
     private RunBean runBean;
@@ -24,26 +26,32 @@ public class RunDetailViewModel implements IViewModel {
     private String calories;
 
 
+    @Bindable
     public String getDistance() {
         return distance;
     }
 
+    @Bindable
     public String getDateTime() {
         return dateTime;
     }
 
+    @Bindable
     public String getDuration() {
         return duration;
     }
 
+    @Bindable
     public String getAvg_pace() {
         return avg_pace;
     }
 
+    @Bindable
     public String getAvg_speed() {
         return avg_speed;
     }
 
+    @Bindable
     public String getCalories() {
         return calories;
     }

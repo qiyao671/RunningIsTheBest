@@ -142,7 +142,7 @@ public abstract class ASectionCollectionViewModel<H, T> extends ACollectionViewM
         @Override
         public void onCompleted() {
             handleNewItemViewModels(mode, newItemViewModels);
-            updateItemViewModels();
+            addListToItemViewModels(mode, newItemViewModels);
             super.onCompleted();
         }
 
@@ -161,10 +161,6 @@ public abstract class ASectionCollectionViewModel<H, T> extends ACollectionViewM
                                 .map(ASectionCollectionViewModel.this::newItemViewModel)
                                 .subscribe(newItemViewModels::add);
                     }, super::onError, this::onCompleted);
-        }
-
-        protected void updateItemViewModels() {
-            addListToItemViewModels(mode, newItemViewModels);
         }
     }
 }

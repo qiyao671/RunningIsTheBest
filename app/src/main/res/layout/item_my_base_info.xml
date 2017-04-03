@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="com.qiyao.bysj.runningisthebest.R" />
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.home.viewmodel.MyInfoItemViewModel" />
@@ -14,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="20dp"
-        android:paddingEnd="30dp"
-        android:paddingStart="30dp"
+        android:paddingEnd="28dp"
+        android:paddingStart="28dp"
         android:paddingTop="20dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -25,6 +26,7 @@
             android:layout_alignParentStart="true"
             app:civ_border_width="1dp"
             app:civ_border_color="@color/primary_light"
+            app:placeholderRes="@{R.drawable.default_profile}"
             app:imageUrl="@{viewModel.userProfileUrl}" />
 
         <LinearLayout

@@ -24,142 +24,178 @@
             android:paddingTop="@dimen/base_list_item_vertical_margin">
 
             <TextView
-                android:text="2017年3月"
+                android:text="@{viewModel.title}"
                 style="@style/DarkPrimaryMediumText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <include layout="@layout/view_divider_horizontal" />
-
         <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/md_white_1000"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/base_list_item_vertical_margin"
-            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
-            android:paddingStart="@dimen/base_list_item_horizontal_margin"
-            android:paddingTop="@dimen/base_list_item_vertical_margin">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/duration"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/text_size_large" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+                android:paddingStart="@dimen/base_list_item_horizontal_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
 
-            <TextView
-                style="@style/TotalNumberTextLarge"
-                android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/distance"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    style="@style/TotalNumberTextLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@{viewModel.distance}" />
+            </LinearLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="00:00:28" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+                android:paddingStart="@dimen/base_list_item_horizontal_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/duration"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    style="@style/TotalNumberTextLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@{viewModel.duration}" />
+            </LinearLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+                android:paddingStart="@dimen/base_list_item_horizontal_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                <TextView
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calories" />
+
+                <TextView
+                    style="@style/TotalNumberTextLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@{viewModel.calories}" />
+
+                <TextView
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cal"/>
+            </LinearLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+                android:paddingStart="@dimen/base_list_item_horizontal_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/avg_pace"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    style="@style/TotalNumberTextLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@{viewModel.avgPace}" />
+
+                <TextView
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/per_km"/>
+            </LinearLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/base_list_item_vertical_margin"
+                android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+                android:paddingStart="@dimen/base_list_item_horizontal_margin"
+                android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/avg_speed"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    style="@style/TotalNumberTextLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@{viewModel.avgSpeed}" />
+
+                <TextView
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    style="@style/DarkPrimaryMediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/km_per_hour"/>
+            </LinearLayout>
         </LinearLayout>
 
-        <include layout="@layout/view_divider_horizontal" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/base_list_item_vertical_margin"
-            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
-            android:paddingStart="@dimen/base_list_item_horizontal_margin"
-            android:paddingTop="@dimen/base_list_item_vertical_margin">
-
-            <TextView
-                style="@style/DarkPrimaryMediumText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/calories" />
-
-            <TextView
-                style="@style/TotalNumberTextLarge"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="00:00:28" />
-
-            <TextView
-                android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
-                style="@style/DarkPrimaryMediumText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cal"/>
-        </LinearLayout>
-
-        <include layout="@layout/view_divider_horizontal" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/base_list_item_vertical_margin"
-            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
-            android:paddingStart="@dimen/base_list_item_horizontal_margin"
-            android:paddingTop="@dimen/base_list_item_vertical_margin">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/avg_pace"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/text_size_large" />
-
-            <TextView
-                style="@style/TotalNumberTextLarge"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="00:00:28" />
-
-            <TextView
-                android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
-                style="@style/DarkPrimaryMediumText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/per_km"/>
-        </LinearLayout>
-
-        <include layout="@layout/view_divider_horizontal" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/base_list_item_vertical_margin"
-            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
-            android:paddingStart="@dimen/base_list_item_horizontal_margin"
-            android:paddingTop="@dimen/base_list_item_vertical_margin">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/avg_speed"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/text_size_large" />
-
-            <TextView
-                style="@style/TotalNumberTextLarge"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="00:00:28" />
-
-            <TextView
-                android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
-                style="@style/DarkPrimaryMediumText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/km_per_hour"/>
-        </LinearLayout>
     </LinearLayout>
 </layout>

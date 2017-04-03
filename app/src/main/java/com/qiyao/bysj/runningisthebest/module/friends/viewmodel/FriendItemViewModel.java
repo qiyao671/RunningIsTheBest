@@ -6,12 +6,13 @@ import android.view.View;
 
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
+import com.qiyao.bysj.runningisthebest.module.friends.ui.UserInfoFragment;
 
 /**
  * Created by qiyao on 2017/3/10.
  */
 
-public class FriendItemViewModel implements IItemViewModel, View.OnClickListener {
+public class FriendItemViewModel implements IItemViewModel {
     public static final String TYPE_FRIEND = "TYPE_FRIEND";
 
     private Context context;
@@ -33,8 +34,12 @@ public class FriendItemViewModel implements IItemViewModel, View.OnClickListener
         return TYPE_FRIEND;
     }
 
-    @Override
     public void onClick(View v) {
+        UserInfoFragment.launch(context, user);
+    }
 
+
+    public UserBean getUser() {
+        return user;
     }
 }

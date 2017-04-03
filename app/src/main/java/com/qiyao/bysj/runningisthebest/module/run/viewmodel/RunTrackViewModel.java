@@ -32,7 +32,7 @@ public class RunTrackViewModel extends BaseObservable implements IViewModel {
     private void setRunInfo(RunBean runBean) {
         distance = runBean.getDistance() != null ? String.valueOf(runBean.getDistance()) : "--";
         duration = runBean.getSpendTime() != null ? MyAppUtils.getTime(runBean.getSpendTime()) : "--";
-        datetime = runBean.getBeginTime() != null ? TimeUtils.getFriendlyTimeSpanByNow(runBean.getBeginTime()) : "--";
+        datetime = runBean.getStartRunTime() != null ? TimeUtils.getFriendlyTimeSpanByNow(runBean.getStartRunTime()) : "--";
         if (!duration.equals("--") && !distance.equals("--")) {
             avgPace = MyAppUtils.getPace(runBean.getSpendTime(), runBean.getDistance());
         }

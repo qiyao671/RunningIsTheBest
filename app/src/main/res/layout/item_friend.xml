@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="com.qiyao.bysj.runningisthebest.R" />
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.friends.viewmodel.FriendItemViewModel" />
@@ -22,6 +23,7 @@
             android:orientation="horizontal">
             <de.hdodenhof.circleimageview.CircleImageView
                 app:imageUrl="@{viewModel.profileUrl}"
+                app:placeholderRes="@{R.drawable.default_profile}"
                 android:layout_width="40dp"
                 android:layout_height="40dp" />
             <TextView

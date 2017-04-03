@@ -5,10 +5,23 @@ import android.databinding.ObservableField;
 
 import com.qiyao.bysj.baselibrary.common.utils.ConstUtils;
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
+import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.common.Constants;
 import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
-import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
+import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
+import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+
+import java.util.Locale;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+import static com.qiyao.bysj.runningisthebest.common.Constants.FLAG_TOTAL_RUN_MONTH;
+import static com.qiyao.bysj.runningisthebest.common.Constants.TYPE_MONTH;
+import static com.qiyao.bysj.runningisthebest.common.Constants.TYPE_TOTAL;
+import static com.qiyao.bysj.runningisthebest.common.Constants.TYPE_WEEK;
 
 /**
  * Created by qiyao on 2017/3/9.
@@ -17,41 +30,52 @@ import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 public class TotalRunViewModel implements IViewModel {
     private Fragment fragment;
 
-    public static final String TYPE_WEEK = "WEEK";
-    public static final String TYPE_MONTH = "MONTH";
-    public static final String TYPE_TOTAL = "TOTAL";
 //    private ObservableField<String> distance = new ObservableField<>("--");
-    private ObservableField<String> duration = new ObservableField<>("--");
-    private ObservableField<String> calories = new ObservableField<>("--");
-    private ObservableField<String> pace = new ObservableField<>("--");
-    private ObservableField<String> avg_pace = new ObservableField<>("--");
-    private ObservableField<String> title = new ObservableField<>();
+    public ObservableField<String> distance = new ObservableField<>("--");
+    public ObservableField<String> duration = new ObservableField<>("--");
+    public ObservableField<String> calories = new ObservableField<>("--");
+    public ObservableField<String> avgPace = new ObservableField<>("--");
+    public ObservableField<String> avgSpeed = new ObservableField<>("--");
+    public ObservableField<String> title = new ObservableField<>();
 
     public TotalRunViewModel(Fragment fragment, String type) {
         this.fragment = fragment;
+        setTitle(type);
         getTotalRun(type);
     }
 
     private void getTotalRun(String type) {
-
+        int flag;
+        switch (type) {
+            case Constants.TYPE_WEEK:
+                flag = Constants.FLAG_TOTAL_RUN_WEEK;
+                break;
+            case Constants.TYPE_MONTH:
+                flag = Constants.FLAG_TOTAL_RUN_MONTH;
+                break;
+            case Constants.TYPE_TOTAL:
+                flag = Constants.FLAG_TOTAL_RUN;
+                break;
+            default:
+                return;
+        }
+        HttpMethods.getInstance().getTotalLogInfo(flag)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::setRunInfo, e -> ToastUtils.showShortToast(e.getMessage()));
     }
 
-    private void setRunInfo(RunBean run, String type) {
-/*        if (run.getTotalDistance() != null) {
-            ditance.set(String.valueOf(run.getTotalDistance()));
-        }*/
-        if (run.getTotalEnergy() != null) {
-            calories.set(String.valueOf(run.getTotalEnergy()));
+    private void setRunInfo(TotalRunBean total) {
+        distance.set(String.valueOf(total.getTotalDistance()));
+        calories.set(String.valueOf(total.getTotalEnergy()));
+        duration.set(MyAppUtils.getTime(total.getTotalSpendTime()));
+        if (total.getTotalDistance() > 0 && total.getTotalSpendTime() > 0) {
+            avgPace.set(MyAppUtils.getPace(total.getTotalSpendTime(), total.getTotalDistance()));
+            avgSpeed.set(String.format(Locale.CHINA, "%.2f", total.getTotalDistance() / total.getTotalSpendTime() * ConstUtils.HOUR));
         }
-        if (run.getTotalSpendTime() != null) {
-            duration.set(MyAppUtils.getTime(run.getTotalSpendTime()));
-        }
-        if (run.getTotalDistance() != null && run.getTotalDistance() > 0
-                && run.getTotalSpendTime() != null && run.getTotalSpendTime() > 0) {
-            pace.set(MyAppUtils.getPace(run.getTotalSpendTime(), run.getTotalDistance()));
-            long hours = run.getTotalSpendTime() / ConstUtils.HOUR;
-            avg_pace.set(String.valueOf(run.getTotalDistance() / hours));
-        }
+    }
+
+    private void setTitle(String type) {
         switch (type) {
             case TYPE_WEEK:
                 title.set(fragment.getString(R.string.this_week));

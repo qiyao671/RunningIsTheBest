@@ -64,7 +64,7 @@ public class MyInfoItemViewModel implements IItemViewModel {
         height.set(user.getHeight() == null ? fragment.getString(R.string.no_height) : String.valueOf(user.getHeight()) + "cm");
         if (user.getWeight() != null && user.getHeight() != null
                 && user.getHeight() != 0 && user.getWeight() != 0) {
-            bmi.set(String.format(Locale.CHINA, "%.2f",user.getWeight() / (user.getHeight() * user.getHeight())));
+            bmi.set(String.format(Locale.CHINA, "%.2f", user.getWeight() / (user.getHeight() * user.getHeight()) * 10000));
         }
     }
 

@@ -1,6 +1,5 @@
 package com.qiyao.bysj.baselibrary.model.net;
 
-import com.qiyao.bysj.baselibrary.BuildConfig;
 import com.qiyao.bysj.baselibrary.common.utils.AppUtils;
 import com.qiyao.bysj.baselibrary.common.utils.NetworkUtils;
 import com.qiyao.bysj.baselibrary.model.bean.HttpResult;
@@ -41,10 +40,10 @@ public class HttpFactory {
 
     private void initOkHttp() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        if (BuildConfig.DEBUG) {
+        if (true) {
             // https://drakeet.me/retrofit-2-0-okhttp-3-0-config
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(loggingInterceptor);
         }
         // 缓存 http://www.jianshu.com/p/93153b34310e
@@ -114,7 +113,7 @@ public class HttpFactory {
             if (!httpResult.isSuccess()) {
 //                throw new ApiException(httpResult.getCode());
                 // TODO: 2017/3/7
-                throw new RuntimeException(httpResult.getCallbackMsg());
+                throw new RuntimeException(httpResult.getMsg());
             }
             return httpResult.getResponseContext();
         }
