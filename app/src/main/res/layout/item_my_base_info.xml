@@ -77,6 +77,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.age}" />
+
+                <TextView
+                    android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
+                    style="@style/LightSecondaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.constellation}" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

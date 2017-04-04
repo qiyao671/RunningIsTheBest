@@ -116,4 +116,8 @@
     <string name="hint_open_gps">记录跑步数据需要使用GPS定位功能\n请设置【准确度高】的定位模式</string>
     <string name="goto_set">去设置</string>
     <string name="pls_open_gps">请开启GPS</string>
+    <string name="distance_km">距离(公里)</string>
+    <string name="pls_pause_run">请先点击暂停按钮，并结束运动</string>
+    <string name="pls_stop_run">请先结束运动</string>
+    <string name="wind_info">%1$s风&#160;&#160;&#160;&#160;%2$s级</string>
 </resources>

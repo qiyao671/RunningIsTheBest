@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.databinding.ObservableField;
 import android.view.View;
 
+import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.StaticItemViewModel;
 import com.qiyao.bysj.runningisthebest.R;
@@ -32,6 +33,7 @@ public class MyInfoItemViewModel implements IItemViewModel {
     public ObservableField<String> userId = new ObservableField<>();
     public ObservableField<String> sex = new ObservableField<>();
     public ObservableField<String> age = new ObservableField<>();
+    public ObservableField<String> constellation = new ObservableField<>();
     public ObservableField<String> signature = new ObservableField<>();
     public ObservableField<String> weight = new ObservableField<>();
     public ObservableField<String> height = new ObservableField<>();
@@ -58,7 +60,8 @@ public class MyInfoItemViewModel implements IItemViewModel {
         userId.set(String.format(Locale.CHINA,"%06d", userBean.getId()));
         userName.set(user.getUsername());
         sex.set(user.getSex() == null ? fragment.getString(R.string.no_sex) : user.getSex());
-        age.set(user.getAge() == null ? fragment.getString(R.string.no_age) : String.valueOf(user.getAge()));
+        age.set(user.getAge() == null ? fragment.getString(R.string.no_age) : String.valueOf(user.getAge()) + "岁");
+        constellation.set(user.getBirthday() == null ? "" : TimeUtils.getZodiac(user.getBirthday()));
         signature.set(user.getSignature());
         weight.set(user.getWeight() == null ? fragment.getString(R.string.no_weight) : String.valueOf(user.getWeight()) + "kg");
         height.set(user.getHeight() == null ? fragment.getString(R.string.no_height) : String.valueOf(user.getHeight()) + "cm");

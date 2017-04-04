@@ -6,22 +6,29 @@
             type="com.qiyao.bysj.runningisthebest.module.run.viewmodel.StartRunViewModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
-        android:gravity="bottom"
         android:background="@drawable/start_run_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_run_large"
+            android:layout_marginTop="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <Button
-            android:id="@+id/button"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/btn_start_run_bg"
             android:onClick="@{viewModel::onClick}"
-            android:text="开始"
+            android:text="@string/start"
             android:textColor="@color/md_white_1000"
             android:textSize="@dimen/text_size_xlarge" />
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

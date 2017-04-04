@@ -5,7 +5,9 @@ import android.net.Uri;
 import com.qiyao.bysj.baselibrary.model.net.HttpFactory;
 import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
+import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
+import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 
@@ -118,6 +120,14 @@ public class HttpMethods extends HttpFactory {
 
     public Observable<String> addFriend(int userId) {
         return handleResult(runApiService.addFriend(userId));
+    }
+
+    public Observable<String> uploadRunRecord(RunBean runBean) {
+        return handleResult(runApiService.uploadRunRecord(runBean));
+    }
+
+    public Observable<ListResultBean<RunBean>> getMyRunRecords(int num, int pageSize) {
+        return handleResult(runApiService.getMyRunRecords(num, pageSize));
     }
 
     public Observable<String> uploadProfile(Uri profileUri) {

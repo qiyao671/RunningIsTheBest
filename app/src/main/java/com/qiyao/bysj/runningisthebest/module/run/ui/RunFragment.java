@@ -6,13 +6,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -23,10 +24,10 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
-import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
+import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
@@ -34,24 +35,24 @@ import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.databinding.FragmentRunBinding;
 import com.qiyao.bysj.runningisthebest.module.run.viewmodel.RunViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by qiyao on 2017/3/7.
  */
 
 public class RunFragment extends ADataBindingFragment
-        implements LocationSource, AMapLocationListener {
+        implements LocationSource, AMapLocationListener, View.OnKeyListener {
     private AMap map;
     private MapView mapView;
     private OnLocationChangedListener mListener;
     private AMapLocationClient locationClient;
     private AMapLocationClientOption locationOption;
-    private List<LatLng> trackPoints = new ArrayList<>();
     private Polyline trackPolyline;
-
-    private boolean isRunning = true;
+    private String city;
 
     @Nullable
     @Override
@@ -74,16 +75,34 @@ public class RunFragment extends ADataBindingFragment
         mapView = getBinding().map;
         mapView.onCreate(savedInstanceState);
         init();
+        if (getView() != null) {
+            getView().setOnKeyListener(this);
+        }
+        showCountdown();
     }
 
     public static void newInstance(Activity activity) {
         FragmentContainerActivity.launch(activity, RunFragment.class);
     }
 
+    /**
+     * 显示倒计时
+     */
+    private void showCountdown() {
+        TextView countDown = getBinding().countDown;
+        Observable.interval(0, 1, TimeUnit.SECONDS)
+                .take(4)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(() -> countDown.setVisibility(View.VISIBLE))
+                .doOnTerminate(() -> countDown.setVisibility(View.GONE))
+                .doOnCompleted(() -> getViewModel().startRun())
+                .subscribe(aLong -> countDown.setText(String.valueOf(3 - aLong)));
+    }
+
     @NonNull
     @Override
     protected IViewModel createViewModel(Bundle arguments) {
-        return new RunViewModel();
+        return new RunViewModel(this);
     }
 
     @Override
@@ -170,10 +189,11 @@ public class RunFragment extends ADataBindingFragment
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (mListener != null && aMapLocation != null) {
+            getViewModel().onLocationChanged(aMapLocation);
             if (aMapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
                 map.moveCamera(CameraUpdateFactory.zoomTo(18));
-                if (isRunning) {
+                if (getViewModel().isRunning.get()) {
                     setTrack(aMapLocation);
                 }
             } else {
@@ -192,12 +212,12 @@ public class RunFragment extends ADataBindingFragment
         // 自定义定位蓝点图标
         myLocationStyle.myLocationIcon(BitmapDescriptorFactory.
                 fromResource(R.drawable.gps_point));
-        // 自定义精度范围的圆形边框颜色
+/*        // 自定义精度范围的圆形边框颜色
         myLocationStyle.strokeColor(ContextCompat.getColor(getActivity(), R.color.md_blue_600));
         //自定义精度范围的圆形边框宽度
         myLocationStyle.strokeWidth(5);
         // 设置圆形的填充颜色
-        myLocationStyle.radiusFillColor(Color.argb(10, 0, 0, 180));
+        myLocationStyle.radiusFillColor(Color.argb(10, 0, 0, 180));*/
         // 将自定义的 myLocationStyle 对象添加到地图上
         map.setMyLocationStyle(myLocationStyle);
     }
@@ -207,12 +227,9 @@ public class RunFragment extends ADataBindingFragment
      * @param aMapLocation 位置
      */
     private void setTrack(AMapLocation aMapLocation) {
-        //记录当前位置
-        LatLng latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
-        trackPoints.add(0, latLng);
         //画出运动轨迹
         trackPolyline = map.addPolyline(new PolylineOptions().color(Color.BLUE));
-        trackPolyline.setPoints(trackPoints);
+        trackPolyline.setPoints(getViewModel().getCurrentTrack());
     }
 
     @Override
@@ -249,5 +266,26 @@ public class RunFragment extends ADataBindingFragment
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public RunViewModel getViewModel() {
+        return (RunViewModel) super.getViewModel();
+    }
+
+    @Override
+    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+        if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            onBackClick();
+        }
+        return false;
+    }
+
+    public void onBackClick() {
+        if (getViewModel().isRunning.get()) {
+            ToastUtils.showShortToast(R.string.pls_pause_run);
+        } else {
+            ToastUtils.showShortToast(R.string.pls_stop_run);
+        }
     }
 }

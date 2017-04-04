@@ -63,7 +63,12 @@ public class MomentsViewModel extends ACollectionViewModel<MomentBean> {
                 return null;
             } else {
                 return httpMethods.getRecentMoments(sinceId, endId, pageSize)
-                        .doOnNext(list -> setPageInfo(list, mode));
+                        .doOnNext(list -> setPageInfo(list, mode))
+                        .doOnNext(momentBeen -> {
+                            if (mode == RefreshMode.reset || mode == RefreshMode.load_more) {
+                                setNextLoadEnable(momentBeen.size() < pageSize);
+                            }
+                        });
             }
         }
 

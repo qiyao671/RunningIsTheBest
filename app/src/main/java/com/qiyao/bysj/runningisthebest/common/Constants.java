@@ -19,4 +19,6 @@ public class Constants {
     public static final int STATUS_FRIENDS = 1;
     public static final int STATUS_NOT_FRIENDS = -1;
     public static final int STATUS_MYSELF = 2;
+
+    public static final int DEFAULT_PAGE_SIZE = 15;
 }

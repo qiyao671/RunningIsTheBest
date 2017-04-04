@@ -7,10 +7,11 @@ import com.qiyao.bysj.baselibrary.viewmodel.ACollectionViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.BR;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.common.Constants;
+import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
+import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import rx.Observable;
@@ -23,40 +24,23 @@ public class RunRecordsViewModel extends ACollectionViewModel<RunBean> {
     public RunRecordsViewModel(Fragment fragment) {
         super(fragment, false, true);
     }
+    private int page;
 
     @Override
     protected void requestData(RefreshMode refreshMode) {
         new APagingTask(refreshMode) {
             @Override
             protected Observable<List<RunBean>> getData(RefreshMode mode) {
-                List<RunBean> list = new ArrayList<>();
-                RunBean runBean = new RunBean();
-                runBean.setStartRunTime(Calendar.getInstance().getTimeInMillis());
-                runBean.setSpendTime(1010L);
-                runBean.setDistance(10.0);
-                list.add(runBean);
-                runBean = new RunBean();
-                runBean.setStartRunTime(Calendar.getInstance().getTimeInMillis());
-                runBean.setSpendTime(193191L);
-                runBean.setDistance(104.0);
-                list.add(runBean);
-                runBean = new RunBean();
-                runBean.setStartRunTime(Calendar.getInstance().getTimeInMillis());
-                runBean.setSpendTime(122L);
-                runBean.setDistance(140.0);
-                list.add(runBean);
-                runBean = new RunBean();
-                runBean.setStartRunTime(Calendar.getInstance().getTimeInMillis());
-                runBean.setSpendTime(112L);
-                runBean.setDistance(130.0);
-                list.add(runBean);
-                runBean = new RunBean();
-                runBean.setStartRunTime(Calendar.getInstance().getTimeInMillis());
-                runBean.setSpendTime(182L);
-                runBean.setDistance(160.0);
-                list.add(runBean);
+                if (mode == RefreshMode.refresh || mode == RefreshMode.reset) {
+                    page = 1;
+                } else{
+                    page ++;
+                }
 
-                return Observable.just(list);
+                return HttpMethods.getInstance()
+                        .getMyRunRecords(page, Constants.DEFAULT_PAGE_SIZE)
+                        .doOnNext(result -> setNextLoadEnable(result.isHasNextPage()))
+                        .map(ListResultBean::getList);
             }
         }.execute();
     }

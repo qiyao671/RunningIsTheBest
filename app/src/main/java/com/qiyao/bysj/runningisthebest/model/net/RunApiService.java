@@ -2,7 +2,9 @@ package com.qiyao.bysj.runningisthebest.model.net;
 
 import com.qiyao.bysj.baselibrary.model.bean.HttpResult;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
+import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
+import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 
@@ -51,6 +53,9 @@ public interface RunApiService {
     @GET("log/getTotalLogInfo")
     Observable<HttpResult<TotalRunBean>> getTotalLogInfo(@Query("flag") int flag);
 
+    @GET("log/listMyAllRunnyLogs")
+    Observable<HttpResult<ListResultBean<RunBean>>> getMyRunRecords(@Query("num") int num, @Query("pageSize") int pageSize);
+
     @FormUrlEncoded
     @POST("user/add")
     Observable<HttpResult<String>> register(@Field("username") String username, @Field("password") String password);
@@ -92,4 +97,7 @@ public interface RunApiService {
 
     @POST("user/saveFriend")
     Observable<HttpResult<String>> addFriend(@Field("friendUserId") int userId);
+
+    @POST("log/saveRunnyLog")
+    Observable<HttpResult<String>> uploadRunRecord(@Body RunBean runnyLog);
 }
