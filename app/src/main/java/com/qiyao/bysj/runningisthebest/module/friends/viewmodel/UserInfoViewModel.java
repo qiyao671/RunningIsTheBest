@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
+import com.qiyao.bysj.runningisthebest.common.Constants;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.trello.rxlifecycle.components.RxFragment;
@@ -61,7 +62,9 @@ public class UserInfoViewModel implements IViewModel, View.OnClickListener {
         sex.set(user.getSex());
 //        rank.set();
 //        totalDistance.set();
-
+        if (user.getRelationStatus() != null) {
+            isFriend.set(user.getRelationStatus() == Constants.STATUS_FRIENDS);
+        }
     }
 
     @Override

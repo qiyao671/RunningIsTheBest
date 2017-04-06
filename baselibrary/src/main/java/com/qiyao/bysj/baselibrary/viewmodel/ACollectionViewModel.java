@@ -8,12 +8,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
+import com.qiyao.bysj.baselibrary.component.bindinghelper.ALoadMoreViewModel;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.IItemViewBindingCreator;
+import com.qiyao.bysj.baselibrary.component.bindinghelper.ILoadMoreViewBindingCreator;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.OnLoadMoreListener;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.SimpleLoadMoreViewBindingCreator;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.ViewBindingRes;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
-import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.SimpleLoadMoreViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.StaticItemViewModel;
 import com.trello.rxlifecycle.components.RxFragment;
 
@@ -47,7 +48,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
     private boolean isLoadMoreEnable = true;
     private boolean isLoading = false;
     public final ObservableField<OnLoadMoreListener> onLoadMoreListener = new ObservableField<>();
-    private SimpleLoadMoreViewBindingCreator loadMoreViewBindingCreator;
+    private ILoadMoreViewBindingCreator loadMoreViewBindingCreator;
 
     //data for presenter
     private final ItemBinding itemBinding = ItemBinding.of(createOnItemBind());
@@ -127,7 +128,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
             addListAtFootOfItemViewModels(itemViewModelArrayList);
         } else if (mode == RefreshMode.reset) {
             clearItemViewModels();
-            itemViewModels.addAll(itemViewModelArrayList);
+            itemViewModels.addAll(getHeaderViewCount(), itemViewModelArrayList);
         } else if (mode == RefreshMode.refresh) {
             addListAtHeadOfItemViewModels(itemViewModelArrayList);
         }
@@ -196,14 +197,27 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
         // TODO: 2017/2/10 添加empty view
     }
 
-    private SimpleLoadMoreViewModel addLoadMoreViewModel() {
-        int itemCount = itemViewModels.size() - (getHeaderViewCount() + getFooterViewCount());
-        if (getLoadMoreViewCount() > 0 && itemCount > 0 && isLoadMoreEnable) {
-            SimpleLoadMoreViewModel loadMoreViewModel = loadMoreViewBindingCreator.genItemViewModel(null);
-            itemViewModels.add(loadMoreViewModel);
-            return loadMoreViewModel;
+    private void addLoadMoreViewModel() {
+        if (isLoadMoreEnable && getLoadMoreViewRes() != null) {
+            ALoadMoreViewModel loadMoreViewModel = loadMoreViewBindingCreator.genItemViewModel(null);
+            itemViewModels.add(loadMoreViewModel == null ? new ALoadMoreViewModel() {
+                @Override
+                public void loadMore() {}
+                @Override
+                public void noMore() {}
+                @Override
+                public void isLoading() {}
+                @Override
+                public void loadFailed() {}
+            } : loadMoreViewModel);
         }
-        return null;
+    }
+
+    private void removeLoadMoreView() {
+        ALoadMoreViewModel loadMoreViewModel = getLoadMoreViewModel();
+        if (loadMoreViewModel != null) {
+            itemViewModels.remove(loadMoreViewModel);
+        }
     }
 
     protected <Header> IItemViewBindingCreator<Header> createHeaderViewBindingHelper() {
@@ -214,7 +228,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
         return null;
     }
 
-    protected SimpleLoadMoreViewBindingCreator createLoadMoreViewBindingHelper() {
+    protected ILoadMoreViewBindingCreator createLoadMoreViewBindingHelper() {
         return new SimpleLoadMoreViewBindingCreator(fragment.getActivity());
     }
 
@@ -228,15 +242,15 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
 
     protected abstract IItemViewModel newItemViewModel(T item);
 
-    protected ViewBindingRes getHeaderRes() {
+    public final ViewBindingRes getHeaderRes() {
         return headerViewBindingCreator == null ? null : headerViewBindingCreator.genViewBindingRes();
     }
 
-    protected ViewBindingRes getFooterRes() {
+    public final ViewBindingRes getFooterRes() {
         return footerViewBindingCreator == null ? null :footerViewBindingCreator.genViewBindingRes();
     }
 
-    protected ViewBindingRes getLoadMoreViewRes() {
+    public final ViewBindingRes getLoadMoreViewRes() {
         return loadMoreViewBindingCreator == null ? null :loadMoreViewBindingCreator.genViewBindingRes();
     }
 
@@ -253,7 +267,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
     }
 
     private int getLoadMoreViewCount() {
-        return getLoadMoreViewRes() == null || loadMoreViewBindingCreator.genItemViewModel(null) == null ? 0 : 1;
+        return getLoadMoreViewModel() == null ? 0 : 1;
     }
 
     private int getItemViewCount() {
@@ -264,14 +278,14 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
         return fragment;
     }
 
-    private SimpleLoadMoreViewModel getLoadMoreViewModel() {
+    private ALoadMoreViewModel getLoadMoreViewModel() {
         if (itemViewModels.size() == 0) {
             return null;
         }
         IItemViewModel loadMoreViewModel = itemViewModels.get(itemViewModels.size() - 1);
         if (isLoadMoreEnable && loadMoreViewModel != null
                 && loadMoreViewModel.getItemViewType().equals(StaticItemViewModel.TYPE_LOAD_MORE) ) {
-            return (SimpleLoadMoreViewModel)loadMoreViewModel;
+            return (ALoadMoreViewModel)loadMoreViewModel;
         }
         return null;
     }
@@ -364,13 +378,16 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
 
         @Override
         public void onError(Throwable e) {
+            if (getLoadMoreViewModel() != null) {
+                getLoadMoreViewModel().loadFailed();
+            }
             // TODO: 2017/2/13 加载失败
             Log.e("TAG", "onError: " + e.getMessage());
         }
 
         @Override
         public void onCompleted() {
-            SimpleLoadMoreViewModel loadMoreViewModel = getLoadMoreViewModel();
+/*            ALoadMoreViewModel loadMoreViewModel = getLoadMoreViewModel();
             if (getItemViewCount() <= 0) {
                 // TODO: 2017/2/15 设置empty view
             } else{
@@ -388,7 +405,28 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
                         }
                     }
                 }
+            }*/
+            if (getItemViewCount() <= 0) {
+                // TODO: 2017/2/15 设置empty view
+                removeLoadMoreView();
+            } else {
+                // TODO: 2017/4/5 去掉empty view
+                ALoadMoreViewModel loadMoreViewModel = getLoadMoreViewModel();
+                if (loadMoreViewModel == null) {
+                    addLoadMoreViewModel();
+                }
+                if (isLoadMoreEnable && isLoading) {
+                    isLoading = false;
+                    if (loadMoreViewModel != null) {
+                        if (isNextLoadEnable) {
+                            loadMoreViewModel.loadMore();
+                        } else {
+                            loadMoreViewModel.noMore();
+                        }
+                    }
+                }
             }
+
 
         }
 

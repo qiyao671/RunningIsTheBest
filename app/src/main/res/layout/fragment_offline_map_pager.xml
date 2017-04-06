@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewModel"
-            type="com.qiyao.bysj.baselibrary.viewmodel.AFragmentTabPagerViewModel" />
+            type="com.qiyao.bysj.runningisthebest.module.home.viewmodel.OfflineMapPagerViewModel" />
     </data>
 
     <LinearLayout
@@ -13,12 +14,16 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
+            app:tabMode="fixed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
 
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
+            app:itemBinding="@{viewModel.itemView}"
+            app:items="@{viewModel.items}"
+            app:pageTitles="@{viewModel.pageTitles}"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

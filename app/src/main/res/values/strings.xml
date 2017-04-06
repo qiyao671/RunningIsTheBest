@@ -104,6 +104,7 @@
     <string name="view_his_crew">查看他的跑团</string>
     <string name="personal_best_run">个人最佳成绩</string>
     <string name="detail_info">详细资料</string>
+    <string name="delete_friend">删除好友</string>
 
     <!--moment-->
     <string name="reply">回复</string>
@@ -124,6 +125,8 @@
 
     <!--setting-->
     <string name="log_out">退出登录</string>
+
+    <!--离线地图-->
     <string name="offline_map">离线地图</string>
     <string name="city_list">城市列表</string>
     <string name="download_manage">下载管理</string>
@@ -133,4 +136,6 @@
     <string name="download_fail">下载失败</string>
     <string name="waiting_for_download">等待下载</string>
     <string name="unzipping">正在解压</string>
+    <string name="delete_map_msg">确认要删除城市“%1$s”的离线地图包吗</string>
+    <string name="delete_success">删除成功</string>
 </resources>

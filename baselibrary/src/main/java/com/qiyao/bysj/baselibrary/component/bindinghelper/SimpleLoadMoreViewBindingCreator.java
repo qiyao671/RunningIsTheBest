@@ -13,16 +13,18 @@ import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.SimpleLoadMoreViewMode
  * 类描述：
  */
 
-public class SimpleLoadMoreViewBindingCreator implements IItemViewBindingCreator<Object> {
+public class SimpleLoadMoreViewBindingCreator implements ILoadMoreViewBindingCreator {
     private Context context;
     public SimpleLoadMoreViewBindingCreator(Context context) {
         this.context = context;
     }
 
+
     @NonNull
     @Override
     public ViewBindingRes genViewBindingRes() {
         return new ViewBindingRes(R.layout.item_simple_load_more, BR.viewModel);
+
     }
 
     @NonNull
@@ -30,5 +32,4 @@ public class SimpleLoadMoreViewBindingCreator implements IItemViewBindingCreator
     public SimpleLoadMoreViewModel genItemViewModel(Object item) {
         return new SimpleLoadMoreViewModel(context);
     }
-
 }

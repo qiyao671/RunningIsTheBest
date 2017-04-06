@@ -43,6 +43,11 @@ public class LinearListBindingAdapters {
         }
     }
 
+    @BindingAdapter(value = "onItemClickListener")
+    public static void setListener(LinearListView linearListView, LinearListView.OnItemClickListener listener) {
+        linearListView.setOnItemClickListener(listener);
+    }
+
     @BindingConversion
     public static <T> ItemBinding<T> toItemBinding(OnItemBind<T> onItemBind) {
         return ItemBinding.of(onItemBind);

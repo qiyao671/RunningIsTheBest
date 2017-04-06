@@ -7,6 +7,7 @@
             type="com.qiyao.bysj.runningisthebest.module.home.viewmodel.item.OfflineMapCitiesItemViewModel" />
     </data>
     <com.linearlistview.LinearListView
+        app:onItemClickListener="@{viewModel}"
         android:orientation="vertical"
         app:items="@{viewModel.cities}"
         app:itemBinding="@{viewModel.itemBinding}"

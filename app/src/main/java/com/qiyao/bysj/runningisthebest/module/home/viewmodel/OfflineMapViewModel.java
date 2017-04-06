@@ -1,6 +1,7 @@
 package com.qiyao.bysj.runningisthebest.module.home.viewmodel;
 
-import android.app.Fragment;
+import android.content.Context;
+import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 
@@ -29,19 +30,19 @@ import rx.Observable;
  * Created by qiyao on 2017/4/6.
  */
 
-public class OfflineMapViewModel implements IViewModel, OnItemClickListener, OfflineMapManager.OfflineMapDownloadListener {
-    private Fragment fragment;
+public class OfflineMapViewModel extends BaseObservable implements IViewModel, OnItemClickListener, OfflineMapManager.OfflineMapDownloadListener, OfflineMapCityItemViewModel.OnStartDownloadListener {
+    private Context context;
     private OfflineMapManager offlineMapManager;
     private HashMap<String, OfflineMapCitiesItemViewModel> provinceCities = new HashMap<>();
 
-    private ObservableArrayList<IItemViewModel> cityItems = new ObservableArrayList<>();
-    private ObservableArrayList<IItemViewModel> provinceItems = new ObservableArrayList<>();
+    public ObservableArrayList<IItemViewModel> cityItems = new ObservableArrayList<>();
+    public ObservableArrayList<IItemViewModel> provinceItems = new ObservableArrayList<>();
     private OnItemBind<IItemViewModel> provinceItemView;
     private ItemBinding<IItemViewModel> cityItemView;
 
-    public OfflineMapViewModel(Fragment fragment) {
-        this.fragment = fragment;
-        offlineMapManager = new OfflineMapManager(fragment.getActivity(), this);
+    public OfflineMapViewModel(Context context) {
+        this.context = context;
+        offlineMapManager = new OfflineMapManager(context, this);
         initItems();
         initItemView();
     }
@@ -52,16 +53,18 @@ public class OfflineMapViewModel implements IViewModel, OnItemClickListener, Off
     }
 
     private void initCityItems() {
+        cityItems.clear();
         List<OfflineMapCity> list = offlineMapManager.getDownloadingCityList();
         list.addAll(offlineMapManager.getDownloadOfflineMapCityList());
         Observable.concat(Observable.from(offlineMapManager.getDownloadingCityList()),
                 Observable.from(offlineMapManager.getDownloadOfflineMapCityList()))
                 .map(this::createCityItemViewModel)
                 .subscribe(cityItems::add, this::onError);
-
     }
 
     private void initProvinceItems() {
+        provinceItems.clear();
+        provinceCities.clear();
         Observable.from(offlineMapManager.getOfflineMapProvinceList())
                 .map(this::createProvinceItemViewModel)
                 .subscribe(provinceItems::add, this::onError);
@@ -87,15 +90,15 @@ public class OfflineMapViewModel implements IViewModel, OnItemClickListener, Off
     }
 
     private IItemViewModel createCityItemViewModel(OfflineMapCity item) {
-        return new OfflineMapCityItemViewModel(fragment.getActivity(), item, offlineMapManager);
+        return new OfflineMapCityItemViewModel(context, item, offlineMapManager);
     }
 
-    private IItemViewModel createCitiesItemViewModel(List<OfflineMapCity> cities) {
-        return new OfflineMapCitiesItemViewModel(fragment.getActivity(), cities, offlineMapManager);
+    private OfflineMapCitiesItemViewModel createCitiesItemViewModel(List<OfflineMapCity> cities) {
+        return new OfflineMapCitiesItemViewModel(context, cities, offlineMapManager, this);
     }
 
     private IItemViewModel createProvinceItemViewModel(OfflineMapProvince province) {
-        OfflineMapProvinceItemViewModel offlineMapProvinceItemViewModel = new OfflineMapProvinceItemViewModel(fragment.getActivity(), province);
+        OfflineMapProvinceItemViewModel offlineMapProvinceItemViewModel = new OfflineMapProvinceItemViewModel(context, province);
         offlineMapProvinceItemViewModel.setOnProvinceClickListener(this);
         return offlineMapProvinceItemViewModel;
     }
@@ -114,9 +117,7 @@ public class OfflineMapViewModel implements IViewModel, OnItemClickListener, Off
 
     @Override
     public void onDownload(int i, int i1, String s) {
-        Observable.from(provinceCities.entrySet())
-                .map(Map.Entry::getValue)
-                .subscribe(OfflineMapCitiesItemViewModel::notifyDataSetChanged);
+        notifyProvinceItemChanged();
         for (IItemViewModel itemViewModel : cityItems) {
             ((OfflineMapCityItemViewModel)itemViewModel).notifyDataChanged();
         }
@@ -129,7 +130,15 @@ public class OfflineMapViewModel implements IViewModel, OnItemClickListener, Off
 
     @Override
     public void onRemove(boolean b, String s, String s1) {
+        notifyProvinceItemChanged();
+        initCityItems();
+        ToastUtils.showShortToast(R.string.delete_success);
+    }
 
+    private void notifyProvinceItemChanged() {
+        Observable.from(provinceCities.entrySet())
+                .map(Map.Entry::getValue)
+                .subscribe(OfflineMapCitiesItemViewModel::notifyDataSetChanged);
     }
 
     @Bindable
@@ -163,9 +172,14 @@ public class OfflineMapViewModel implements IViewModel, OnItemClickListener, Off
         OfflineMapCitiesItemViewModel citiesItemViewModel = provinceCities.get(provinceName);
         if (citiesItemViewModel == null) {
             List<OfflineMapCity> cities = provinceItemViewModel.getCities();
-            citiesItemViewModel = new OfflineMapCitiesItemViewModel(fragment.getActivity(), cities, offlineMapManager);
+            citiesItemViewModel = createCitiesItemViewModel(cities);
             provinceCities.put(provinceName, citiesItemViewModel);
         }
         provinceItems.add(position + 1, citiesItemViewModel);
+    }
+
+    @Override
+    public void onStartDownload() {
+        initCityItems();
     }
 }

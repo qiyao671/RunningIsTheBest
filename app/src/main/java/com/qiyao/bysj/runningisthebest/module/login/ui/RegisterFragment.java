@@ -31,6 +31,7 @@ public class RegisterFragment extends ADataBindingFragment {
         if (activity.getSupportActionBar() != null) {
             activity.setTitle(getString(R.string.register));
         }
+        setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

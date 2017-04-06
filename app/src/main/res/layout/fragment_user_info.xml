@@ -229,8 +229,8 @@
         <TextView
             android:visibility="@{viewModel.isFriend ? View.GONE : View.VISIBLE}"
             android:onClick="@{viewModel::onClick}"
-            android:background="@color/md_teal_400"
-            android:text="@string/add_friend"
+            android:background="@{viewModel.isFriend ? @color/md_red_400 : @color/md_teal_400}"
+            android:text="@{viewModel.isFriend ? @string/delete_friend : @string/add_friend}"
             android:textColor="@color/md_white_1000"
             android:textSize="@dimen/text_size_medium"
             android:gravity="center"
