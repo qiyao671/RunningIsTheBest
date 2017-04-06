@@ -7,18 +7,29 @@
     </data>
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/sign_out"
-            android:onClick="@{viewModel::onClick}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
             <TextView
-                android:text="退出登录"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_offline_map"
+                android:onClick="@{viewModel::onClick}"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/offline_map"
+                android:drawableStart="@drawable/ic_download"
+                style="@style/SettingsItemStyle" />
+
+            <Button
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:background="@drawable/btn_login_selector"
+                android:id="@+id/btn_sign_out"
+                android:onClick="@{viewModel::onClick}"
+                android:text="@string/log_out"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_large"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
     </LinearLayout>
 
 </layout>

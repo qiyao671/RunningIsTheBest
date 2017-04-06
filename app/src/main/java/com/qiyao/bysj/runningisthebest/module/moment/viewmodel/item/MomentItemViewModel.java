@@ -1,4 +1,4 @@
-package com.qiyao.bysj.runningisthebest.module.moment.viewmodel;
+package com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
@@ -7,6 +7,9 @@ import android.databinding.ObservableField;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.StaticItemViewModel;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
+import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentCommentsViewModel;
+import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentContentViewModel;
+import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentLikesViewModel;
 
 /**
  * Created by qiyao on 2017/3/17.

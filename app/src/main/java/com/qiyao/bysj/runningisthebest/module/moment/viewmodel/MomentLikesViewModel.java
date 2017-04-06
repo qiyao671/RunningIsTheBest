@@ -10,6 +10,7 @@ import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
+import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.MomentLikeItemViewModel;
 
 import java.util.List;
 

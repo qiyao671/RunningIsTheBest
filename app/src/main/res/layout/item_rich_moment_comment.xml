@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.RichMomentCommentItemViewModel" />
+            type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.RichMomentCommentItemViewModel" />
     </data>
     <LinearLayout
         android:orientation="horizontal" android:layout_width="match_parent"

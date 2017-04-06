@@ -19,6 +19,7 @@ import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.home.ui.BestRunFragment;
 import com.qiyao.bysj.runningisthebest.module.home.ui.SettingFragment;
 import com.qiyao.bysj.runningisthebest.module.home.ui.TotalRunPagerFragment;
+import com.qiyao.bysj.runningisthebest.module.home.viewmodel.item.MyInfoItemViewModel;
 import com.qiyao.bysj.runningisthebest.module.run.ui.RunRecordsFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 

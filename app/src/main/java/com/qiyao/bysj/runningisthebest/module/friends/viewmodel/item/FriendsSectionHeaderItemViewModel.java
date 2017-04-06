@@ -1,4 +1,4 @@
-package com.qiyao.bysj.runningisthebest.module.friends.viewmodel;
+package com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item;
 
 import android.databinding.ObservableField;
 
@@ -12,7 +12,7 @@ import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 public class FriendsSectionHeaderItemViewModel implements IItemViewModel {
     public ObservableField<String> name = new ObservableField<>();
 
-    FriendsSectionHeaderItemViewModel(String name) {
+    public FriendsSectionHeaderItemViewModel(String name) {
         this.name.set(name);
     }
 

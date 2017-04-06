@@ -1,4 +1,4 @@
-package com.qiyao.bysj.runningisthebest.module.run.viewmodel;
+package com.qiyao.bysj.runningisthebest.module.run.viewmodel.item;
 
 import android.app.Fragment;
 import android.databinding.ObservableField;

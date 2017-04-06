@@ -1,4 +1,4 @@
-package com.qiyao.bysj.runningisthebest.module.moment.viewmodel;
+package com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item;
 
 import android.content.Context;
 import android.databinding.ObservableField;

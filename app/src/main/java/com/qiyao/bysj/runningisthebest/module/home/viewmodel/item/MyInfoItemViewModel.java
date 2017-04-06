@@ -1,4 +1,4 @@
-package com.qiyao.bysj.runningisthebest.module.home.viewmodel;
+package com.qiyao.bysj.runningisthebest.module.home.viewmodel.item;
 
 import android.app.Fragment;
 import android.databinding.ObservableField;
@@ -44,7 +44,7 @@ public class MyInfoItemViewModel implements IItemViewModel {
         return StaticItemViewModel.TYPE_ITEM;
     }
 
-    MyInfoItemViewModel(Fragment fragment) {
+    public MyInfoItemViewModel(Fragment fragment) {
         this.fragment = fragment;
         //默认显示缓存的数据
         UserBean oldUser = SPHelper.loadUser();

@@ -5,7 +5,7 @@
         <import type="com.qiyao.bysj.runningisthebest.R" />
         <variable
             name="viewModel"
-            type="com.qiyao.bysj.runningisthebest.module.home.viewmodel.MyInfoItemViewModel" />
+            type="com.qiyao.bysj.runningisthebest.module.home.viewmodel.item.MyInfoItemViewModel" />
     </data>
 
     <RelativeLayout

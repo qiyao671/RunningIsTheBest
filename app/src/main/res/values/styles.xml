@@ -82,4 +82,18 @@
         <item name="android:textColor">@color/primary_text</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
+
+    <style name="SettingsItemStyle">
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:drawablePadding">@dimen/base_list_item_horizontal_spacing</item>
+        <item name="android:drawableEnd">@drawable/ic_arrow_right</item>
+        <item name="android:background">@color/md_white_1000</item>
+        <item name="android:paddingStart">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingEnd">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/base_list_item_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/base_list_item_vertical_margin</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>

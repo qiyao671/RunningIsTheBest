@@ -3,10 +3,12 @@ package com.qiyao.bysj.runningisthebest.module.home.viewmodel;
 import android.app.Fragment;
 import android.view.View;
 
+import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.common.SPHelper;
+import com.qiyao.bysj.runningisthebest.module.home.ui.OfflineMapPagerFragment;
 import com.qiyao.bysj.runningisthebest.module.login.ui.LoginFragment;
 
 /**
@@ -24,8 +26,11 @@ public class SettingViewModel implements IViewModel {
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.sign_out:
+            case R.id.btn_sign_out:
                 signOut();
+                break;
+            case R.id.tv_offline_map:
+                FragmentContainerActivity.launch(fragment.getActivity(), OfflineMapPagerFragment.class);
                 break;
         }
     }

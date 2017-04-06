@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentLikeItemViewModel" />
+            type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.MomentLikeItemViewModel" />
     </data>
 
     <de.hdodenhof.circleimageview.CircleImageView

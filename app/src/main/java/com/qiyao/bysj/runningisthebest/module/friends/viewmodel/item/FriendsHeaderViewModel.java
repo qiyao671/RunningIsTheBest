@@ -1,4 +1,4 @@
-package com.qiyao.bysj.runningisthebest.module.friends.viewmodel;
+package com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item;
 
 import android.view.View;
 

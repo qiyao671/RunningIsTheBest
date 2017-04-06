@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.qiyao.bysj.runningisthebest.module.friends.viewmodel.FriendsSectionHeaderItemViewModel" />
+            type="com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item.FriendsSectionHeaderItemViewModel" />
     </data>
     <LinearLayout
         android:paddingStart="@dimen/base_list_item_horizontal_margin"

@@ -49,4 +49,8 @@ public abstract class ARecyclerViewFragment extends ADataBindingFragment {
     public ACollectionViewModel getViewModel() {
         return (ACollectionViewModel) super.getViewModel();
     }
+
+    public void hideToolbar() {
+        getBinding().toolbar.setVisibility(View.GONE);
+    }
 }

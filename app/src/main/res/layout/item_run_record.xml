@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.qiyao.bysj.runningisthebest.module.run.viewmodel.RunRecordsItemViewModel" />
+            type="com.qiyao.bysj.runningisthebest.module.run.viewmodel.item.RunRecordsItemViewModel" />
     </data>
 
     <LinearLayout

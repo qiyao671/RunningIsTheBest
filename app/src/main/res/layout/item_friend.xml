@@ -5,7 +5,7 @@
         <import type="com.qiyao.bysj.runningisthebest.R" />
         <variable
             name="viewModel"
-            type="com.qiyao.bysj.runningisthebest.module.friends.viewmodel.FriendItemViewModel" />
+            type="com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item.FriendItemViewModel" />
     </data>
     <LinearLayout
         android:onClick="@{viewModel::onClick}"

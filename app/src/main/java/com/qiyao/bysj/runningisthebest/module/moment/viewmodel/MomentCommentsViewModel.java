@@ -10,6 +10,8 @@ import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
+import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.RichMomentCommentItemViewModel;
+import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.SuccinctMomentCommentItemViewModel;
 
 import java.util.List;
 

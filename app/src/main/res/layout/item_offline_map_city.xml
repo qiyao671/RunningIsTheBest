@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.amap.api.maps.offlinemap.OfflineMapStatus" />
+
+        <import type="java.util.Locale" />
+
+        <import type="com.qiyao.bysj.runningisthebest.R" />
+
+        <variable
+            name="city"
+            type="com.qiyao.bysj.runningisthebest.module.home.viewmodel.item.OfflineMapCityItemViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:onClick="@{city::onClick}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{city.name}"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base_list_item_vertical_spacing"
+                android:text="@{String.format(Locale.CHINA, context.getString(R.string.map_size), city.size)}"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/text_size_body" />
+        </LinearLayout>
+
+        <!--下载中，暂停中-->
+        <TextView
+            android:onClick="@{city::onClick}"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:drawableEnd="@{city.status == OfflineMapStatus.LOADING ? @drawable/ic_pause_stroke : @drawable/ic_start_stroke}"
+            android:drawablePadding="@dimen/base_list_item_horizontal_spacing"
+            android:text='@{city.completeCode + "%"}'
+            android:textColor="@{city.status == OfflineMapStatus.LOADING ? @color/primary : @color/md_red_500}"
+            android:textSize="@dimen/text_size_body"
+            android:visibility="@{city.status == OfflineMapStatus.LOADING || city.status == OfflineMapStatus.PAUSE ? View.VISIBLE : View.GONE}" />
+
+        <!--开始下载-->
+        <TextView
+            android:onClick="@{city::onClick}"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/download_bg"
+            android:paddingBottom="3dp"
+            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+            android:paddingStart="@dimen/base_list_item_horizontal_margin"
+            android:paddingTop="3dp"
+            android:text="@string/download"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/text_size_small"
+            android:visibility="@{city.status == OfflineMapStatus.CHECKUPDATES ? View.VISIBLE : View.GONE}" />
+
+        <!--已下载-->
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/downloaded"
+            android:textColor="@color/secondary_text"
+            android:textSize="13sp"
+            android:visibility="@{city.status == OfflineMapStatus.SUCCESS ? View.VISIBLE : View.GONE}" />
+
+        <!--下载失败-->
+        <TextView
+            android:onClick="@{city::onClick}"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/download_fail"
+            android:textColor="@color/md_red_500"
+            android:textSize="13sp"
+            android:visibility="@{city.status == OfflineMapStatus.ERROR || city.status == OfflineMapStatus.EXCEPTION_AMAP || city.status == OfflineMapStatus.EXCEPTION_NETWORK_LOADING || city.status == OfflineMapStatus.EXCEPTION_SDCARD ? View.VISIBLE : View.GONE}" />
+
+        <!--等待下载-->
+        <TextView
+            android:onClick="@{city::onClick}"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/waiting_for_download"
+            android:textColor="@color/primary"
+            android:textSize="13sp"
+            android:visibility="@{city.status == OfflineMapStatus.WAITING ? View.VISIBLE : View.GONE}" />
+
+        <!--正在解压-->
+        <TextView
+            android:onClick="@{city::onClick}"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/unzipping"
+            android:textColor="@color/primary"
+            android:textSize="13sp"
+            android:visibility="@{city.status == OfflineMapStatus.UNZIP ? View.VISIBLE : View.GONE}" />
+    </RelativeLayout>
+
+</layout>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RunningIsTheBest</string>
+    <string name="app_name">爱跑</string>
     <!--MainActivity底边栏-->
     <string name="tab_community">社团</string>
     <string name="tab_friends">好友</string>
@@ -120,4 +120,17 @@
     <string name="pls_pause_run">请先点击暂停按钮，并结束运动</string>
     <string name="pls_stop_run">请先结束运动</string>
     <string name="wind_info">%1$s风&#160;&#160;&#160;&#160;%2$s级</string>
+    <string name="end">结&#160;束</string>
+
+    <!--setting-->
+    <string name="log_out">退出登录</string>
+    <string name="offline_map">离线地图</string>
+    <string name="city_list">城市列表</string>
+    <string name="download_manage">下载管理</string>
+    <string name="map_size">%1$.1fMB</string>
+    <string name="download">下载</string>
+    <string name="downloaded">已下载</string>
+    <string name="download_fail">下载失败</string>
+    <string name="waiting_for_download">等待下载</string>
+    <string name="unzipping">正在解压</string>
 </resources>

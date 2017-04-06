@@ -21,8 +21,8 @@ import com.qiyao.bysj.runningisthebest.module.friends.viewmodel.UserSearchResult
 public class UserSearchResultFragment extends ARecyclerViewFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        getBinding().toolbar.setVisibility(View.GONE);
         super.onViewCreated(view, savedInstanceState);
+        hideToolbar();
     }
 
     @NonNull

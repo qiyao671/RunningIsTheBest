@@ -1,5 +1,7 @@
 package com.qiyao.bysj.baselibrary.component.bindinghelper;
 
+import android.support.annotation.LayoutRes;
+
 /**
  * Created by qiyao on 2017/2/3.
  */
@@ -8,7 +10,7 @@ public class ViewBindingRes {
     private int layoutRes;
     private int bindingVariableRes;
 
-    public ViewBindingRes(int layoutRes, int bindingVariableRes) {
+    public ViewBindingRes(@LayoutRes int layoutRes, int bindingVariableRes) {
         this.layoutRes = layoutRes;
         this.bindingVariableRes = bindingVariableRes;
     }

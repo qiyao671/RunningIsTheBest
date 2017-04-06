@@ -1,5 +1,6 @@
 package com.qiyao.bysj.baselibrary.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,7 @@ import java.util.Map;
  * Created by qiyao on 2017/1/24.
  */
 
+@SuppressLint("Registered")
 public class BaseActivity extends RxAppCompatActivity {
     private static BaseActivity currentActivity;
 
@@ -34,6 +36,7 @@ public class BaseActivity extends RxAppCompatActivity {
     public static void setCurrentActivity(BaseActivity activity) {
         currentActivity = activity;
     }
+
     /**
      * 设置时间记号,用来计算2次时间间隔
      */
@@ -67,15 +70,19 @@ public class BaseActivity extends RxAppCompatActivity {
         }
         return isShort;
     }
-    public boolean isShortTimeFromLast(String tag,long shortTime) {
+
+    public boolean isShortTimeFromLast(String tag, long shortTime) {
         boolean isShort = isShortTime(tag, shortTime);
         if (!isShort) {
             setMarkTime(tag);
         }
         return isShort;
     }
+
     public void setDisplayHomeAsUpEnabled(boolean enabled) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(enabled);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(enabled);
+        }
     }
 
     public void enableDisplayHomeAsUp() {
@@ -83,13 +90,14 @@ public class BaseActivity extends RxAppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
         }
-       // 如果设备有实体MENU按键，overflow菜单不会再显示
+        // 如果设备有实体MENU按键，overflow菜单不会再显示
         ViewConfiguration viewConfiguration = ViewConfiguration.get(this);
         if (viewConfiguration.hasPermanentMenuKey()) {
             try {

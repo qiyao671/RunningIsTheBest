@@ -154,6 +154,28 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
 
     protected void beforeRequest() {}
 
+    protected void addItem(int position, IItemViewModel itemViewModel) {
+        if (itemViewModels != null) {
+            itemViewModels.add(position, itemViewModel);
+        }
+    }
+
+    protected void removeItem(int position) {
+        if (itemViewModels != null) {
+            itemViewModels.remove(position);
+        }
+    }
+
+    protected void removeItem(IItemViewModel itemViewModel) {
+        if (itemViewModels != null) {
+            itemViewModels.remove(itemViewModel);
+        }
+    }
+
+    protected void notifyDataSetChanged() {
+        if (itemViewModels != null) {
+        }
+    }
 
     private void addStaticViewModel() {
         //添加header view model
@@ -252,6 +274,18 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
             return (SimpleLoadMoreViewModel)loadMoreViewModel;
         }
         return null;
+    }
+
+    protected int indexOf(IItemViewModel itemViewModel) {
+        return itemViewModels.indexOf(itemViewModel);
+    }
+
+    protected IItemViewModel getItem(int position) {
+        return itemViewModels.get(position);
+    }
+
+    protected ObservableArrayList<IItemViewModel> getItems() {
+        return itemViewModels;
     }
 
     public boolean isNextLoadEnable() {

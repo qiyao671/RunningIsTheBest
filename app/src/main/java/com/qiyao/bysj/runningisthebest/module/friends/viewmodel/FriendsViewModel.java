@@ -15,6 +15,9 @@ import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.common.SPHelper;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item.FriendItemViewModel;
+import com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item.FriendsHeaderViewModel;
+import com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item.FriendsSectionHeaderItemViewModel;
 
 import java.util.List;
 

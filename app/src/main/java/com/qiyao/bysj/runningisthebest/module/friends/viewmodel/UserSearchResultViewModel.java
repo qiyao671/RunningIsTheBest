@@ -9,6 +9,7 @@ import com.qiyao.bysj.runningisthebest.BR;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item.UserSearchResultItemViewModel;
 
 import java.util.List;
 

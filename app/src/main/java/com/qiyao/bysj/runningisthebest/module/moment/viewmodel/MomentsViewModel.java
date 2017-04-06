@@ -10,6 +10,7 @@ import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.MomentItemViewModel;
 
 import java.util.List;
 

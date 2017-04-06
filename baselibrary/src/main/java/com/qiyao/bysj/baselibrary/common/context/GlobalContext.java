@@ -1,11 +1,13 @@
 package com.qiyao.bysj.baselibrary.common.context;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.os.Handler;
 
 import com.qiyao.bysj.baselibrary.common.utils.ConstUtils;
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 
+@SuppressLint("Registered")
 public class GlobalContext extends Application {
 
 	private static GlobalContext _context;
@@ -24,11 +26,11 @@ public class GlobalContext extends Application {
 		return _context;
 	}
 	
-	public Handler getHandler() {
+/*	public Handler getHandler() {
 		return mHandler;
 	}
 
 	Handler mHandler = new Handler() {
 		
-	};
+	};*/
 }

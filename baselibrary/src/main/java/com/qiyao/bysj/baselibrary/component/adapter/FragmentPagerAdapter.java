@@ -1,5 +1,6 @@
 package com.qiyao.bysj.baselibrary.component.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -22,7 +23,7 @@ abstract class FragmentPagerAdapter extends PagerAdapter {
     private FragmentTransaction mCurTransaction = null;
     private Fragment mCurrentPrimaryItem = null;
 
-    public FragmentPagerAdapter(FragmentManager fm) {
+    FragmentPagerAdapter(FragmentManager fm) {
         mFragmentManager = fm;
     }
 
@@ -39,6 +40,7 @@ abstract class FragmentPagerAdapter extends PagerAdapter {
         }
     }
 
+    @SuppressLint("CommitTransaction")
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         if (mCurTransaction == null) {
@@ -67,6 +69,7 @@ abstract class FragmentPagerAdapter extends PagerAdapter {
         return fragment;
     }
 
+    @SuppressLint("CommitTransaction")
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         if (mCurTransaction == null) {
