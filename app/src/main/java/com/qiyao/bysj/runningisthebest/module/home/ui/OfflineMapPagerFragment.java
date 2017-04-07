@@ -26,6 +26,7 @@ public class OfflineMapPagerFragment extends ADataBindingFragment {
         tabLayout.setupWithViewPager(viewPager);
         setTitle(R.string.offline_map);
         setDisplayHomeAsUpEnabled(true);
+        viewPager.addOnPageChangeListener((OfflineMapPagerViewModel)getViewModel());
     }
 
     @NonNull

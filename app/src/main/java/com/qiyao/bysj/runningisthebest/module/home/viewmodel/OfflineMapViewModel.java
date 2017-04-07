@@ -10,13 +10,18 @@ import com.amap.api.maps.offlinemap.OfflineMapManager;
 import com.amap.api.maps.offlinemap.OfflineMapProvince;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.component.OnItemClickListener;
+import com.qiyao.bysj.baselibrary.model.event.MessageEvent;
+import com.qiyao.bysj.baselibrary.model.event.RxBus;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.BR;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.common.Constants;
 import com.qiyao.bysj.runningisthebest.module.home.viewmodel.item.OfflineMapCitiesItemViewModel;
 import com.qiyao.bysj.runningisthebest.module.home.viewmodel.item.OfflineMapCityItemViewModel;
 import com.qiyao.bysj.runningisthebest.module.home.viewmodel.item.OfflineMapProvinceItemViewModel;
+import com.trello.rxlifecycle.components.RxActivity;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,11 +50,12 @@ public class OfflineMapViewModel extends BaseObservable implements IViewModel, O
         offlineMapManager = new OfflineMapManager(context, this);
         initItems();
         initItemView();
+        receiveMassage();
     }
 
     private void initItems() {
         initProvinceItems();
-        initCityItems();
+//        initCityItems();
     }
 
     private void initCityItems() {
@@ -131,7 +137,7 @@ public class OfflineMapViewModel extends BaseObservable implements IViewModel, O
     @Override
     public void onRemove(boolean b, String s, String s1) {
         notifyProvinceItemChanged();
-        initCityItems();
+//        initCityItems();
         ToastUtils.showShortToast(R.string.delete_success);
     }
 
@@ -180,6 +186,17 @@ public class OfflineMapViewModel extends BaseObservable implements IViewModel, O
 
     @Override
     public void onStartDownload() {
-        initCityItems();
+//        initCityItems();
+    }
+
+    private void receiveMassage() {
+        RxBus.getDefault()
+                .toObservable(MessageEvent.class)
+                .compose(((RxAppCompatActivity)context).bindToLifecycle())
+                .subscribe(event -> {
+                        if (event.getName().equals(Constants.EVENT_REFRESH_DOWNLOAD_MAPS)) {
+                            initCityItems();
+                        }
+                });
     }
 }

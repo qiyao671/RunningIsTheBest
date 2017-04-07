@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.android.databinding.library.baseAdapters.BR;
+import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
@@ -68,6 +69,7 @@ public class HomeViewModel extends BaseObservable implements IViewModel {
 
     private void onError(Throwable e) {
         Log.e("home", "onError: " + e.getMessage(), e);
+        ToastUtils.showShortToast(e.getMessage());
     }
 
     private void setTotalRunInfo(TotalRunBean totalRun) {

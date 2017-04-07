@@ -45,8 +45,8 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
 
     //加载更多
     private boolean isNextLoadEnable = false;
-    private boolean isLoadMoreEnable = true;
-    private boolean isLoading = false;
+    public boolean isLoadMoreEnable = true;
+    public ObservableBoolean isLoading = new ObservableBoolean(false);
     public final ObservableField<OnLoadMoreListener> onLoadMoreListener = new ObservableField<>();
     private ILoadMoreViewBindingCreator loadMoreViewBindingCreator;
 
@@ -65,6 +65,18 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
 
         onRefreshListener.set(this);
         onLoadMoreListener.set(this);
+        isLoading.addOnPropertyChangedCallback(new android.databinding.Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(android.databinding.Observable observable, int i) {
+                if (((ObservableBoolean) observable).get()) {
+                    if (isLoadMoreEnable) {
+                        if (getLoadMoreViewModel() != null) {
+                            getLoadMoreViewModel().isLoading();
+                        }
+                    }
+                }
+            }
+        });
     }
 
     public ACollectionViewModel(Fragment fragment, boolean isRefreshEnable, boolean isLoadMoreEnable) {
@@ -85,8 +97,8 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
     //加载更多的回调
     @Override
     public void onLoadMore() {
-        if (isLoadMoreEnable && !isLoading && isNextLoadEnable) {
-            isLoading = true;
+        if (isLoadMoreEnable && !isLoading.get() && isNextLoadEnable) {
+            isLoading.set(true);
             requestData(RefreshMode.load_more);
         }
     }
@@ -150,6 +162,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
 
     public final void initItemViewModels() {
         beforeRequest();
+        addLoadMoreViewModel();
         requestData(RefreshMode.reset);
     }
 
@@ -310,22 +323,6 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
         isNextLoadEnable = nextLoadEnable;
     }
 
-    public boolean isLoadMoreEnable() {
-        return isLoadMoreEnable;
-    }
-
-    public void setLoadMoreEnable(boolean loadMoreEnable) {
-        isLoadMoreEnable = loadMoreEnable;
-    }
-
-    public boolean isLoading() {
-        return isLoading;
-    }
-
-    public void setLoading(boolean loading) {
-        isLoading = loading;
-    }
-
     public enum RefreshMode {
         /**
          * 重设数据
@@ -369,6 +366,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
                     .toList()
                     .doAfterTerminate(() -> {if (isRefreshEnable.get() && isRefreshing.get())
                         isRefreshing.set(false);})
+                    .doOnSubscribe(() -> {if (getLoadMoreViewModel() != null) { isLoading.set(true); }})
                     .compose(((RxFragment) fragment).bindToLifecycle())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this);
@@ -415,8 +413,8 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
                 if (loadMoreViewModel == null) {
                     addLoadMoreViewModel();
                 }
-                if (isLoadMoreEnable && isLoading) {
-                    isLoading = false;
+                if (isLoadMoreEnable && isLoading.get()) {
+                    isLoading.set(false);
                     if (loadMoreViewModel != null) {
                         if (isNextLoadEnable) {
                             loadMoreViewModel.loadMore();

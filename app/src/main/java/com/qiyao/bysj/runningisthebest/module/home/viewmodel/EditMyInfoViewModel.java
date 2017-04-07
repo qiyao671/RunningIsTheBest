@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableField;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.util.Log;
@@ -29,11 +30,16 @@ import com.qiyao.bysj.runningisthebest.module.home.ui.EditMyInfoFragment;
 import com.qiyao.bysj.runningisthebest.module.home.ui.HomeFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
+import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultSubscriber;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -167,10 +173,24 @@ public class EditMyInfoViewModel extends BaseObservable
     }
 
     private void pickImage() {
-        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickIntent.setType("image/*");
+/*        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image*//*");
 
-        fragment.startActivityForResult(pickIntent, EditMyInfoFragment.CODE_PICK_IMAGE);
+        fragment.startActivityForResult(pickIntent, EditMyInfoFragment.CODE_PICK_IMAGE);*/
+        RxGalleryFinal
+                .with(fragment.getActivity())
+                .image()
+                .radio()
+                .crop()
+                .imageLoader(ImageLoaderType.GLIDE)
+                .subscribe(new RxBusResultSubscriber<ImageRadioResultEvent>() {
+                    @Override
+                    protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
+                        profileUrl.set(imageRadioResultEvent.getResult().getCropPath());
+                    }
+                })
+                .openGallery();
+
     }
 
     private void showSexChooseDialog() {
@@ -278,6 +298,14 @@ public class EditMyInfoViewModel extends BaseObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onSubmitSuccess, e -> ToastUtils.showShortToast(e.getMessage()));
+        if (!profileUrl.get().equals(userBean.getProfile())) {
+            HttpMethods.getInstance()
+                    .uploadProfile(Uri.parse(profileUrl.get()))
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onSubmitSuccess, e -> ToastUtils.showShortToast(e.getMessage()));
+        }
+
     }
 
     private void onSubmitSuccess(String msg) {

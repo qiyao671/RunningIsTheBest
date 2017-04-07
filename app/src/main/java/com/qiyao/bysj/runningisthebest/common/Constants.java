@@ -21,4 +21,6 @@ public class Constants {
     public static final int STATUS_MYSELF = 2;
 
     public static final int DEFAULT_PAGE_SIZE = 15;
+
+    public static final String EVENT_REFRESH_DOWNLOAD_MAPS = "EVENT_REFRESH_DOWNLOAD_MAPS";
 }

@@ -33,7 +33,7 @@ android {
     signingConfigs {
         //调试版的keystore
         debug {
-            storeFile file("C:\\Users\\qiyao671\\.android\\debug.keystore")
+            storeFile file("C:\\Users\\qiyao\\.android\\debug.keystore")
             storePassword "android"
             keyAlias "androiddebugkey"
             keyPassword "android"
@@ -65,4 +65,6 @@ dependencies {
     compile 'com.afollestad.material-dialogs:core:0.9.4.1'
     compile 'com.contrarywind:Android-PickerView:3.1.1'
     compile files('libs/AMap_Search_V4.0.0_20170111.jar')
+    compile project(':sharesdk')
+    compile 'cn.finalteam.rxgalleryfinal:library:0.0.9'
 }
