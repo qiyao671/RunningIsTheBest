@@ -34,6 +34,7 @@ public class RunRecordDetailPagerFragment extends AFragmentPagerFragment {
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         getTabLayout().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.primary));
+        getTabLayout().setTabTextColors(ContextCompat.getColor(getActivity(), R.color.md_white_1000), ContextCompat.getColor(getActivity(), R .color.accent));
     }
 
     @Override

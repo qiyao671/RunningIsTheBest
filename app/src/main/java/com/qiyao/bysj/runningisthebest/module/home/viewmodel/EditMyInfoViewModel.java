@@ -1,7 +1,6 @@
 package com.qiyao.bysj.runningisthebest.module.home.viewmodel;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableField;
@@ -17,6 +16,7 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.google.gson.Gson;
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
+import com.qiyao.bysj.baselibrary.model.bean.HttpResult;
 import com.qiyao.bysj.baselibrary.model.event.MessageEvent;
 import com.qiyao.bysj.baselibrary.model.event.RxBus;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
@@ -26,11 +26,9 @@ import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.LocationJsonBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
-import com.qiyao.bysj.runningisthebest.module.home.ui.EditMyInfoFragment;
 import com.qiyao.bysj.runningisthebest.module.home.ui.HomeFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -210,7 +208,7 @@ public class EditMyInfoViewModel extends BaseObservable
         new MaterialDialog.Builder(fragment.getActivity())
                 .title(R.string.select)
                 .items(list)
-                .itemsCallback( listCallback)
+                .itemsCallback(listCallback)
                 .positiveText(R.string.cancel)
                 .show();
     }
@@ -268,17 +266,17 @@ public class EditMyInfoViewModel extends BaseObservable
 
     private void updateHeight(int height) {
         this.height.set(String.valueOf(height));
-        userBean.setHeight((double)height);
+        userBean.setHeight((double) height);
     }
 
     private void updateWeight(int weight) {
         this.weight.set(String.valueOf(weight));
-        userBean.setWeight((double)weight);
+        userBean.setWeight((double) weight);
     }
 
     private void updateBirthday(Date birthday) {
         setBirthday(birthday.getTime());
-         userBean.setBirthday(birthday.getTime());
+        userBean.setBirthday(birthday.getTime());
     }
 
     private void updateLocation(int p, int c) {
@@ -293,19 +291,16 @@ public class EditMyInfoViewModel extends BaseObservable
     }
 
     public void submitUpdate() {
-        HttpMethods.getInstance()
-                .updateUserInfo(userBean)
+        Observable<String> observable = HttpMethods.getInstance()
+                .updateUserInfo(userBean);
+        if (!profileUrl.get().equals(userBean.getProfile())) {
+            observable.mergeWith(HttpMethods.getInstance()
+                    .uploadProfile(Uri.parse(profileUrl.get())));
+        }
+        observable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onSubmitSuccess, e -> ToastUtils.showShortToast(e.getMessage()));
-        if (!profileUrl.get().equals(userBean.getProfile())) {
-            HttpMethods.getInstance()
-                    .uploadProfile(Uri.parse(profileUrl.get()))
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onSubmitSuccess, e -> ToastUtils.showShortToast(e.getMessage()));
-        }
-
     }
 
     private void onSubmitSuccess(String msg) {

@@ -24,6 +24,7 @@ public class FriendsRankingPagerFragment extends AFragmentPagerFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getTabLayout().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.primary));
+        getTabLayout().setTabTextColors(ContextCompat.getColor(getActivity(), R.color.md_white_1000), ContextCompat.getColor(getActivity(), R .color.accent));
     }
 
     @Override

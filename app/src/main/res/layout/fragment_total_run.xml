@@ -18,10 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingBottom="@dimen/base_list_item_vertical_margin"
             android:paddingEnd="@dimen/base_list_item_horizontal_margin"
             android:paddingStart="@dimen/base_list_item_horizontal_margin"
-            android:paddingTop="@dimen/base_list_item_vertical_margin">
+            android:paddingTop="20dp">
 
             <TextView
                 android:text="@{viewModel.title}"
@@ -33,7 +32,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:background="@color/md_white_1000"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/base_list_item_vertical_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

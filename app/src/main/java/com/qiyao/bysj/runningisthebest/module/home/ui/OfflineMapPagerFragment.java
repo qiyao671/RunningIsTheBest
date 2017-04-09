@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -27,6 +28,9 @@ public class OfflineMapPagerFragment extends ADataBindingFragment {
         setTitle(R.string.offline_map);
         setDisplayHomeAsUpEnabled(true);
         viewPager.addOnPageChangeListener((OfflineMapPagerViewModel)getViewModel());
+        tabLayout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.primary));
+        tabLayout.setTabTextColors(ContextCompat.getColor(getActivity(), R.color.md_white_1000), ContextCompat.getColor(getActivity(), R .color.accent));
+
     }
 
     @NonNull

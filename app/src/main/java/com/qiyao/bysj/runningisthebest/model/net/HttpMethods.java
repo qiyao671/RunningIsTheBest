@@ -135,7 +135,7 @@ public class HttpMethods extends HttpFactory {
         // create RequestBody instance from file
         RequestBody requestFile =
                 RequestBody.create(
-                        MediaType.parse(AppApplication.getInstance().getContentResolver().getType(profileUri)),
+                        MediaType.parse("multipart/form-data"),
                         file
                 );
 
@@ -143,6 +143,6 @@ public class HttpMethods extends HttpFactory {
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("profile", file.getName(), requestFile);
 
-        return handleResult(runApiService.uploadProfile(body));
+        return handleResult(runApiService.uploadFile(body));
     }
 }

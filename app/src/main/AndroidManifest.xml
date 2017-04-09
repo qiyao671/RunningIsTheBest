@@ -56,6 +56,13 @@
                 android:value=".module.friends.ui.FriendsSearchableActivity" />
         </activity>
 
+        <activity
+            android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait" />
         <service android:name="com.amap.api.location.APSService" />
     </application>
 

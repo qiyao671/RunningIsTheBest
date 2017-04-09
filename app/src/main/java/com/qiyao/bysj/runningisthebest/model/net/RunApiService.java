@@ -92,8 +92,8 @@ public interface RunApiService {
     Observable<HttpResult<String>> commentMoment(@Field("momentId") int momentId, @Field("comment") Comment comment);
 
     @Multipart
-    @POST("user/uploadProfile")
-    Observable<HttpResult<String>> uploadProfile(@Part MultipartBody.Part profile);
+    @POST("user/uploadFile")
+    Observable<HttpResult<String>> uploadFile(@Part MultipartBody.Part profile);
 
     @POST("user/saveFriend")
     Observable<HttpResult<String>> addFriend(@Field("friendUserId") int userId);
