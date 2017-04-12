@@ -1,9 +1,9 @@
 package com.qiyao.bysj.baselibrary.component.bindingadapter;
 
 import android.databinding.BindingAdapter;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 
 /**
@@ -11,15 +11,14 @@ import com.bumptech.glide.Glide;
  */
 
 public class ImageViewBindingAdapters {
-    @BindingAdapter(value = {"imageUrl", "placeholder"}, requireAll = false)
-    public static void loadImage(ImageView imageView, String url, int placeholderRes) {
-        DrawableTypeRequest<String> request = Glide.with(imageView.getContext())
-                .load(url);
-        if (placeholderRes != 0) {
-            request.placeholder(placeholderRes);
-        }
-        request
+    @BindingAdapter(value = {"imageUrl", "placeholderRes", "placeholder"}, requireAll = false)
+    public static void loadImage(ImageView imageView, String url, int placeholderRes, Drawable placeholder) {
+        Glide.with(imageView.getContext())
+                .load(url)
+                .placeholder(placeholder)
+                .placeholder(placeholderRes)
                 .crossFade()
+                .dontAnimate()
                 .into(imageView);
     }
 }

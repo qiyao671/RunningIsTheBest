@@ -39,7 +39,7 @@ public class MomentsViewModel extends ACollectionViewModel<MomentBean> {
 
     @Override
     protected ViewBindingRes getItemRes(int position, IItemViewModel item) {
-        return new ViewBindingRes(BR.viewModel, R.layout.item_moment);
+        return new ViewBindingRes(R.layout.item_moment, BR.viewModel);
     }
 
     @Override

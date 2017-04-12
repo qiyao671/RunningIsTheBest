@@ -7,12 +7,17 @@
             type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.MomentItemViewModel" />
     </data>
     <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/base_list_item_vertical_margin"
+        android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+        android:paddingStart="@dimen/base_list_item_horizontal_margin"
+        android:paddingTop="@dimen/base_list_item_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <include layout="@layout/view_moment_content"
             app:viewModel="@{viewModel.contentViewModel}"/>
-        <include layout="@layout/view_moment_likes"
-            app:viewModel="@{viewModel.likesViewModel}"/>
+<!--        <include layout="@layout/view_moment_likes"
+            app:viewModel="@{viewModel.likesViewModel}"/>-->
         <include layout="@layout/view_moment_comments"
             app:viewModel="@{viewModel.commentsViewModel}"/>
     </LinearLayout>

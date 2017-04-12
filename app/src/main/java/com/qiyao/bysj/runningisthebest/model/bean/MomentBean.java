@@ -3,7 +3,8 @@ package com.qiyao.bysj.runningisthebest.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lvqiyao (amorfatilay@163.com).
@@ -28,14 +29,11 @@ public class MomentBean implements Parcelable {
 
     private String content;
 
-    /*非数据库字段*/
-    private Integer minId;
+    private Boolean isApproved;
 
-    private Integer maxId;
+    private List<CommentBean> commentList;
 
-    private Integer num;
-
-    private Integer pageSize;
+//    private List<UserBean> approveList;
 
     public Integer getId() {
         return id;
@@ -101,37 +99,30 @@ public class MomentBean implements Parcelable {
         this.content = content == null ? null : content.trim();
     }
 
-    public Integer getMinId() {
-        return minId;
+    public Boolean getApproved() {
+        return isApproved;
     }
 
-    public void setMinId(Integer minId) {
-        this.minId = minId;
+    public void setApproved(Boolean approved) {
+        isApproved = approved;
     }
 
-    public Integer getMaxId() {
-        return maxId;
+    public List<CommentBean> getCommentList() {
+        return commentList;
     }
 
-    public void setMaxId(Integer maxId) {
-        this.maxId = maxId;
+    public void setCommentList(List<CommentBean> commentList) {
+        this.commentList = commentList;
     }
 
-    public Integer getNum() {
-        return num;
+/*    public List<UserBean> getApproveList() {
+        return approveList;
     }
 
-    public void setNum(Integer num) {
-        this.num = num;
-    }
+    public void setApproveList(List<UserBean> approveList) {
+        this.approveList = approveList;
+    }*/
 
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
 
     @Override
     public int describeContents() {
@@ -148,10 +139,9 @@ public class MomentBean implements Parcelable {
         dest.writeValue(this.gmtModified);
         dest.writeValue(this.status);
         dest.writeString(this.content);
-        dest.writeValue(this.minId);
-        dest.writeValue(this.maxId);
-        dest.writeValue(this.num);
-        dest.writeValue(this.pageSize);
+        dest.writeValue(this.isApproved);
+        dest.writeList(this.commentList);
+//        dest.writeTypedList(this.approveList);
     }
 
     public MomentBean() {
@@ -166,13 +156,13 @@ public class MomentBean implements Parcelable {
         this.gmtModified = (Long) in.readValue(Long.class.getClassLoader());
         this.status = (Short) in.readValue(Short.class.getClassLoader());
         this.content = in.readString();
-        this.minId = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.maxId = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.num = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.pageSize = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.isApproved = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.commentList = new ArrayList<CommentBean>();
+        in.readList(this.commentList, CommentBean.class.getClassLoader());
+//        this.approveList = in.createTypedArrayList(UserBean.CREATOR);
     }
 
-    public static final Parcelable.Creator<MomentBean> CREATOR = new Parcelable.Creator<MomentBean>() {
+    public static final Creator<MomentBean> CREATOR = new Creator<MomentBean>() {
         @Override
         public MomentBean createFromParcel(Parcel source) {
             return new MomentBean(source);
