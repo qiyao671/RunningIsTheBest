@@ -30,7 +30,7 @@ import rx.Observable;
  */
 
 public interface RunApiService {
-    String HOST = "http://192.168.1.7:8080/";
+    String HOST = "http://192.168.31.245:8080/";
 
 
     /**

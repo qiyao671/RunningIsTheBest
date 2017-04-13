@@ -60,8 +60,10 @@
 
     <!--friends-->
     <string name="add_friend">添加好友</string>
-    <string name="new_friend">新的朋友</string>
+    <string name="friend_request">好友请求</string>
     <string name="search_friend">搜索用户名</string>
+    <string name="accept">接受</string>
+    <string name="already_add">已添加</string>
 
     <!--run record-->
     <string name="duration">时长</string>
