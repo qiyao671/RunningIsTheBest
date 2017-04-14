@@ -8,17 +8,24 @@
     </data>
     <LinearLayout
         android:orientation="vertical"
-        android:paddingBottom="@dimen/base_list_item_vertical_margin"
-        android:paddingEnd="@dimen/base_list_item_horizontal_margin"
-        android:paddingStart="@dimen/base_list_item_horizontal_margin"
-        android:paddingTop="@dimen/base_list_item_vertical_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <include layout="@layout/view_moment_content"
-            app:viewModel="@{viewModel.contentViewModel}"/>
-<!--        <include layout="@layout/view_moment_likes"
-            app:viewModel="@{viewModel.likesViewModel}"/>-->
-        <include layout="@layout/view_moment_comments"
-            app:viewModel="@{viewModel.commentsViewModel}"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/base_list_item_vertical_margin"
+            android:paddingEnd="@dimen/base_list_item_horizontal_margin"
+            android:paddingStart="@dimen/base_list_item_horizontal_margin"
+            android:paddingTop="@dimen/base_list_item_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/view_moment_content"
+                app:viewModel="@{viewModel.contentViewModel}"/>
+            <include layout="@layout/view_moment_likes"
+                app:viewModel="@{viewModel.likesViewModel}"/>
+            <include layout="@layout/view_moment_comments"
+                app:viewModel="@{viewModel.commentsViewModel}"/>
+        </LinearLayout>
+        <include layout="@layout/view_divider_horizontal" />
     </LinearLayout>
+
 </layout>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <import type="com.qiyao.bysj.runningisthebest.R" />
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentContentViewModel" />
@@ -20,6 +20,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 app:imageUrl="@{viewModel.profileUrl}"
+                app:placeholderRes="@{R.drawable.default_profile}"
                 android:layout_width="40dp"
                 android:layout_height="40dp" />
 
@@ -31,11 +32,13 @@
 
                 <TextView
                     android:text="@{viewModel.userName}"
+                    android:textSize="@dimen/text_size_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:text="@{viewModel.datetime}"
+                    android:textSize="@dimen/text_size_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -43,6 +46,7 @@
 
         <TextView
             android:text="@{viewModel.content}"
+            android:textSize="@dimen/text_size_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

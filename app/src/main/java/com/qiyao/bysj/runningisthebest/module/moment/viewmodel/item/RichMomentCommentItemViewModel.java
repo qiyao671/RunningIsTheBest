@@ -3,6 +3,7 @@ package com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item;
 import android.content.Context;
 import android.databinding.ObservableField;
 
+import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
 
 /**
@@ -20,7 +21,8 @@ public class RichMomentCommentItemViewModel extends SuccinctMomentCommentItemVie
     }
 
     private void setMoreInfo(CommentBean commentBean) {
-        // TODO: 2017/3/17 user profile datetime
+        userProfile.set(commentBean.getUser().getProfile());
+        datetime.set(TimeUtils.getFriendlyTimeSpanByNow(commentBean.getGmtCreate()));
     }
 
     @Override

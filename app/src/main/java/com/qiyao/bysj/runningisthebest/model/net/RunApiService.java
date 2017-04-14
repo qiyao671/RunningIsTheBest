@@ -100,4 +100,7 @@ public interface RunApiService {
 
     @POST("log/saveRunnyLog")
     Observable<HttpResult<String>> uploadRunRecord(@Body RunBean runnyLog);
+
+    @GET("moment/listFriendsMoments")
+    Observable<HttpResult<List<MomentBean>>> getFriendsRecentMoments(@Query("minId") Integer minId, @Query("maxId") Integer maxId, @Query("pageSize") Integer pageSize);
 }

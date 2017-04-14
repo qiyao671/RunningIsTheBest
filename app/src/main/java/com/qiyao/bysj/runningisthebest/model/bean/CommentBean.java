@@ -23,6 +23,11 @@ public class CommentBean {
 
     private Long gmtModified;
 
+    private UserBean user;
+
+    private UserBean repliedUser;
+
+
     public Integer getId() {
         return id;
     }
@@ -85,5 +90,21 @@ public class CommentBean {
 
     public void setGmtModified(Long gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public UserBean getUser() {
+        return user;
+    }
+
+    public void setUser(UserBean user) {
+        this.user = user;
+    }
+
+    public UserBean getRepliedUser() {
+        return repliedUser;
+    }
+
+    public void setRepliedUser(UserBean repliedUser) {
+        this.repliedUser = repliedUser;
     }
 }

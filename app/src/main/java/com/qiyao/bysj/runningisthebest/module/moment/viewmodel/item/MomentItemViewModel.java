@@ -29,7 +29,7 @@ public class MomentItemViewModel extends BaseObservable implements IItemViewMode
         this.momentBean = momentBean;
         contentViewModel.set(new MomentContentViewModel(context, momentBean));
         // TODO: 2017/3/17
-//        likesViewModel.set(new MomentLikesViewModel(context, momentBean));
+        likesViewModel.set(new MomentLikesViewModel(context, momentBean.getApproveList()));
         commentsViewModel.set(new MomentCommentsViewModel(context, SuccinctMomentCommentItemViewModel.TYPE_SUCCINCT,momentBean.getCommentList()));
     }
 

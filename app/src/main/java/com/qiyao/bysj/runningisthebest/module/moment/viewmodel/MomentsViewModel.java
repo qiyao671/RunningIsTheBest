@@ -22,6 +22,8 @@ import rx.Observable;
 
 public class MomentsViewModel extends ACollectionViewModel<MomentBean> {
     private UserBean user;
+    private Integer sinceId = null;
+    private Integer endId = null;
 
     public MomentsViewModel(Fragment fragment) {
         super(fragment);
@@ -48,8 +50,6 @@ public class MomentsViewModel extends ACollectionViewModel<MomentBean> {
     }
 
     private class GetMomentsTask extends APagingTask {
-        private Integer sinceId = null;
-        private Integer endId = null;
         private Integer pageSize = 15;
 
         GetMomentsTask(RefreshMode mode) {
@@ -63,11 +63,21 @@ public class MomentsViewModel extends ACollectionViewModel<MomentBean> {
                 // TODO: 2017/3/17
                 return null;
             } else {
-                return httpMethods.getRecentMoments(sinceId, endId, pageSize)
+                Integer maxId = null;
+                Integer minId = null;
+                switch (mode) {
+                    case load_more:
+                        minId = endId;
+                        break;
+                    case refresh:
+                        maxId = sinceId;
+                        break;
+                }
+                return httpMethods.getFriendsRecentMoments(minId, maxId, pageSize)
                         .doOnNext(list -> setPageInfo(list, mode))
                         .doOnNext(momentBeen -> {
                             if (mode == RefreshMode.reset || mode == RefreshMode.load_more) {
-                                setNextLoadEnable(momentBeen.size() < pageSize);
+                                setNextLoadEnable(!(momentBeen.size() < pageSize));
                             }
                         });
             }
@@ -79,11 +89,15 @@ public class MomentsViewModel extends ACollectionViewModel<MomentBean> {
                     endId = list.get(list.size() - 1).getId();
                     break;
                 case refresh:
-                    sinceId = list.get(0).getId();
+                    if (list.size() > 0) {
+                        sinceId = list.get(0).getId();
+                    }
                     break;
                 case reset:
-                    sinceId = list.get(0).getId();
-                    endId = list.get(list.size() - 1).getId();
+                    if (list.size() > 0) {
+                        sinceId = list.get(0).getId();
+                        endId = list.get(list.size() - 1).getId();
+                    }
                     break;
             }
         }

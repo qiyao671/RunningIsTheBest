@@ -29,11 +29,13 @@ public class MomentBean implements Parcelable {
 
     private String content;
 
-    private Boolean isApproved;
+    private Boolean approved;
+
+    private UserBean user;
 
     private List<CommentBean> commentList;
 
-//    private List<UserBean> approveList;
+    private List<ApproveBean> approveList;
 
     public Integer getId() {
         return id;
@@ -100,11 +102,11 @@ public class MomentBean implements Parcelable {
     }
 
     public Boolean getApproved() {
-        return isApproved;
+        return approved;
     }
 
     public void setApproved(Boolean approved) {
-        isApproved = approved;
+        this.approved = approved;
     }
 
     public List<CommentBean> getCommentList() {
@@ -115,14 +117,21 @@ public class MomentBean implements Parcelable {
         this.commentList = commentList;
     }
 
-/*    public List<UserBean> getApproveList() {
+    public List<ApproveBean> getApproveList() {
         return approveList;
     }
 
-    public void setApproveList(List<UserBean> approveList) {
+    public void setApproveList(List<ApproveBean> approveList) {
         this.approveList = approveList;
-    }*/
+    }
 
+    public UserBean getUser() {
+        return user;
+    }
+
+    public void setUser(UserBean user) {
+        this.user = user;
+    }
 
     @Override
     public int describeContents() {
@@ -139,9 +148,10 @@ public class MomentBean implements Parcelable {
         dest.writeValue(this.gmtModified);
         dest.writeValue(this.status);
         dest.writeString(this.content);
-        dest.writeValue(this.isApproved);
+        dest.writeValue(this.approved);
+        dest.writeParcelable(this.user, flags);
         dest.writeList(this.commentList);
-//        dest.writeTypedList(this.approveList);
+        dest.writeTypedList(this.approveList);
     }
 
     public MomentBean() {
@@ -156,10 +166,11 @@ public class MomentBean implements Parcelable {
         this.gmtModified = (Long) in.readValue(Long.class.getClassLoader());
         this.status = (Short) in.readValue(Short.class.getClassLoader());
         this.content = in.readString();
-        this.isApproved = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.approved = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.user = in.readParcelable(UserBean.class.getClassLoader());
         this.commentList = new ArrayList<CommentBean>();
         in.readList(this.commentList, CommentBean.class.getClassLoader());
-//        this.approveList = in.createTypedArrayList(UserBean.CREATOR);
+        this.approveList = in.createTypedArrayList(ApproveBean.CREATOR);
     }
 
     public static final Creator<MomentBean> CREATOR = new Creator<MomentBean>() {

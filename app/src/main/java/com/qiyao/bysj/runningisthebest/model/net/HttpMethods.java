@@ -94,8 +94,13 @@ public class HttpMethods extends HttpFactory {
         return handleResult(runApiService.postMoment(momentBean));
     }
 
+    @Deprecated
     public Observable<List<MomentBean>> getRecentMoments(Integer minId, Integer maxId, Integer pageSize) {
         return handleResult(runApiService.getRecentMoments(minId, maxId, pageSize));
+    }
+
+    public Observable<List<MomentBean>> getFriendsRecentMoments(Integer minId, Integer maxId, Integer pageSize) {
+        return handleResult(runApiService.getFriendsRecentMoments(minId, maxId, pageSize));
     }
 
     public Observable<String> updateUserInfo(UserBean userBean) {

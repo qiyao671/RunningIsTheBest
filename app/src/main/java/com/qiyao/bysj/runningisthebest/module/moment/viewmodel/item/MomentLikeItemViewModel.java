@@ -6,7 +6,7 @@ import android.databinding.ObservableField;
 
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.StaticItemViewModel;
-import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
+import com.qiyao.bysj.runningisthebest.model.bean.ApproveBean;
 
 /**
  * Created by qiyao on 2017/3/17.
@@ -15,14 +15,14 @@ import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 public class MomentLikeItemViewModel extends BaseObservable implements IItemViewModel {
     private Context context;
 
-    private UserBean userBean;
+    private ApproveBean approveBean;
 
     public ObservableField<String> userProfile = new ObservableField<>();
 
-    public MomentLikeItemViewModel(Context context, UserBean userBean) {
+    public MomentLikeItemViewModel(Context context, ApproveBean approveBean) {
         this.context = context;
-        this.userBean = userBean;
-        userProfile.set(userBean.getProfile());
+        this.approveBean = approveBean;
+        userProfile.set(approveBean.getUser().getProfile());
     }
 
     @Override

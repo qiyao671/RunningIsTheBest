@@ -1,9 +1,11 @@
 package com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item;
 
 import android.content.Context;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
+import com.qiyao.bysj.runningisthebest.databinding.ItemFriendBinding;
 import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
 
 /**
@@ -19,6 +21,7 @@ public class SuccinctMomentCommentItemViewModel implements IItemViewModel {
     public ObservableField<String> userName = new ObservableField<>();
     public ObservableField<String> repliedUserName = new ObservableField<>();
     public ObservableField<String> content = new ObservableField<>();
+    public ObservableBoolean isReply = new ObservableBoolean();
 
     public SuccinctMomentCommentItemViewModel(Context context, CommentBean commentBean) {
         this.context = context;
@@ -27,8 +30,11 @@ public class SuccinctMomentCommentItemViewModel implements IItemViewModel {
     }
 
     private void setCommentInfo(CommentBean comment) {
-        userName.set(String.valueOf(comment.getUserId()));
-        repliedUserName.set(String.valueOf(comment.getRepliedUserId()));
+        userName.set(comment.getUser().getUsername());
+        if (comment.getRepliedUser() != null) {
+            repliedUserName.set(comment.getRepliedUser().getUsername());
+        }
+        isReply.set(comment.getRepliedUser() != null);
         content.set(comment.getContent());
     }
 

@@ -9,6 +9,7 @@ import com.android.databinding.library.baseAdapters.BR;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.model.bean.ApproveBean;
 import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.MomentLikeItemViewModel;
@@ -30,18 +31,18 @@ public class LikesAndCommentsViewModel extends BaseObservable implements IViewMo
     private String commentType;
 
     private List<CommentBean> commentBeanList;
-    private List<UserBean> likeUserBeanList;
+    private List<ApproveBean> approveBeanList;
 
     private OnItemBind<IItemViewModel> commentItemView;
-    private ItemBinding<UserBean> likeItemView;
+    private ItemBinding<ApproveBean> likeItemView;
     public ObservableArrayList<IItemViewModel> comments = new ObservableArrayList<>();
     public ObservableArrayList<IItemViewModel> likes = new ObservableArrayList<>();
 
-    public LikesAndCommentsViewModel(Context context, String commentType, List<CommentBean> commentBeanList, List<UserBean> likeUserBeanList) {
+    public LikesAndCommentsViewModel(Context context, String commentType, List<CommentBean> commentBeanList, List<ApproveBean> approveBeanList) {
         this.context = context;
         this.commentType = commentType;
         this.commentBeanList = commentBeanList;
-        this.likeUserBeanList = likeUserBeanList;
+        this.approveBeanList = approveBeanList;
         initItemView();
         initItems();
     }
@@ -50,7 +51,7 @@ public class LikesAndCommentsViewModel extends BaseObservable implements IViewMo
         Observable.from(commentBeanList)
                 .map(this::createCommentItemViewModel)
                 .subscribe(comments::add);
-        Observable.from(likeUserBeanList)
+        Observable.from(approveBeanList)
                 .map(userBean -> new MomentLikeItemViewModel(context, userBean))
                 .subscribe(likes::add);
     }
@@ -91,7 +92,7 @@ public class LikesAndCommentsViewModel extends BaseObservable implements IViewMo
     }
 
     @Bindable
-    public ItemBinding<UserBean> getLikeItemView() {
+    public ItemBinding<ApproveBean> getLikeItemView() {
         return likeItemView;
     }
 }

@@ -283,7 +283,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
         return getLoadMoreViewModel() == null ? 0 : 1;
     }
 
-    private int getItemViewCount() {
+    protected int getItemViewCount() {
         return itemViewModels.size() - getHeaderViewCount() - getFooterViewCount() - getLoadMoreViewCount();
     }
 

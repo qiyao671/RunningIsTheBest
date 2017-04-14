@@ -9,6 +9,7 @@ import com.android.databinding.library.baseAdapters.BR;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.model.bean.ApproveBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.MomentLikeItemViewModel;
 
@@ -24,21 +25,21 @@ import rx.Observable;
 public class MomentLikesViewModel extends BaseObservable implements IViewModel {
     private Context context;
 
-    private List<UserBean> likeUserBeanList;
+    private List<ApproveBean> approveBeanList;
 
-    private ItemBinding<UserBean> likeItemView;
+    private ItemBinding<ApproveBean> likeItemView;
     public ObservableArrayList<IItemViewModel> likes = new ObservableArrayList<>();
 
-    public MomentLikesViewModel(Context context, List<UserBean> likeUserBeanList) {
+    public MomentLikesViewModel(Context context, List<ApproveBean> approveBeanList) {
         this.context = context;
-        this.likeUserBeanList = likeUserBeanList;
+        this.approveBeanList = approveBeanList;
         initItemView();
         initItems();
     }
 
     private void initItems() {
-        Observable.from(likeUserBeanList)
-                .map(userBean -> new MomentLikeItemViewModel(context, userBean))
+        Observable.from(approveBeanList)
+                .map(approve -> new MomentLikeItemViewModel(context, approve))
                 .subscribe(likes::add);
     }
 
@@ -47,7 +48,7 @@ public class MomentLikesViewModel extends BaseObservable implements IViewModel {
     }
 
     @Bindable
-    public ItemBinding<UserBean> getLikeItemView() {
+    public ItemBinding<ApproveBean> getLikeItemView() {
         return likeItemView;
     }
 }
