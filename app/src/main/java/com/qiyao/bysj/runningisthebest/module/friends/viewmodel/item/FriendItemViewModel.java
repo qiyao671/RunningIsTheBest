@@ -38,8 +38,11 @@ public class FriendItemViewModel implements IItemViewModel {
         UserInfoFragment.launch(context, user);
     }
 
-
     public UserBean getUser() {
         return user;
+    }
+
+    public Context getContext() {
+        return context;
     }
 }

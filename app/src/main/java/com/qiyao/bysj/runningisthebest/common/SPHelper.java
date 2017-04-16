@@ -55,4 +55,8 @@ public class SPHelper {
         }
         return new Gson().fromJson(jsonStr, new TypeToken<List<UserBean>>(){}.getType());
     }
+
+    public static void removeFriends() {
+        spUtils.remove(SP_KEY_FRIEND_LIST);
+    }
 }

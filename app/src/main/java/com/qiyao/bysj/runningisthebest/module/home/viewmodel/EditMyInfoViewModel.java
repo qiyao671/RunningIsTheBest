@@ -16,7 +16,6 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.google.gson.Gson;
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
-import com.qiyao.bysj.baselibrary.model.bean.HttpResult;
 import com.qiyao.bysj.baselibrary.model.event.MessageEvent;
 import com.qiyao.bysj.baselibrary.model.event.RxBus;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
@@ -188,7 +187,6 @@ public class EditMyInfoViewModel extends BaseObservable
                     }
                 })
                 .openGallery();
-
     }
 
     private void showSexChooseDialog() {

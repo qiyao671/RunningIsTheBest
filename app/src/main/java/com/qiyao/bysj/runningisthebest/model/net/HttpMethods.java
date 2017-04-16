@@ -150,4 +150,12 @@ public class HttpMethods extends HttpFactory {
 
         return handleResult(runApiService.uploadFile(body));
     }
+
+    public Observable<List<UserBean>> listFriendRequests() {
+        return handleResult(runApiService.listFriendRequests());
+    }
+
+    public Observable<String> agreeAddFriend(int userId) {
+        return handleResult(runApiService.agreeAddFriend(userId));
+    }
 }

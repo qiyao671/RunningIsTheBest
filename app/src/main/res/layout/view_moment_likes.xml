@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentLikesViewModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="@{viewModel.likes.size() > 0 ? View.VISIBLE : View.GONE}">
 
         <com.linearlistview.LinearListView
-            android:visibility="@{viewModel.likes.size() > 0 ? View.VISIBLE : View.GONE}"
-            app:items="@{viewModel.likes}"
-            app:itemBinding="@{viewModel.likeItemView}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:dividerPadding="2dp"
+            android:orientation="horizontal"
+            app:itemBinding="@{viewModel.likeItemView}"
+            app:items="@{viewModel.likes}" />
     </LinearLayout>
 </layout>

@@ -1,30 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.MomentItemViewModel" />
     </data>
+
     <LinearLayout
-        android:orientation="vertical"
+        android:onClick="@{viewModel::onClick}"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="@dimen/base_list_item_vertical_margin"
             android:paddingEnd="@dimen/base_list_item_horizontal_margin"
             android:paddingStart="@dimen/base_list_item_horizontal_margin"
-            android:paddingTop="@dimen/base_list_item_vertical_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <include layout="@layout/view_moment_content"
-                app:viewModel="@{viewModel.contentViewModel}"/>
-            <include layout="@layout/view_moment_likes"
-                app:viewModel="@{viewModel.likesViewModel}"/>
-            <include layout="@layout/view_moment_comments"
-                app:viewModel="@{viewModel.commentsViewModel}"/>
+            android:paddingTop="@dimen/base_list_item_vertical_margin">
+
+            <include
+                layout="@layout/view_moment_content"
+                app:viewModel="@{viewModel.contentViewModel}" />
+
+            <include
+                layout="@layout/view_moment_likes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base_list_item_vertical_margin"
+                app:viewModel="@{viewModel.likesViewModel}" />
+
+            <include
+                layout="@layout/view_moment_comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base_list_item_vertical_margin"
+                app:viewModel="@{viewModel.commentsViewModel}" />
         </LinearLayout>
+
         <include layout="@layout/view_divider_horizontal" />
     </LinearLayout>
 

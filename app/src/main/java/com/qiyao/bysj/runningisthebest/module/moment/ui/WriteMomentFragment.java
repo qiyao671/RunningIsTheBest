@@ -1,8 +1,9 @@
 package com.qiyao.bysj.runningisthebest.module.moment.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
@@ -16,6 +17,13 @@ import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.WriteMomentViewMo
  */
 
 public class WriteMomentFragment extends ADataBindingFragment {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
+        setTitle(R.string.write_moment);
+    }
+
     @NonNull
     @Override
     protected IViewModel createViewModel(Bundle arguments) {
@@ -25,11 +33,5 @@ public class WriteMomentFragment extends ADataBindingFragment {
     @Override
     protected int layoutRes() {
         return R.layout.fragment_write_moment;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
     }
 }

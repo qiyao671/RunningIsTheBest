@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.databinding.ObservableField;
 import android.util.Log;
 
+import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.common.SPHelper;
@@ -59,8 +60,8 @@ public class LoginViewModel implements IViewModel {
     }
 
     private void onLoginFailed(Throwable e) {
-        // TODO: 2017/3/6 fengzhuang
         Log.e("login", "onLoginFailed: " + e.getMessage());
+        ToastUtils.showShortToast(e.getMessage());
     }
 
     private void saveToken(String token) {

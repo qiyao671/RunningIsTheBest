@@ -30,7 +30,8 @@ import rx.Observable;
  */
 
 public interface RunApiService {
-    String HOST = "http://192.168.31.245:8080/";
+//    String HOST = "http://192.168.31.245:8080/";
+    String HOST = "http://192.168.1.7:8080/";
 
 
     /**
@@ -95,12 +96,21 @@ public interface RunApiService {
     @POST("user/uploadFile")
     Observable<HttpResult<String>> uploadFile(@Part MultipartBody.Part profile);
 
+    @FormUrlEncoded
     @POST("user/saveFriend")
     Observable<HttpResult<String>> addFriend(@Field("friendUserId") int userId);
 
+    @FormUrlEncoded
     @POST("log/saveRunnyLog")
     Observable<HttpResult<String>> uploadRunRecord(@Body RunBean runnyLog);
 
     @GET("moment/listFriendsMoments")
     Observable<HttpResult<List<MomentBean>>> getFriendsRecentMoments(@Query("minId") Integer minId, @Query("maxId") Integer maxId, @Query("pageSize") Integer pageSize);
+
+    @GET("user/listFriendRequests")
+    Observable<HttpResult<List<UserBean>>> listFriendRequests();
+
+    @FormUrlEncoded
+    @POST("user/agreeAddFriend")
+    Observable<HttpResult<String>> agreeAddFriend(@Field("friendUserId") int friendUserId);
 }

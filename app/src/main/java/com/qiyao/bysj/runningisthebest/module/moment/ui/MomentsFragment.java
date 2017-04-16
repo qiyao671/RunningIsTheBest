@@ -15,7 +15,6 @@ import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.ui.fragment.ARecyclerViewFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
-import com.qiyao.bysj.runningisthebest.databinding.FragmentMomentsBinding;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentsViewModel;
 
@@ -28,16 +27,16 @@ public class MomentsFragment extends ARecyclerViewFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        setHasOptionsMenu(true);
         initToolbar();
+        setHasOptionsMenu(true);
     }
 
     private void initToolbar() {
-        Toolbar toolbar = FragmentMomentsBinding.inflate(getActivity().getLayoutInflater()).toolbar;
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
         if (activity.getSupportActionBar() != null) {
-            activity.getSupportActionBar().setTitle(R.string.tab_moment);
+            setTitle(R.string.tab_moment);
             activity.getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
             activity.getSupportActionBar().setDisplayShowHomeEnabled(false);
         }

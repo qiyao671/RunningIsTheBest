@@ -7,7 +7,7 @@
         <import type="com.qiyao.bysj.runningisthebest.R" />
         <import type="com.qiyao.bysj.baselibrary.common.utils.ConstUtils" />
         <import type="android.view.View" />
-
+        <import type="com.qiyao.bysj.runningisthebest.common.Constants" />
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.friends.viewmodel.UserInfoViewModel" />
@@ -227,10 +227,26 @@
         </LinearLayout>
 
         <TextView
-            android:visibility="@{viewModel.isFriend ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.status == Constants.FRIEND_STATUS_ADD_FRIENDS || viewModel.status == Constants.FRIEND_STATUS_NOT_FRIEND ? View.VISIBLE : View.GONE}"
             android:onClick="@{viewModel::onClick}"
-            android:background="@{viewModel.isFriend ? @color/md_red_400 : @color/md_teal_400}"
-            android:text="@{viewModel.isFriend ? @string/delete_friend : @string/add_friend}"
+            android:background="@color/md_teal_400"
+            android:id="@+id/tv_add_friend"
+            android:text="@string/add_friend"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/text_size_medium"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_delete_friend"
+            android:visibility="@{viewModel.status == Constants.FRIEND_STATUS_HAS_BEEN_FRIENDS  ? View.VISIBLE : View.GONE}"
+            android:onClick="@{viewModel::onClick}"
+            android:background="@color/md_red_400"
+            android:text="@string/delete_friend"
             android:textColor="@color/md_white_1000"
             android:textSize="@dimen/text_size_medium"
             android:gravity="center"

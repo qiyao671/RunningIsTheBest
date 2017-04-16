@@ -3,8 +3,8 @@ package com.qiyao.bysj.runningisthebest.module.moment.viewmodel;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ObservableBoolean;
-import android.view.View;
 import android.databinding.ObservableField;
+import android.view.View;
 
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
@@ -12,6 +12,8 @@ import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.friends.ui.UserInfoFragment;
+import com.qiyao.bysj.runningisthebest.module.moment.ui.MomentDetailFragment;
 
 import java.util.Arrays;
 import java.util.List;
@@ -63,6 +65,9 @@ public class MomentContentViewModel extends BaseObservable implements IViewModel
                             ToastUtils.showShortToast(s);
                             isLike.set(!isLike.get());
                         }, e -> ToastUtils.showShortToast(e.getMessage()));
+                break;
+            case R.id.civ_user_profile:
+                UserInfoFragment.launch(context, momentBean.getUser());
                 break;
         }
     }

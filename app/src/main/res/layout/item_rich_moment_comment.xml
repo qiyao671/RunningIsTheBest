@@ -1,57 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.RichMomentCommentItemViewModel" />
     </data>
+
     <LinearLayout
-        android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_list_item_vertical_spacing"
+        android:orientation="horizontal">
+
         <de.hdodenhof.circleimageview.CircleImageView
-            app:imageUrl="@{viewModel.userProfile}"
             android:id="@+id/civ_user_profile"
             android:layout_width="40dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            app:placeholder="@{@drawable/default_profile}"
+            app:imageUrl="@{viewModel.userProfile}" />
+
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="1"
+            android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="start|center_vertical"
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.userName}"
+                    android:textSize="@dimen/text_size_body" />
+
+                <TextView
+                    android:textColor="@color/secondary_text"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.datetime}"
+                    android:textSize="@dimen/text_size_body" />
+            </FrameLayout>
+
             <LinearLayout
-                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/small_list_item_vertical_spacing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
-                    android:id="@+id/tv_user_name"
-                    android:text="@{viewModel.userName}"
-                    android:textSize="@dimen/text_size_body"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
+                    android:layout_height="wrap_content"
                     android:text="@string/reply"
-                    android:textSize="@dimen/text_size_body"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_medium" />
+
                 <TextView
                     android:id="@+id/tv_replied_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@{viewModel.repliedUserName}"
-                    android:textSize="@dimen/text_size_body"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textSize="@dimen/text_size_medium" />
+
                 <TextView
-                    android:text="@{viewModel.datetime}"
-                    android:textSize="@dimen/text_size_body"
-                    android:layout_gravity="end"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text='@{":" + viewModel.content}'
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
-            <TextView
-                android:text="@{viewModel.content}"
-                android:textSize="@dimen/text_size_medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
     </LinearLayout>

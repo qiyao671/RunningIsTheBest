@@ -109,6 +109,7 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         app:imageUrl="@{viewModel.profileUrl}"
+                        app:placeholder="@{@drawable/default_profile}"
                         android:layout_width="40dp"
                         android:layout_height="40dp" />
 

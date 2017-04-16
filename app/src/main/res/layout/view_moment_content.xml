@@ -15,16 +15,20 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_user_profile"
+                android:onClick="@{viewModel::onClick}"
                 app:imageUrl="@{viewModel.profileUrl}"
                 app:placeholderRes="@{R.drawable.default_profile}"
                 android:layout_width="40dp"
                 android:layout_height="40dp" />
 
             <LinearLayout
+                android:layout_marginStart="@dimen/base_list_item_horizontal_spacing"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -32,25 +36,31 @@
 
                 <TextView
                     android:text="@{viewModel.userName}"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_size_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:layout_marginTop="@dimen/small_list_item_vertical_spacing"
                     android:text="@{viewModel.datetime}"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
 
         <TextView
+            android:layout_marginTop="@dimen/base_list_item_vertical_spacing"
             android:text="@{viewModel.content}"
+            android:textColor="@color/primary_text"
             android:textSize="@dimen/text_size_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <com.jaeger.ninegridimageview.NineGridImageView
+            android:layout_marginTop="@dimen/base_list_item_vertical_spacing"
             app:imgGap="4dp"
             app:maxSize="9"
             app:showStyle="grid"
@@ -60,6 +70,7 @@
             android:layout_height="wrap_content" />
 
         <LinearLayout
+            android:layout_marginTop="@dimen/base_list_item_vertical_spacing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

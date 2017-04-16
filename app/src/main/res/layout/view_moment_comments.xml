@@ -8,12 +8,12 @@
             type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentCommentsViewModel" />
     </data>
     <LinearLayout
+        android:visibility="@{viewModel.comments.size() > 0 ? View.VISIBLE : View.GONE}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <com.linearlistview.LinearListView
-            android:visibility="@{viewModel.comments.size() > 0 ? View.VISIBLE : View.GONE}"
             app:items="@{viewModel.comments}"
             app:itemBinding="@{viewModel.commentItemView}"
             android:layout_width="match_parent"

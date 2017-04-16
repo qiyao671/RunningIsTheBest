@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="com.qiyao.bysj.runningisthebest.R" />
+        <import type="com.qiyao.bysj.runningisthebest.common.Constants" />
+        <import type="android.view.View" />
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item.FriendRequestItemViewModel" />
@@ -39,6 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
                 <TextView
+                    android:visibility="@{viewModel.status == Constants.FRIEND_STATUS_ADD_FRIENDS ? View.VISIBLE : View.GONE}"
                     android:layout_gravity="center"
                     android:text="@string/accept"
                     android:textColor="@color/md_white_1000"
@@ -51,6 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:visibility="@{viewModel.status == Constants.FRIEND_STATUS_HAS_BEEN_FRIENDS ? View.VISIBLE : View.GONE}"
                     android:layout_gravity="center"
                     android:textColor="@color/secondary_text"
                     android:text="@string/already_add"

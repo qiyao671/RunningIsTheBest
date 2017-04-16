@@ -1,25 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
+
         <import type="com.qiyao.bysj.runningisthebest.R" />
+
+        <import type="com.qiyao.bysj.baselibrary.common.utils.StringUtils" />
+
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.CommentBarViewModel" />
     </data>
 
     <LinearLayout
-        android:background="@color/md_grey_200"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-        <EditText
-            android:hint='@{viewModel.repliedUserName == null ? @string/comment : context.getString(R.string.reply) + viewModel.repliedUserName}'
-            android:text="@={viewModel.content}"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-        <Button
-            android:text="@string/send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        android:orientation="vertical">
+
+        <include layout="@layout/view_divider_horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_grey_200"
+            android:paddingBottom="5dp"
+            android:paddingEnd="@dimen/base_list_item_horizontal_spacing"
+            android:paddingStart="@dimen/base_list_item_horizontal_spacing"
+            android:paddingTop="5dp">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint='@{viewModel.repliedUserName == null ? @string/comment : context.getString(R.string.reply) + viewModel.repliedUserName}'
+                android:text="@={viewModel.content}" />
+
+            <TextView
+                android:onClick="@{viewModel::onClick}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base_list_item_horizontal_margin"
+                android:background="@drawable/btn_accept_request_selector"
+                android:enabled="@{!StringUtils.isEmpty(viewModel.content)}"
+                android:paddingBottom="6dp"
+                android:paddingEnd="@dimen/base_list_item_horizontal_spacing"
+                android:paddingStart="@dimen/base_list_item_horizontal_spacing"
+                android:paddingTop="6dp"
+                android:text="@string/send"
+                android:textColor="@{StringUtils.isEmpty(viewModel.content)? @color/md_grey_300 : @color/md_white_1000}"
+                android:textSize="@dimen/text_size_body" />
+        </LinearLayout>
     </LinearLayout>
+
 </layout>

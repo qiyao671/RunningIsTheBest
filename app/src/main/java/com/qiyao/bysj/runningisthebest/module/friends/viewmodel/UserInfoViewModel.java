@@ -2,11 +2,12 @@ package com.qiyao.bysj.runningisthebest.module.friends.viewmodel;
 
 import android.app.Fragment;
 import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.view.View;
 
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
-import com.qiyao.bysj.runningisthebest.common.Constants;
+import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.trello.rxlifecycle.components.RxFragment;
@@ -33,7 +34,7 @@ public class UserInfoViewModel implements IViewModel, View.OnClickListener {
     public ObservableField<String> rank = new ObservableField<>();
     public ObservableField<Double> totalDistance = new ObservableField<>();
     public ObservableField<Long> totalDuration = new ObservableField<>();
-    public ObservableField<Boolean> isFriend = new ObservableField<>();
+    public ObservableInt status = new ObservableInt();
 
     public UserInfoViewModel(Fragment fragment, UserBean user) {
         this.fragment = fragment;
@@ -63,12 +64,24 @@ public class UserInfoViewModel implements IViewModel, View.OnClickListener {
 //        rank.set();
 //        totalDistance.set();
         if (user.getRelationStatus() != null) {
-            isFriend.set(user.getRelationStatus() == Constants.STATUS_FRIENDS);
+            status.set(user.getRelationStatus());
         }
     }
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_add_friend:
+                addFriend();
+                break;
+        }
+    }
 
+    private void addFriend() {
+        HttpMethods.getInstance().addFriend(userBean.getId())
+                .subscribeOn(Schedulers.newThread())
+                .compose(((RxFragment) fragment).bindToLifecycle())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(ToastUtils::showShortToast, error -> ToastUtils.showShortToast(error.getMessage()));
     }
 }

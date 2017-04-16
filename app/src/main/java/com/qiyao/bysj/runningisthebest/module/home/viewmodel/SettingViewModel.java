@@ -38,6 +38,7 @@ public class SettingViewModel implements IViewModel {
     private void signOut() {
         SPHelper.removeToken();
         SPHelper.removeUser();
+        SPHelper.removeFriends();
         AppApplication.instance().loadToken();
         LoginFragment.launchAndClearTask(fragment.getActivity());
     }

@@ -3,11 +3,12 @@
     <data>
         <variable
             name="viewModel"
-            type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.WriteMomentViewModel" />
+            type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.WriteMomentAddImageItemViewModel" />
 
     </data>
 
         <ImageView
+            android:onClick="@{viewModel::onClick}"
             android:id="@+id/iv_add_image"
             android:tint="@color/accent"
             android:src="@drawable/ic_add"

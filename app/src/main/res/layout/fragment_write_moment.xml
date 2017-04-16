@@ -13,10 +13,12 @@
         android:layout_height="match_parent">
         <EditText
             android:text="@={viewModel.content}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:inputType="text"
             tools:ignore="LabelFor" />
+
         <android.support.v7.widget.RecyclerView
             app:items="@{viewModel.imagesWithAddBtn}"
             app:itemBinding="@{viewModel.imageItemView}"

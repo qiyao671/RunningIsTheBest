@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
+import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.ALoadMoreViewModel;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.IItemViewBindingCreator;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.ILoadMoreViewBindingCreator;
@@ -381,6 +382,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
             }
             // TODO: 2017/2/13 加载失败
             Log.e("TAG", "onError: " + e.getMessage());
+            ToastUtils.showShortToast(e.getMessage());
         }
 
         @Override

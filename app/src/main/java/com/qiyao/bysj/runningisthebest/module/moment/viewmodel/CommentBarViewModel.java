@@ -34,10 +34,10 @@ public class CommentBarViewModel implements IViewModel, View.OnClickListener {
     public void onClick(View v) {
         CommentBean commentBean = new CommentBean();
         commentBean.setContent(content.get());
-
         if (repliedUser != null) {
             commentBean.setRepliedUserId(repliedUser.getId());
         }
+
     }
 
     public void setOnCommentSuccessListener(OnCommentSuccessListener onCommentSuccessListener) {

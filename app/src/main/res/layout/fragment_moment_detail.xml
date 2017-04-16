@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentDetailViewModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/view_moment_content"
-            app:viewModel="@{viewModel.momentContentViewModel}"/>
-        <include layout="@layout/view_moment_likes"
-            app:viewModel="@{viewModel.momentLikesViewModel}" />
-        <include layout="@layout/view_moment_comments"
-            app:viewModel="@{viewModel.momentCommentsViewModel}" />
-        <include layout="@layout/view_comment_bar"
-            app:viewModel="@{viewModel.commentBarViewModel}" />
-    </LinearLayout>
-</layout>-->
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <import type="android.view.View" />
-        <variable
-            name="viewModel"
-            type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentCommentsViewModel" />
-    </data>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.linearlistview.LinearListView
-            android:visibility="@{viewModel.comments.size() > 0 ? View.VISIBLE : View.GONE}"
-            app:items="@{viewModel.comments}"
-            app:itemBinding="@{viewModel.commentItemView}"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:paddingBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/view_moment_content"
+                    app:viewModel="@{viewModel.momentContentViewModel}" />
+
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/base_list_item_vertical_margin"
+                    layout="@layout/view_moment_likes"
+                    app:viewModel="@{viewModel.momentLikesViewModel}" />
+
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/base_list_item_vertical_margin"
+                    layout="@layout/view_moment_comments"
+                    app:viewModel="@{viewModel.momentCommentsViewModel}" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <include
+            layout="@layout/view_comment_bar"
+            app:viewModel="@{viewModel.commentBarViewModel}" />
     </LinearLayout>
 </layout>

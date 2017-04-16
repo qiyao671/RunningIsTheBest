@@ -8,6 +8,8 @@ import com.qiyao.bysj.baselibrary.common.utils.PinyinUtils;
 import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.IItemViewBindingCreator;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.ViewBindingRes;
+import com.qiyao.bysj.baselibrary.model.event.MessageEvent;
+import com.qiyao.bysj.baselibrary.model.event.RxBus;
 import com.qiyao.bysj.baselibrary.viewmodel.ASectionCollectionViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.BR;
@@ -18,6 +20,7 @@ import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item.FriendItemViewModel;
 import com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item.FriendsHeaderViewModel;
 import com.qiyao.bysj.runningisthebest.module.friends.viewmodel.item.FriendsSectionHeaderItemViewModel;
+import com.trello.rxlifecycle.components.RxFragment;
 
 import java.util.List;
 
@@ -31,6 +34,7 @@ public class FriendsViewModel extends ASectionCollectionViewModel<String, UserBe
     private List<UserBean> friends;
     public FriendsViewModel(Fragment fragment) {
         super(fragment, false, false);
+        receiveMessage();
     }
 
     @Override
@@ -95,7 +99,7 @@ public class FriendsViewModel extends ASectionCollectionViewModel<String, UserBe
             @NonNull
             @Override
             public IItemViewModel genItemViewModel(UserBean item) {
-                return new FriendsHeaderViewModel();
+                return new FriendsHeaderViewModel(getFragment().getActivity());
             }
         };
     }
@@ -136,5 +140,11 @@ public class FriendsViewModel extends ASectionCollectionViewModel<String, UserBe
                     .doOnNext(list -> friends = list)
                     .doOnNext(SPHelper::saveFriends);
         }
+    }
+
+    private void receiveMessage() {
+        RxBus.getDefault().toObservable(MessageEvent.class)
+                .compose(((RxFragment)getFragment()).bindToLifecycle())
+                .subscribe(messageEvent -> requestData(RefreshMode.reset));
     }
 }
