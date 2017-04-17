@@ -158,4 +158,15 @@ public class HttpMethods extends HttpFactory {
     public Observable<String> agreeAddFriend(int userId) {
         return handleResult(runApiService.agreeAddFriend(userId));
     }
+
+    public Observable<String> publishMoment(MomentBean moment, List<String> pictures) {
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        for (String picture : pictures) {
+            File file = new File(picture);
+            builder.addFormDataPart("picture", file.getName(), RequestBody.create(MediaType.parse("images/*"), file));
+        }
+        builder.addFormDataPart("content", moment.getContent());
+        RequestBody requestbody = builder.build();
+        return handleResult(runApiService.publishMoment(requestbody));
+    }
 }

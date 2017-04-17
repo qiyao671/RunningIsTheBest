@@ -6,20 +6,32 @@ import android.databinding.ObservableField;
 import android.view.View;
 
 import com.android.databinding.library.baseAdapters.BR;
+import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
+import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.WriteMomentImageItemViewModel;
+import com.trello.rxlifecycle.components.RxFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
 import cn.finalteam.rxgalleryfinal.bean.MediaBean;
 import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultSubscriber;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
+import cn.finalteam.rxgalleryfinal.ui.RxGalleryListener;
+import cn.finalteam.rxgalleryfinal.ui.base.IMultiImageCheckedListener;
 import me.tatarka.bindingcollectionadapter2.OnItemBind;
 import me.tatarka.bindingcollectionadapter2.collections.MergeObservableList;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by lvqiyao (amorfatilay@163.com).
@@ -44,7 +56,7 @@ public class WriteMomentViewModel implements IViewModel, View.OnClickListener {
             if (item.getItemViewType().equals(WriteMomentAddImageItemViewModel.TYPE_ADD_IMAGE)) {
                 itemBinding.set(BR.viewModel, R.layout.item_add_image);
             } else {
-                itemBinding.set(BR.imageUrl, R.layout.item_image);
+                itemBinding.set(BR.viewModel , R.layout.item_image);
             }
         });
     }
@@ -78,6 +90,16 @@ public class WriteMomentViewModel implements IViewModel, View.OnClickListener {
 //                        Toast.makeText(getBaseContext(), "OVER", Toast.LENGTH_SHORT).show();
                     }
                 }).openGallery();
+        //得到图片多选的事件
+        RxGalleryListener.getInstance().setMultiImageCheckedListener(new IMultiImageCheckedListener() {
+            @Override
+            public void selectedImg(Object t, boolean isChecked) {
+                //这个主要点击或者按到就会触发，所以不建议在这里进行Toast
+            }
+            @Override
+            public void selectedImgMax(Object t, boolean isChecked, int maxSize) {
+            }
+        });
     }
 
     private void addImagesToList(IItemViewModel itemViewModel) {
@@ -85,5 +107,19 @@ public class WriteMomentViewModel implements IViewModel, View.OnClickListener {
         if (images.size() >= 9) {
             imagesWithAddBtn.removeItem(addImageItemViewModel);
         }
+    }
+
+    public void publishMoment() {
+        MomentBean momentBean = new MomentBean();
+        momentBean.setContent(content.get());
+        List<String> pictures = new ArrayList<>();
+        Observable.from(images)
+                .map(itemViewModel -> ((WriteMomentImageItemViewModel) itemViewModel).imageUri.get())
+                .subscribe(pictures::add);
+        HttpMethods.getInstance()
+                .publishMoment(momentBean, pictures)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(ToastUtils::showShortToast, error -> ToastUtils.showShortToast(error.getMessage()));
     }
 }

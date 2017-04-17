@@ -13,6 +13,7 @@ import org.w3c.dom.Comment;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -30,8 +31,8 @@ import rx.Observable;
  */
 
 public interface RunApiService {
-//    String HOST = "http://192.168.31.245:8080/";
-    String HOST = "http://192.168.1.7:8080/";
+    String HOST = "http://192.168.31.245:8080/";
+//    String HOST = "http://192.168.1.7:8080/";
 
 
     /**
@@ -113,4 +114,7 @@ public interface RunApiService {
     @FormUrlEncoded
     @POST("user/agreeAddFriend")
     Observable<HttpResult<String>> agreeAddFriend(@Field("friendUserId") int friendUserId);
+
+    @POST("moment/saveMoment")
+    Observable<HttpResult<String>> publishMoment(@Body RequestBody body);
 }

@@ -114,6 +114,7 @@
     <string name="send">发送</string>
     <string name="comment">评论</string>
     <string name="write_moment">发表动态</string>
+    <string name="publish">发表</string>
 
     <!--run-->
     <string name="start">开始</string>

@@ -48,8 +48,12 @@ public class MomentContentViewModel extends BaseObservable implements IViewModel
         profileUrl.set(momentBean.getUser().getProfile());
         userName.set(momentBean.getUser().getUsername());
         datetime.set(TimeUtils.getFriendlyTimeSpanByNow(momentBean.getGmtCreate()));
-        content.set(momentBean.getContent());
-        imageUrls.set(Arrays.asList(momentBean.getPicture().split(",")));
+        if (momentBean.getContent() != null) {
+            content.set(momentBean.getContent());
+        }
+        if (momentBean.getPicture() != null) {
+            imageUrls.set(Arrays.asList(momentBean.getPicture().split(",")));
+        }
         isLike.set(momentBean.getApproved());
     }
 

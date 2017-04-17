@@ -7,12 +7,16 @@
 
     </data>
 
+    <FrameLayout
+        android:showDividers=""
+        android:layout_width="80dp"
+        android:layout_height="80dp">
         <ImageView
             android:onClick="@{viewModel::onClick}"
             android:id="@+id/iv_add_image"
-            android:tint="@color/accent"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/ic_add_grey_300_48dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+    </FrameLayout>
 
 </layout>

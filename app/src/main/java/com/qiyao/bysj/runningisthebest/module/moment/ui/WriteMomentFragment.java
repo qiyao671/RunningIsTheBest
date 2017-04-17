@@ -3,6 +3,9 @@ package com.qiyao.bysj.runningisthebest.module.moment.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
@@ -21,6 +24,7 @@ public class WriteMomentFragment extends ADataBindingFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
+        setDisplayHomeAsUpEnabled(true);
         setTitle(R.string.write_moment);
     }
 
@@ -28,6 +32,24 @@ public class WriteMomentFragment extends ADataBindingFragment {
     @Override
     protected IViewModel createViewModel(Bundle arguments) {
         return new WriteMomentViewModel(this);
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.tb_write_moment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.publish:
+                ((WriteMomentViewModel)getViewModel()).publishMoment();
+                getActivity().finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
