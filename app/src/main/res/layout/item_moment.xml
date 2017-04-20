@@ -28,7 +28,7 @@
                 layout="@layout/view_moment_content"
                 app:viewModel="@{viewModel.contentViewModel}" />
 
-            <include
+<!--            <include
                 layout="@layout/view_moment_likes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/base_list_item_vertical_margin"
-                app:viewModel="@{viewModel.commentsViewModel}" />
+                app:viewModel="@{viewModel.commentsViewModel}" />-->
         </LinearLayout>
 
         <include layout="@layout/view_divider_horizontal" />

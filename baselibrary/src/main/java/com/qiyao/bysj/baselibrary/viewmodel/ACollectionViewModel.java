@@ -78,6 +78,8 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
                 }
             }
         });
+
+//        itemViewModels.addOnListChangedCallback();
     }
 
     public ACollectionViewModel(Fragment fragment, boolean isRefreshEnable, boolean isLoadMoreEnable) {

@@ -13,12 +13,6 @@
     </data>
 
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:onRefresh="@{viewModel.onRefreshListener}"
-        app:refreshEnable="@{viewModel.isRefreshEnable}"
-        app:refreshing="@{viewModel.isRefreshing}">
 
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -56,6 +50,13 @@
                 </android.support.design.widget.CollapsingToolbarLayout>
             </android.support.design.widget.AppBarLayout>
 
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:onRefresh="@{viewModel.onRefreshListener}"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:refreshEnable="@{viewModel.isRefreshEnable}"
+                app:refreshing="@{viewModel.isRefreshing}">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -64,9 +65,8 @@
                 app:itemBinding="@{viewModel.getItemBinding()}"
                 app:items="@{viewModel.itemViewModels}"
                 app:layoutManager="@{LayoutManagers.linear()}"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:onLoadMore="@{viewModel.onLoadMoreListener}" />
+            </android.support.v4.widget.SwipeRefreshLayout>
 
         </android.support.design.widget.CoordinatorLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
 </layout>

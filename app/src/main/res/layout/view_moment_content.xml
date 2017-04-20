@@ -4,6 +4,8 @@
 
     <data>
         <import type="com.qiyao.bysj.runningisthebest.R" />
+        <import type="android.view.View" />
+        <import type="com.qiyao.bysj.baselibrary.common.utils.StringUtils" />
         <variable
             name="viewModel"
             type="com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentContentViewModel" />
@@ -53,6 +55,7 @@
 
         <TextView
             android:layout_marginTop="@dimen/base_list_item_vertical_spacing"
+            android:visibility="@{StringUtils.isEmpty(viewModel.content) ? View.GONE : View.VISIBLE}"
             android:text="@{viewModel.content}"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/text_size_medium"

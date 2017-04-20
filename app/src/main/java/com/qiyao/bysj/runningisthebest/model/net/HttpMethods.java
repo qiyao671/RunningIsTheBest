@@ -161,11 +161,14 @@ public class HttpMethods extends HttpFactory {
 
     public Observable<String> publishMoment(MomentBean moment, List<String> pictures) {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        for (String picture : pictures) {
+        for (int i = 0; i < pictures.size(); i++) {
+            String picture = pictures.get(i);
             File file = new File(picture);
-            builder.addFormDataPart("picture", file.getName(), RequestBody.create(MediaType.parse("images/*"), file));
+            builder.addFormDataPart("picture" + i, file.getName(), RequestBody.create(MediaType.parse("images/*"), file));
         }
-        builder.addFormDataPart("content", moment.getContent());
+        if (moment != null && moment.getContent() != null) {
+            builder.addFormDataPart("content", moment.getContent());
+        }
         RequestBody requestbody = builder.build();
         return handleResult(runApiService.publishMoment(requestbody));
     }
