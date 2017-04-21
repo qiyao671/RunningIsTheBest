@@ -7,6 +7,7 @@ import android.databinding.ObservableField;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.databinding.ItemFriendBinding;
 import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
+import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 
 /**
  * Created by qiyao on 2017/3/17.
@@ -41,5 +42,9 @@ public class SuccinctMomentCommentItemViewModel implements IItemViewModel {
     @Override
     public String getItemViewType() {
         return TYPE_SUCCINCT;
+    }
+
+    public UserBean getUser() {
+        return commentBean.getUser();
     }
 }

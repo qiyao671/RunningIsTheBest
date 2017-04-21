@@ -47,6 +47,6 @@
 
         <include
             layout="@layout/view_comment_bar"
-            app:viewModel="@{viewModel.commentBarViewModel}" />
+            app:viewModel="@{viewModel.momentCommentBarViewModel}" />
     </LinearLayout>
 </layout>

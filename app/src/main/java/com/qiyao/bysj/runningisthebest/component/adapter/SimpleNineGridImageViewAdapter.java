@@ -20,7 +20,7 @@ public class SimpleNineGridImageViewAdapter extends NineGridImageViewAdapter<Str
     protected void onDisplayImage(Context context, ImageView imageView, String s) {
         Glide.with(imageView.getContext())
                 .load(s)
-                .placeholder(new ColorDrawable(ContextCompat.getColor(context, R.color.md_grey_300)))
+                .placeholder(new ColorDrawable(ContextCompat.getColor(context, R.color.md_grey_200)))
                 .crossFade()
                 .dontAnimate()
                 .into(imageView);

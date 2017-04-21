@@ -78,8 +78,6 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
                 }
             }
         });
-
-//        itemViewModels.addOnListChangedCallback();
     }
 
     public ACollectionViewModel(Fragment fragment, boolean isRefreshEnable, boolean isLoadMoreEnable) {
@@ -370,6 +368,8 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
                     .doAfterTerminate(() -> {if (isRefreshEnable.get() && isRefreshing.get())
                         isRefreshing.set(false);})
                     .doOnSubscribe(() -> {if (getLoadMoreViewModel() != null) { isLoading.set(true); }})
+                    .doOnSubscribe(() -> {if (isRefreshEnable.get() && !isRefreshing.get())
+                        isRefreshing.set(true);})
                     .compose(((RxFragment) fragment).bindToLifecycle())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this);

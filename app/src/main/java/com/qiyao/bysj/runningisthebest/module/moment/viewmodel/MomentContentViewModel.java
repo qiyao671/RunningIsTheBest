@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
+import com.qiyao.bysj.baselibrary.model.event.MessageEvent;
+import com.qiyao.bysj.baselibrary.model.event.RxBus;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
@@ -35,6 +37,8 @@ public class MomentContentViewModel extends BaseObservable implements IViewModel
     public ObservableField<List<String>> imageUrls = new ObservableField<>();
     public ObservableBoolean isLike = new ObservableBoolean();
 
+    private View.OnClickListener onCommentClickListener;
+
     private MomentBean momentBean;
 
     public MomentContentViewModel(Context context, MomentBean momentBean) {
@@ -61,18 +65,30 @@ public class MomentContentViewModel extends BaseObservable implements IViewModel
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_like:
-                HttpMethods.getInstance()
-                        .likeMoment(momentBean.getId(), !isLike.get())
-                        .subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(s -> {
-                            ToastUtils.showShortToast(s);
-                            isLike.set(!isLike.get());
-                        }, e -> ToastUtils.showShortToast(e.getMessage()));
+                likeMoment();
                 break;
             case R.id.civ_user_profile:
                 UserInfoFragment.launch(context, momentBean.getUser());
                 break;
+            case R.id.iv_comment:
+                if (onCommentClickListener != null) {
+                    onCommentClickListener.onClick(view);
+                }
         }
+    }
+
+    private void likeMoment() {
+        boolean up = !isLike.get();
+        HttpMethods.getInstance()
+                .likeMoment(momentBean.getId(), up)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(s -> isLike.set(up))
+                .doOnNext(s -> momentBean.setApproved(up))
+                .subscribe(ToastUtils::showShortToast, e -> ToastUtils.showShortToast(e.getMessage()));
+    }
+
+    public void setOnCommentClickListener(View.OnClickListener onCommentClickListener) {
+        this.onCommentClickListener = onCommentClickListener;
     }
 }

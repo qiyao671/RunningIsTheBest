@@ -4,8 +4,11 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
+import android.widget.AdapterView;
 
 import com.android.databinding.library.baseAdapters.BR;
+import com.linearlistview.LinearListView;
+import com.qiyao.bysj.baselibrary.component.OnItemClickListener;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.R;
@@ -30,6 +33,7 @@ public class MomentCommentsViewModel extends BaseObservable implements IViewMode
 
     private OnItemBind<IItemViewModel> commentItemView;
     public ObservableArrayList<IItemViewModel> comments = new ObservableArrayList<>();
+    private LinearListView.OnItemClickListener onItemClickListener;
 
     public MomentCommentsViewModel(Context context, String commentType, List<CommentBean> commentBeanList) {
         this.context = context;
@@ -73,8 +77,21 @@ public class MomentCommentsViewModel extends BaseObservable implements IViewMode
         }
     }
 
+    void addComment(CommentBean commentBean) {
+        comments.add(createCommentItemViewModel(commentBean));
+    }
+
     @Bindable
     public OnItemBind<IItemViewModel> getCommentItemView() {
         return commentItemView;
+    }
+
+    public void setOnItemClickListener(LinearListView.OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    @Bindable
+    public LinearListView.OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
     }
 }

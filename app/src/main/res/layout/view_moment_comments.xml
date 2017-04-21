@@ -14,6 +14,7 @@
         android:orientation="vertical">
 
         <com.linearlistview.LinearListView
+            app:onItemClickListener="@{viewModel.onItemClickListener}"
             app:items="@{viewModel.comments}"
             app:itemBinding="@{viewModel.commentItemView}"
             android:layout_width="match_parent"

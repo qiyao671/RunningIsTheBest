@@ -7,9 +7,12 @@ import android.view.View;
 
 import com.android.databinding.library.baseAdapters.BR;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
+import com.qiyao.bysj.baselibrary.model.event.MessageEvent;
+import com.qiyao.bysj.baselibrary.model.event.RxBus;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.common.Constants;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.WriteMomentImageItemViewModel;
@@ -120,6 +123,7 @@ public class WriteMomentViewModel implements IViewModel, View.OnClickListener {
                 .publishMoment(momentBean, pictures)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(ToastUtils::showShortToast, error -> ToastUtils.showShortToast(error.getMessage()));
+                .doOnNext(ToastUtils::showShortToast)
+                .subscribe(s -> RxBus.getDefault().post(new MessageEvent(Constants.EVENT_PUBLISH_MOMENT_SUCCESS)), error -> ToastUtils.showShortToast(error.getMessage()));
     }
 }

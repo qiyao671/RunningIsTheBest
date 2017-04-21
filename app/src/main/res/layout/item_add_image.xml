@@ -9,6 +9,7 @@
 
     <FrameLayout
         android:showDividers=""
+        android:background="@drawable/item_bg_selector"
         android:layout_width="80dp"
         android:layout_height="80dp">
         <ImageView

@@ -49,6 +49,18 @@ public class FragmentContainerActivity extends BaseActivity {
         launch(context, clazz, null);
     }
 
+    public static void launchForResult(Fragment from, Class<? extends Fragment> clazz, Bundle args, int requestCode) {
+        Intent intent = new Intent(from.getActivity(), FragmentContainerActivity.class);
+        intent.putExtra("className", clazz.getName());
+        if (args != null)
+            intent.putExtras(args);
+        from.startActivityForResult(intent, requestCode);
+    }
+
+    public static void launchForResult(Fragment from, Class<? extends Fragment> clazz, int requestCode) {
+        launchForResult(from, clazz, null, requestCode);
+    }
+
     public static void launchForResult(Activity from, Class<? extends Fragment> clazz, Bundle args, int requestCode) {
         Intent intent = new Intent(from, FragmentContainerActivity.class);
         intent.putExtra("className", clazz.getName());

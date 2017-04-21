@@ -1,6 +1,7 @@
 package com.qiyao.bysj.runningisthebest.module.moment.ui;
 
 import android.content.Context;
+import android.databinding.ObservableList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.ui.fragment.ARecyclerViewFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.databinding.FragmentMomentsBinding;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentsViewModel;
 
@@ -29,6 +31,36 @@ public class MomentsFragment extends ARecyclerViewFragment {
         super.onViewCreated(view, savedInstanceState);
         initToolbar();
         setHasOptionsMenu(true);
+        setOnDataSetChange();
+    }
+
+    private void setOnDataSetChange() {
+        getViewModel().itemViewModels.addOnListChangedCallback(new ObservableList.OnListChangedCallback() {
+            @Override
+            public void onChanged(ObservableList observableList) {
+                getBinding().recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onItemRangeChanged(ObservableList observableList, int i, int i1) {
+                getBinding().recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onItemRangeInserted(ObservableList observableList, int i, int i1) {
+                getBinding().recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onItemRangeMoved(ObservableList observableList, int i, int i1, int i2) {
+                getBinding().recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onItemRangeRemoved(ObservableList observableList, int i, int i1) {
+                getBinding().recyclerView.getAdapter().notifyDataSetChanged();
+            }
+        });
     }
 
     private void initToolbar() {
@@ -84,5 +116,9 @@ public class MomentsFragment extends ARecyclerViewFragment {
 
     public static void launch(Context context) {
         launch(context, null);
+    }
+
+    public FragmentMomentsBinding getBinding() {
+        return (FragmentMomentsBinding) super.getBinding();
     }
 }

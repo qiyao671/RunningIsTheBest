@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.qiyao.bysj.baselibrary.databinding.FragmentRecyclerViewBinding;
 import com.qiyao.bysj.baselibrary.ui.fragment.ARecyclerViewFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
@@ -27,7 +28,7 @@ public class FriendsFragment extends ARecyclerViewFragment {
 
     public void initToolbar() {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(getBinding().toolbar);
+        activity.setSupportActionBar(((FragmentRecyclerViewBinding)getBinding()).toolbar);
         setHasOptionsMenu(true);
 //        activity.setTitle(R.string.tab_friends);
         if (activity.getSupportActionBar() != null) {

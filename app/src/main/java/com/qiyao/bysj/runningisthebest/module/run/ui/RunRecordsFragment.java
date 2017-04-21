@@ -19,7 +19,7 @@ public class RunRecordsFragment extends ARecyclerViewFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getBinding().toolbar.setVisibility(View.GONE);
+        hideToolbar();
         initToolbar();
     }
 

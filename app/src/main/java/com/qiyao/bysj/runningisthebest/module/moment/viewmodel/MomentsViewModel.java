@@ -4,6 +4,8 @@ import android.app.Fragment;
 
 import com.android.databinding.library.baseAdapters.BR;
 import com.qiyao.bysj.baselibrary.component.bindinghelper.ViewBindingRes;
+import com.qiyao.bysj.baselibrary.model.event.MessageEvent;
+import com.qiyao.bysj.baselibrary.model.event.RxBus;
 import com.qiyao.bysj.baselibrary.viewmodel.ACollectionViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.runningisthebest.R;
@@ -32,6 +34,12 @@ public class MomentsViewModel extends ACollectionViewModel<MomentBean> {
     public MomentsViewModel(Fragment fragment, UserBean userId) {
         super(fragment);
         this.user = userId;
+        setOnPublishSuccess();
+    }
+
+    private void setOnPublishSuccess() {
+        RxBus.getDefault().toObservable(MessageEvent.class)
+                .subscribe(event -> requestData(RefreshMode.refresh));
     }
 
     @Override

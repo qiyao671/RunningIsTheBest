@@ -1,14 +1,17 @@
 package com.qiyao.bysj.baselibrary.ui.fragment;
 
+import android.databinding.ObservableList;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.qiyao.bysj.baselibrary.R;
 import com.qiyao.bysj.baselibrary.databinding.FragmentRecyclerViewBinding;
 import com.qiyao.bysj.baselibrary.viewmodel.ACollectionViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
+import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 
 /**
  * Created by lvqiyao (amorfatilay@163.com).
@@ -41,16 +44,15 @@ public abstract class ARecyclerViewFragment extends ADataBindingFragment {
     }
 
     @Override
-    public FragmentRecyclerViewBinding getBinding() {
-        return (FragmentRecyclerViewBinding) super.getBinding();
-    }
-
-    @Override
     public ACollectionViewModel getViewModel() {
         return (ACollectionViewModel) super.getViewModel();
     }
 
     public void hideToolbar() {
-        getBinding().toolbar.setVisibility(View.GONE);
+        ((FragmentRecyclerViewBinding)getBinding()).toolbar.setVisibility(View.GONE);
+    }
+
+    public Toolbar getToolbar() {
+        return ((FragmentRecyclerViewBinding) getBinding()).toolbar;
     }
 }

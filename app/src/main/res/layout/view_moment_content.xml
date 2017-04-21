@@ -74,7 +74,8 @@
 
         <LinearLayout
             android:layout_marginTop="@dimen/base_list_item_vertical_spacing"
-            android:layout_width="match_parent"
+            android:layout_gravity="end"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -83,7 +84,7 @@
                 android:onClick="@{viewModel::onClick}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_like" />
+                android:src="@{viewModel.isLike ? @drawable/ic_like_fill : @drawable/ic_like}" />
 
             <ImageView
                 android:id="@+id/iv_comment"

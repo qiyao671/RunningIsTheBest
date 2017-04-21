@@ -5,6 +5,7 @@ import android.net.Uri;
 import com.qiyao.bysj.baselibrary.model.net.HttpFactory;
 import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
+import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
@@ -119,8 +120,8 @@ public class HttpMethods extends HttpFactory {
         return handleResult(runApiService.listApproveUsers(momentId));
     }
 
-    public Observable<String> deleteMoment(int momentId, Comment comment) {
-        return handleResult(runApiService.commentMoment(momentId, comment));
+    public Observable<String> commentMoment(CommentBean comment) {
+        return handleResult(runApiService.commentMoment(comment));
     }
 
     public Observable<String> addFriend(int userId) {

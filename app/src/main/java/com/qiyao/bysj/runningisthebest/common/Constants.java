@@ -22,6 +22,8 @@ public class Constants {
 
     public static final String EVENT_REFRESH_FRIENDS_LIST = "EVENT_REFRESH_FRIENDS_LIST";
 
+    public static final String EVENT_PUBLISH_MOMENT_SUCCESS = "EVENT_PUBLISH_MOMENT_SUCCESS";
+
     //添加好友
     public final static int FRIEND_STATUS_ADD_FRIENDS = 0;
 

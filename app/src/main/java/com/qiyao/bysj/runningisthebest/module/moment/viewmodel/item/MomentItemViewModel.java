@@ -6,6 +6,7 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.view.View;
 
+import com.linearlistview.LinearListView;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.StaticItemViewModel;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
@@ -18,7 +19,7 @@ import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.MomentLikesViewMo
  * Created by qiyao on 2017/3/17.
  */
 
-public class MomentItemViewModel extends BaseObservable implements IItemViewModel, View.OnClickListener {
+public class MomentItemViewModel extends BaseObservable implements IItemViewModel, View.OnClickListener{
     private Context context;
 
     private MomentBean momentBean;

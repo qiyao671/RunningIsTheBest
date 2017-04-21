@@ -18,8 +18,8 @@ import me.tatarka.bindingcollectionadapter2.OnItemBind;
 
 public class LinearListBindingAdapters {
     @SuppressWarnings("unchecked")
-    @BindingAdapter(value = {"itemBinding", "itemTypeCount", "items", "adapter", "itemDropDownLayout", "itemIds", "itemIsEnabled"}, requireAll = false)
-    public static <T> void setAdapter(LinearListView linearListView, ItemBinding<T> itemBinding, Integer itemTypeCount, List items, BindingListViewAdapter<T> adapter, @LayoutRes int itemDropDownLayout, BindingListViewAdapter.ItemIds<? super T> itemIds, BindingListViewAdapter.ItemIsEnabled<? super T> itemIsEnabled) {
+    @BindingAdapter(value = {"itemBinding", "itemTypeCount", "items", "adapter", "itemDropDownLayout", "itemIds", "itemIsEnabled", "onItemClickListener"}, requireAll = false)
+    public static <T> void setAdapter(LinearListView linearListView, ItemBinding<T> itemBinding, Integer itemTypeCount, List items, BindingListViewAdapter<T> adapter, @LayoutRes int itemDropDownLayout, BindingListViewAdapter.ItemIds<? super T> itemIds, BindingListViewAdapter.ItemIsEnabled<? super T> itemIsEnabled, LinearListView.OnItemClickListener onItemClickListener) {
         if (itemBinding == null) {
             throw new IllegalArgumentException("onItemBind must not be null");
         }
@@ -37,6 +37,7 @@ public class LinearListBindingAdapters {
         adapter.setItems(items);
         adapter.setItemIds(itemIds);
         adapter.setItemIsEnabled(itemIsEnabled);
+        linearListView.setOnItemClickListener(onItemClickListener);
 
         if (oldAdapter != adapter) {
             linearListView.setAdapter(adapter);

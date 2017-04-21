@@ -2,6 +2,7 @@ package com.qiyao.bysj.runningisthebest.model.net;
 
 import com.qiyao.bysj.baselibrary.model.bean.HttpResult;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
+import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
@@ -89,9 +90,8 @@ public interface RunApiService {
     @POST("moment/listApproveUser")
     Observable<HttpResult<List<UserBean>>> listApproveUsers(@Field("momentId") int momentId);
 
-    @FormUrlEncoded
     @POST("moment/comment")
-    Observable<HttpResult<String>> commentMoment(@Field("momentId") int momentId, @Field("comment") Comment comment);
+    Observable<HttpResult<String>> commentMoment(@Body CommentBean comment);
 
     @Multipart
     @POST("user/uploadFile")
