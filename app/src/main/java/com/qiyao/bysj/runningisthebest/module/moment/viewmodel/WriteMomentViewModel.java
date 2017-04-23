@@ -16,7 +16,6 @@ import com.qiyao.bysj.runningisthebest.common.Constants;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.moment.viewmodel.item.WriteMomentImageItemViewModel;
-import com.trello.rxlifecycle.components.RxFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,6 @@ import me.tatarka.bindingcollectionadapter2.OnItemBind;
 import me.tatarka.bindingcollectionadapter2.collections.MergeObservableList;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 

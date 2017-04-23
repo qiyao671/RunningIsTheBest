@@ -2,6 +2,7 @@ package com.qiyao.bysj.runningisthebest.model.net;
 
 import android.net.Uri;
 
+import com.amap.api.maps.model.LatLng;
 import com.qiyao.bysj.baselibrary.model.net.HttpFactory;
 import com.qiyao.bysj.runningisthebest.AppApplication;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
@@ -11,8 +12,6 @@ import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
-
-import org.w3c.dom.Comment;
 
 import java.io.File;
 import java.util.List;
@@ -172,5 +171,17 @@ public class HttpMethods extends HttpFactory {
         }
         RequestBody requestbody = builder.build();
         return handleResult(runApiService.publishMoment(requestbody));
+    }
+
+    public Observable<RunBean> getRunBean(int logId) {
+        return handleResult(runApiService.getRunnyLog(logId));
+    }
+
+    public Observable<List<List<LatLng>>> getRunTracks(int logId) {
+        return handleResult(runApiService.getRunnyTracks(logId));
+    }
+
+    public Observable<List<List<Double>>> getRunAltitudeList(int logId) {
+        return handleResult(runApiService.getRunnyAltitudeList(logId));
     }
 }

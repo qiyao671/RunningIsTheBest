@@ -52,7 +52,6 @@ public class RunFragment extends ADataBindingFragment
     private AMapLocationClient locationClient;
     private AMapLocationClientOption locationOption;
     private Polyline trackPolyline;
-    private String city;
 
     @Nullable
     @Override

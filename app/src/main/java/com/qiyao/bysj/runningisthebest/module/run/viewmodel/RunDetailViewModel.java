@@ -25,7 +25,6 @@ public class RunDetailViewModel extends BaseObservable implements IViewModel {
     private String avg_speed;
     private String calories;
 
-
     @Bindable
     public String getDistance() {
         return distance;

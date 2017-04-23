@@ -3,6 +3,10 @@ package com.qiyao.bysj.runningisthebest.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.amap.api.maps.model.LatLng;
+
+import java.util.List;
+
 /**
  * Created by lvqiyao (amorfatilay@163.com).
  * 2017/3/9 21:00.
@@ -27,6 +31,10 @@ public class RunBean implements Parcelable {
     private String momentContent;
 
     private Long startRunTime;
+
+    private List<List<LatLng>> tracks;
+
+    private List<List<Double>> altitudeLists;
 
     public Integer getId() {
         return id;
@@ -144,4 +152,20 @@ public class RunBean implements Parcelable {
             return new RunBean[size];
         }
     };
+
+    public List<List<LatLng>> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(List<List<LatLng>> tracks) {
+        this.tracks = tracks;
+    }
+
+    public List<List<Double>> getAltitudeLists() {
+        return altitudeLists;
+    }
+
+    public void setAltitudeLists(List<List<Double>> altitudeLists) {
+        this.altitudeLists = altitudeLists;
+    }
 }

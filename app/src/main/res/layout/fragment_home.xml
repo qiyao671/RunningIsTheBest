@@ -16,8 +16,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <RelativeLayout
-            android:layout_width="match_pa
-            rent"
+            android:layout_width="match_parent"
             android:layout_height="150dp">
             <android.support.v4.view.ViewPager
                 android:id="@+id/view_pager"

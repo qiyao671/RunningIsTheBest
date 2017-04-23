@@ -109,6 +109,8 @@ public class RunViewModel implements IViewModel, AMapLocationListener, WeatherSe
     public void stopRun() {
         run.setDistance(distance.get());
         run.setSpendTime(spendTime.get());
+        run.setAltitudeLists(altitudeLists);
+        run.setTracks(tracks);
         uploadRunRecord(run);
     }
 

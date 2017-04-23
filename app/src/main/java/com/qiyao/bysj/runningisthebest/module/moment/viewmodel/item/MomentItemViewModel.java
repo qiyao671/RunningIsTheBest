@@ -6,7 +6,6 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.view.View;
 
-import com.linearlistview.LinearListView;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.IItemViewModel;
 import com.qiyao.bysj.baselibrary.viewmodel.itemviewmodel.StaticItemViewModel;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
@@ -46,6 +45,9 @@ public class MomentItemViewModel extends BaseObservable implements IItemViewMode
 
     @Override
     public void onClick(View view) {
-        MomentDetailFragment.launch(context, momentBean);
+        switch (view.getId()) {
+            default:
+                MomentDetailFragment.launch(context, momentBean);
+        }
     }
 }
