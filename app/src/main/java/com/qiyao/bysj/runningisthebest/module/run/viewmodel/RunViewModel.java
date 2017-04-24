@@ -64,17 +64,22 @@ public class RunViewModel implements IViewModel, AMapLocationListener, WeatherSe
     }
 
     private void addPoint(AMapLocation aMapLocation) {
-        LatLng latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
-        currentTrack.add(latLng);
+        if (isRunning.get()) {
+            LatLng latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+            currentTrack.add(latLng);
+        }
     }
 
     private void calculateDistance() {
-        int size = currentTrack.size();
-        if (size > 1) {
-            double delta = AMapUtils.calculateLineDistance(currentTrack.get(size - 1), currentTrack.get(size - 2)) / 1000;
-            Log.d("delta", delta + "");
-            distance.set(distance.get() + delta);
+        if (isRunning.get()) {
+            int size = currentTrack.size();
+            if (size > 1) {
+                double delta = AMapUtils.calculateLineDistance(currentTrack.get(size - 1), currentTrack.get(size - 2)) / 1000;
+                Log.d("delta", delta + "");
+                distance.set(distance.get() + delta);
+            }
         }
+
     }
 
     public void startRun() {
@@ -86,6 +91,9 @@ public class RunViewModel implements IViewModel, AMapLocationListener, WeatherSe
     public void onRunResume() {
         isRunning.set(true);
         startTimeCounter();
+        //开始一段新的轨迹
+        currentTrack = new ArrayList<>();
+        currentAltitudeList = new ArrayList<>();
     }
 
     public void onRunPause() {
@@ -93,11 +101,10 @@ public class RunViewModel implements IViewModel, AMapLocationListener, WeatherSe
         timeCounter.unsubscribe();
         //添加这一段轨迹到轨迹列表中
         tracks.add(currentTrack);
-        //开始一段新的轨迹
-        currentTrack = new ArrayList<>();
+        currentTrack = null;
 
         altitudeLists.add(currentAltitudeList);
-        currentAltitudeList = new ArrayList<>();
+        currentAltitudeList = null;
     }
 
     private void startTimeCounter() {
