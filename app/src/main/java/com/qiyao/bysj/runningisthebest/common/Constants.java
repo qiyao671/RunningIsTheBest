@@ -35,4 +35,5 @@ public class Constants {
 
     //不是好友
     public final static int FRIEND_STATUS_NOT_FRIEND = 3;
+    public static final String ON_MAP_INIT = "ON_MAP_INIT";
 }

@@ -10,13 +10,18 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 import com.qiyao.bysj.baselibrary.common.CommonConstants;
+import com.qiyao.bysj.baselibrary.model.event.MessageEvent;
+import com.qiyao.bysj.baselibrary.model.event.RxBus;
 import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.common.Constants;
 import com.qiyao.bysj.runningisthebest.databinding.FragmentRunTrackBinding;
+import com.qiyao.bysj.runningisthebest.databinding.ItemFriendBinding;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.module.run.viewmodel.RunTrackViewModel;
 
@@ -45,7 +50,7 @@ public class RunTrackFragment extends ADataBindingFragment
         mapView = getBinding().map;
         mapView.onCreate(savedInstanceState);
         init();
-        setUpMap();
+        RxBus.getDefault().post(new MessageEvent(Constants.ON_MAP_INIT));
     }
 
 
@@ -56,12 +61,6 @@ public class RunTrackFragment extends ADataBindingFragment
         if (map == null) {
             map = mapView.getMap();
         }
-    }
-
-
-    private void setUpMap() {
-        map.moveCamera(CameraUpdateFactory.zoomTo(6));
-        map.setMapTextZIndex(2);
     }
 
 
@@ -77,7 +76,16 @@ public class RunTrackFragment extends ADataBindingFragment
 
     @Override
     public void addTrackToMap(List<LatLng> track) {
-        Polyline trackPolyline = map.addPolyline(new PolylineOptions().color(Color.BLUE));
-        trackPolyline.setPoints(track);
+        if (map != null) {
+            Polyline trackPolyline = map.addPolyline(new PolylineOptions().color(Color.BLUE));
+            trackPolyline.setPoints(track);
+        }
+    }
+
+    @Override
+    public void setMapScale(LatLngBounds bounds) {
+        if (map != null) {
+            map.moveCamera(CameraUpdateFactory.newLatLngBoundsRect(bounds, 80, 80, 80, 600));
+        }
     }
 }

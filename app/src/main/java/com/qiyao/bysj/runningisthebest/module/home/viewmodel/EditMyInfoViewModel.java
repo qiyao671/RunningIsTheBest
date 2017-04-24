@@ -178,7 +178,7 @@ public class EditMyInfoViewModel extends BaseObservable
                 .with(fragment.getActivity())
                 .image()
                 .radio()
-                .crop()
+                .cropWithAspectRatio(1f, 1f)
                 .imageLoader(ImageLoaderType.GLIDE)
                 .subscribe(new RxBusResultSubscriber<ImageRadioResultEvent>() {
                     @Override
@@ -292,17 +292,17 @@ public class EditMyInfoViewModel extends BaseObservable
         Observable<String> observable = HttpMethods.getInstance()
                 .updateUserInfo(userBean);
         if (!profileUrl.get().equals(userBean.getProfile())) {
-            observable.mergeWith(HttpMethods.getInstance()
-                    .uploadProfile(Uri.parse(profileUrl.get())));
+            observable = Observable.merge(HttpMethods.getInstance()
+                    .uploadProfile(Uri.parse(profileUrl.get())), observable);
         }
+
         observable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onSubmitSuccess, e -> ToastUtils.showShortToast(e.getMessage()));
+                .subscribe(this::onSubmitSuccess, e -> ToastUtils.showShortToast(e.getMessage()), () -> ToastUtils.showShortToast("信息修改成功"));
     }
 
     private void onSubmitSuccess(String msg) {
-        ToastUtils.showShortToast(msg);
         RxBus.getDefault().post(new MessageEvent(HomeFragment.EVENT_EDIT_INFO, true));
     }
 }

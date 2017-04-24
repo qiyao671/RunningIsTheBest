@@ -1,10 +1,15 @@
 package com.qiyao.bysj.runningisthebest.module.moment.ui;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.qiyao.bysj.baselibrary.ui.activity.FragmentContainerActivity;
 import com.qiyao.bysj.baselibrary.ui.fragment.ADataBindingFragment;
@@ -40,6 +45,22 @@ public class ImagePagerFragment extends ADataBindingFragment {
         super.onViewCreated(view, savedInstanceState);
         int current = getArguments().getInt(KEY_CURRENT_POSITION, 0);
         ((FragmentImagePagerBinding)getBinding()).viewPager.setCurrentItem(current);
+        setDisplayHomeAsUpEnabled(false);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WindowManager.LayoutParams localLayoutParams = getActivity().getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_FULLSCREEN | localLayoutParams.flags);
+        }
+        //隐藏toolbar
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().hide();
+        }
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     public static void launch(Context context, ArrayList<String> imagesUrl, int currentPosition) {

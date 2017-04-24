@@ -4,14 +4,21 @@ import android.app.Fragment;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.LatLngBounds;
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
+import com.qiyao.bysj.baselibrary.model.event.MessageEvent;
+import com.qiyao.bysj.baselibrary.model.event.RxBus;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
+import com.qiyao.bysj.runningisthebest.common.Constants;
 import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.run.ui.IRunTrackView;
 import com.trello.rxlifecycle.components.RxFragment;
+
+import java.util.List;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -33,11 +40,17 @@ public class RunTrackViewModel extends BaseObservable implements IViewModel {
     private String calories;
     private String datetime;
 
+    private RunBean runBean;
+
     public RunTrackViewModel(Fragment fragment, RunBean runBean, IRunTrackView runTrackView) {
         this.fragment = fragment;
+        this.runBean = runBean;
         setRunInfo(runBean);
         this.runTrackView = runTrackView;
-        setTrack(runBean.getId());
+        setTrack();
+        RxBus.getDefault().toObservable(MessageEvent.class)
+                .filter(event -> event.getName().equals(Constants.ON_MAP_INIT))
+                .subscribe(event -> setTrack());
     }
 
     private void setRunInfo(RunBean runBean) {
@@ -50,15 +63,21 @@ public class RunTrackViewModel extends BaseObservable implements IViewModel {
         calories = runBean.getEnergy() != null ? String.valueOf(runBean.getEnergy()) : "--";
     }
 
-    private void setTrack(Integer logId) {
+    private void setTrack() {
+        LatLngBounds.Builder builder = LatLngBounds.builder();
+
         HttpMethods.getInstance()
-                .getRunTracks(logId)
+                .getRunTracks(runBean.getId())
                 .subscribeOn(Schedulers.newThread())
                 .compose(((RxFragment) fragment).bindToLifecycle())
                 .flatMap(Observable::from)
+                .doOnNext(runTrackView::addTrackToMap)
+                .flatMap(Observable::from)
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError(Throwable::printStackTrace)
-                .subscribe(runTrackView::addTrackToMap, throwable -> ToastUtils.showShortToast(throwable.getMessage()));
+                .doOnError(throwable -> ToastUtils.showShortToast(throwable.getMessage()))
+                .subscribe(builder::include,
+                        Throwable::printStackTrace,
+                        () -> runTrackView.setMapScale(builder.build()));
     }
 
     @Bindable
