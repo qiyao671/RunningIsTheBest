@@ -29,4 +29,8 @@ public class MomentLikeItemViewModel extends BaseObservable implements IItemView
     public String getItemViewType() {
         return StaticItemViewModel.TYPE_ITEM;
     }
+
+    public int getUserId() {
+        return approveBean.getUserId();
+    }
 }

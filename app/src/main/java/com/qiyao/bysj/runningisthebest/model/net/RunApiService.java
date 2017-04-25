@@ -124,4 +124,10 @@ public interface RunApiService {
 
     @GET("log/getRunnyAltitudeList")
     Observable<HttpResult<List<List<Double>>>> getRunnyAltitudeList(@Query("logId") int logId);
+
+    @GET("moment/listSomeOneMoments")
+    Observable<HttpResult<ListResultBean<MomentBean>>> getMomentListOfUser(@Query("someOneId") Integer userId, @Query("pageSize") int pageSize, @Query("num") Integer num);
+
+    @GET("moment/getMoment")
+    Observable<HttpResult<MomentBean>> getMoment(@Query("momentId") int momentId);
 }

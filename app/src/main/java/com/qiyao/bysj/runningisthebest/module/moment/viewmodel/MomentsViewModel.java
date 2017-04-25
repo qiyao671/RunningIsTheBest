@@ -94,7 +94,9 @@ public class MomentsViewModel extends ACollectionViewModel<MomentBean> {
         private void setPageInfo(List<MomentBean> list, RefreshMode mode) {
             switch (mode) {
                 case load_more:
-                    endId = list.get(list.size() - 1).getId();
+                    if (list.size() > 0) {
+                        endId = list.get(list.size() - 1).getId();
+                    }
                     break;
                 case refresh:
                     if (list.size() > 0) {

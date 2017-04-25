@@ -38,12 +38,13 @@ public class MomentCommentsViewModel extends BaseObservable implements IViewMode
     public MomentCommentsViewModel(Context context, String commentType, List<CommentBean> commentBeanList) {
         this.context = context;
         this.commentType = commentType;
-        this.commentBeanList = commentBeanList;
         initItemView();
-        initItems();
+        initItems(commentBeanList);
     }
 
-    private void initItems() {
+    public void initItems(List<CommentBean> commentBeanList) {
+        this.commentBeanList = commentBeanList;
+        comments.clear();
         Observable.from(commentBeanList)
                 .map(this::createCommentItemViewModel)
                 .subscribe(comments::add);

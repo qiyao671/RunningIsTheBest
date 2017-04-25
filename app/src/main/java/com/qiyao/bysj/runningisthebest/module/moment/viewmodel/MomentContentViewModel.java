@@ -13,6 +13,7 @@ import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.MomentBean;
+import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.friends.ui.UserInfoFragment;
 import com.qiyao.bysj.runningisthebest.module.moment.ui.ImagePagerFragment;
@@ -39,17 +40,17 @@ public class MomentContentViewModel extends BaseObservable implements IViewModel
     public ObservableBoolean isLike = new ObservableBoolean();
 
     private View.OnClickListener onCommentClickListener;
+    private OnLikeMomentSuccessListener onLikeMomentSuccessListener;
 
     private MomentBean momentBean;
 
     public MomentContentViewModel(Context context, MomentBean momentBean) {
         this.context = context;
-        this.momentBean = momentBean;
         setMoment(momentBean);
     }
 
-    private void setMoment(MomentBean momentBean) {
-        // TODO: 2017/3/17
+    public void setMoment(MomentBean momentBean) {
+        this.momentBean = momentBean;
         profileUrl.set(momentBean.getUser().getProfile());
         userName.set(momentBean.getUser().getUsername());
         datetime.set(TimeUtils.getFriendlyTimeSpanByNow(momentBean.getGmtCreate()));
@@ -88,6 +89,7 @@ public class MomentContentViewModel extends BaseObservable implements IViewModel
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(s -> isLike.set(up))
                 .doOnNext(s -> momentBean.setApproved(up))
+                .doOnNext(s -> {if(onLikeMomentSuccessListener != null) onLikeMomentSuccessListener.onLikeMomentSuccess(up);})
                 .subscribe(ToastUtils::showShortToast, e -> ToastUtils.showShortToast(e.getMessage()));
     }
 
@@ -99,4 +101,13 @@ public class MomentContentViewModel extends BaseObservable implements IViewModel
     public void onItemImageClick(Context context, ImageView imageView, int index, List list) {
         ImagePagerFragment.launch(context, (ArrayList<String>) imageUrls.get(), index);
     }
+
+    public void setOnLikeMomentSuccessListener(OnLikeMomentSuccessListener onLikeMomentSuccessListener) {
+        this.onLikeMomentSuccessListener = onLikeMomentSuccessListener;
+    }
+
+    interface OnLikeMomentSuccessListener {
+        void onLikeMomentSuccess(boolean isLike);
+    }
+
 }

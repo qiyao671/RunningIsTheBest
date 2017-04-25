@@ -10,6 +10,7 @@ import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.moment.ui.UserMomentsFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
 import java.util.Locale;
@@ -73,6 +74,9 @@ public class UserInfoViewModel implements IViewModel, View.OnClickListener {
         switch (view.getId()) {
             case R.id.tv_add_friend:
                 addFriend();
+                break;
+            case R.id.moment:
+                UserMomentsFragment.launch(fragment.getActivity(), userBean.getId());
                 break;
         }
     }

@@ -164,6 +164,14 @@ public class UserBean implements Parcelable {
         this.age = age;
     }
 
+    public Integer getRelationStatus() {
+        return relationStatus;
+    }
+
+    public void setRelationStatus(Integer relationStatus) {
+        this.relationStatus = relationStatus;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -184,6 +192,7 @@ public class UserBean implements Parcelable {
         dest.writeValue(this.communityId);
         dest.writeString(this.signature);
         dest.writeValue(this.age);
+        dest.writeValue(this.relationStatus);
     }
 
     public UserBean() {
@@ -203,9 +212,10 @@ public class UserBean implements Parcelable {
         this.communityId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.signature = in.readString();
         this.age = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.relationStatus = (Integer) in.readValue(Integer.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<UserBean> CREATOR = new Parcelable.Creator<UserBean>() {
+    public static final Creator<UserBean> CREATOR = new Creator<UserBean>() {
         @Override
         public UserBean createFromParcel(Parcel source) {
             return new UserBean(source);
@@ -216,36 +226,4 @@ public class UserBean implements Parcelable {
             return new UserBean[size];
         }
     };
-
-    @Override
-    public boolean equals(Object o) {
-
-        if (o == this) return true;
-        if (!(o instanceof UserBean)) {
-            return false;
-        }
-
-        UserBean user = (UserBean) o;
-
-        return Objects.equals(user.id, id) &&
-                Objects.equals(user.username, username) &&
-                Objects.equals(user.password, password) &&
-                Objects.equals(user.rank, rank) &&
-                Objects.equals(user.profile, profile) &&
-                Objects.equals(user.height, height) &&
-                Objects.equals(user.birthday, birthday) &&
-                Objects.equals(user.location, location) &&
-                Objects.equals(user.communityId, communityId) &&
-                Objects.equals(user.signature, signature) &&
-                Objects.equals(user.age, age) &&
-                Objects.equals(user.relationStatus, relationStatus);
-    }
-
-    public Integer getRelationStatus() {
-        return relationStatus;
-    }
-
-    public void setRelationStatus(Integer relationStatus) {
-        this.relationStatus = relationStatus;
-    }
 }

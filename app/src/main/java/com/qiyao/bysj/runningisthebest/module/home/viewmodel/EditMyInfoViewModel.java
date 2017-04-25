@@ -178,6 +178,8 @@ public class EditMyInfoViewModel extends BaseObservable
                 .with(fragment.getActivity())
                 .image()
                 .radio()
+                .crop()
+                .cropOvalDimmedLayer(true)
                 .cropWithAspectRatio(1f, 1f)
                 .imageLoader(ImageLoaderType.GLIDE)
                 .subscribe(new RxBusResultSubscriber<ImageRadioResultEvent>() {

@@ -382,8 +382,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
             if (getLoadMoreViewModel() != null) {
                 getLoadMoreViewModel().loadFailed();
             }
-            // TODO: 2017/2/13 加载失败
-            Log.e("TAG", "onError: " + e.getMessage());
+            e.printStackTrace();
             ToastUtils.showShortToast(e.getMessage());
         }
 

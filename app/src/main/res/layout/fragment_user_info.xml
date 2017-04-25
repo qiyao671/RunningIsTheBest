@@ -182,28 +182,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/crew"
-                style="@style/MyModuleCardLayout"
-                android:onClick="@{viewModel::onClick}">
-
-                <ImageView
-                    android:layout_width="@dimen/home_ic_size"
-                    android:layout_height="@dimen/home_ic_size"
-                    android:src="@drawable/ic_best"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    style="@style/MyModuleCardTitle"
-                    android:text="@string/view_his_crew" />
-
-                <ImageView
-                    android:layout_width="@dimen/home_right_arrow_size"
-                    android:layout_height="@dimen/home_right_arrow_size"
-                    android:src="@drawable/ic_arrow_right"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/moment"
                 style="@style/MyModuleCardLayout"
                 android:onClick="@{viewModel::onClick}">

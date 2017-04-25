@@ -184,4 +184,12 @@ public class HttpMethods extends HttpFactory {
     public Observable<List<List<Double>>> getRunAltitudeList(int logId) {
         return handleResult(runApiService.getRunnyAltitudeList(logId));
     }
+
+    public Observable<ListResultBean<MomentBean>> getMomentListOfUser(Integer userId, Integer num, int pageSize) {
+        return handleResult(runApiService.getMomentListOfUser(userId, pageSize, num));
+    }
+
+    public Observable<MomentBean> getMoment(int momentId) {
+        return handleResult(runApiService.getMoment(momentId));
+    }
 }

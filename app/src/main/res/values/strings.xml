@@ -115,6 +115,7 @@
     <string name="comment">评论</string>
     <string name="write_moment">发表动态</string>
     <string name="publish">发表</string>
+    <string name="user_moment">用户动态</string>
 
     <!--run-->
     <string name="start">开始</string>
