@@ -18,6 +18,7 @@ import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.home.ui.BestRunFragment;
+import com.qiyao.bysj.runningisthebest.module.home.ui.FriendsRankingPagerFragment;
 import com.qiyao.bysj.runningisthebest.module.home.ui.SettingFragment;
 import com.qiyao.bysj.runningisthebest.module.home.ui.TotalRunPagerFragment;
 import com.qiyao.bysj.runningisthebest.module.home.viewmodel.item.MyInfoItemViewModel;
@@ -93,6 +94,9 @@ public class HomeViewModel extends BaseObservable implements IViewModel {
                 break;
             case R.id.history:
                 FragmentContainerActivity.launch(fragment.getActivity(), RunRecordsFragment.class);
+                break;
+            case R.id.friend_ranking:
+                FragmentContainerActivity.launch(fragment.getActivity(), FriendsRankingPagerFragment.class);
         }
     }
 

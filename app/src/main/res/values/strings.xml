@@ -32,6 +32,7 @@
     <string name="no_age">未设置年龄</string>
     <string name="no_sex">未设置性别</string>
     <string name="no_signature">没有个性签名</string>
+    <string name="friend_ranking">好友排行榜</string>
 
     <!--best run-->
     <string name="farthest_run">最长距离：公里</string>

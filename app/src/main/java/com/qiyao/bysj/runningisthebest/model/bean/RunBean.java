@@ -36,6 +36,8 @@ public class RunBean implements Parcelable {
 
     private List<List<Double>> altitudeLists;
 
+    private UserBean user;
+
     public Integer getId() {
         return id;
     }
@@ -108,50 +110,8 @@ public class RunBean implements Parcelable {
         this.startRunTime = startRunTime;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.id);
-        dest.writeValue(this.userId);
-        dest.writeValue(this.distance);
-        dest.writeValue(this.spendTime);
-        dest.writeValue(this.energy);
-        dest.writeValue(this.createTime);
-        dest.writeString(this.picture);
-        dest.writeString(this.momentContent);
-        dest.writeValue(this.startRunTime);
-    }
-
     public RunBean() {
     }
-
-    protected RunBean(Parcel in) {
-        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.userId = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.distance = (Double) in.readValue(Double.class.getClassLoader());
-        this.spendTime = (Long) in.readValue(Long.class.getClassLoader());
-        this.energy = (Double) in.readValue(Double.class.getClassLoader());
-        this.createTime = (Long) in.readValue(Long.class.getClassLoader());
-        this.picture = in.readString();
-        this.momentContent = in.readString();
-        this.startRunTime = (Long) in.readValue(Long.class.getClassLoader());
-    }
-
-    public static final Parcelable.Creator<RunBean> CREATOR = new Parcelable.Creator<RunBean>() {
-        @Override
-        public RunBean createFromParcel(Parcel source) {
-            return new RunBean(source);
-        }
-
-        @Override
-        public RunBean[] newArray(int size) {
-            return new RunBean[size];
-        }
-    };
 
     public List<List<LatLng>> getTracks() {
         return tracks;
@@ -168,4 +128,56 @@ public class RunBean implements Parcelable {
     public void setAltitudeLists(List<List<Double>> altitudeLists) {
         this.altitudeLists = altitudeLists;
     }
+
+    public UserBean getUser() {
+        return user;
+    }
+
+    public void setUser(UserBean user) {
+        this.user = user;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeValue(this.userId);
+        dest.writeValue(this.distance);
+        dest.writeValue(this.spendTime);
+        dest.writeValue(this.energy);
+        dest.writeValue(this.createTime);
+        dest.writeString(this.picture);
+        dest.writeString(this.momentContent);
+        dest.writeValue(this.startRunTime);
+        dest.writeParcelable(this.user, flags);
+    }
+
+    protected RunBean(Parcel in) {
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.userId = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.distance = (Double) in.readValue(Double.class.getClassLoader());
+        this.spendTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.energy = (Double) in.readValue(Double.class.getClassLoader());
+        this.createTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.picture = in.readString();
+        this.momentContent = in.readString();
+        this.startRunTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.user = in.readParcelable(UserBean.class.getClassLoader());
+    }
+
+    public static final Creator<RunBean> CREATOR = new Creator<RunBean>() {
+        @Override
+        public RunBean createFromParcel(Parcel source) {
+            return new RunBean(source);
+        }
+
+        @Override
+        public RunBean[] newArray(int size) {
+            return new RunBean[size];
+        }
+    };
 }

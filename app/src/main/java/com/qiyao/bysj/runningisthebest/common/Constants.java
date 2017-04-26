@@ -12,6 +12,7 @@ public class Constants {
     public static final int FLAG_TOTAL_RUN_MONTH = 2;
     public static final int FLAG_TOTAL_RUN = 1;
 
+    public static final String TYPE_DAY = "DAY";
     public static final String TYPE_WEEK = "WEEK";
     public static final String TYPE_MONTH = "MONTH";
     public static final String TYPE_TOTAL = "TOTAL";

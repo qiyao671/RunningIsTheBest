@@ -2,6 +2,7 @@ package com.qiyao.bysj.runningisthebest.model.net;
 
 import com.amap.api.maps.model.LatLng;
 import com.qiyao.bysj.baselibrary.model.bean.HttpResult;
+import com.qiyao.bysj.baselibrary.model.bean.ListResult;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
@@ -130,4 +131,7 @@ public interface RunApiService {
 
     @GET("moment/getMoment")
     Observable<HttpResult<MomentBean>> getMoment(@Query("momentId") int momentId);
+
+    @GET("log/listFriendsRank")
+    Observable<HttpResult<ListResultBean<RunBean>>> getFriendRankList(@Query("flag") int flag, @Query("pageSize") int pageSize, @Query("num") int num);
 }

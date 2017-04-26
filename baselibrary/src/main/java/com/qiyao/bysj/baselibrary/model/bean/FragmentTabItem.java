@@ -1,8 +1,10 @@
 package com.qiyao.bysj.baselibrary.model.bean;
 
+import android.app.Application;
 import android.app.Fragment;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.IdRes;
 
 /**
  * Created by qiyao on 2017/3/9.

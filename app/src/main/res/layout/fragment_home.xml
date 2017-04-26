@@ -176,6 +176,28 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/friend_ranking"
+                android:onClick="@{viewModel::onClick}"
+                style="@style/MyModuleCardLayout">
+
+                <ImageView
+                    android:layout_width="@dimen/home_ic_size"
+                    android:layout_height="@dimen/home_ic_size"
+                    android:src="@drawable/ic_ranking"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/MyModuleCardTitle"
+                    android:text="@string/friend_ranking" />
+
+                <ImageView
+                    android:layout_width="@dimen/home_right_arrow_size"
+                    android:layout_height="@dimen/home_right_arrow_size"
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/setting"
                 android:onClick="@{viewModel::onClick}"
                 style="@style/MyModuleCardLayout">
