@@ -99,11 +99,11 @@ public class MomentDetailViewModel extends BaseObservable implements IViewModel,
         HttpMethods.getInstance()
                 .getMoment(momentBean.getId())
                 .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(moment -> momentContentViewModel.setMoment(moment))
                 .doOnNext(moment -> momentCommentsViewModel.initItems(moment.getCommentList()))
                 .doOnNext(moment -> momentLikesViewModel.initItems(moment.getApproveList()))
                 .compose(((RxFragment)fragment).bindToLifecycle())
-                .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(Throwable::printStackTrace)
                 .subscribe(moment -> this.momentBean = moment, throwable -> ToastUtils.showShortToast(throwable.getMessage()));
     }
