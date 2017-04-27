@@ -4,7 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.amap.api.maps.model.LatLng;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,13 +20,18 @@ import java.util.List;
  * 类描述：
  */
 
+@DatabaseTable(tableName = "tb_user")
 public class RunBean implements Parcelable {
+    @DatabaseField(generatedId = true)
     private Integer id;
 
+    @DatabaseField(columnName = "user_id")
     private Integer userId;
 
+    @DatabaseField(columnName = "distance")
     private Double distance;
 
+    @DatabaseField(columnName = "spend_time")
     private Long spendTime;
 
     private Double energy;
@@ -30,13 +42,24 @@ public class RunBean implements Parcelable {
 
     private String momentContent;
 
+    @DatabaseField(columnName = "start_run_time")
     private Long startRunTime;
 
-    private List<List<LatLng>> tracks;
+    @DatabaseField(columnName = "tracks")
+    private String tracks;
 
-    private List<List<Double>> altitudeLists;
+    @DatabaseField(columnName = "altitudeLists", dataType = DataType.SERIALIZABLE)
+    private ArrayList<ArrayList<Double>> altitudeLists;
 
     private UserBean user;
+
+    private Double totalDistance;
+
+    private Long totalSpendTime;
+
+    private Double totalCount;
+
+    private Integer totalEnergy;
 
     public Integer getId() {
         return id;
@@ -110,23 +133,36 @@ public class RunBean implements Parcelable {
         this.startRunTime = startRunTime;
     }
 
-    public RunBean() {
+    public Double getTotalDistance() {
+        return totalDistance;
     }
 
-    public List<List<LatLng>> getTracks() {
-        return tracks;
+    public void setTotalDistance(Double totalDistance) {
+        this.totalDistance = totalDistance;
     }
 
-    public void setTracks(List<List<LatLng>> tracks) {
-        this.tracks = tracks;
+    public Long getTotalSpendTime() {
+        return totalSpendTime;
     }
 
-    public List<List<Double>> getAltitudeLists() {
-        return altitudeLists;
+    public void setTotalSpendTime(Long totalSpendTime) {
+        this.totalSpendTime = totalSpendTime;
     }
 
-    public void setAltitudeLists(List<List<Double>> altitudeLists) {
-        this.altitudeLists = altitudeLists;
+    public Double getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Double totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public Integer getTotalEnergy() {
+        return totalEnergy;
+    }
+
+    public void setTotalEnergy(Integer totalEnergy) {
+        this.totalEnergy = totalEnergy;
     }
 
     public UserBean getUser() {
@@ -154,6 +190,13 @@ public class RunBean implements Parcelable {
         dest.writeString(this.momentContent);
         dest.writeValue(this.startRunTime);
         dest.writeParcelable(this.user, flags);
+        dest.writeValue(this.totalDistance);
+        dest.writeValue(this.totalSpendTime);
+        dest.writeValue(this.totalCount);
+        dest.writeValue(this.totalEnergy);
+    }
+
+    public RunBean() {
     }
 
     protected RunBean(Parcel in) {
@@ -167,6 +210,10 @@ public class RunBean implements Parcelable {
         this.momentContent = in.readString();
         this.startRunTime = (Long) in.readValue(Long.class.getClassLoader());
         this.user = in.readParcelable(UserBean.class.getClassLoader());
+        this.totalDistance = (Double) in.readValue(Double.class.getClassLoader());
+        this.totalSpendTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.totalCount = (Double) in.readValue(Double.class.getClassLoader());
+        this.totalEnergy = (Integer) in.readValue(Integer.class.getClassLoader());
     }
 
     public static final Creator<RunBean> CREATOR = new Creator<RunBean>() {
@@ -180,4 +227,22 @@ public class RunBean implements Parcelable {
             return new RunBean[size];
         }
     };
+
+    public ArrayList<ArrayList<LatLng>> getTracks() {
+        Gson gson = new Gson();
+        return gson.fromJson(tracks, new TypeToken<ArrayList<ArrayList<LatLng>>>(){}.getType());
+    }
+
+    public void setTracks(ArrayList<ArrayList<LatLng>> tracks) {
+        Gson gson = new Gson();
+        this.tracks = gson.toJson(tracks);
+    }
+
+    public ArrayList<ArrayList<Double>> getAltitudeLists() {
+        return altitudeLists;
+    }
+
+    public void setAltitudeLists(ArrayList<ArrayList<Double>> altitudeLists) {
+        this.altitudeLists = altitudeLists;
+    }
 }

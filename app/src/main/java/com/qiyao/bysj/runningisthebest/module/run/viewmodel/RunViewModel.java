@@ -2,6 +2,7 @@ package com.qiyao.bysj.runningisthebest.module.run.viewmodel;
 
 import android.app.Fragment;
 import android.databinding.ObservableField;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
@@ -18,14 +19,18 @@ import com.qiyao.bysj.baselibrary.common.utils.StringUtils;
 import com.qiyao.bysj.baselibrary.common.utils.TimeUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
+import com.qiyao.bysj.runningisthebest.common.SPHelper;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
+import com.qiyao.bysj.runningisthebest.model.dao.RunDao;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.trello.rxlifecycle.components.RxFragment;
 
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import retrofit2.HttpException;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -47,10 +52,10 @@ public class RunViewModel implements IViewModel, AMapLocationListener, WeatherSe
     public ObservableField<String> windDirection = new ObservableField<>("-");
     public ObservableField<String> windPower = new ObservableField<>("-");
 
-    private List<List<LatLng>> tracks = new ArrayList<>();
-    private List<LatLng> currentTrack = new ArrayList<>();
-    private List<List<Double>> altitudeLists = new ArrayList<>();
-    private List<Double> currentAltitudeList = new ArrayList<>();
+    private ArrayList<ArrayList<LatLng>> tracks = new ArrayList<>();
+    private ArrayList<LatLng> currentTrack = new ArrayList<>();
+    private ArrayList<ArrayList<Double>> altitudeLists = new ArrayList<>();
+    private ArrayList<Double> currentAltitudeList = new ArrayList<>();
     private RunBean run;
 
     private Subscription timeCounter;
@@ -118,6 +123,7 @@ public class RunViewModel implements IViewModel, AMapLocationListener, WeatherSe
         run.setSpendTime(spendTime.get());
         run.setAltitudeLists(altitudeLists);
         run.setTracks(tracks);
+        run.setUserId(SPHelper.loadUser().getId());
         uploadRunRecord(run);
     }
 
@@ -126,8 +132,9 @@ public class RunViewModel implements IViewModel, AMapLocationListener, WeatherSe
         HttpMethods.getInstance()
                 .uploadRunRecord(run)
                 .subscribeOn(Schedulers.newThread())
+                .doOnError(this::onUploadError)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(ToastUtils::showShortToast, e -> ToastUtils.showLongToast(e.getMessage()));
+                .subscribe(ToastUtils::showShortToast, throwable -> {ToastUtils.showShortToast(throwable.getMessage()); throwable.printStackTrace();});
     }
 
     private void getWeather() {
@@ -168,5 +175,11 @@ public class RunViewModel implements IViewModel, AMapLocationListener, WeatherSe
     @Override
     public void onWeatherForecastSearched(LocalWeatherForecastResult localWeatherForecastResult, int i) {
         //ignore
+    }
+
+    private void onUploadError(Throwable throwable) {
+        if (throwable instanceof SocketTimeoutException || throwable instanceof HttpException) {
+            new RunDao(fragment.getActivity()).add(run);
+        }
     }
 }

@@ -101,7 +101,7 @@ public interface RunApiService {
     @POST("user/saveFriend")
     Observable<HttpResult<String>> addFriend(@Field("friendUserId") int userId);
 
-    @POST("log/saveRunnyLog")
+    @POST("log/saveRunnyLogs")
     Observable<HttpResult<String>> uploadRunRecord(@Body RunBean runnyLog);
 
     @GET("moment/listFriendsMoments")

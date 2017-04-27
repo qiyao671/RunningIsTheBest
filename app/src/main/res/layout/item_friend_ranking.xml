@@ -15,6 +15,7 @@
         android:layout_height="wrap_content">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_user_profile"
+            app:placeholder="@{@drawable/default_profile}"
             app:imageUrl="@{viewModel.profileUrl}"
             android:layout_width="60dp"
             android:layout_height="60dp" />
@@ -32,7 +33,7 @@
             android:textColor="@color/primary_text"
             android:layout_toEndOf="@id/civ_user_profile"
             android:layout_alignBottom="@id/civ_user_profile"
-            android:text='@{String.format("%.2fkm",viewModel.distance / 1000)}'
+            android:text='@{String.format("%.2fkm",viewModel.distance)}'
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

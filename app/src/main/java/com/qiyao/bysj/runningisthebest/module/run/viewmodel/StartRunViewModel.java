@@ -9,7 +9,12 @@ import com.qiyao.bysj.baselibrary.common.utils.LocationUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.common.SPHelper;
+import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
+import com.qiyao.bysj.runningisthebest.model.dao.RunDao;
 import com.qiyao.bysj.runningisthebest.module.run.ui.RunFragment;
+
+import java.util.List;
 
 /**
  * Created by lvqiyao (amorfatilay@163.com).
@@ -22,6 +27,12 @@ public class StartRunViewModel implements IViewModel {
 
     public StartRunViewModel(Fragment fragment) {
         this.fragment = fragment;
+        uploadLocalRecord();
+    }
+
+    private void uploadLocalRecord() {
+        List<RunBean> runBeen = new RunDao(fragment.getActivity()).listByUserId(SPHelper.loadUser().getId());
+        List<RunBean> runBeen1 = new RunDao(fragment.getActivity()).listAll();
     }
 
     public void onClick(View v) {

@@ -30,7 +30,7 @@ public class FriendRankingItemViewModel implements IItemViewModel {
     private void setData(RunBean runBean) {
         userName.set(runBean.getUser().getUsername());
         profileUrl.set(runBean.getUser().getProfile());
-//        distance.set(runBean.);
+        distance.set(runBean.getTotalDistance());
     }
 
     @Override

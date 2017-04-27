@@ -212,7 +212,7 @@ public abstract class ACollectionViewModel<T> implements IViewModel, OnLoadMoreL
     }
 
     private void addLoadMoreViewModel() {
-        if (isLoadMoreEnable && getLoadMoreViewRes() != null) {
+        if (isLoadMoreEnable && getLoadMoreViewModel() == null && getLoadMoreViewRes() != null) {
             ALoadMoreViewModel loadMoreViewModel = loadMoreViewBindingCreator.genItemViewModel(null);
             itemViewModels.add(loadMoreViewModel == null ? new ALoadMoreViewModel() {
                 @Override
