@@ -20,7 +20,6 @@ import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -196,5 +195,9 @@ public class HttpMethods extends HttpFactory {
 
     public Observable<ListResultBean<RunBean>> getFriendRankList(int flag, int pageSize, int num) {
         return handleResult(runApiService.getFriendRankList(flag, pageSize, num));
+    }
+
+    public Observable<String> uploadRunRecordList(List<RunBean> runBeen) {
+        return handleResult(runApiService.uploadRunRecordList(runBeen));
     }
 }

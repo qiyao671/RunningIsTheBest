@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.qiyao.bysj.baselibrary.common.utils.EmptyUtils;
 import com.qiyao.bysj.baselibrary.common.utils.LocationUtils;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
@@ -12,9 +13,13 @@ import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.common.SPHelper;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.model.dao.RunDao;
+import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
 import com.qiyao.bysj.runningisthebest.module.run.ui.RunFragment;
 
 import java.util.List;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by lvqiyao (amorfatilay@163.com).
@@ -31,8 +36,17 @@ public class StartRunViewModel implements IViewModel {
     }
 
     private void uploadLocalRecord() {
-        List<RunBean> runBeen = new RunDao(fragment.getActivity()).listByUserId(SPHelper.loadUser().getId());
-        List<RunBean> runBeen1 = new RunDao(fragment.getActivity()).listAll();
+        RunDao runDao = new RunDao(fragment.getActivity());
+        List<RunBean> runBeen = runDao.listByUserId(SPHelper.loadUser().getId());
+        if (EmptyUtils.isEmpty(runBeen)) return;
+        HttpMethods.getInstance()
+                .uploadRunRecordList(runBeen)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(Throwable::printStackTrace)
+                .subscribe(ToastUtils::showShortToast,
+                        e -> ToastUtils.showShortToast(e.getMessage()),
+                        () -> runDao.removeList(runBeen));
     }
 
     public void onClick(View v) {

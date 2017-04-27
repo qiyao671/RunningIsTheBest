@@ -2,7 +2,6 @@ package com.qiyao.bysj.runningisthebest.model.net;
 
 import com.amap.api.maps.model.LatLng;
 import com.qiyao.bysj.baselibrary.model.bean.HttpResult;
-import com.qiyao.bysj.baselibrary.model.bean.ListResult;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.CommentBean;
 import com.qiyao.bysj.runningisthebest.model.bean.ListResultBean;
@@ -32,8 +31,8 @@ import rx.Observable;
  */
 
 public interface RunApiService {
-    String HOST = "http://192.168.31.245:8080/";
-//    String HOST = "http://192.168.1.7:8080/";
+//    String HOST = "http://192.168.31.245:8080/";
+    String HOST = "http://192.168.1.7:8080/";
 
 
     /**
@@ -101,7 +100,7 @@ public interface RunApiService {
     @POST("user/saveFriend")
     Observable<HttpResult<String>> addFriend(@Field("friendUserId") int userId);
 
-    @POST("log/saveRunnyLogs")
+    @POST("log/saveRunnyLog")
     Observable<HttpResult<String>> uploadRunRecord(@Body RunBean runnyLog);
 
     @GET("moment/listFriendsMoments")
@@ -134,4 +133,7 @@ public interface RunApiService {
 
     @GET("log/listFriendsRank")
     Observable<HttpResult<ListResultBean<RunBean>>> getFriendRankList(@Query("flag") int flag, @Query("pageSize") int pageSize, @Query("num") int num);
+
+    @POST("log/saveRunnyLogList")
+    Observable<HttpResult<String>> uploadRunRecordList(@Field("runnyLogs") List<RunBean> runBeen);
 }
