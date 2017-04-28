@@ -12,9 +12,11 @@ import com.qiyao.bysj.runningisthebest.common.MyAppUtils;
 import com.qiyao.bysj.runningisthebest.model.bean.BestRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.home.ui.BestRunFragment;
 import com.qiyao.bysj.runningisthebest.module.run.ui.RunRecordDetailPagerFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -36,14 +38,27 @@ public class BestRunViewModel implements IViewModel {
 
     private BestRunBean bestRunBean;
 
+    int userId = -1;
+
     public BestRunViewModel(Fragment fragment) {
         this.fragment = fragment;
         getBestRun();
     }
 
+    public BestRunViewModel(Fragment fragment, int userId) {
+        this.userId = userId;
+        this.fragment = fragment;
+        getBestRun();
+    }
+
     private void getBestRun() {
-        HttpMethods httpMethods = HttpMethods.getInstance();
-        httpMethods.getBestRun()
+        Observable<BestRunBean> bestRunObservable;
+        if (userId > 0) {
+            bestRunObservable = HttpMethods.getInstance().getBestRun(userId);
+        } else {
+            bestRunObservable = HttpMethods.getInstance().getBestRun();
+        }
+        bestRunObservable
                 .subscribeOn(Schedulers.newThread())
                 .filter(bestRun -> bestRun != null)
                 .compose(((RxFragment) fragment).bindToLifecycle())

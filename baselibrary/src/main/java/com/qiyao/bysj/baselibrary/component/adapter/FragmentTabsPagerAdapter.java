@@ -42,7 +42,7 @@ public class FragmentTabsPagerAdapter extends FragmentPagerAdapter {
         String name = item.getFragmentClass().getName();
         Bundle args = new Bundle();
         args.putString(CommonConstants.KEY_FRAGMENT_IN_PAGER_TYPE, item.getType());
-        args.putParcelable(CommonConstants.KEY_FRAGMENT_IN_PAGER_ARGS, item.getTag());
+        args.putParcelable(CommonConstants.KEY_FRAGMENT_IN_PAGER_TAG, item.getTag());
         return Fragment.instantiate(context, name, args);
     }
 

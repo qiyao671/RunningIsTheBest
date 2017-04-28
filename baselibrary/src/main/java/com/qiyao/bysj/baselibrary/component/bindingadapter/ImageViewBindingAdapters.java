@@ -11,12 +11,13 @@ import com.bumptech.glide.Glide;
  */
 
 public class ImageViewBindingAdapters {
-    @BindingAdapter(value = {"imageUrl", "placeholderRes", "placeholder"}, requireAll = false)
-    public static void loadImage(ImageView imageView, String url, int placeholderRes, Drawable placeholder) {
+    @BindingAdapter(value = {"imageUrl", "placeholderRes", "placeholder", "thumbnailSize"}, requireAll = false)
+    public static void loadImage(ImageView imageView, String url, int placeholderRes, Drawable placeholder, float thumbnailSize) {
         Glide.with(imageView.getContext())
                 .load(url)
                 .placeholder(placeholder)
                 .placeholder(placeholderRes)
+                .thumbnail(thumbnailSize)
                 .crossFade()
                 .dontAnimate()
                 .into(imageView);

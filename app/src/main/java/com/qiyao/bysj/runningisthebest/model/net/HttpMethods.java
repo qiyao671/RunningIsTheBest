@@ -1,5 +1,6 @@
 package com.qiyao.bysj.runningisthebest.model.net;
 
+import android.databinding.ObservableDouble;
 import android.net.Uri;
 
 import com.amap.api.maps.model.LatLng;
@@ -199,5 +200,13 @@ public class HttpMethods extends HttpFactory {
 
     public Observable<String> uploadRunRecordList(List<RunBean> runBeen) {
         return handleResult(runApiService.uploadRunRecordList(runBeen));
+    }
+
+    public Observable<TotalRunBean> getTotalLogInfo(int flag, int userId) {
+        return handleResult(runApiService.getTotalLogInfo(flag, userId));
+    }
+
+    public Observable<BestRunBean> getBestRun(int userId) {
+        return handleResult(runApiService.getBestRun(userId));
     }
 }

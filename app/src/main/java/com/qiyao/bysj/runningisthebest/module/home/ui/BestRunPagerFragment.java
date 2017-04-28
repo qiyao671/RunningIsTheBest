@@ -47,4 +47,7 @@ public class BestRunPagerFragment extends AFragmentPagerFragment {
     public static void launch(Activity activity) {
         FragmentContainerActivity.launch(activity, BestRunPagerFragment.class);
     }
+
+    public static void launch(Activity activity, Integer id) {
+    }
 }

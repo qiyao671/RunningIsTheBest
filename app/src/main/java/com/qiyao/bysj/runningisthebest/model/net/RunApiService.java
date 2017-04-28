@@ -30,9 +30,9 @@ import rx.Observable;
  * 类描述：
  */
 
-public interface RunApiService {
-//    String HOST = "http://192.168.31.245:8080/";
-    String HOST = "http://192.168.1.7:8080/";
+interface RunApiService {
+    String HOST = "http://192.168.31.245:8080/";
+//    String HOST = "http://192.168.1.7:8080/";
 
 
     /**
@@ -135,5 +135,15 @@ public interface RunApiService {
     Observable<HttpResult<ListResultBean<RunBean>>> getFriendRankList(@Query("flag") int flag, @Query("pageSize") int pageSize, @Query("num") int num);
 
     @POST("log/saveRunnyLogList")
-    Observable<HttpResult<String>> uploadRunRecordList(@Field("runnyLogs") List<RunBean> runBeen);
+    Observable<HttpResult<String>> uploadRunRecordList(@Body List<RunBean> runnyLogs);
+
+    @GET("log/getTotalLogInfo")
+    Observable<HttpResult<TotalRunBean>> getTotalLogInfo(@Query("flag") int flag, @Query("someoneId") int userId);
+
+    /**
+     * 获得最佳记录
+     * @return
+     */
+    @GET("log/getBestRunningLogInfo")
+    Observable<HttpResult<BestRunBean>> getBestRun(@Query("someoneId") int userId);
 }

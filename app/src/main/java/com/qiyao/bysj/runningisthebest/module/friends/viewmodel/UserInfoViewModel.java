@@ -8,8 +8,11 @@ import android.view.View;
 import com.qiyao.bysj.baselibrary.common.utils.ToastUtils;
 import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
+import com.qiyao.bysj.runningisthebest.common.Constants;
+import com.qiyao.bysj.runningisthebest.model.bean.TotalRunBean;
 import com.qiyao.bysj.runningisthebest.model.bean.UserBean;
 import com.qiyao.bysj.runningisthebest.model.net.HttpMethods;
+import com.qiyao.bysj.runningisthebest.module.home.ui.BestRunFragment;
 import com.qiyao.bysj.runningisthebest.module.moment.ui.UserMomentsFragment;
 import com.trello.rxlifecycle.components.RxFragment;
 
@@ -42,6 +45,7 @@ public class UserInfoViewModel implements IViewModel, View.OnClickListener {
         this.userBean = user;
         setUserInfo(user);
         getUser(user.getId());
+        getTotal(user.getId());
     }
 
     private void getUser(int userId) {
@@ -53,6 +57,15 @@ public class UserInfoViewModel implements IViewModel, View.OnClickListener {
                 .subscribe(this::setUserInfo, e -> ToastUtils.showLongToast(e.getMessage()));
     }
 
+    private void getTotal(int userId) {
+        HttpMethods.getInstance()
+                .getTotalLogInfo(Constants.FLAG_TOTAL_RUN, userId)
+                .subscribeOn(Schedulers.newThread())
+                .compose(((RxFragment) fragment).bindToLifecycle())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::setTotal, e -> ToastUtils.showLongToast(e.getMessage()));
+    }
+
     private void setUserInfo(UserBean user) {
         if (user == null) {
             return;
@@ -62,11 +75,14 @@ public class UserInfoViewModel implements IViewModel, View.OnClickListener {
         userId.set(String.format(Locale.CHINA, "%06d", user.getId()));
         location.set(user.getLocation());
         sex.set(user.getSex());
-//        rank.set();
-//        totalDistance.set();
         if (user.getRelationStatus() != null) {
             status.set(user.getRelationStatus());
         }
+    }
+
+    private void setTotal(TotalRunBean runBean) {
+        totalDistance.set(runBean.getTotalDistance());
+        totalDuration.set(runBean.getTotalSpendTime());
     }
 
     @Override
@@ -78,6 +94,8 @@ public class UserInfoViewModel implements IViewModel, View.OnClickListener {
             case R.id.moment:
                 UserMomentsFragment.launch(fragment.getActivity(), userBean.getId());
                 break;
+            case R.id.best_run:
+                BestRunFragment.launch(fragment.getActivity(), userBean.getId());
         }
     }
 

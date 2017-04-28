@@ -8,6 +8,7 @@
     </data>
     <ImageView
         app:imageUrl="@{imageUrl}"
+        app:thumbnailSize="@{0.1f}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </layout>

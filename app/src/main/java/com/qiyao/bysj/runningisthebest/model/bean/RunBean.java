@@ -12,6 +12,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,8 +46,8 @@ public class RunBean implements Parcelable {
     @DatabaseField(columnName = "start_run_time")
     private Long startRunTime;
 
-    @DatabaseField(columnName = "tracks")
-    private String tracks;
+    @DatabaseField(columnName = "tracks", dataType = DataType.SERIALIZABLE)
+    private ArrayList<ArrayList<HashMap<String, Double>>> tracks;
 
     @DatabaseField(columnName = "altitudeLists", dataType = DataType.SERIALIZABLE)
     private ArrayList<ArrayList<Double>> altitudeLists;
@@ -230,12 +231,12 @@ public class RunBean implements Parcelable {
 
     public ArrayList<ArrayList<LatLng>> getTracks() {
         Gson gson = new Gson();
-        return gson.fromJson(tracks, new TypeToken<ArrayList<ArrayList<LatLng>>>(){}.getType());
+        return gson.fromJson(gson.toJson(tracks), new TypeToken<ArrayList<ArrayList<LatLng>>>(){}.getType());
     }
 
     public void setTracks(ArrayList<ArrayList<LatLng>> tracks) {
         Gson gson = new Gson();
-        this.tracks = gson.toJson(tracks);
+        this.tracks = gson.fromJson(gson.toJson(tracks), new TypeToken<ArrayList<ArrayList<HashMap<String, Double>>>>(){}.getType());
     }
 
     public ArrayList<ArrayList<Double>> getAltitudeLists() {

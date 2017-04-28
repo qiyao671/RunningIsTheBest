@@ -1,6 +1,7 @@
 package com.qiyao.bysj.runningisthebest.module.home.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import com.qiyao.bysj.runningisthebest.module.home.viewmodel.BestRunViewModel;
  */
 
 public class BestRunFragment extends ADataBindingFragment {
+    private static final String KEY_USER_ID = "USER_ID";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +40,9 @@ public class BestRunFragment extends ADataBindingFragment {
     @NonNull
     @Override
     protected IViewModel createViewModel(Bundle arguments) {
+        if (arguments.getInt(KEY_USER_ID, -1) != -1) {
+            return new BestRunViewModel(this, arguments.getInt(KEY_USER_ID));
+        }
         return new BestRunViewModel(this);
     }
 
@@ -48,5 +53,11 @@ public class BestRunFragment extends ADataBindingFragment {
 
     public static void launch(Activity from) {
         FragmentContainerActivity.launch(from, BestRunFragment.class);
+    }
+
+    public static void launch(Context context, Integer userId) {
+        Bundle args = new Bundle();
+        args.putInt(KEY_USER_ID, userId);
+        FragmentContainerActivity.launch(context, BestRunFragment.class, args);
     }
 }

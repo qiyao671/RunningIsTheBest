@@ -21,7 +21,6 @@ import com.qiyao.bysj.baselibrary.viewmodel.IViewModel;
 import com.qiyao.bysj.runningisthebest.R;
 import com.qiyao.bysj.runningisthebest.common.Constants;
 import com.qiyao.bysj.runningisthebest.databinding.FragmentRunTrackBinding;
-import com.qiyao.bysj.runningisthebest.databinding.ItemFriendBinding;
 import com.qiyao.bysj.runningisthebest.model.bean.RunBean;
 import com.qiyao.bysj.runningisthebest.module.run.viewmodel.RunTrackViewModel;
 
@@ -40,7 +39,7 @@ public class RunTrackFragment extends ADataBindingFragment
     @NonNull
     @Override
     protected IViewModel createViewModel(Bundle arguments) {
-        RunBean runBean = getArguments().getParcelable(CommonConstants.KEY_FRAGMENT_IN_PAGER_ARGS);
+        RunBean runBean = getArguments().getParcelable(CommonConstants.KEY_FRAGMENT_IN_PAGER_TAG);
         return new RunTrackViewModel(this, runBean, this);
     }
 

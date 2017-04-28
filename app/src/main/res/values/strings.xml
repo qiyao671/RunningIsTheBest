@@ -74,6 +74,9 @@
     <string name="track">轨迹</string>
     <string name="detail">详情</string>
     <string name="run_record">运动记录</string>
+    <string name="avg_pace_m_per_km">平均配速(分钟/公里)</string>
+    <string name="calories_cal">卡路里(大卡)</string>
+    <string name="avg_speed_km_per_h">平均速度(公里/时)</string>
 
     <!--my info-->
     <string name="sex_And_Age">%1$s %2$d岁</string>
